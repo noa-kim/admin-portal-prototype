@@ -11,8 +11,8 @@
 <style>
 :root{
   --navy:#253972;--navy-lt:#eceef5;
-  --teal:#00A6A8;--teal-lt:#e0f5f5;
-  --amber:#d3872c;--amber-lt:#faf0e2;
+  --teal:#007475;--teal-lt:#e0f5f5;
+  --amber:#9e5d15;--amber-lt:#faf0e2;
   --sky:#b9e2e3;--sky-lt:#f0fafb;
   --gray-50:#f8f8f7;--gray-100:#f0efec;--gray-200:#e4e2dc;
   --gray-400:#9a9890;--gray-600:#6b6a64;--gray-900:#1e1e1c;
@@ -20,7 +20,7 @@
   --font:'DM Sans',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-size:14px}
+html{font-size:16px}
 body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min-height:100vh}
 
 /* Layout */
@@ -35,49 +35,50 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-scroll::-webkit-scrollbar-thumb{background:rgba(185,226,227,.15);border-radius:3px}
 
 /* Logo */
-.sb-logo{padding:16px 14px 13px;border-bottom:.5px solid rgba(185,226,227,.12);flex-shrink:0}
-.sb-logo-top{font-size:9px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.sb-logo{padding:16px 14px 13px;border-bottom:.5px solid rgba(185,226,227,.12);flex-shrink:0;transition:background .13s}
+.sb-logo:hover{background:rgba(255,255,255,.06)}
+.sb-logo-top{font-size:11px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
 .sb-logo-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em}
-.sb-logo-sub{font-size:10px;color:rgba(185,226,227,.55);margin-top:1px}
+.sb-logo-sub{font-size:12px;color:rgba(185,226,227,.78);margin-top:1px}
 
 /* Search bar */
 .sb-search-wrap{padding:10px 12px;border-bottom:.5px solid rgba(185,226,227,.1);flex-shrink:0}
 .sb-search{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.2);border-radius:var(--radius-md);padding:7px 10px;cursor:text;transition:background .13s}
 .sb-search:hover,.sb-search.focused{background:rgba(255,255,255,.12);border-color:rgba(185,226,227,.4)}
-.sb-search i{font-size:14px;color:rgba(185,226,227,.5);flex-shrink:0}
-.sb-search input{background:none;border:none;outline:none;font-size:12px;color:#fff;width:100%;font-family:var(--font);caret-color:var(--teal)}
-.sb-search input::placeholder{color:rgba(185,226,227,.45)}
-.sb-search-kbd{font-size:9px;color:rgba(185,226,227,.35);background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.15);border-radius:3px;padding:1px 5px;flex-shrink:0;font-family:var(--font-mono,monospace);white-space:nowrap}
+.sb-search i{font-size:16px;color:rgba(185,226,227,.5);flex-shrink:0}
+.sb-search input{background:none;border:none;outline:none;font-size:16px;color:#fff;width:100%;font-family:var(--font);caret-color:var(--teal)}
+.sb-search input::placeholder{color:rgba(185,226,227,.72)}
+.sb-search-kbd{font-size:11px;color:rgba(185,226,227,.70);background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.15);border-radius:3px;padding:1px 5px;flex-shrink:0;font-family:var(--font-mono,monospace);white-space:nowrap}
 
 /* Search results overlay */
 .sb-results{position:absolute;left:0;right:0;top:0;background:var(--navy);z-index:300;display:none;flex-direction:column}
 .sb-results.open{display:flex}
 .sb-results-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px;border-bottom:.5px solid rgba(185,226,227,.12)}
-.sb-results-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(185,226,227,.45)}
-.sb-results-close{font-size:13px;color:rgba(185,226,227,.5);cursor:pointer;background:none;border:none;padding:2px;font-family:var(--font)}
+.sb-results-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(185,226,227,.72)}
+.sb-results-close{font-size:15px;color:rgba(185,226,227,.5);cursor:pointer;background:none;border:none;padding:2px;font-family:var(--font)}
 .sb-results-close:hover{color:#fff}
 .sb-results-list{overflow-y:auto;max-height:calc(100vh - 80px);padding:4px 0 8px}
 .sb-result-item{display:flex;align-items:center;gap:9px;padding:8px 14px;cursor:pointer;transition:background .1s}
 .sb-result-item:hover,.sb-result-item.highlighted{background:rgba(255,255,255,.1)}
-.sb-result-icon{width:22px;height:22px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.sb-result-icon{width:22px;height:22px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .sb-result-text{flex:1;min-width:0}
-.sb-result-name{font-size:12px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sb-result-group{font-size:10px;color:rgba(185,226,167,.5);margin-top:1px}
-.sb-result-badge{font-size:9px;padding:1px 6px;border-radius:10px;background:rgba(211,135,44,.25);color:#FAC775;white-space:nowrap;flex-shrink:0}
-.sb-no-results{padding:20px 14px;font-size:12px;color:rgba(185,226,227,.4);text-align:center}
+.sb-result-name{font-size:14px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-result-group{font-size:12px;color:rgba(185,226,167,.5);margin-top:1px}
+.sb-result-badge{font-size:11px;padding:1px 6px;border-radius:10px;background:rgba(211,135,44,.25);color:#FAC775;white-space:nowrap;flex-shrink:0}
+.sb-no-results{padding:20px 14px;font-size:14px;color:rgba(185,226,227,.4);text-align:center}
 
 /* Home item */
-.sb-home-item{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;font-size:12px;font-weight:600;color:rgba(185,226,227,.85);transition:all .13s;border-left:2px solid transparent;text-decoration:none}
-.sb-home-item i{font-size:15px}
+.sb-home-item{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;font-size:16px;font-weight:600;color:rgba(185,226,227,.85);transition:all .13s;border-left:2px solid transparent;text-decoration:none}
+.sb-home-item i{font-size:16px}
 .sb-home-item:hover{background:rgba(255,255,255,.07);color:#fff}
 .sb-home-item.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--teal)}
 
 /* Recently visited */
 .sb-recent{padding:8px 0 4px;border-bottom:.5px solid rgba(185,226,227,.1)}
-.sb-recent-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.35);padding:0 14px 5px;display:flex;align-items:center;gap:5px}
-.sb-recent-lbl i{font-size:11px}
-.sb-recent-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:400;color:rgba(185,226,227,.58);transition:all .13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sb-recent-item i{font-size:13px;flex-shrink:0;color:rgba(185,226,227,.35)}
+.sb-recent-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.70);padding:0 14px 5px;display:flex;align-items:center;gap:5px}
+.sb-recent-lbl i{font-size:13px}
+.sb-recent-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:14px;font-weight:400;color:rgba(185,226,227,.82);transition:all .13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-recent-item i{font-size:15px;flex-shrink:0;color:rgba(185,226,227,.70)}
 .sb-recent-item:hover{color:#fff;background:rgba(255,255,255,.06)}
 
 /* Collapsible section groups */
@@ -85,37 +86,37 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-group-header{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;transition:background .13s;user-select:none}
 .sb-group-header:hover{background:rgba(255,255,255,.05)}
 .sb-group-header.active-group{background:rgba(255,255,255,.07)}
-.sb-group-icon{font-size:14px;color:rgba(185,226,227,.55);flex-shrink:0;transition:color .13s}
+.sb-group-icon{font-size:16px;color:rgba(185,226,227,.78);flex-shrink:0;transition:color .13s}
 .sb-group-header:hover .sb-group-icon,.sb-group-header.active-group .sb-group-icon{color:rgba(185,226,227,.85)}
-.sb-group-label{font-size:12px;font-weight:500;color:rgba(185,226,227,.72);flex:1;transition:color .13s}
+.sb-group-label{font-size:14px;font-weight:500;color:rgba(185,226,227,.72);flex:1;transition:color .13s}
 .sb-group-header:hover .sb-group-label,.sb-group-header.active-group .sb-group-label{color:#fff}
 .sb-group-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.sb-group-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;white-space:nowrap}
+.sb-group-badge{font-size:11px;font-weight:700;padding:1px 6px;border-radius:10px;white-space:nowrap}
 .sgb-amber{background:rgba(211,135,44,.3);color:#FAC775}
 .sgb-teal{background:rgba(0,166,168,.25);color:var(--sky)}
-.sgb-gray{background:rgba(255,255,255,.1);color:rgba(185,226,227,.55)}
-.sb-group-chev{font-size:12px;color:rgba(185,226,227,.3);transition:transform .2s}
+.sgb-gray{background:rgba(255,255,255,.1);color:rgba(185,226,227,.78)}
+.sb-group-chev{font-size:14px;color:rgba(185,226,227,.3);transition:transform .2s}
 .sb-group.open .sb-group-chev{transform:rotate(180deg)}
 
 /* Group body — items */
 .sb-group-body{display:none;padding-bottom:4px}
 .sb-group.open .sb-group-body{display:block}
-.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px 7px 36px;cursor:pointer;font-size:11px;font-weight:400;color:rgba(185,226,227,.62);transition:all .13s;border-left:2px solid transparent;text-decoration:none;white-space:nowrap;overflow:hidden}
-.sb-item i{font-size:13px;flex-shrink:0}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px 7px 36px;cursor:pointer;font-size:16px;font-weight:400;color:rgba(185,226,227,.62);transition:all .13s;border-left:2px solid transparent;text-decoration:none;white-space:nowrap;overflow:hidden}
+.sb-item i{font-size:15px;flex-shrink:0}
 .sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
 .sb-item.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--teal)}
-.sb-item-hint{font-size:10px;color:rgba(185,226,227,.38);margin-top:1px;white-space:normal;line-height:1.35;padding:0 14px 5px 36px}
+.sb-item-hint{font-size:12px;color:rgba(185,226,227,.38);margin-top:1px;white-space:normal;line-height:1.35;padding:0 14px 5px 36px}
 
 /* Context hints under group header */
-.sb-group-hint{font-size:10px;color:rgba(185,226,227,.42);padding:0 14px 7px 36px;line-height:1.4;display:none}
+.sb-group-hint{font-size:12px;color:rgba(185,226,227,.42);padding:0 14px 7px 36px;line-height:1.4;display:none}
 .sb-group.open .sb-group-hint{display:none}
 
 /* Footer */
 .sb-footer{padding:11px 14px;border-top:.5px solid rgba(185,226,227,.1);flex-shrink:0}
 .sb-user{display:flex;align-items:center;gap:9px}
-.sb-avatar{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--navy);flex-shrink:0}
-.sb-user-name{font-size:11px;font-weight:600;color:#fff}
-.sb-user-role{font-size:10px;color:rgba(185,226,227,.55)}
+.sb-avatar{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--navy);flex-shrink:0}
+.sb-user-name{font-size:13px;font-weight:600;color:#fff}
+.sb-user-role{font-size:12px;color:rgba(185,226,227,.78)}
 /* Admin-only group — top border separator */
 .sb-group-admin{border-top:1px solid rgba(185,226,227,.18);margin-top:4px}
 
@@ -124,29 +125,23 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 /* Topbar */
 .topbar{background:var(--navy);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;flex-shrink:0}
-.tb-org{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--sky);margin-bottom:2px}
+.tb-org{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--sky);margin-bottom:2px}
 .tb-title{font-size:17px;font-weight:600;color:#fff;letter-spacing:-.01em}
+.tb-coord{font-size:12px;color:rgba(185,226,227,.75);margin-top:2px;font-weight:400}
 .tb-right{display:flex;align-items:center;gap:18px}
 .tb-stat{text-align:right}
-.tb-stat-lbl{font-size:9px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.tb-stat-lbl{font-size:11px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .tb-stat-val{font-size:20px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.01em}
-.tb-stat-sub{font-size:10px;color:var(--sky)}
+.tb-stat-sub{font-size:12px;color:var(--sky)}
 .tb-div{width:.5px;height:34px;background:rgba(185,226,227,.2)}
 
 /* Score bar */
 .scorebar{background:var(--teal-lt);border-bottom:1px solid var(--sky);padding:8px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;flex-shrink:0}
-.sbl{font-size:12px;font-weight:600;color:#005c5d;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.sbl{font-size:14px;font-weight:600;color:#005c5d;white-space:nowrap;display:flex;align-items:center;gap:5px}
 .sb-track{flex:1;min-width:80px;max-width:200px;height:7px;background:rgba(0,166,168,.18);border-radius:4px;overflow:hidden;border:.5px solid rgba(0,166,168,.3)}
 .sb-fill{height:100%;border-radius:4px;background:var(--teal);transition:width .5s}
-.sb-pts{font-size:12px;font-weight:700;color:#005c5d;white-space:nowrap}
-.sb-period{font-size:11px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
-
-/* View tabs */
-.view-tabs{padding:12px 24px 0;display:flex;gap:0;border-bottom:1px solid var(--gray-200);background:#fff;flex-shrink:0}
-.vt{font-size:12px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
-.vt i{font-size:14px}
-.vt:hover{color:var(--navy)}
-.vt.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+.sb-pts{font-size:14px;font-weight:700;color:#005c5d;white-space:nowrap}
+.sb-period{font-size:13px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
 
 /* Content */
 .content{padding:20px 24px;flex:1;background:#fff}
@@ -155,43 +150,219 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 /* Stat grid */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:18px}
 .stat-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:11px 13px}
-.sc-lbl{font-size:11px;color:var(--gray-400);margin-bottom:4px}
+.sc-lbl{font-size:13px;color:var(--gray-400);margin-bottom:4px}
 .sc-val{font-size:22px;font-weight:700;color:var(--gray-900);line-height:1;letter-spacing:-.01em}
-.sc-sub{font-size:10px;color:var(--gray-400);margin-top:3px}
+.sc-sub{font-size:12px;color:var(--gray-400);margin-top:3px}
 
 /* Section header bars */
 .sec-head{padding:8px 14px;border-radius:var(--radius-md) var(--radius-md) 0 0;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .sh-amber{background:var(--amber)}.sh-teal{background:var(--teal)}.sh-navy{background:var(--navy)}
-.sh-title{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
-.sh-right{font-size:11px;color:rgba(255,255,255,.75)}
+.sh-title{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+.sh-right{font-size:13px;color:rgba(255,255,255,1)}
 .sec-body{border:1px solid var(--gray-200);border-top:none;border-radius:0 0 var(--radius-md) var(--radius-md);overflow:hidden;margin-bottom:18px;background:#fff}
 
 /* Home two-col */
 .two-col{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;align-items:start}
 
+/* ── Actions needed tabbed panel ── */
+.an-panel{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:#fff;margin-bottom:0}
+.an-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#bf5500;gap:10px}
+.an-panel-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+.an-panel-title i{font-size:16px}
+.an-total-count{font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap}
+
+/* Tab row — 5 tabs that always fit */
+.an-tabs{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
+.an-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  padding:8px 4px 7px;font-size:11px;font-weight:500;color:var(--gray-600);
+  background:transparent;border:none;border-bottom:2px solid transparent;
+  margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font);
+  min-width:0;text-align:center;line-height:1.2}
+.an-tab:hover{color:var(--navy);background:var(--navy-lt)}
+.an-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:700;background:#fff}
+.an-tab i{font-size:16px;margin-bottom:1px}
+.an-tab-label{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.an-tab-badge{font-size:10px;font-weight:700;min-width:18px;text-align:center;padding:1px 5px;border-radius:20px;line-height:1.4;margin-top:1px}
+.an-badge-amber{background:var(--amber);color:#fff}
+.an-badge-navy{background:var(--navy);color:#fff}
+.an-badge-teal{background:var(--teal);color:#fff}
+.an-badge-endo{background:#6D28D9;color:#fff}
+.an-badge-nephro{background:#0369a1;color:#fff}
+.an-tab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.an-dot-navy{background:var(--navy)}
+.an-dot-teal{background:var(--teal)}
+.an-dot-endo{background:#6D28D9}
+.an-dot-nephro{background:#0369a1}
+
+/* Panes */
+.an-pane{display:none}
+.an-pane.on{display:block}
+
+/* Sub-header within each scorecard pane */
+.an-pane-subhdr{display:flex;align-items:center;gap:11px;padding:10px 14px;border-bottom:1px solid var(--gray-200)}
+.an-subhdr-icon{flex-shrink:0}
+.an-subhdr-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.an-subhdr-name{font-size:13px;color:var(--gray-600)}
+.an-subhdr-po{background:var(--navy-lt)}
+.an-subhdr-po .an-subhdr-type{color:var(--navy)}
+.an-subhdr-pcp{background:var(--teal-lt)}
+.an-subhdr-pcp .an-subhdr-type{color:#005c5d}
+.an-subhdr-endo{background:#f4f0fa}
+.an-subhdr-endo .an-subhdr-type{color:#4C1D95}
+.an-subhdr-nephro{background:#e0f2fe}
+.an-subhdr-nephro .an-subhdr-type{color:#0c4a6e}
+
+/* ── Scorecard action sections (legacy stacked layout, keep for compat) ── */
+.sc-section{border-radius:var(--radius-lg);overflow:hidden;margin-bottom:14px;border:1px solid var(--gray-200)}
+.sc-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px}
+.sc-section-head-left{display:flex;align-items:center;gap:11px;min-width:0;flex:1}
+.sc-section-icon{flex-shrink:0}
+.sc-section-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.sc-section-name{font-size:13px;font-weight:500;color:var(--gray-900);line-height:1.3}
+.sc-section-count{font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.sc-section-body{border-top:1px solid var(--gray-200);background:#fff}
+.sc-head-po{background:var(--navy-lt);border-bottom:2px solid var(--navy)}
+.sc-head-po .sc-section-type{color:var(--navy)}
+.sc-head-po .sc-section-count{background:var(--navy);color:#fff}
+.sc-head-pcp{background:var(--teal-lt);border-bottom:2px solid var(--teal)}
+.sc-head-pcp .sc-section-type{color:#005c5d}
+.sc-head-pcp .sc-section-count{background:var(--teal);color:#fff}
+.sc-head-endo{background:#f4f0fa;border-bottom:2px solid #6D28D9}
+.sc-head-endo .sc-section-type{color:#4C1D95}
+.sc-head-endo .sc-section-count{background:#6D28D9;color:#fff}
+.sc-head-nephro{background:#e0f2fe;border-bottom:2px solid #0369a1}
+.sc-head-nephro .sc-section-type{color:#0c4a6e}
+.sc-head-nephro .sc-section-count{background:#0369a1;color:#fff}
+
+/* ══════════ HOME PAGE REDESIGN ══════════ */
+
+/* ── Zone 1: Status hero bar ── */
+.status-hero{background:var(--navy);padding:16px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:3px solid #bf5500;flex-shrink:0}
+.sh-score-block{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.sh-score-ring{position:relative;width:72px;height:72px;flex-shrink:0}
+.sh-score-ring svg{transform:rotate(-90deg)}
+.sh-score-ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.sh-score-val{font-size:20px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.sh-score-denom{font-size:11px;color:rgba(185,226,227,.65);line-height:1}
+.sh-score-meta{min-width:0}
+.sh-score-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.65);margin-bottom:4px}
+.sh-tier-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.sh-tier-102{background:rgba(211,135,44,.25);color:#FAC775;border:.5px solid rgba(211,135,44,.4)}
+.sh-tier-103{background:rgba(0,116,117,.3);color:#6de4e5;border:.5px solid rgba(0,116,117,.5)}
+.sh-tier-105{background:rgba(29,197,94,.2);color:#6effa8;border:.5px solid rgba(29,197,94,.3)}
+.sh-tier-risk{background:rgba(190,80,0,.3);color:#ffc47a;border:.5px solid rgba(190,80,0,.5)}
+.sh-score-period{font-size:11px;color:rgba(185,226,227,.55);margin-top:5px}
+.sh-divider{width:.5px;height:56px;background:rgba(185,226,227,.18);flex-shrink:0}
+.sh-metrics{display:flex;gap:24px;flex:1;flex-wrap:wrap}
+.sh-metric{text-align:center}
+.sh-metric-val{font-size:22px;font-weight:700;color:#fff;line-height:1;letter-spacing:-.01em}
+.sh-metric-lbl{font-size:11px;color:rgba(185,226,227,.65);margin-top:3px;white-space:nowrap}
+.sh-vbr-block{margin-left:auto;text-align:right;flex-shrink:0}
+.sh-vbr-days{font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+.sh-vbr-label{font-size:11px;color:rgba(185,226,227,.65);margin-top:2px}
+.sh-vbr-date{font-size:12px;color:rgba(185,226,227,.5);margin-top:1px}
+
+/* ── Zone 2: Participation tiles ── */
+.ptile-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 24px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+.ptile{background:#fff;border-radius:var(--radius-md);padding:14px 16px;border:1px solid var(--gray-200);cursor:default;position:relative;overflow:hidden}
+.ptile.clickable{cursor:pointer;transition:box-shadow .15s,border-color .15s}
+.ptile.clickable:hover{border-color:var(--navy);box-shadow:0 2px 10px rgba(37,57,114,.12)}
+.ptile-accent{position:absolute;top:0;left:0;right:0;height:3px}
+.ptile-accent-green{background:#1a9e50}
+.ptile-accent-amber{background:var(--amber)}
+.ptile-accent-blue{background:#0369a1}
+.ptile-accent-orange{background:#bf5500}
+.ptile-icon{width:28px;height:28px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:10px}
+.ptile-icon-green{background:#e7f7ef;color:#1a6640}
+.ptile-icon-amber{background:var(--amber-lt);color:#7a4a0d}
+.ptile-icon-blue{background:#e0f2fe;color:#0c4a6e}
+.ptile-icon-orange{background:#fff3e0;color:#bf5500}
+.ptile-val{font-size:28px;font-weight:800;line-height:1;letter-spacing:-.02em;margin-bottom:4px}
+.ptile-val-green{color:#1a9e50}
+.ptile-val-amber{color:var(--amber)}
+.ptile-val-blue{color:#0369a1}
+.ptile-val-orange{color:#bf5500}
+.ptile-label{font-size:13px;font-weight:500;color:var(--gray-900);line-height:1.3}
+.ptile-sub{font-size:12px;color:var(--gray-600);margin-top:3px}
+
+/* ── Quick links strip ── */
+.ql-strip{padding:10px 24px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex-shrink:0}
+.ql-strip-label{font-size:12px;font-weight:600;color:var(--gray-600);white-space:nowrap;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.ql-strip-label i{font-size:14px}
+.ql-strip-chips{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.ql-strip-chip{display:flex;align-items:center;gap:5px;padding:4px 10px;background:#fff;border:.5px solid var(--gray-200);border-radius:20px;font-size:13px;font-weight:500;color:var(--gray-900);cursor:pointer;transition:all .12s;white-space:nowrap;font-family:var(--font)}
+.ql-strip-chip i{font-size:13px;color:var(--gray-400)}
+.ql-strip-chip:hover{border-color:var(--navy);background:var(--navy-lt);color:var(--navy)}
+.ql-strip-edit{margin-left:auto;flex-shrink:0;font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font)}
+.ql-strip-edit:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.ql-strip-edit.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ── Zone 3: Workspace ── */
+.workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px;padding:20px 24px;align-items:start;background:#fff}
+.right-col{display:flex;flex-direction:column;gap:16px}
+.zone-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-400);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.zone-label i{font-size:13px}
+
+/* ── Recently completed panel ── */
+.rc-panel{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:#fff}
+.rc-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--teal)}
+.rc-hdr-left{display:flex;align-items:center;gap:8px}
+.rc-hdr-title{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+.rc-hdr-count{font-size:12px;color:rgba(255,255,255,.75)}
+.rc-hdr-link{font-size:12px;color:rgba(255,255,255,.85);text-decoration:none;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.rc-hdr-link:hover{color:#fff;text-decoration:underline}
+.rc-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100);transition:background .1s}
+.rc-item:last-child{border-bottom:none}
+.rc-item:hover{background:var(--teal-lt)}
+.rc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.rc-dot-credited{background:var(--teal)}
+.rc-dot-submitted{background:var(--amber)}
+.rc-dot-completed{background:#1a9e50}
+.rc-body{flex:1;min-width:0}
+.rc-title{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
+.rc-who{font-size:12px;color:var(--gray-600);margin-top:2px}
+.rc-status-row{display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap}
+.rc-status{font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.rc-status-credited{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.rc-status-submitted{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.rc-status-completed{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
+.rc-when{font-size:11px;color:var(--gray-400)}
+.rc-pts{font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-lt);padding:1px 7px;border-radius:20px;border:.5px solid var(--teal)}
+
+/* ── Deadlines/messages/updates feed panel ── */
+.df-panel{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:#fff}
+.df-tabs{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
+.df-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 6px;font-size:12px;font-weight:500;color:var(--gray-600);background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font)}
+.df-tab i{font-size:14px}
+.df-tab:hover{color:var(--navy);background:var(--navy-lt)}
+.df-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;background:#fff}
+.df-pane{display:none}.df-pane.on{display:block}
+
 /* Coordinator context bar */
 .coord-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:9px 14px;background:var(--navy-lt);border:1px solid rgba(37,57,114,.12);
   border-radius:var(--radius-md);margin-bottom:14px;flex-wrap:wrap}
-.coord-context{font-size:12px;color:var(--navy);display:flex;align-items:center;gap:7px}
-.coord-context i{font-size:14px;color:var(--teal)}
+.coord-context{font-size:14px;color:var(--navy);display:flex;align-items:center;gap:7px}
+.coord-context i{font-size:16px;color:var(--teal)}
 .coord-context strong{font-weight:600}
 .coord-actions{display:flex;gap:6px;flex-wrap:wrap}
-.coord-btn{font-size:11px;font-weight:500;padding:5px 11px;border-radius:20px;
+.coord-btn{font-size:13px;font-weight:500;padding:5px 11px;border-radius:20px;
   border:.5px solid rgba(37,57,114,.25);background:#fff;color:var(--navy);
   cursor:pointer;display:flex;align-items:center;gap:5px;
   transition:all .12s;font-family:var(--font)}
 .coord-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-.coord-btn i{font-size:12px}
+.coord-btn i{font-size:14px}
+
+.section-heading{font-size:13px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
 
 /* Command summary row */
 .cmd-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:18px}
 .cmd-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:11px 13px;cursor:default}
 .cmd-card.clickable{cursor:pointer;transition:border-color .12s}
 .cmd-card.clickable:hover{border-color:var(--navy)}
-.cmd-card-lbl{font-size:11px;color:var(--gray-400);margin-bottom:4px;line-height:1.3}
+.cmd-card-lbl{font-size:13px;color:var(--gray-600);margin-bottom:4px;line-height:1.3}
 .cmd-card-val{font-size:22px;font-weight:700;line-height:1;letter-spacing:-.01em}
-.cmd-card-sub{font-size:10px;color:var(--gray-400);margin-top:3px}
+.cmd-card-sub{font-size:12px;color:var(--gray-600);margin-top:3px}
 .cmd-val-amber{color:var(--amber)}
 .cmd-val-navy{color:var(--navy)}
 .cmd-val-teal{color:var(--teal)}
@@ -200,10 +371,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 /* Quick links */
 .ql-wrap{margin-bottom:18px}
 .ql-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.ql-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);display:flex;align-items:center;gap:5px}
-.ql-label i{font-size:13px}
-.ql-hint{font-size:11px;color:var(--gray-400);margin-left:2px}
-.ql-manage-btn{margin-left:auto;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font)}
+.ql-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);display:flex;align-items:center;gap:5px}
+.ql-label i{font-size:15px}
+.ql-hint{font-size:13px;color:var(--gray-400);margin-left:2px}
+.ql-manage-btn{margin-left:auto;font-size:13px;font-weight:500;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font)}
 .ql-manage-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
 .ql-manage-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 
@@ -211,23 +382,23 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 .ql-chip{display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-family:var(--font);text-decoration:none;max-width:280px}
 .ql-chip:hover{border-color:var(--navy);background:var(--navy-lt)}
-.ql-chip-icon{width:24px;height:24px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ql-chip-icon{width:24px;height:24px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 .ql-chip-text{flex:1;min-width:0}
-.ql-chip-title{font-size:12px;font-weight:500;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ql-chip-group{font-size:10px;color:var(--gray-400);margin-top:1px}
-.ql-chip-remove{font-size:14px;color:var(--gray-400);flex-shrink:0;opacity:0;transition:opacity .12s;margin-left:2px;background:none;border:none;cursor:pointer;padding:0;line-height:1;font-family:var(--font)}
+.ql-chip-title{font-size:14px;font-weight:500;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ql-chip-group{font-size:12px;color:var(--gray-600);margin-top:1px}
+.ql-chip-remove{font-size:16px;color:var(--gray-400);flex-shrink:0;opacity:0;transition:opacity .12s;margin-left:2px;background:none;border:none;cursor:pointer;padding:0;line-height:1;font-family:var(--font)}
 .ql-chip:hover .ql-chip-remove{opacity:1}
 .ql-chip-remove:hover{color:var(--amber)}
 
-.ql-empty{font-size:12px;color:var(--gray-400);padding:10px 2px;display:flex;align-items:center;gap:6px}
-.ql-empty i{font-size:14px}
+.ql-empty{font-size:14px;color:var(--gray-400);padding:10px 2px;display:flex;align-items:center;gap:6px}
+.ql-empty i{font-size:16px}
 
 /* Add link picker */
 .ql-picker{margin-top:12px;padding:12px 14px;background:var(--gray-50);border:1px dashed var(--gray-200);border-radius:var(--radius-md)}
-.ql-picker-label{font-size:11px;color:var(--gray-600);margin-bottom:10px;font-weight:500}
+.ql-picker-label{font-size:13px;color:var(--gray-600);margin-bottom:10px;font-weight:500}
 .ql-picker-grid{display:flex;flex-wrap:wrap;gap:6px}
-.ql-add-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-size:11px;font-weight:500;color:var(--gray-600);font-family:var(--font)}
-.ql-add-chip i{font-size:13px;color:var(--gray-400)}
+.ql-add-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-size:13px;font-weight:500;color:var(--gray-600);font-family:var(--font)}
+.ql-add-chip i{font-size:15px;color:var(--gray-400)}
 .ql-add-chip:hover{border-color:var(--teal);background:var(--teal-lt);color:#005c5d}
 .ql-add-chip:hover i{color:var(--teal)}
 .ql-add-chip.already-saved{opacity:.45;cursor:default;pointer-events:none}
@@ -239,9 +410,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .ai-accent{width:3px;flex-shrink:0;align-self:stretch;min-height:32px;border-radius:2px}
 .ac-urg{background:var(--amber)}.ac-soon{background:var(--teal)}.ac-later{background:var(--sky)}
 .ai-body{flex:1;min-width:0}
-.ai-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--gray-900)}
+.ai-title{font-size:16px;font-weight:500;line-height:1.35;color:var(--gray-900)}
 .ai-chips{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;align-items:center}
-.chip{font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
+.chip{font-size:12px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
 .c-urg{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .c-soon{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .c-later{background:var(--sky-lt);color:#2a6e70;border:.5px solid var(--sky)}
@@ -249,24 +420,24 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .c-pcp{background:var(--teal-lt);color:#005c5d;border:.5px solid rgba(0,166,168,.3)}
 .c-nephro{background:#f4f0fa;color:#3d2a70;border:.5px solid #c4b0e8}
 .c-endo{background:#fdf3e8;color:#7a4a0d;border:.5px solid #f0c890}
-.ai-hint{font-size:11px;color:var(--gray-400);margin-top:4px;line-height:1.45}
+.ai-hint{font-size:13px;color:var(--gray-600);margin-top:4px;line-height:1.45}
 .ai-prog{display:flex;align-items:center;gap:8px;margin-top:7px}
 .prog-track{flex:1;height:3px;background:var(--gray-100);border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;border-radius:2px}
-.prog-txt{font-size:10px;color:var(--gray-400);white-space:nowrap}
-.ai-arrow{font-size:13px;color:var(--gray-400);flex-shrink:0;padding-top:1px}
-.show-more-btn{width:100%;border:none;border-top:1px solid var(--gray-100);background:var(--gray-50);padding:9px;font-size:11px;color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .12s;font-family:var(--font)}
+.prog-txt{font-size:12px;color:var(--gray-600);white-space:nowrap}
+.ai-arrow{font-size:15px;color:var(--gray-400);flex-shrink:0;padding-top:1px}
+.show-more-btn{width:100%;border:none;border-top:1px solid var(--gray-100);background:var(--gray-50);padding:9px;font-size:13px;color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .12s;font-family:var(--font)}
 .show-more-btn:hover{background:var(--navy-lt);color:var(--navy)}
 
 /* Send/copy micro-actions on action items */
 .ai-footer{display:flex;align-items:center;gap:6px;margin-top:7px;padding-top:6px;border-top:.5px solid var(--gray-100)}
-.ai-send-btn{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.ai-send-btn{font-size:12px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
 .ai-send-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
-.ai-send-btn i{font-size:11px}
+.ai-send-btn i{font-size:13px}
 .ai-send-btn.copied{background:var(--teal-lt);color:#005c5d;border-color:var(--teal)}
 
 /* Status badges */
-.status-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+.status-badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
 .sb-notstarted{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
 .sb-registered{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .sb-submitted{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
@@ -277,30 +448,34 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 /* Pending credit list */
 .pending-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100)}
 .pending-item:last-child{border-bottom:none}
-.pending-icon{width:22px;height:22px;border-radius:50%;background:var(--amber-lt);border:.5px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--amber);flex-shrink:0;margin-top:1px}
+.pending-icon{width:22px;height:22px;border-radius:50%;background:var(--amber-lt);border:.5px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--amber);flex-shrink:0;margin-top:1px}
 .pending-body{flex:1;min-width:0}
-.pending-title{font-size:12px;font-weight:500;line-height:1.3;color:var(--gray-900)}
-.pending-meta{font-size:11px;color:var(--gray-600);margin-top:2px}
-.pending-timing{font-size:10px;color:var(--gray-400);margin-top:2px}
+.pending-title{font-size:14px;font-weight:500;line-height:1.3;color:var(--gray-900)}
+.pending-meta{font-size:13px;color:var(--gray-600);margin-top:2px}
+.pending-timing{font-size:12px;color:var(--gray-400);margin-top:2px}
 
 /* Feed status chips */
-.feed-status{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;margin-top:3px}
+.feed-status{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:500;padding:1px 7px;border-radius:20px;margin-top:3px}
 .fs-credited{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .fs-complete{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
 .fs-registered{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
-.action-group{border-bottom:1px solid var(--gray-200)}
-.action-group:last-child{border-bottom:none}
-.ag-header{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;transition:background .12s}
-.ag-header:hover{background:var(--gray-50)}
+.action-group{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+.action-group:last-child{margin-bottom:0}
+.ag-header{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--gray-200);border-left:4px solid transparent}
+.ag-header:hover{filter:brightness(.97)}
+.ag-header[data-type="po"]{background:#f0f2f9;border-left-color:var(--navy)}
+.ag-header[data-type="pcp"]{background:#e8f7f7;border-left-color:var(--teal)}
+.ag-header[data-type="endo"]{background:#f1ecfc;border-left-color:#6D28D9}
+.ag-header[data-type="nephro"]{background:#e6f4fd;border-left-color:#0369a1}
 .ag-header-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
 .ag-svg-icon{flex-shrink:0;display:flex;align-items:center}
 .ag-text{min-width:0;flex:1}
-.ag-type-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
-.ag-full-name{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.3;margin-bottom:1px}
-.ag-period{font-size:11px;color:var(--gray-400)}
+.ag-type-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.ag-full-name{font-size:15px;font-weight:600;color:var(--gray-900);line-height:1.3;margin-bottom:2px}
+.ag-period{font-size:13px;color:var(--gray-600)}
 .ag-header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.ag-task-count{font-size:11px;color:var(--gray-400);background:var(--gray-100);border:.5px solid var(--gray-200);padding:2px 8px;border-radius:20px;white-space:nowrap}
-.ag-chev{font-size:13px;color:var(--gray-400)}
+.ag-task-count{font-size:13px;font-weight:500;color:var(--gray-600);background:rgba(255,255,255,1);border:.5px solid rgba(0,0,0,.1);padding:3px 10px;border-radius:20px;white-space:nowrap}
+.ag-chev{font-size:15px;color:var(--gray-400)}
 .ag-body{}
 
 .action-item{border-bottom:1px solid var(--gray-100);padding:10px 14px 10px 22px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .12s}
@@ -309,32 +484,32 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .action-item.ai-done{opacity:.62}
 .action-item.ai-done:hover{background:var(--gray-50)}
 .ac-done{background:var(--gray-200)}
-.ai-measure-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-top:3px}
+.ai-measure-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-top:3px}
 .c-done{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
 
-.group-show-more{width:100%;border:none;border-top:1px solid var(--gray-100);background:transparent;padding:8px 14px 8px 22px;font-size:11px;color:var(--teal);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);text-align:left;font-weight:500}
+.group-show-more{width:100%;border:none;border-top:1px solid var(--gray-100);background:transparent;padding:8px 14px 8px 22px;font-size:13px;color:var(--teal);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);text-align:left;font-weight:500}
 .group-show-more:hover{background:var(--teal-lt)}
 
 /* Pending user approvals block */
 .approvals-block{border-bottom:1px solid var(--gray-200)}
 .approvals-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200)}
 .approvals-subhead-left{display:flex;align-items:center;gap:8px}
-.approvals-icon{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
-.approvals-title{font-size:12px;font-weight:600;color:var(--navy)}
-.approvals-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--amber);color:#fff;white-space:nowrap}
-.approvals-link{font-size:11px;color:var(--teal);font-weight:500;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0}
+.approvals-icon{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.approvals-title{font-size:14px;font-weight:600;color:var(--navy)}
+.approvals-badge{font-size:12px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--amber);color:#fff;white-space:nowrap}
+.approvals-link{font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0}
 .approvals-link:hover{text-decoration:underline}
 .approval-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
 .approval-item:last-child{border-bottom:none}
 .approval-item:hover{background:var(--navy-lt)}
-.approval-avatar{width:28px;height:28px;border-radius:50%;background:var(--navy-lt);border:.5px solid rgba(37,57,114,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--navy);flex-shrink:0}
+.approval-avatar{width:28px;height:28px;border-radius:50%;background:var(--navy-lt);border:.5px solid rgba(37,57,114,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--navy);flex-shrink:0}
 .approval-body{flex:1;min-width:0}
-.approval-name{font-size:13px;font-weight:500;color:var(--gray-900)}
-.approval-meta{font-size:11px;color:var(--gray-600);margin-top:2px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-.approval-role{font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
-.approval-date{font-size:10px;color:var(--gray-400);margin-top:3px;display:flex;align-items:center;gap:3px}
+.approval-name{font-size:14px;font-weight:500;color:var(--gray-900)}
+.approval-meta{font-size:13px;color:var(--gray-600);margin-top:2px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.approval-role{font-size:12px;font-weight:500;padding:1px 7px;border-radius:20px;background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
+.approval-date{font-size:12px;color:var(--gray-400);margin-top:3px;display:flex;align-items:center;gap:3px}
 .approval-actions{display:flex;gap:6px;flex-shrink:0;padding-top:2px}
-.approval-btn{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:none;cursor:pointer;font-family:var(--font);transition:all .12s;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.approval-btn{font-size:13px;font-weight:500;padding:4px 11px;border-radius:20px;border:none;cursor:pointer;font-family:var(--font);transition:all .12s;display:flex;align-items:center;gap:4px;white-space:nowrap}
 .approval-btn-approve{background:var(--teal);color:#fff}
 .approval-btn-approve:hover{background:#008a8b}
 .approval-btn-review{background:#fff;color:var(--navy);border:.5px solid rgba(37,57,114,.3)}
@@ -348,63 +523,63 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .feed-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
 .fd-done{background:var(--teal)}.fd-event{background:var(--navy)}.fd-pts{background:var(--amber)}
 .feed-body{flex:1;min-width:0}
-.feed-title{font-size:12px;font-weight:500;line-height:1.35}
-.feed-sub{font-size:11px;color:var(--gray-600);margin-top:1px}
-.feed-when{font-size:10px;color:var(--gray-400);margin-top:3px}
-.feed-pts{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:1px 7px;border-radius:20px;background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber);margin-top:3px;font-weight:600}
+.feed-title{font-size:14px;font-weight:500;line-height:1.35}
+.feed-sub{font-size:13px;color:var(--gray-600);margin-top:1px}
+.feed-when{font-size:12px;color:var(--gray-400);margin-top:3px}
+.feed-pts{display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:1px 7px;border-radius:20px;background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber);margin-top:3px;font-weight:600}
 
 /* PO scorecard measures */
 .measure-card{border-bottom:1px solid var(--gray-100);overflow:hidden}
 .measure-card:last-child{border-bottom:none}
 .mc-row{display:grid;grid-template-columns:28px 1fr auto auto auto;gap:10px;align-items:center;padding:11px 14px;cursor:pointer;transition:background .12s}
 .mc-row:hover{background:var(--navy-lt)}
-.mc-num{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.mc-num{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .mc-info{min-width:0}
-.mc-name{font-size:12px;font-weight:500;line-height:1.3}
-.mc-wt{font-size:10px;color:var(--gray-400);margin-top:1px}
+.mc-name{font-size:14px;font-weight:500;line-height:1.3}
+.mc-wt{font-size:12px;color:var(--gray-600);margin-top:1px}
 .mc-scored{text-align:right;flex-shrink:0}
 .mc-pts{font-size:16px;font-weight:700}
-.mc-max{font-size:10px;color:var(--gray-400)}
+.mc-max{font-size:12px;color:var(--gray-600)}
 .mc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .dot-full{background:var(--teal)}.dot-part{background:var(--amber)}.dot-none{background:var(--gray-200)}
-.mc-chev{font-size:14px;color:var(--gray-400);transition:transform .2s}
+.mc-chev{font-size:16px;color:var(--gray-400);transition:transform .2s}
 .measure-card.open .mc-chev{transform:rotate(180deg)}
 .mc-detail{display:none;padding:0 14px 14px 50px;background:var(--navy-lt)}
 .measure-card.open .mc-detail{display:block;padding-top:12px}
-.mc-desc{font-size:11px;color:var(--gray-600);line-height:1.6;margin-bottom:10px}
+.mc-desc{font-size:13px;color:var(--gray-600);line-height:1.6;margin-bottom:10px}
 .mc-tiers{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
-.mc-tier{display:flex;align-items:center;gap:8px;font-size:11px}
+.mc-tier{display:flex;align-items:center;gap:8px;font-size:13px}
 .tier-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.tier-pts{font-size:11px;font-weight:700;min-width:24px;text-align:right}
+.tier-pts{font-size:13px;font-weight:700;min-width:24px;text-align:right}
 .tier-desc{color:var(--gray-600);flex:1}
-.mc-opts-lbl{font-size:10px;font-weight:600;color:var(--gray-400);margin-bottom:5px}
+.mc-opts-lbl{font-size:12px;font-weight:600;color:var(--gray-400);margin-bottom:5px}
 .mc-opts{display:flex;gap:5px;flex-wrap:wrap}
-.mc-opt{font-size:10px;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
+.mc-opt{font-size:12px;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
 .mc-opt:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
 .mc-opt.sel{background:var(--navy);border-color:var(--navy);color:#fff}
 
 /* Practice table */
 .spec-tabs{display:flex;gap:0;border-bottom:1px solid var(--gray-200);margin-bottom:14px}
-.spec-tab{font-size:12px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
+.spec-tab{font-size:14px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
 .spec-tab:hover{color:var(--navy)}
 .spec-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
-.spec-count{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--gray-100);color:var(--gray-400)}
+.spec-count{font-size:12px;padding:1px 6px;border-radius:20px;background:var(--gray-100);color:var(--gray-400)}
 .spec-tab.on .spec-count{background:var(--navy-lt);color:var(--navy)}
 .toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .search-wrap{position:relative;flex:1;min-width:150px;max-width:280px}
-.search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}
-.search-input{width:100%;padding:7px 10px 7px 32px;font-size:12px;border:1px solid var(--gray-200);border-radius:var(--radius-md);background:#fff;color:var(--gray-900);font-family:var(--font);transition:border-color .13s}
+.search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--gray-400);pointer-events:none}
+.search-input{width:100%;padding:7px 10px 7px 32px;font-size:16px;border:1px solid var(--gray-200);border-radius:var(--radius-md);background:#fff;color:var(--gray-900);font-family:var(--font);transition:border-color .13s}
 .search-input:focus{outline:none;border-color:var(--teal)}
 .search-input::placeholder{color:var(--gray-400)}
 .filter-row{display:flex;gap:5px;flex-wrap:wrap}
-.pf-btn{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
+.pf-btn{font-size:13px;padding:5px 11px;border-radius:20px;border:1px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
 .pf-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .pf-btn:not(.on):hover{background:var(--navy-lt);color:var(--navy)}
-.sort-select{font-size:11px;padding:5px 9px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;font-family:var(--font)}
+.sort-select{font-size:13px;padding:5px 9px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;font-family:var(--font)}
 .sort-select:focus{outline:none;border-color:var(--teal)}
-.result-count{font-size:11px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
+.result-count{font-size:13px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
 .prac-table{border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden}
-.prac-thead{display:grid;padding:7px 14px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em}
+.prac-thead{display:grid;padding:7px 14px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:12px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em}
 .prac-row{display:grid;padding:9px 14px;border-bottom:1px solid var(--gray-100);align-items:center;cursor:pointer;transition:background .1s;background:#fff}
 .prac-row:last-child{border-bottom:none}
 .prac-row:hover,.prac-row.open{background:var(--navy-lt)}
@@ -412,60 +587,60 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .grid-endo{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 66px 66px 66px 72px 22px}
 .grid-nephro{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 66px 66px 66px 72px 22px}
 .cell-name{min-width:0}
-.prac-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prac-champ{font-size:10px;color:var(--gray-400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prac-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prac-champ{font-size:12px;color:var(--gray-600);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cell-score{text-align:center}
-.score-pill{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.score-pill{display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
 .sp-full{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .sp-part{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .sp-none{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
 .cell-total{text-align:center}
-.total-num{font-size:13px;font-weight:700}
-.total-pct{font-size:9px;color:var(--gray-400)}
+.total-num{font-size:15px;font-weight:700}
+.total-pct{font-size:11px;color:var(--gray-400)}
 .cell-tier{text-align:right}
-.tier-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.tier-badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
 .tb-105{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .tb-103{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .tb-102{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .tb-risk{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
-.cell-chev{text-align:right;font-size:13px;color:var(--gray-400)}
+.cell-chev{text-align:right;font-size:15px;color:var(--gray-400)}
 .chev-r{transition:transform .18s;display:inline-block}
 .open .chev-r{transform:rotate(180deg)}
 .prac-detail{display:none;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);padding:12px 14px}
 .prac-detail.show{display:block}
 .detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 .detail-mcard{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:10px 12px}
-.dm-lbl{font-size:10px;color:var(--gray-400);margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.dm-lbl{font-size:12px;color:var(--gray-400);margin-bottom:5px;display:flex;align-items:center;gap:4px}
 .dm-val{font-size:17px;font-weight:700}
-.dm-max{font-size:10px;color:var(--gray-400);font-weight:400}
+.dm-max{font-size:12px;color:var(--gray-400);font-weight:400}
 .dm-bar{height:3px;background:var(--gray-100);border-radius:2px;overflow:hidden;margin-top:6px}
 .dm-fill{height:100%;border-radius:2px}
-.no-results{text-align:center;padding:40px 20px;font-size:13px;color:var(--gray-400)}
+.no-results{text-align:center;padding:40px 20px;font-size:15px;color:var(--gray-400)}
 .no-results i{font-size:28px;display:block;margin-bottom:8px}
 
 /* Tooltip */
 .tip-anchor{position:relative;display:inline-flex;align-items:center}
-.tip-icon{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .12s;font-style:normal;line-height:1;user-select:none}
+.tip-icon{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .12s;font-style:normal;line-height:1;user-select:none}
 .ti-white{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff}
 .ti-white:hover{background:rgba(255,255,255,.4)}
 .ti-teal{background:var(--teal-lt);border:1px solid rgba(0,166,168,.4);color:var(--teal)}
 .ti-teal:hover{background:var(--teal);color:#fff}
 .ti-dark{background:var(--navy-lt);border:1px solid rgba(37,57,114,.3);color:var(--navy)}
 .ti-dark:hover{background:var(--navy);color:#fff}
-.tooltip{position:absolute;z-index:200;background:var(--navy);color:#fff;font-size:11px;line-height:1.55;padding:10px 13px;border-radius:var(--radius-md);width:230px;pointer-events:none;opacity:0;transition:opacity .15s;top:calc(100% + 8px);left:50%;transform:translateX(-50%)}
+.tooltip{position:absolute;z-index:200;background:var(--navy);color:#fff;font-size:13px;line-height:1.55;padding:10px 13px;border-radius:var(--radius-md);width:230px;pointer-events:none;opacity:0;transition:opacity .15s;top:calc(100% + 8px);left:50%;transform:translateX(-50%)}
 .tooltip.tr{left:auto;right:0;transform:none}
 .tooltip.tl{left:0;transform:none}
 .tooltip::before{content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-bottom-color:var(--navy)}
 .tooltip.tr::before{left:auto;right:12px;transform:none}
 .tooltip.tl::before{left:12px;transform:none}
 .tooltip.vis{opacity:1}
-.tip-ttl{font-size:11px;font-weight:700;color:var(--sky);margin-bottom:4px}
+.tip-ttl{font-size:13px;font-weight:700;color:var(--sky);margin-bottom:4px}
 
 /* ── Three-feed panel ── */
 .feed-panel{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:#fff}
 .feed-panel-tabs{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
-.fp-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 6px;font-size:11px;font-weight:500;color:var(--gray-600);background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font)}
-.fp-tab i{font-size:13px}
+.fp-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 6px;font-size:13px;font-weight:500;color:var(--gray-600);background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font)}
+.fp-tab i{font-size:15px}
 .fp-tab:hover{color:var(--navy);background:var(--navy-lt)}
 .fp-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;background:#fff}
 .feed-panel-body{min-height:200px}
@@ -475,28 +650,28 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .dl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100)}
 .dl-item:last-child{border-bottom:none}
 .dl-badge{width:36px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:var(--radius-sm);padding:4px 2px;margin-top:1px}
-.dl-badge-month{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.dl-badge-month{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1}
 .dl-badge-day{font-size:16px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .dl-badge-urg{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .dl-badge-soon{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .dl-badge-later{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
 .dl-badge-past{background:var(--gray-100);color:var(--gray-400);border:.5px solid var(--gray-200);opacity:.55}
 .dl-body{flex:1;min-width:0}
-.dl-title{font-size:12px;font-weight:500;color:var(--gray-900);line-height:1.35}
-.dl-meta{font-size:10px;color:var(--gray-400);margin-top:2px}
+.dl-title{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
+.dl-meta{font-size:12px;color:var(--gray-400);margin-top:2px}
 .dl-chips{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
-.dl-chip{font-size:10px;padding:1px 7px;border-radius:20px;font-weight:500;white-space:nowrap}
+.dl-chip{font-size:12px;padding:1px 7px;border-radius:20px;font-weight:500;white-space:nowrap}
 .dl-chip-po{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .dl-chip-pcp{background:var(--teal-lt);color:#005c5d;border:.5px solid rgba(0,166,168,.3)}
 .dl-chip-endo{background:#f4f0fa;color:#3d2a70;border:.5px solid #c4b0e8}
 .dl-chip-nephro{background:#e0f2fe;color:#0c4a6e;border:.5px solid #7dd3fc}
 .dl-chip-all{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
-.dl-days{font-size:10px;font-weight:600;flex-shrink:0;padding-top:2px;white-space:nowrap}
+.dl-days{font-size:12px;font-weight:600;flex-shrink:0;padding-top:2px;white-space:nowrap}
 .dl-days-urg{color:var(--amber)}
 .dl-days-soon{color:var(--teal)}
-.dl-days-later{color:var(--gray-400)}
+.dl-days-later{color:var(--gray-600)}
 .dl-days-past{color:var(--gray-400)}
-.dl-section-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);padding:8px 14px 4px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100)}
+.dl-section-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-600);padding:8px 14px 4px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100)}
 
 /* Message items */
 .msg-item{padding:11px 14px;border-bottom:.5px solid var(--gray-100);cursor:pointer;transition:background .1s}
@@ -506,11 +681,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .msg-unread-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:4px}
 .msg-row{display:flex;align-items:flex-start;gap:8px}
 .msg-body{flex:1;min-width:0}
-.msg-from{font-size:10px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.msg-subject{font-size:12px;color:var(--gray-900);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.msg-preview{font-size:11px;color:var(--gray-400);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.msg-date{font-size:10px;color:var(--gray-400);flex-shrink:0;white-space:nowrap}
-.msg-tag{display:inline-flex;font-size:9px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:4px}
+.msg-from{font-size:12px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.msg-subject{font-size:14px;color:var(--gray-900);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-preview{font-size:13px;color:var(--gray-600);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-date{font-size:12px;color:var(--gray-600);flex-shrink:0;white-space:nowrap}
+.msg-tag{display:inline-flex;font-size:11px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:4px}
 .mt-req{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .mt-info{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .mt-event{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
@@ -519,15 +694,15 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .upd-item{padding:11px 14px;border-bottom:.5px solid var(--gray-100)}
 .upd-item:last-child{border-bottom:none}
 .upd-row{display:flex;align-items:flex-start;gap:9px}
-.upd-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.upd-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .upd-icon-new{background:var(--teal-lt);color:var(--teal);border:.5px solid var(--teal)}
 .upd-icon-fix{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .upd-icon-data{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .upd-body{flex:1;min-width:0}
-.upd-title{font-size:12px;font-weight:500;color:var(--gray-900);line-height:1.35}
-.upd-desc{font-size:11px;color:var(--gray-600);margin-top:2px;line-height:1.45}
-.upd-date{font-size:10px;color:var(--gray-400);margin-top:3px}
-.upd-badge{display:inline-flex;font-size:9px;font-weight:600;padding:1px 6px;border-radius:20px;margin-right:4px}
+.upd-title{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
+.upd-desc{font-size:13px;color:var(--gray-600);margin-top:2px;line-height:1.45}
+.upd-date{font-size:12px;color:var(--gray-400);margin-top:3px}
+.upd-badge{display:inline-flex;font-size:11px;font-weight:600;padding:1px 6px;border-radius:20px;margin-right:4px}
 .ub-new{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .ub-fix{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .ub-data{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
@@ -536,10 +711,91 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 32px;color:var(--gray-400);min-height:300px}
 .placeholder i{font-size:42px;margin-bottom:14px;color:var(--gray-200)}
 .placeholder h2{font-size:17px;font-weight:600;color:var(--gray-600);margin-bottom:8px}
-.placeholder p{font-size:12px;line-height:1.7;max-width:380px;color:var(--gray-400)}
+.placeholder p{font-size:14px;line-height:1.7;max-width:380px;color:var(--gray-400)}
 .placeholder a{color:var(--teal);text-decoration:none;font-weight:500}
 .placeholder a:hover{text-decoration:underline}
-.ph-url{display:inline-block;margin-top:12px;font-size:11px;font-family:monospace;background:var(--gray-100);color:var(--gray-600);padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--gray-200)}
+.ph-url{display:inline-block;margin-top:12px;font-size:13px;font-family:monospace;background:var(--gray-100);color:var(--gray-600);padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--gray-200)}
+/* ══════════ PHYSICIAN LC OVERLAY ══════════ */
+.phys-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:400;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+.phys-overlay.open{display:flex}
+.phys-modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:740px;box-shadow:0 20px 60px rgba(0,0,0,.22);display:flex;flex-direction:column;max-height:calc(100vh - 48px);overflow:hidden;margin:auto}
+
+/* Header */
+.phys-modal-hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--gray-200);flex-shrink:0;background:var(--navy)}
+.phys-modal-hdr-left{display:flex;align-items:center;gap:12px}
+.phys-modal-icon{width:34px;height:34px;border-radius:var(--radius-md);background:rgba(185,226,227,.2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--sky);flex-shrink:0}
+.phys-modal-title{font-size:16px;font-weight:600;color:#fff}
+.phys-modal-sub{font-size:13px;color:rgba(185,226,227,.7);margin-top:2px}
+.phys-modal-close{background:rgba(255,255,255,.12);border:none;border-radius:var(--radius-sm);width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(185,226,227,.8);cursor:pointer;flex-shrink:0;transition:all .13s}
+.phys-modal-close:hover{background:rgba(255,255,255,.22);color:#fff}
+
+/* LC options banner */
+.phys-lc-banner{padding:12px 18px;background:var(--teal-lt);border-bottom:1px solid var(--sky);flex-shrink:0}
+.phys-lc-banner-label{font-size:13px;font-weight:600;color:#005c5d;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.phys-lc-banner-label i{font-size:16px}
+.phys-lc-options{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.phys-lc-opt{display:flex;align-items:center;gap:6px;padding:5px 11px;background:#fff;border:.5px solid var(--teal);border-radius:var(--radius-md);font-size:13px;font-weight:500;color:#005c5d;cursor:pointer;text-decoration:none;transition:all .12s;font-family:var(--font)}
+.phys-lc-opt:hover{background:var(--teal);color:#fff}
+.phys-lc-opt i{font-size:15px}
+.phys-lc-link{font-size:13px;color:var(--teal);font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.phys-lc-link:hover{text-decoration:underline}
+
+/* Progress */
+.phys-progress-wrap{padding:12px 18px;border-bottom:1px solid var(--gray-100);flex-shrink:0;background:var(--gray-50)}
+.phys-progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.phys-progress-lbl{font-size:13px;font-weight:500;color:var(--gray-600)}
+.phys-progress-frac{font-size:14px;font-weight:700;color:var(--gray-900)}
+.phys-progress-track{height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden;margin-bottom:5px}
+.phys-progress-fill{height:100%;border-radius:3px;background:var(--amber);transition:width .4s}
+.phys-scoring-hint{font-size:12px;color:var(--gray-600);line-height:1.5}
+
+/* Tabs */
+.phys-tabs{display:flex;border-bottom:1px solid var(--gray-200);background:#fff;flex-shrink:0}
+.phys-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;font-size:14px;font-weight:500;color:var(--gray-600);background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font)}
+.phys-tab i{font-size:16px}
+.phys-tab:hover{color:var(--navy)}
+.phys-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+.phys-tab-count{font-size:12px;padding:1px 6px;border-radius:20px;background:var(--gray-100);color:var(--gray-600);font-weight:600}
+.phys-tab.on .phys-tab-count{background:var(--navy-lt);color:var(--navy)}
+
+/* Toolbar */
+.phys-toolbar{display:flex;align-items:center;gap:8px;padding:10px 18px;border-bottom:1px solid var(--gray-100);background:#fff;flex-shrink:0;flex-wrap:wrap}
+.phys-search-wrap{position:relative;flex:1;min-width:160px}
+.phys-search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--gray-400);pointer-events:none}
+.phys-search-input{width:100%;padding:7px 10px 7px 30px;font-size:16px;border:1px solid var(--gray-200);border-radius:var(--radius-md);background:#fff;color:var(--gray-900);font-family:var(--font)}
+.phys-search-input:focus{outline:none;border-color:var(--teal)}
+.phys-filter-sel{font-size:16px;padding:7px 10px;border:1px solid var(--gray-200);border-radius:var(--radius-md);background:#fff;color:var(--gray-600);font-family:var(--font);cursor:pointer;min-width:160px}
+.phys-filter-sel:focus{outline:none;border-color:var(--teal)}
+
+/* Physician list */
+.phys-list{overflow-y:auto;flex:1;min-height:0}
+.phys-row{display:flex;align-items:center;gap:12px;padding:10px 18px;border-bottom:.5px solid var(--gray-100);transition:background .1s}
+.phys-row:last-child{border-bottom:none}
+.phys-row:hover{background:var(--gray-50)}
+.phys-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.phys-av-incomplete{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.phys-av-complete{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.phys-info{flex:1;min-width:0}
+.phys-name{font-size:16px;font-weight:500;color:var(--gray-900)}
+.phys-practice{font-size:13px;color:var(--gray-600);margin-top:1px;display:flex;align-items:center;gap:5px}
+.phys-practice-link{color:var(--teal);text-decoration:none;font-weight:500}
+.phys-practice-link:hover{text-decoration:underline}
+.phys-status{flex-shrink:0;text-align:right}
+.phys-status-badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.psb-incomplete{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.psb-complete{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.phys-completed-via{font-size:12px;color:var(--gray-600);margin-top:2px}
+.phys-deadline{font-size:12px;color:var(--gray-400);margin-top:2px}
+.phys-empty{padding:32px 18px;text-align:center;font-size:15px;color:var(--gray-400)}
+.phys-empty i{font-size:28px;display:block;margin-bottom:8px;color:var(--gray-200)}
+
+/* Footer */
+.phys-modal-footer{display:flex;align-items:center;gap:8px;padding:12px 18px;border-top:1px solid var(--gray-200);background:var(--gray-50);flex-shrink:0;flex-wrap:wrap}
+.phys-footer-btn{font-size:14px;font-weight:500;padding:6px 14px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);text-decoration:none}
+.phys-footer-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.phys-footer-btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.phys-footer-btn-primary:hover{background:#008a8b;color:#fff;border-color:#008a8b}
+
 /* ══════════ MOBILE RESPONSIVE ══════════ */
 
 /* Hamburger button — hidden on desktop */
@@ -569,8 +825,8 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   /* ── Topbar ── */
   .mob-menu-btn{display:flex;align-items:center}
   .topbar{padding:10px 14px;gap:8px}
-  .tb-title{font-size:14px}
-  .tb-org{font-size:9px}
+  .tb-title{font-size:16px}
+  .tb-org{font-size:11px}
   .tb-right{gap:10px}
   .tb-stat-val{font-size:16px}
   .tb-div{display:none}
@@ -581,9 +837,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   .scorebar{padding:7px 14px;gap:8px}
   .sb-period{display:none}
   .sb-track{max-width:none}
-
-  /* ── View tabs — hide on mobile, use bottom nav ── */
-  .view-tabs{display:none}
 
   /* ── Content ── */
   .content{padding:14px 14px 80px}
@@ -608,7 +861,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   .sec-head{border-radius:var(--radius-sm) var(--radius-sm) 0 0}
 
   /* ── Action group headers ── */
-  .ag-full-name{font-size:12px}
+  .ag-full-name{font-size:14px}
   .ag-period{display:none}
   .ag-svg-icon svg{width:30px;height:30px}
 
@@ -637,17 +890,17 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
   /* ── Feed panel ── */
   .feed-panel{margin-top:0}
-  .fp-tab{font-size:10px;padding:8px 4px}
-  .fp-tab i{font-size:12px}
+  .fp-tab{font-size:12px;padding:8px 4px}
+  .fp-tab i{font-size:14px}
 
   /* ── Deadline items ── */
-  .dl-badge-day{font-size:14px}
+  .dl-badge-day{font-size:16px}
   .dl-chips{display:none} /* too tight on mobile — chips hidden */
-  .dl-days{font-size:10px}
+  .dl-days{font-size:12px}
 
   /* ── Message items ── */
   .msg-preview{display:none}
-  .msg-date{font-size:9px}
+  .msg-date{font-size:11px}
 
   /* ── Pending items ── */
   .pending-timing{display:none}
@@ -670,21 +923,31 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     flex:1;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:3px;padding:9px 4px 7px;
     background:none;border:none;cursor:pointer;
-    font-size:10px;font-weight:500;color:var(--gray-400);
+    font-size:12px;font-weight:500;color:var(--gray-400);
     font-family:var(--font);transition:color .13s;
     -webkit-tap-highlight-color:transparent;
   }
   .mob-bn-item i{font-size:20px;line-height:1}
   .mob-bn-item.active{color:var(--navy)}
   .mob-bn-item:hover{color:var(--navy)}
+  /* ── Actions needed tab panel ── */
+  .an-tab{padding:7px 2px 6px;font-size:10px}
+  .an-tab i{font-size:14px}
+  .an-tab-badge{font-size:9px;padding:1px 4px}
+  .phys-overlay{padding:0}
+  .phys-modal{max-width:100%;border-radius:0;min-height:100vh}
+  .phys-toolbar{flex-direction:column;align-items:stretch}
+  .phys-filter-sel{width:100%}
+  .phys-lc-options{flex-direction:column}
+  .phys-lc-opt{width:100%}
 }
 
 @media(max-width:400px){
   .cmd-summary{grid-template-columns:1fr 1fr}
-  .cmd-card-lbl{font-size:10px}
+  .cmd-card-lbl{font-size:12px}
   .approval-item{flex-wrap:wrap}
   .approval-actions{width:100%;margin-top:6px}
-  .ql-chip-title{font-size:11px}
+  .ql-chip-title{font-size:13px}
 }
 </style>
 </head>
@@ -694,7 +957,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 <!-- ═══════ SIDEBAR ═══════ -->
 <nav class="sidebar" id="sidebar">
 
-  <div class="sb-logo">
+  <div class="sb-logo" onclick="sbNav('home',document.getElementById('nav-home'))" style="cursor:pointer" title="Go to home page" role="button" tabindex="0" onkeydown="if(event.key==='Enter')sbNav('home',document.getElementById('nav-home'))">
     <div class="sb-logo-top">Michigan Collaborative</div>
     <div class="sb-logo-name">MCT2D</div>
     <div class="sb-logo-sub">CQI Admin Portal</div>
@@ -811,7 +1074,8 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       </div>
       <div class="sb-group-body">
         <a class="sb-item" id="nav-vbr-metrics" onclick="sbNav('vbr-metrics',this)"><i class="ti ti-chart-line"></i>VBR status</a>
-        <a class="sb-item" id="nav-po-sc" onclick="sbNav('dashboard',this);switchView('po')"><i class="ti ti-chart-bar"></i>Scorecards</a>
+        <a class="sb-item" id="nav-po-sc" onclick="sbNav('po-scorecard',this)"><i class="ti ti-chart-bar"></i>PO scorecard 2025</a>
+        <a class="sb-item" id="nav-pcp-sc" onclick="sbNav('practice-scorecard',this)"><i class="ti ti-building-community"></i>Practice scorecards 2025</a>
         <a class="sb-item" id="nav-po-reports" onclick="sbNav('po-reports',this)"><i class="ti ti-report"></i>Performance reports</a>
         <a class="sb-item" id="nav-baseline-reports" onclick="sbNav('baseline-reports',this)"><i class="ti ti-chart-dots"></i>Baseline reports</a>
         <a class="sb-item" id="nav-practice-reports" onclick="sbNav('practice-reports',this)"><i class="ti ti-file-analytics"></i>Practice reports</a>
@@ -940,11 +1204,12 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div>
         <div class="tb-org">Midwest Health Partners</div>
         <div class="tb-title" id="page-title">MCT2D Participation Management Center</div>
+        <div class="tb-coord">Coordinating 9 PCP practices · 2 endocrinology · 2 nephrology</div>
       </div>
     </div>
     <div class="tb-right">
       <div class="tb-stat">
-        <div class="tb-stat-lbl">PO score
+        <div class="tb-stat-lbl">PO scorecard progress
           <span class="tip-anchor"><i class="tip-icon ti-white" tabindex="0" onmouseenter="st('t-pos')" onmouseleave="ht('t-pos')" onfocus="st('t-pos')" onblur="ht('t-pos')">?</i>
           <div class="tooltip tr" id="t-pos"><div class="tip-ttl">PO scorecard score</div>Your PO's current total across 7 weighted measures (max 100 pts). Updated as activities are verified by MCT2D.</div></span>
         </div>
@@ -959,106 +1224,238 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     </div>
   </div>
 
-  <div class="scorebar">
-    <span class="sbl">PO scorecard progress
-      <span class="tip-anchor"><i class="tip-icon ti-teal" tabindex="0" onmouseenter="st('t-prog')" onmouseleave="ht('t-prog')" onfocus="st('t-prog')" onblur="ht('t-prog')">?</i>
-      <div class="tooltip" id="t-prog"><div class="tip-ttl">7 measures, 100 pts total</div>Monthly calls (10) · Small group discussion (10) · Collaborative wide meeting (10) · Workgroup (15) · Dashboard focus group (10) · Clinical champion meeting (15) · A1c performance target (30)</div></span>
-    </span>
-    <div class="sb-track"><div class="sb-fill" id="sbar" style="width:39%"></div></div>
-    <span class="sb-pts" id="sbar-pts">39 / 100 pts</span>
-    <span class="sb-period">Measurement period: Sep 1, 2025 – Jul 1, 2026</span>
-  </div>
-
-  <div class="view-tabs" id="view-tabs">
-    <button class="vt on" id="vt-home" onclick="switchView('home')"><i class="ti ti-home"></i>Home</button>
-    <button class="vt" id="vt-po" onclick="switchView('po')"><i class="ti ti-chart-bar"></i>My PO scorecard</button>
-    <button class="vt" id="vt-practices" onclick="switchView('practices')"><i class="ti ti-building-community"></i>Practice scorecards</button>
-  </div>
-
   <div class="content" id="main-content">
 
     <!-- HOME — MCT2D Participation Management Center -->
     <div class="view on" id="view-home">
 
-      <!-- Coordinator context bar -->
-      <div class="coord-bar">
-        <div class="coord-context">
-          <i class="ti ti-building-community" aria-hidden="true"></i>
-          Coordinating <strong>9 PCP practices</strong> · 2 endocrinology · 2 nephrology
+      <!-- ══ ZONE 1: Status Hero ══ -->
+      <div class="status-hero" id="status-hero">
+        <!-- PO Score ring -->
+        <div class="sh-score-block">
+          <div class="sh-score-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="30" fill="none" stroke="rgba(185,226,227,.15)" stroke-width="7"/>
+              <circle cx="36" cy="36" r="30" fill="none" stroke="#007475" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="115" stroke-linecap="round"/>
+            </svg>
+            <div class="sh-score-ring-num">
+              <span class="sh-score-val" id="hero-score">39</span>
+              <span class="sh-score-denom">/100</span>
+            </div>
+          </div>
+          <div class="sh-score-meta">
+            <div class="sh-score-label">PO Scorecard</div>
+            <div class="sh-tier-badge sh-tier-102" id="hero-tier">102% VBR eligible</div>
+            <div class="sh-score-period">Sep 2025 – Jul 2026</div>
+          </div>
         </div>
-        <div class="coord-actions">
-          <button class="coord-btn" onclick="nav('practice-tasks',document.getElementById('nav-practice-tasks'))"><i class="ti ti-filter" aria-hidden="true"></i>Filter by practice</button>
-          <button class="coord-btn" onclick="nav('tasks',document.getElementById('nav-tasks'))"><i class="ti ti-download" aria-hidden="true"></i>Export incomplete list</button>
+
+        <div class="sh-divider"></div>
+
+        <!-- Key metrics -->
+        <div class="sh-metrics">
+          <div class="sh-metric">
+            <div class="sh-metric-val">9</div>
+            <div class="sh-metric-lbl">PCP practices</div>
+          </div>
+          <div class="sh-metric">
+            <div class="sh-metric-val" id="hero-open">15</div>
+            <div class="sh-metric-lbl">open tasks</div>
+          </div>
+          <div class="sh-metric">
+            <div class="sh-metric-val" style="color:#6de4e5">5</div>
+            <div class="sh-metric-lbl">completed<br>this month</div>
+          </div>
+          <div class="sh-metric">
+            <div class="sh-metric-val" style="color:#FAC775">3</div>
+            <div class="sh-metric-lbl">awaiting<br>credit</div>
+          </div>
+        </div>
+
+        <!-- VBR countdown -->
+        <div class="sh-vbr-block">
+          <div class="sh-vbr-days">56</div>
+          <div class="sh-vbr-label">days remaining</div>
+          <div class="sh-vbr-date">VBR year ends Jul 1, 2026</div>
         </div>
       </div>
 
-      <!-- At-a-glance summary row -->
-      <div class="cmd-summary" id="cmd-summary"></div>
-
-      <!-- Quick links / bookmarks -->
-      <div class="ql-wrap" id="ql-wrap">
-        <div class="ql-header">
-          <span class="ql-label"><i class="ti ti-bookmark" aria-hidden="true"></i>Quick links</span>
-          <span class="ql-hint" id="ql-hint"></span>
-          <button class="ql-manage-btn" id="ql-manage-btn" onclick="toggleManageLinks()"><i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit</button>
+      <!-- ══ ZONE 2: Participation tiles ══ -->
+      <div class="ptile-row" id="ptile-row">
+        <!-- Completed this VBR year — green signal -->
+        <div class="ptile">
+          <div class="ptile-accent ptile-accent-green"></div>
+          <div class="ptile-icon ptile-icon-green"><i class="ti ti-circle-check"></i></div>
+          <div class="ptile-val ptile-val-green">5</div>
+          <div class="ptile-label">Measures completed</div>
+          <div class="ptile-sub">out of 7 PO scorecard measures</div>
         </div>
+        <!-- Physicians incomplete — amber -->
+        <div class="ptile clickable" onclick="openPhysicianOverlay()">
+          <div class="ptile-accent ptile-accent-amber"></div>
+          <div class="ptile-icon ptile-icon-amber"><i class="ti ti-stethoscope"></i></div>
+          <div class="ptile-val ptile-val-amber">95</div>
+          <div class="ptile-label">PCP physicians incomplete</div>
+          <div class="ptile-sub">of 108 need LC activity</div>
+        </div>
+        <!-- Practices at risk — orange -->
+        <div class="ptile clickable" onclick="nav('practice-scorecard', document.getElementById('nav-pcp-sc'))">
+          <div class="ptile-accent ptile-accent-orange"></div>
+          <div class="ptile-icon ptile-icon-orange"><i class="ti ti-alert-triangle"></i></div>
+          <div class="ptile-val ptile-val-orange">2</div>
+          <div class="ptile-label">Practices need attention</div>
+          <div class="ptile-sub">score &lt;55 · VBR at risk</div>
+        </div>
+        <!-- Closing soon — blue urgency -->
+        <div class="ptile clickable" onclick="switchFeed('deadlines')">
+          <div class="ptile-accent ptile-accent-blue"></div>
+          <div class="ptile-icon ptile-icon-blue"><i class="ti ti-calendar-due"></i></div>
+          <div class="ptile-val ptile-val-blue" id="hero-closing">3</div>
+          <div class="ptile-label">Deadlines within 14 days</div>
+          <div class="ptile-sub">Jun 1 next · regional meeting</div>
+        </div>
+      </div>
+
+      <!-- ══ Quick links strip ══ -->
+      <div class="ql-strip" id="ql-strip">
+        <span class="ql-strip-label"><i class="ti ti-bookmark" aria-hidden="true"></i>Quick links</span>
+        <div class="ql-strip-chips" id="ql-strip-chips"><!-- rendered by JS --></div>
+        <button class="ql-strip-edit" id="ql-manage-btn" onclick="toggleManageLinks()">
+          <i class="ti ti-pencil" style="font-size:11px"></i>Edit
+        </button>
+      </div>
+      <!-- Quick link picker (edit mode) — still uses existing ql-wrap/ql-picker IDs -->
+      <div id="ql-wrap" style="display:none">
         <div class="ql-grid" id="ql-grid"></div>
-        <!-- Add link picker — shown when manage mode is on -->
         <div class="ql-picker" id="ql-picker" style="display:none">
           <div class="ql-picker-label">Add a page to your quick links:</div>
           <div class="ql-picker-grid" id="ql-picker-grid"></div>
         </div>
       </div>
+      <span id="ql-hint" style="display:none"></span>
 
-      <!-- Main two-col -->
-      <div class="two-col">
+      <!-- ══ ZONE 3: Workspace ══ -->
+      <div class="workspace">
+
+        <!-- LEFT: Actions needed -->
         <div>
-          <div class="sec-head sh-amber">
-            <span class="sh-title">Actions needed</span>
-            <span class="sh-right" id="action-count"></span>
-          </div>
-          <div class="sec-body">
-
-            <!-- Pending user approvals — administrative action block -->
-            <div id="user-approvals-block"></div>
-
-            <!-- Scorecard & VBR action groups -->
-            <div id="action-list"></div>
-
-          </div>
-        </div>
-
-        <div>
-          <!-- Awaiting credit confirmation -->
-          <div class="sec-head sh-navy" style="margin-bottom:0">
-            <span class="sh-title">Awaiting credit confirmation</span>
-            <span class="sh-right" id="pending-count"></span>
-          </div>
-          <div class="sec-body" id="pending-list" style="margin-bottom:14px"></div>
-
-          <!-- Three-feed panel: Deadlines · Messages · Updates -->
-          <div class="feed-panel">
-            <div class="feed-panel-tabs">
-              <button class="fp-tab on" id="fptab-deadlines" onclick="switchFeed('deadlines')">
-                <i class="ti ti-calendar-due"></i>Deadlines
+          <div class="zone-label"><i class="ti ti-alert-circle"></i>Actions needed</div>
+          <div class="an-panel">
+            <div class="an-panel-hdr">
+              <div class="an-panel-title"><i class="ti ti-alert-circle"></i>ACTIONS NEEDED</div>
+              <span class="an-total-count" id="action-count"></span>
+            </div>
+            <div class="an-tabs" role="tablist">
+              <button class="an-tab on" id="antab-access" onclick="switchActionTab('access')" role="tab" aria-selected="true" aria-controls="anpane-access">
+                <i class="ti ti-user-plus" style="color:var(--amber)"></i>
+                <span class="an-tab-label">Access</span>
+                <span class="an-tab-badge an-badge-amber" id="antbadge-access"></span>
               </button>
-              <button class="fp-tab" id="fptab-messages" onclick="switchFeed('messages')">
-                <i class="ti ti-mail"></i>Messages
+              <button class="an-tab" id="antab-po" onclick="switchActionTab('po')" role="tab" aria-selected="false" aria-controls="anpane-po">
+                <i class="ti ti-chart-bar" style="color:var(--navy)"></i>
+                <span class="an-tab-label">PO</span>
+                <span class="an-tab-badge an-badge-navy" id="antbadge-po"></span>
               </button>
-              <button class="fp-tab" id="fptab-updates" onclick="switchFeed('updates')">
-                <i class="ti ti-bell"></i>Updates
+              <button class="an-tab" id="antab-pcp" onclick="switchActionTab('pcp')" role="tab" aria-selected="false" aria-controls="anpane-pcp">
+                <i class="ti ti-building-community" style="color:var(--teal)"></i>
+                <span class="an-tab-label">PCP</span>
+                <span class="an-tab-badge an-badge-teal" id="antbadge-pcp"></span>
+              </button>
+              <button class="an-tab" id="antab-endo" onclick="switchActionTab('endo')" role="tab" aria-selected="false" aria-controls="anpane-endo">
+                <i class="ti ti-stethoscope" style="color:#6D28D9"></i>
+                <span class="an-tab-label">Endo</span>
+                <span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span>
+              </button>
+              <button class="an-tab" id="antab-nephro" onclick="switchActionTab('nephro')" role="tab" aria-selected="false" aria-controls="anpane-nephro">
+                <i class="ti ti-droplet" style="color:#0369a1"></i>
+                <span class="an-tab-label">Nephro</span>
+                <span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span>
               </button>
             </div>
-            <div class="feed-panel-body">
-              <div class="feed-pane on" id="fpane-deadlines"></div>
-              <div class="feed-pane" id="fpane-messages"></div>
-              <div class="feed-pane" id="fpane-updates"></div>
+            <div class="an-pane on" id="anpane-access" role="tabpanel"></div>
+            <div class="an-pane" id="anpane-po" role="tabpanel">
+              <div class="an-pane-subhdr an-subhdr-po">
+                <div class="an-subhdr-icon" id="sc-icon-po"></div>
+                <div><div class="an-subhdr-type">PO scorecard</div><div class="an-subhdr-name">2025–2026 Physician Organization scorecard · Sep 2025 – Jul 2026</div></div>
+                <span class="sc-section-count" id="sc-count-po"></span>
+              </div>
+              <div id="sc-list-po"></div>
+            </div>
+            <div class="an-pane" id="anpane-pcp" role="tabpanel">
+              <div class="an-pane-subhdr an-subhdr-pcp">
+                <div class="an-subhdr-icon" id="sc-icon-pcp"></div>
+                <div><div class="an-subhdr-type">PCP practice scorecard</div><div class="an-subhdr-name">2025–2026 Primary care practice scorecard · Sep 2025 – Jul 2026</div></div>
+                <span class="sc-section-count" id="sc-count-pcp"></span>
+              </div>
+              <div id="sc-list-pcp"></div>
+            </div>
+            <div class="an-pane" id="anpane-endo" role="tabpanel">
+              <div class="an-pane-subhdr an-subhdr-endo">
+                <div class="an-subhdr-icon" id="sc-icon-endo"></div>
+                <div><div class="an-subhdr-type">Endocrinology SCP scorecard</div><div class="an-subhdr-name">2026–2027 Endocrinology specialty care practice scorecard · Mar 2026 – Dec 2026</div></div>
+                <span class="sc-section-count" id="sc-count-endo"></span>
+              </div>
+              <div id="sc-list-endo"></div>
+            </div>
+            <div class="an-pane" id="anpane-nephro" role="tabpanel">
+              <div class="an-pane-subhdr an-subhdr-nephro">
+                <div class="an-subhdr-icon" id="sc-icon-nephro"></div>
+                <div><div class="an-subhdr-type">Nephrology SCP scorecard</div><div class="an-subhdr-name">2025–2026 Nephrology specialty care practice scorecard · Mar 2025 – Dec 2025</div></div>
+                <span class="sc-section-count" id="sc-count-nephro"></span>
+              </div>
+              <div id="sc-list-nephro"></div>
+            </div>
+          </div><!-- /an-panel -->
+        </div>
+
+        <!-- RIGHT column -->
+        <div class="right-col">
+
+          <!-- Recently completed — restored -->
+          <div>
+            <div class="zone-label"><i class="ti ti-circle-check"></i>Recently completed</div>
+            <div class="rc-panel">
+              <div class="rc-hdr">
+                <div class="rc-hdr-left">
+                  <span class="rc-hdr-title">Team completions</span>
+                  <span class="rc-hdr-count" id="rc-count"></span>
+                </div>
+                <a class="rc-hdr-link" onclick="sbNav('recently-completed', document.getElementById('nav-recently-completed'))">
+                  View all <i class="ti ti-arrow-right" style="font-size:11px"></i>
+                </a>
+              </div>
+              <div id="rc-list"></div>
             </div>
           </div>
-        </div>
-      </div>
+
+          <!-- Awaiting credit -->
+          <div>
+            <div class="zone-label"><i class="ti ti-clock"></i>Awaiting credit confirmation</div>
+            <div class="sec-body" id="pending-list" style="margin-bottom:0;border-radius:var(--radius-lg)">
+              <span id="pending-count" style="display:none"></span>
+            </div>
+          </div>
+
+          <!-- Deadlines & messages feed -->
+          <div>
+            <div class="zone-label"><i class="ti ti-calendar-due"></i>Deadlines &amp; updates</div>
+            <div class="df-panel">
+              <div class="df-tabs">
+                <button class="df-tab on" id="dftab-deadlines" onclick="switchDfTab('deadlines')"><i class="ti ti-calendar-due"></i>Deadlines</button>
+                <button class="df-tab" id="dftab-messages" onclick="switchDfTab('messages')"><i class="ti ti-mail"></i>Messages</button>
+                <button class="df-tab" id="dftab-updates" onclick="switchDfTab('updates')"><i class="ti ti-bell"></i>Updates</button>
+              </div>
+              <div class="df-pane on" id="dfpane-deadlines"></div>
+              <div class="df-pane" id="dfpane-messages"></div>
+              <div class="df-pane" id="dfpane-updates"></div>
+            </div>
+          </div>
+
+        </div><!-- /right-col -->
+      </div><!-- /workspace -->
+
     </div>
-
     <!-- PO SCORECARD -->
     <div class="view" id="view-po">
       <div class="sec-head sh-navy" style="margin-bottom:0">
@@ -1106,15 +1503,73 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   </div>
 </div>
 
+<!-- Physician LC overlay -->
+<div class="phys-overlay" id="phys-overlay" onclick="closePhysicianOverlay()" aria-modal="true" role="dialog" aria-label="Physician LC requirement status">
+  <div class="phys-modal" onclick="event.stopPropagation()">
+    <div class="phys-modal-hdr">
+      <div class="phys-modal-hdr-left">
+        <div class="phys-modal-icon"><i class="ti ti-stethoscope"></i></div>
+        <div>
+          <div class="phys-modal-title">Physician LC requirement</div>
+          <div class="phys-modal-sub">Measure 2 · 20 pts per practice · Deadline: Jul 1, 2026</div>
+        </div>
+      </div>
+      <button class="phys-modal-close" onclick="closePhysicianOverlay()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="phys-lc-banner">
+      <div class="phys-lc-banner-label"><i class="ti ti-books"></i>How physicians can complete this requirement</div>
+      <div class="phys-lc-options" id="phys-lc-options"></div>
+      <a class="phys-lc-link" href="https://portal.mct2d.org/portal/events/learning-community" target="_blank" rel="noopener">
+        View all options on Learning requirements &amp; options <i class="ti ti-external-link" style="font-size:11px"></i>
+      </a>
+    </div>
+    <div class="phys-progress-wrap">
+      <div class="phys-progress-row">
+        <span class="phys-progress-lbl">Completion progress across all PCP practices</span>
+        <span class="phys-progress-frac" id="phys-progress-frac"></span>
+      </div>
+      <div class="phys-progress-track"><div class="phys-progress-fill" id="phys-progress-fill"></div></div>
+      <div class="phys-scoring-hint">20 pts = 90–100% · 15 pts = 80–89% · 10 pts = 70–79% · 0 pts = &lt;70%</div>
+    </div>
+    <div class="phys-tabs">
+      <button class="phys-tab on" id="ptab-incomplete" onclick="switchPhysTab('incomplete')">
+        <i class="ti ti-clock"></i>Incomplete <span class="phys-tab-count" id="ptab-count-incomplete"></span>
+      </button>
+      <button class="phys-tab" id="ptab-complete" onclick="switchPhysTab('complete')">
+        <i class="ti ti-circle-check"></i>Completed <span class="phys-tab-count" id="ptab-count-complete"></span>
+      </button>
+    </div>
+    <div class="phys-toolbar">
+      <div class="phys-search-wrap">
+        <i class="ti ti-search"></i>
+        <input class="phys-search-input" type="text" id="phys-search" placeholder="Search by name or practice…" oninput="renderPhysicianList()" autocomplete="off">
+      </div>
+      <select class="phys-filter-sel" id="phys-filter-practice" onchange="renderPhysicianList()">
+        <option value="">All practices</option>
+      </select>
+    </div>
+    <div class="phys-list" id="phys-list"></div>
+    <div class="phys-modal-footer">
+      <button class="phys-footer-btn phys-footer-btn-primary" onclick="window.open('https://portal.mct2d.org/portal/events/learning-community','_blank')">
+        <i class="ti ti-external-link"></i>Learning requirements &amp; options
+      </button>
+      <button class="phys-footer-btn" onclick="exportIncomplete()">
+        <i class="ti ti-download"></i>Export incomplete list
+      </button>
+      <button class="phys-footer-btn" onclick="closePhysicianOverlay()" style="margin-left:auto">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- Mobile bottom nav bar -->
 <nav class="mob-bottom-nav" id="mob-bottom-nav">
   <button class="mob-bn-item active" id="mbn-home" onclick="mobileSwitchView('home',this)">
     <i class="ti ti-home"></i><span>Home</span>
   </button>
-  <button class="mob-bn-item" id="mbn-po" onclick="mobileSwitchView('po',this)">
+  <button class="mob-bn-item" id="mbn-po" onclick="mobileSwitchView('po-scorecard',this)">
     <i class="ti ti-chart-bar"></i><span>PO Score</span>
   </button>
-  <button class="mob-bn-item" id="mbn-practices" onclick="mobileSwitchView('practices',this)">
+  <button class="mob-bn-item" id="mbn-practices" onclick="mobileSwitchView('practice-scorecard',this)">
     <i class="ti ti-building-community"></i><span>Practices</span>
   </button>
   <button class="mob-bn-item" id="mbn-menu" onclick="toggleMobileMenu()">
@@ -1158,17 +1613,17 @@ const SC_ICONS={
   </svg>`,
   [SC_PCP]:`<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="38" height="38" rx="9" fill="#e0f5f5"/>
-    <path d="M19 7L30 16V30H23.5V23H14.5V30H8V16L19 7Z" fill="#00A6A8" opacity=".18" stroke="#00A6A8" stroke-width="1.5"/>
-    <rect x="17" y="17" width="2" height="5.5" rx=".8" fill="#00A6A8"/>
-    <rect x="14.5" y="18.75" width="5.5" height="2" rx=".8" fill="#00A6A8"/>
+    <path d="M19 7L30 16V30H23.5V23H14.5V30H8V16L19 7Z" fill="#007475" opacity=".18" stroke="#007475" stroke-width="1.5"/>
+    <rect x="17" y="17" width="2" height="5.5" rx=".8" fill="#007475"/>
+    <rect x="14.5" y="18.75" width="5.5" height="2" rx=".8" fill="#007475"/>
   </svg>`,
   [SC_ENDO]:`<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="38" height="38" rx="9" fill="#f4f0fa"/>
-    <rect x="8" y="12" width="19" height="14" rx="3" fill="#8B5CF6" opacity=".12" stroke="#8B5CF6" stroke-width="1.2"/>
-    <polyline points="11,22 14.5,18 17.5,20.5 21,14.5 24.5,17" stroke="#8B5CF6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="25" y="20" width="5.5" height="7.5" rx="2.75" fill="#8B5CF6" opacity=".55"/>
-    <circle cx="27.75" cy="17.5" r="3" fill="none" stroke="#8B5CF6" stroke-width="1.2" stroke-dasharray="2 1.5"/>
-    <circle cx="9.5" cy="9.5" r="5.5" fill="#8B5CF6"/>
+    <rect x="8" y="12" width="19" height="14" rx="3" fill="#6D28D9" opacity=".12" stroke="#6D28D9" stroke-width="1.2"/>
+    <polyline points="11,22 14.5,18 17.5,20.5 21,14.5 24.5,17" stroke="#6D28D9" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="25" y="20" width="5.5" height="7.5" rx="2.75" fill="#6D28D9" opacity=".55"/>
+    <circle cx="27.75" cy="17.5" r="3" fill="none" stroke="#6D28D9" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+    <circle cx="9.5" cy="9.5" r="5.5" fill="#6D28D9"/>
     <text x="9.5" y="12.5" text-anchor="middle" fill="white" font-size="7.5" font-weight="700" font-family="sans-serif">E</text>
   </svg>`,
   [SC_NEPHRO]:`<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1196,7 +1651,7 @@ const SC_META={
   },
   [SC_ENDO]:{
     typeLabel:'Endocrinology SCP scorecard',
-    typeLabelColor:'#5b3fa6',
+    typeLabelColor:'#4C1D95',
     name:'2026–2027 Endocrinology specialty care practice scorecard',
     period:'Mar 1, 2026 – Dec 31, 2026',
   },
@@ -1473,89 +1928,164 @@ function st(id){const e=document.getElementById(id);if(e)e.classList.add('vis');
 function ht(id){const e=document.getElementById(id);if(e)e.classList.remove('vis');}
 
 /* ══════════ NAVIGATION ══════════ */
+const ALL_VIEWS = ['view-home','view-po','view-practices','view-placeholder'];
+
+function showView(id) {
+  ALL_VIEWS.forEach(v => document.getElementById(v).classList.toggle('on', v === id));
+}
+
 function nav(page, el){
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
   if(el && el.classList) el.classList.add('active');
-  if(page==='home'||page==='dashboard'){showDash();return;}
-  const info=PH[page]||{icon:'ti-file',title:page,url:'https://portal.mct2d.org/portal/',desc:'This page exists in the live portal.'};
-  document.getElementById('view-tabs').style.display='none';
-  ['view-home','view-po','view-practices','view-placeholder'].forEach(v=>document.getElementById(v).classList.remove('on'));
-  document.getElementById('view-placeholder').classList.add('on');
-  document.getElementById('ph-icon').className='ti '+info.icon;
-  document.getElementById('ph-title').textContent=info.title;
-  document.getElementById('ph-desc').textContent=info.desc+' This prototype focuses on the home dashboard and scorecard views.';
-  document.getElementById('ph-link').href=info.url;
-  document.getElementById('ph-link').textContent=info.url.replace('https://','');
-  document.getElementById('page-title').textContent=info.title;
-}
 
-function showDash(){
-  document.getElementById('view-tabs').style.display='flex';
-  document.getElementById('view-placeholder').classList.remove('on');
+  if(page === 'home' || page === 'dashboard'){
+    showView('view-home');
+    document.getElementById('page-title').textContent = 'MCT2D Participation Management Center';
+    const homeEl = document.getElementById('nav-home');
+    if(homeEl) homeEl.classList.add('active');
+    return;
+  }
+
+  // PO and Practices scorecard pages — treated as full pages now
+  if(page === 'po-scorecard'){
+    showView('view-po');
+    document.getElementById('page-title').textContent = 'PO scorecard 2025–2026';
+    if(el) el.classList.add('active');
+    return;
+  }
+  if(page === 'practice-scorecard'){
+    showView('view-practices');
+    document.getElementById('page-title').textContent = 'Practice scorecards 2025–2026';
+    if(el) el.classList.add('active');
+    return;
+  }
+
+  // All other pages — placeholder
+  const info = PH[page] || {icon:'ti-file', title:page, url:'https://portal.mct2d.org/portal/', desc:'This page exists in the live portal.'};
+  showView('view-placeholder');
+  document.getElementById('ph-icon').className = 'ti ' + info.icon;
+  document.getElementById('ph-title').textContent = info.title;
+  document.getElementById('ph-desc').textContent = info.desc + ' This prototype focuses on the home dashboard and scorecard views.';
+  document.getElementById('ph-link').href = info.url;
+  document.getElementById('ph-link').textContent = info.url.replace('https://','');
+  document.getElementById('page-title').textContent = info.title;
 }
 
 function switchView(v){
-  showDash();
-  ['home','po','practices'].forEach(id=>{
-    document.getElementById('view-'+id).classList.toggle('on',id===v);
-    document.getElementById('vt-'+id).classList.toggle('on',id===v);
-  });
-  const titles={
-    home:'MCT2D Participation Management Center',
-    po:'PO scorecard 2025',
-    practices:'Practice scorecards 2025'
-  };
-  document.getElementById('page-title').textContent=titles[v];
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  const map={home:'nav-home',po:'nav-po-sc',practices:'nav-pcp-sc'};
-  const el=document.getElementById(map[v]);
-  if(el) el.classList.add('active');
+  // Legacy helper — maps old 'po' / 'practices' / 'home' keys to new nav calls
+  if(v === 'po')        nav('po-scorecard', document.getElementById('nav-po-sc'));
+  else if(v === 'practices') nav('practice-scorecard', document.getElementById('nav-pcp-sc'));
+  else                  nav('home', document.getElementById('nav-home'));
 }
 
 /* ══════════ HOME ══════════ */
 const groupCollapsed={[SC_PO]:false,[SC_PCP]:false,[SC_ENDO]:true,[SC_NEPHRO]:true};
 const GROUP_PREVIEW=3;
 
-/* Summary card data — derived from ACTION_GROUPS */
 function renderCmdSummary(){
-  // Count across all groups
-  let physIncomplete=0,practicesAtRisk=0,openActions=0,closingSoon=0;
+  // Count closing soon for tile
+  let closingSoon=0;
   ACTION_GROUPS.forEach(g=>g.items.forEach(a=>{
     const isDone=a.incomplete===0&&a.total!==null;
-    if(!isDone) openActions++;
     if(dU(a.due)<=14&&!isDone) closingSoon++;
-    if(a.title.toLowerCase().includes('physician')&&a.incomplete){physIncomplete+=a.incomplete;}
-    if(a.total&&a.incomplete&&a.total<=9&&a.incomplete>0) practicesAtRisk+=a.incomplete;
   }));
-  document.getElementById('cmd-summary').innerHTML=`
-    <div class="cmd-card clickable" onclick="switchView('po')">
-      <div class="cmd-card-lbl">PO scorecard</div>
-      <div class="cmd-card-val cmd-val-navy">39<span style="font-size:13px;font-weight:400;color:var(--gray-400)">/100</span></div>
-      <div class="cmd-card-sub">pts · Sep 2025 – Jul 2026</div>
-    </div>
-    <div class="cmd-card clickable" onclick="switchView('practices')">
-      <div class="cmd-card-lbl">Physicians still incomplete</div>
-      <div class="cmd-card-val cmd-val-amber">95</div>
-      <div class="cmd-card-sub">of 108 need LC activity</div>
-    </div>
-    <div class="cmd-card clickable" onclick="switchView('practices')">
-      <div class="cmd-card-lbl">Practices at risk</div>
-      <div class="cmd-card-val cmd-val-amber">2</div>
-      <div class="cmd-card-sub">score &lt;55 · may miss VBR</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-card-lbl">Closing within 14 days</div>
-      <div class="cmd-card-val cmd-val-amber">${closingSoon}</div>
-      <div class="cmd-card-sub">task${closingSoon!==1?'s':''} due soon</div>
-    </div>
-    <div class="cmd-card">
-      <div class="cmd-card-lbl">Awaiting credit</div>
-      <div class="cmd-card-val cmd-val-navy">3</div>
-      <div class="cmd-card-sub">items pending verification</div>
-    </div>`;
+  const el=document.getElementById('hero-closing');
+  if(el) el.textContent=closingSoon;
 }
 
-/* Pending credit items — activities done but not yet credited */
+/* ── Recently completed data ── */
+const RECENTLY_COMPLETED=[
+  {
+    type:'credited',
+    title:'Clinical champion meeting held — all 9 practices',
+    who:'Jordan T. (PO Admin Lead)',
+    scorecard:'PO scorecard · Measure 6',
+    pts:'15/15 pts',
+    status:'credited', statusLabel:'Credited',
+    when:'Apr 10, 2026',
+  },
+  {
+    type:'credited',
+    title:'Dashboard Focus Group participation',
+    who:'Jordan T. (PO Admin Lead)',
+    scorecard:'PO scorecard · Measure 5',
+    pts:'10/10 pts',
+    status:'credited', statusLabel:'Credited',
+    when:'Mar 2026',
+  },
+  {
+    type:'completed',
+    title:'Spring 2026 regional meeting — 6 of 9 practices attended',
+    who:'Multiple clinical champions',
+    scorecard:'PCP practice scorecard · Measure 1',
+    pts:'Pending credit',
+    status:'submitted', statusLabel:'Awaiting credit',
+    when:'May 7, 2026',
+  },
+  {
+    type:'completed',
+    title:'13 physicians completed LC requirement this month',
+    who:'Various physicians across 4 practices',
+    scorecard:'PCP practice scorecard · Measure 2',
+    pts:null,
+    status:'submitted', statusLabel:'Awaiting verification',
+    when:'May 1–7, 2026',
+  },
+  {
+    type:'credited',
+    title:'PO small group discussion attended',
+    who:'Jordan T. (PO Admin Lead)',
+    scorecard:'PO scorecard · Measure 2',
+    pts:'10/10 pts',
+    status:'credited', statusLabel:'Credited',
+    when:'Feb 28, 2026',
+  },
+  {
+    type:'completed',
+    title:'Practice Census Survey — all 9 practices completed',
+    who:'Practice coordinators',
+    scorecard:'PCP practice scorecard · Measure 3',
+    pts:'5 pts per practice',
+    status:'credited', statusLabel:'Credited',
+    when:'Nov–Dec 2025',
+  },
+  {
+    type:'completed',
+    title:'Fall 2025 regional meeting — all 9 practices attended',
+    who:'All clinical champions',
+    scorecard:'PCP practice scorecard · Measure 1',
+    pts:'25 pts per practice',
+    status:'credited', statusLabel:'Credited',
+    when:'Nov 15, 2025',
+  },
+];
+
+function renderRecentlyCompleted(){
+  const SHOW=5;
+  const list=document.getElementById('rc-list');
+  const count=document.getElementById('rc-count');
+  if(!list) return;
+  if(count) count.textContent=RECENTLY_COMPLETED.length+' recent';
+  const dotCls={credited:'rc-dot-credited',submitted:'rc-dot-submitted',completed:'rc-dot-completed'};
+  const stCls={credited:'rc-status-credited',submitted:'rc-status-submitted',completed:'rc-status-completed'};
+  list.innerHTML=RECENTLY_COMPLETED.slice(0,SHOW).map(r=>`
+    <div class="rc-item">
+      <div class="rc-dot ${dotCls[r.status]||'rc-dot-completed'}"></div>
+      <div class="rc-body">
+        <div class="rc-title">${r.title}</div>
+        <div class="rc-who">${r.who}</div>
+        <div class="rc-status-row">
+          <span class="rc-status ${stCls[r.status]||'rc-status-completed'}">
+            <i class="ti ti-circle-check" style="font-size:10px"></i>${r.statusLabel}
+          </span>
+          ${r.pts?`<span class="rc-pts">${r.pts}</span>`:''}
+          <span class="rc-when">${r.scorecard} · ${r.when}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* Pending credit items */
 const PENDING_ITEMS=[
   {title:'Spring 2026 regional meeting — 6 practices',meta:'Attended May 7, 2026 · attendance being processed by MCT2D',timing:'Credit expected within 5–7 business days of event',icon:'ti-clock'},
   {title:'Physician LC: 13 physicians completed last week',meta:'Submitted via recorded webinar completion · awaiting MCT2D verification',timing:'Credit applied at end of each month',icon:'ti-user-check'},
@@ -1563,16 +2093,55 @@ const PENDING_ITEMS=[
 ];
 
 function renderPendingList(){
-  document.getElementById('pending-count').textContent=PENDING_ITEMS.length+' items';
-  document.getElementById('pending-list').innerHTML=PENDING_ITEMS.map(p=>`
+  const el=document.getElementById('pending-list');
+  const cnt=document.getElementById('pending-count');
+  if(!el) return;
+  if(cnt) cnt.textContent=PENDING_ITEMS.length+' items';
+  el.innerHTML=PENDING_ITEMS.map(p=>`
     <div class="pending-item">
       <div class="pending-icon"><i class="ti ${p.icon}" aria-hidden="true"></i></div>
       <div class="pending-body">
         <div class="pending-title">${p.title}</div>
         <div class="pending-meta">${p.meta}</div>
-        <div class="pending-timing"><i class="ti ti-info-circle" style="font-size:10px;margin-right:2px" aria-hidden="true"></i>${p.timing}</div>
+        <div class="pending-timing"><i class="ti ti-info-circle" style="font-size:12px;margin-right:2px" aria-hidden="true"></i>${p.timing}</div>
       </div>
     </div>`).join('');
+}
+
+/* Deadlines/messages/updates tab switcher for right-col df-panel */
+function switchDfTab(tab){
+  ['deadlines','messages','updates'].forEach(t=>{
+    document.getElementById('dftab-'+t)?.classList.toggle('on',t===tab);
+    document.getElementById('dfpane-'+t)?.classList.toggle('on',t===tab);
+  });
+  // Also sync the old feed panel tabs if they exist
+  const oldTab=document.getElementById('fptab-'+tab);
+  if(oldTab) switchFeed(tab);
+}
+
+/* Render deadlines into the df-panel */
+function renderDfDeadlines(){
+  const el=document.getElementById('dfpane-deadlines');
+  if(!el||typeof DEADLINES==='undefined') return;
+  // reuse the existing renderDeadlines logic output
+  const pane=document.createElement('div');
+  pane.id='fpane-deadlines-tmp';
+  document.body.appendChild(pane);
+  const orig=document.getElementById('fpane-deadlines');
+  if(orig) el.innerHTML=orig.innerHTML;
+  pane.remove();
+}
+
+/* Render messages/updates into df panes */
+function renderDfMessages(){
+  const el=document.getElementById('dfpane-messages');
+  const orig=document.getElementById('fpane-messages');
+  if(el&&orig) el.innerHTML=orig.innerHTML;
+}
+function renderDfUpdates(){
+  const el=document.getElementById('dfpane-updates');
+  const orig=document.getElementById('fpane-updates');
+  if(el&&orig) el.innerHTML=orig.innerHTML;
 }
 
 function copyLink(btn, text){
@@ -1584,39 +2153,37 @@ function copyLink(btn, text){
 }
 
 function renderActions(){
-  let openCount=0;
-  ACTION_GROUPS.forEach(g=>g.items.forEach(a=>{if(!(a.incomplete===0&&a.total!==null))openCount++;}));
-  document.getElementById('action-count').textContent=openCount+' open';
-
+  const containerMap={
+    [SC_PO]:    {list:'sc-list-po',    count:'sc-count-po',    icon:'sc-icon-po'},
+    [SC_PCP]:   {list:'sc-list-pcp',   count:'sc-count-pcp',   icon:'sc-icon-pcp'},
+    [SC_ENDO]:  {list:'sc-list-endo',  count:'sc-count-endo',  icon:'sc-icon-endo'},
+    [SC_NEPHRO]:{list:'sc-list-nephro',count:'sc-count-nephro',icon:'sc-icon-nephro'},
+  };
   let tipIdx=0;
-  const html=ACTION_GROUPS.map(group=>{
-    const meta=SC_META[group.type];
-    const icon=SC_ICONS[group.type];
-    const collapsed=groupCollapsed[group.type];
-    const sorted=[...group.items].sort((a,b)=>dU(a.due)-dU(b.due));
-    const visItems=collapsed?sorted.slice(0,GROUP_PREVIEW):sorted;
-    const hiddenCount=sorted.length-GROUP_PREVIEW;
 
-    const itemsHtml=visItems.map(a=>{
+  ACTION_GROUPS.forEach(group=>{
+    const ids=containerMap[group.type];
+    if(!ids) return;
+    const iconEl=document.getElementById(ids.icon);
+    if(iconEl) iconEl.innerHTML=SC_ICONS[group.type];
+
+    const sorted=[...group.items].sort((a,b)=>dU(a.due)-dU(b.due));
+    let openInGroup=0;
+
+    const itemsHtml=sorted.map(a=>{
       const d=dU(a.due);
       const hasProg=a.incomplete!==null&&a.total!==null;
       const done=hasProg?a.total-a.incomplete:0;
       const pct=hasProg?Math.round(done/a.total*100):0;
       const isDone=hasProg&&a.incomplete===0;
+      if(!isDone) openInGroup++;
       const tid='tip-'+tipIdx++;
       const tipH=a.tip?`<span class="tip-anchor" style="margin-left:5px"><i class="tip-icon ti-dark" tabindex="0" onmouseenter="st('${tid}')" onmouseleave="ht('${tid}')" onfocus="st('${tid}')" onblur="ht('${tid}')">?</i><div class="tooltip tl" id="${tid}"><div class="tip-ttl">${a.tip.title}</div>${a.tip.body}</div></span>`:'';
-      /* Send/copy actions — shown on non-complete items with PCP scope (most relevant for coordinator workflows) */
       const showSend=!isDone&&(group.type===SC_PCP||group.type===SC_PO);
       const sendActions=showSend?`<div class="ai-footer">
-        <button class="ai-send-btn" onclick="event.stopPropagation();copyLink(this,'${a.url}')" title="Copy direct link to this task">
-          <i class="ti ti-link" aria-hidden="true"></i>Copy link
-        </button>
-        ${group.type===SC_PCP?`<button class="ai-send-btn" onclick="event.stopPropagation()" title="Draft a reminder email">
-          <i class="ti ti-mail" aria-hidden="true"></i>Draft reminder
-        </button>`:''}
-        ${hasProg&&a.incomplete>0?`<button class="ai-send-btn" onclick="event.stopPropagation()" title="Export list of who still needs to complete this">
-          <i class="ti ti-download" aria-hidden="true"></i>Export incomplete
-        </button>`:''}
+        <button class="ai-send-btn" onclick="event.stopPropagation();copyLink(this,'${a.url}')" title="Copy link"><i class="ti ti-link" aria-hidden="true"></i>Copy link</button>
+        ${group.type===SC_PCP?'<button class="ai-send-btn" onclick="event.stopPropagation()"><i class="ti ti-mail" aria-hidden="true"></i>Draft reminder</button>':''}
+        ${hasProg&&a.incomplete>0?'<button class="ai-send-btn" onclick="event.stopPropagation()"><i class="ti ti-download" aria-hidden="true"></i>Export incomplete</button>':''}
       </div>`:'';
       return`<div class="action-item${isDone?' ai-done':''}" onclick="if(event.target.closest('.tip-anchor,.ai-send-btn'))return;window.open('${a.url||'#'}','_blank')">
         <div class="ai-accent ${isDone?'ac-done':acC(d)}"></div>
@@ -1625,9 +2192,8 @@ function renderActions(){
           <div class="ai-measure-label">${a.measure}</div>
           <div class="ai-chips">
             ${isDone
-              ?`<span class="chip c-done"><i class="ti ti-circle-check" style="font-size:9px;margin-right:2px"></i>Complete</span>`
-              :`<span class="chip ${dcC(d)}"><i class="ti ti-calendar" style="font-size:9px;margin-right:2px"></i>${dL(a.due,a.dueLabel)}</span>`
-            }
+              ?'<span class="chip c-done"><i class="ti ti-circle-check" style="font-size:12px;margin-right:2px"></i>Complete</span>'
+              :`<span class="chip ${dcC(d)}"><i class="ti ti-calendar" style="font-size:12px;margin-right:2px"></i>${dL(a.due,a.dueLabel)}</span>`}
           </div>
           ${a.hint&&!isDone?`<div class="ai-hint">${a.hint}</div>`:''}
           ${hasProg&&!isDone?`<div class="ai-prog"><div class="prog-track"><div class="prog-fill" style="width:${pct}%;background:${pCol(pct)}"></div></div><div class="prog-txt">${done}/${a.total} practices</div></div>`:''}
@@ -1637,40 +2203,16 @@ function renderActions(){
       </div>`;
     }).join('');
 
-    const showMoreBtn=(collapsed&&hiddenCount>0)?
-      `<button class="group-show-more" onclick="event.stopPropagation();expandGroup('${group.type}')">
-        <i class="ti ti-chevron-down" style="font-size:11px"></i>Show ${hiddenCount} more task${hiddenCount>1?'s':''}
-       </button>`:'';
-    const collapseBtn=(!collapsed&&sorted.length>GROUP_PREVIEW)?
-      `<button class="group-show-more" onclick="event.stopPropagation();expandGroup('${group.type}')">
-        <i class="ti ti-chevron-up" style="font-size:11px"></i>Show less
-       </button>`:'';
-
-    return`<div class="action-group" id="ag-${group.type}">
-      <div class="ag-header" onclick="toggleGroup('${group.type}')">
-        <div class="ag-header-left">
-          <div class="ag-svg-icon">${icon}</div>
-          <div class="ag-text">
-            <div class="ag-type-label" style="color:${meta.typeLabelColor}">${meta.typeLabel}</div>
-            <div class="ag-full-name">${meta.name}</div>
-            <div class="ag-period">${meta.period}</div>
-          </div>
-        </div>
-        <div class="ag-header-right">
-          <span class="ag-task-count">${group.items.length} task${group.items.length!==1?'s':''}</span>
-          <i class="ti ti-chevron-${collapsed?'down':'up'} ag-chev"></i>
-        </div>
-      </div>
-      <div class="ag-body">${itemsHtml}${showMoreBtn}${collapseBtn}</div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('action-list').innerHTML=html;
+    const countEl=document.getElementById(ids.count);
+    if(countEl){
+      countEl.textContent=openInGroup>0?openInGroup+' open':'All complete';
+      if(openInGroup===0) countEl.style.cssText='background:var(--teal);color:#fff';
+    }
+    const listEl=document.getElementById(ids.list);
+    if(listEl) listEl.innerHTML=itemsHtml||('<div style="padding:14px 16px;font-size:13px;color:var(--gray-400)">No tasks.</div>');
+  });
   renderActionCount();
 }
-
-function toggleGroup(type){groupCollapsed[type]=!groupCollapsed[type];renderActions();}
-function expandGroup(type){groupCollapsed[type]=!groupCollapsed[type];renderActions();}
 
 /* ══════════ THREE-FEED PANEL ══════════ */
 
@@ -1909,9 +2451,14 @@ function renderFeed(){} // kept for compat — feed-list div no longer used
 /* ══════════ PO SCORECARD ══════════ */
 function updateHeader(){
   const s=mSc.reduce((a,b)=>a+b,0);
-  document.getElementById('hdr-score').innerHTML=`${s}<span style="font-size:13px;opacity:.55">/100</span>`;
-  document.getElementById('sbar').style.width=s+'%';
-  document.getElementById('sbar-pts').textContent=s+' / 100 pts';
+  const hdr=document.getElementById('hdr-score');
+  if(hdr) hdr.innerHTML=`${s}<span style="font-size:13px;opacity:.55">/100</span>`;
+  const hero=document.getElementById('hero-score');
+  if(hero) hero.textContent=s;
+  const sbar=document.getElementById('sbar');
+  if(sbar) sbar.style.width=s+'%';
+  const sbarPts=document.getElementById('sbar-pts');
+  if(sbarPts) sbarPts.textContent=s+' / 100 pts';
 }
 function renderPOMeasures(){
   document.getElementById('po-measures').innerHTML=PO_MS.map((m,i)=>{
@@ -1987,7 +2534,7 @@ function renderTable(){
     const pct=Math.round(p.t/p.mx*100);
     const tb=tBadge(p.t,p.mx);
     const isOpen=openRow===p.idx+'_'+curSpec;
-    const sC=p.measures.map(m=>{const e=p.scores[m.key]||0;return`<div class="cell-score"><span class="score-pill ${spC(e,m.pts)}">${e}<span style="font-size:9px;opacity:.6">/${m.pts}</span></span></div>`;}).join('');
+    const sC=p.measures.map(m=>{const e=p.scores[m.key]||0;return`<div class="cell-score"><span class="score-pill ${spC(e,m.pts)}">${e}<span style="font-size:11px;opacity:.6">/${m.pts}</span></span></div>`;}).join('');
     const dC=p.measures.map(m=>{const e=p.scores[m.key]||0;const p2=Math.round(e/m.pts*100);return`<div class="detail-mcard"><div class="dm-lbl"><i class="ti ti-chart-bar" style="font-size:11px"></i>${m.label}</div><div class="dm-val" style="color:${pCol(p2)}">${e}<span class="dm-max"> / ${m.pts} pts</span></div><div class="dm-bar"><div class="dm-fill" style="width:${p2}%;background:${pCol(p2)}"></div></div></div>`;}).join('');
     const key=p.idx+'_'+curSpec;
     return`<div><div class="prac-row ${gc}${isOpen?' open':''}" onclick="toggleRow('${key}')"><div class="cell-name"><div class="prac-name">${p.name}</div></div><div class="cell-name"><div class="prac-champ">${p.champion}</div></div>${sC}<div class="cell-total"><div class="total-num" style="color:${pCol(pct)}">${p.t}</div><div class="total-pct">${pct}%</div></div><div class="cell-tier"><span class="tier-badge ${tb.cls}">${tb.txt}</span></div><div class="cell-chev"><i class="ti ti-chevron-down chev-r${isOpen?' open':''}"></i></div></div><div class="prac-detail${isOpen?' show':''}"><div class="detail-grid">${dC}</div></div></div>`;
@@ -1995,6 +2542,19 @@ function renderTable(){
   document.getElementById('practice-table').innerHTML=`<div class="prac-table">${thead}${tbody}</div>`;
 }
 function toggleRow(key){openRow=openRow===key?null:key;renderTable();}
+
+/* ══════════ ACTIONS NEEDED TABS ══════════ */
+const AN_TABS = ['access','po','pcp','endo','nephro'];
+
+function switchActionTab(tab) {
+  AN_TABS.forEach(t => {
+    const tabEl = document.getElementById('antab-'+t);
+    const paneEl = document.getElementById('anpane-'+t);
+    const isOn = t === tab;
+    if (tabEl) { tabEl.classList.toggle('on', isOn); tabEl.setAttribute('aria-selected', isOn); }
+    if (paneEl) paneEl.classList.toggle('on', isOn);
+  });
+}
 
 /* ══════════ PENDING USER APPROVALS ══════════ */
 const PENDING_USERS = [
@@ -2041,73 +2601,81 @@ function pendingApprovalCount() {
 }
 
 function renderApprovals() {
-  const el = document.getElementById('user-approvals-block');
+  const el = document.getElementById('anpane-access');
   if (!el) return;
   const count = pendingApprovalCount();
-
-  if (PENDING_USERS.length === 0) { el.innerHTML = ''; return; }
-
+  if (PENDING_USERS.length === 0) {
+    el.innerHTML = '<div style="padding:20px 16px;font-size:13px;color:var(--gray-600)">No pending access requests.</div>';
+    return;
+  }
   const items = PENDING_USERS.map(u => {
     const state = approvalState[u.id];
     const isActioned = !!state;
     let actionBtns;
     if (state === 'approved') {
-      actionBtns = `<div class="approval-actions">
-        <span class="approval-btn st-approved"><i class="ti ti-circle-check" aria-hidden="true" style="font-size:12px"></i>Approved</span>
-      </div>`;
+      actionBtns = `<div class="approval-actions"><span class="approval-btn st-approved"><i class="ti ti-circle-check" style="font-size:12px"></i>Approved</span></div>`;
     } else if (state === 'denied') {
-      actionBtns = `<div class="approval-actions">
-        <span class="approval-btn st-denied"><i class="ti ti-circle-x" aria-hidden="true" style="font-size:12px"></i>Denied</span>
-      </div>`;
+      actionBtns = `<div class="approval-actions"><span class="approval-btn st-denied"><i class="ti ti-circle-x" style="font-size:12px"></i>Denied</span></div>`;
     } else {
       actionBtns = `<div class="approval-actions">
-        <button class="approval-btn approval-btn-approve" onclick="event.stopPropagation();approveUser('${u.id}')" aria-label="Approve ${u.name}">
-          <i class="ti ti-check" aria-hidden="true" style="font-size:11px"></i>Approve
-        </button>
-        <button class="approval-btn approval-btn-review" onclick="event.stopPropagation();nav('pending',document.getElementById('nav-pending'))" aria-label="Review full application for ${u.name}">
-          <i class="ti ti-external-link" aria-hidden="true" style="font-size:11px"></i>Review
-        </button>
+        <button class="approval-btn approval-btn-approve" onclick="event.stopPropagation();approveUser('${u.id}')"><i class="ti ti-check" style="font-size:11px"></i>Approve</button>
+        <button class="approval-btn approval-btn-review" onclick="event.stopPropagation();nav('pending',document.getElementById('nav-pending'))"><i class="ti ti-external-link" style="font-size:11px"></i>Review</button>
       </div>`;
     }
-
     return `<div class="approval-item" style="${isActioned?'opacity:.6':''}">
       <div class="approval-avatar">${u.initials}</div>
       <div class="approval-body">
         <div class="approval-name">${u.name}</div>
-        <div class="approval-meta">
-          <span>${u.practice}</span>
-        </div>
-        <div class="approval-date">
-          <i class="ti ti-clock" aria-hidden="true" style="font-size:10px"></i>
-          Submitted ${u.submitted}
-        </div>
+        <div class="approval-meta"><span>${u.practice}</span></div>
+        <div class="approval-date"><i class="ti ti-clock" style="font-size:12px"></i> Submitted ${u.submitted}</div>
       </div>
       ${actionBtns}
     </div>`;
   }).join('');
 
-  el.innerHTML = `<div class="approvals-block">
-    <div class="approvals-subhead">
-      <div class="approvals-subhead-left">
-        <div class="approvals-icon"><i class="ti ti-user-plus" aria-hidden="true"></i></div>
-        <span class="approvals-title">Portal access requests</span>
-        ${count > 0 ? `<span class="approvals-badge">${count} pending</span>` : ''}
+  el.innerHTML = `
+    <div class="an-pane-subhdr" style="background:var(--amber-lt);border-bottom:1px solid var(--gray-200)">
+      <div class="approvals-icon" style="background:var(--navy)"><i class="ti ti-user-plus"></i></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--navy);margin-bottom:2px">Portal access requests</div>
+        <div style="font-size:13px;color:var(--gray-600)">${count > 0 ? count + ' pending · review and approve or deny' : 'No pending requests'}</div>
       </div>
-      <a class="approvals-link" onclick="nav('pending',document.getElementById('nav-pending'))">
-        View all <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:11px"></i>
-      </a>
+      <a class="approvals-link" onclick="nav('pending',document.getElementById('nav-pending'))">View all <i class="ti ti-arrow-right" style="font-size:11px"></i></a>
     </div>
-    ${items}
-  </div>`;
+    ${items}`;
 }
 
 function renderActionCount() {
-  // Update the total "open" count in the sec-head to include pending approvals
   const approvalsPending = pendingApprovalCount();
-  let scorecardOpen = 0;
-  ACTION_GROUPS.forEach(g => g.items.forEach(a => { if (!(a.incomplete === 0 && a.total !== null)) scorecardOpen++; }));
-  document.getElementById('action-count').textContent = (approvalsPending + scorecardOpen) + ' open';
+  let totalOpen = approvalsPending;
+  const groupCounts = { po:0, pcp:0, endo:0, nephro:0 };
+  ACTION_GROUPS.forEach(g => {
+    g.items.forEach(a => {
+      if (!(a.incomplete === 0 && a.total !== null)) {
+        totalOpen++;
+        if (groupCounts[g.type] !== undefined) groupCounts[g.type]++;
+      }
+    });
+  });
+  const totalEl = document.getElementById('action-count');
+  if (totalEl) totalEl.textContent = totalOpen + ' open';
+  const accessBadge = document.getElementById('antbadge-access');
+  if (accessBadge) {
+    accessBadge.textContent = approvalsPending > 0 ? approvalsPending : '';
+    accessBadge.style.display = approvalsPending > 0 ? '' : 'none';
+  }
+  [['po','--navy'],['pcp','var(--teal)'],['endo','#6D28D9'],['nephro','#0369a1']].forEach(([type, bg]) => {
+    const badge = document.getElementById('antbadge-' + type);
+    const count = groupCounts[type] || 0;
+    if (badge) {
+      badge.textContent = count > 0 ? count : '✓';
+      badge.style.cssText = count > 0
+        ? 'background:' + bg + ';color:#fff'
+        : 'background:var(--teal);color:#fff';
+    }
+  });
 }
+
 
 /* ══════════ QUICK LINKS ══════════
    Uses window.storage to persist bookmarks across sessions.
@@ -2124,8 +2692,8 @@ const QL_CATALOG = [
   {key:'not-registered',title:'Not yet registered for meeting',group:'Practice & PO',        icon:'ti-calendar-x',       color:'#faf0e2',  iconColor:'var(--amber)'},
   {key:'practice-tasks',title:'Practice overview',            group:'Practice & PO',         icon:'ti-building-community',color:'#eceef5', iconColor:'var(--navy)'},
   {key:'physicians',  title:'Participating physicians',        group:'Practice & PO',         icon:'ti-stethoscope',      color:'#eceef5',  iconColor:'var(--navy)'},
-  {key:'po-sc',       title:'PO scorecard 2025',              group:'VBR & reports',         icon:'ti-chart-bar',        color:'#eceef5',  iconColor:'var(--navy)',  isDashboard:true, dashView:'po'},
-  {key:'pcp-sc',      title:'Practice scorecards 2025',       group:'VBR & reports',         icon:'ti-building-community',color:'#eceef5',iconColor:'var(--navy)',  isDashboard:true, dashView:'practices'},
+  {key:'po-sc',       title:'PO scorecard 2025',              group:'VBR & reports',         icon:'ti-chart-bar',        color:'#eceef5',  iconColor:'var(--navy)'},
+  {key:'pcp-sc',      title:'Practice scorecards 2025',       group:'VBR & reports',         icon:'ti-building-community',color:'#eceef5',iconColor:'var(--navy)'},
   {key:'scp25',       title:'Specialty practice scorecard 2025',group:'VBR & reports',       icon:'ti-stethoscope',      color:'#eceef5',  iconColor:'var(--navy)'},
   {key:'vbr-metrics', title:'VBR status',                     group:'VBR & reports',         icon:'ti-chart-line',       color:'#eceef5',  iconColor:'var(--navy)'},
   {key:'a1c-data',    title:'Practice-level A1c report',      group:'VBR & reports',         icon:'ti-chart-dots',       color:'#eceef5',  iconColor:'var(--navy)'},
@@ -2134,9 +2702,9 @@ const QL_CATALOG = [
   {key:'po-reports',  title:'Reports',                        group:'VBR & reports',         icon:'ti-report',           color:'#eceef5',  iconColor:'var(--navy)'},
   {key:'practice-reports',title:'Practice reports',           group:'VBR & reports',         icon:'ti-file-analytics',   color:'#eceef5',  iconColor:'var(--navy)'},
   {key:'data-sub',    title:'Data submission status',         group:'VBR & reports',         icon:'ti-database',         color:'#eceef5',  iconColor:'var(--navy)'},
-  {key:'people',      title:'Member directory',               group:'People & access',       icon:'ti-users',            color:'#f4f0fa',  iconColor:'#8B5CF6'},
-  {key:'users',       title:'Active portal users',            group:'People & access',       icon:'ti-user-check',       color:'#f4f0fa',  iconColor:'#8B5CF6'},
-  {key:'pending',     title:'Pending access requests',        group:'People & access',       icon:'ti-clock',            color:'#f4f0fa',  iconColor:'#8B5CF6'},
+  {key:'people',      title:'Member directory',               group:'People & access',       icon:'ti-users',            color:'#f4f0fa',  iconColor:'#6D28D9'},
+  {key:'users',       title:'Active portal users',            group:'People & access',       icon:'ti-user-check',       color:'#f4f0fa',  iconColor:'#6D28D9'},
+  {key:'pending',     title:'Pending access requests',        group:'People & access',       icon:'ti-clock',            color:'#f4f0fa',  iconColor:'#6D28D9'},
   {key:'tasks',       title:'My tasks',                       group:'My tasks',              icon:'ti-list-check',       color:'#faf0e2',  iconColor:'var(--amber)'},
   {key:'tool-review', title:'Tool review survey',             group:'Surveys & forms',       icon:'ti-clipboard-list',   color:'#f0fafb',  iconColor:'#2a6e70'},
   {key:'pcra',        title:'PCRA submissions',               group:'Surveys & forms',       icon:'ti-clipboard-list',   color:'#f0fafb',  iconColor:'#2a6e70'},
@@ -2176,12 +2744,14 @@ function qlItemByKey(key) {
 }
 
 function qlNavigate(item) {
-  if (item.isDashboard) {
-    nav('dashboard', null);
-    switchView(item.dashView);
+  const key = item.key || item;
+  if (key === 'po-sc') {
+    nav('po-scorecard', document.getElementById('nav-po-sc'));
+  } else if (key === 'pcp-sc') {
+    nav('practice-scorecard', document.getElementById('nav-pcp-sc'));
   } else {
-    const sidebarEl = document.getElementById('nav-' + item.key);
-    nav(item.key, sidebarEl);
+    const sidebarEl = document.getElementById('nav-' + key);
+    nav(key, sidebarEl);
   }
 }
 
@@ -2201,10 +2771,12 @@ async function qlAdd(key) {
 function toggleManageLinks() {
   qlManageMode = !qlManageMode;
   const btn = document.getElementById('ql-manage-btn');
-  btn.innerHTML = qlManageMode
-    ? '<i class="ti ti-check" aria-hidden="true" style="font-size:11px"></i>Done'
-    : '<i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit';
-  btn.classList.toggle('active', qlManageMode);
+  if(btn){
+    btn.innerHTML = qlManageMode
+      ? '<i class="ti ti-check" aria-hidden="true" style="font-size:11px"></i>Done'
+      : '<i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit';
+    btn.classList.toggle('active', qlManageMode);
+  }
   renderQuickLinks();
 }
 
@@ -2213,47 +2785,50 @@ function renderQuickLinks() {
   const grid = document.getElementById('ql-grid');
   const picker = document.getElementById('ql-picker');
   const pickerGrid = document.getElementById('ql-picker-grid');
+  const strip = document.getElementById('ql-strip-chips');
+  const wrapEl = document.getElementById('ql-wrap');
 
-  // Hint text
-  hint.textContent = qlLinks.length > 0
-    ? `${qlLinks.length} of ${QL_MAX} saved`
-    : '';
+  if(hint) hint.textContent = qlLinks.length > 0 ? `${qlLinks.length} of ${QL_MAX} saved` : '';
 
-  // Chips
-  if (qlLinks.length === 0) {
-    grid.innerHTML = `<div class="ql-empty"><i class="ti ti-bookmark" aria-hidden="true"></i>No quick links yet — click Edit to add pages you visit often.</div>`;
-  } else {
+  // Strip chips (compact bar)
+  if(strip){
+    strip.innerHTML = qlLinks.length === 0
+      ? '<span style="font-size:13px;color:var(--gray-400)">No quick links — click Edit to add pages.</span>'
+      : qlLinks.map(key => {
+          const item = qlItemByKey(key);
+          if(!item) return '';
+          return `<button class="ql-strip-chip" onclick="qlNavigate(${JSON.stringify(item).replace(/"/g,"'")})" title="${item.title}"><i class="ti ${item.icon}" style="color:${item.iconColor}"></i>${item.title}</button>`;
+        }).join('');
+  }
+
+  if(!qlManageMode){ if(wrapEl) wrapEl.style.display='none'; return; }
+  if(wrapEl) wrapEl.style.display='block';
+
+  if(grid){
     grid.innerHTML = qlLinks.map(key => {
       const item = qlItemByKey(key);
-      if (!item) return '';
-      const removeBtn = qlManageMode
-        ? `<button class="ql-chip-remove" onclick="event.stopPropagation();qlRemove('${key}')" title="Remove from quick links" aria-label="Remove ${item.title}"><i class="ti ti-x" aria-hidden="true"></i></button>`
-        : '';
+      if(!item) return '';
       return `<div class="ql-chip" onclick="qlNavigate(${JSON.stringify(item).replace(/"/g,"'")})" role="button" tabindex="0" aria-label="Go to ${item.title}">
         <div class="ql-chip-icon" style="background:${item.color};color:${item.iconColor}"><i class="ti ${item.icon}" aria-hidden="true"></i></div>
-        <div class="ql-chip-text">
-          <div class="ql-chip-title">${item.title}</div>
-          <div class="ql-chip-group">${item.group}</div>
-        </div>
-        ${removeBtn}
+        <div class="ql-chip-text"><div class="ql-chip-title">${item.title}</div><div class="ql-chip-group">${item.group}</div></div>
+        <button class="ql-chip-remove" onclick="event.stopPropagation();qlRemove('${key}')" title="Remove" aria-label="Remove ${item.title}"><i class="ti ti-x" aria-hidden="true"></i></button>
       </div>`;
     }).join('');
   }
 
-  // Add picker
-  if (qlManageMode) {
+  if(picker){
     picker.style.display = 'block';
-    pickerGrid.innerHTML = QL_CATALOG.map(item => {
-      const saved = qlLinks.includes(item.key);
-      const atMax = qlLinks.length >= QL_MAX;
-      const disabled = saved || atMax;
-      return `<button class="ql-add-chip${disabled?' already-saved':''}" onclick="qlAdd('${item.key}')" ${disabled?'disabled':''} title="${saved?'Already saved':atMax?`Maximum ${QL_MAX} links reached`:'Add to quick links'}">
-        <i class="ti ${item.icon}" style="color:${item.iconColor}" aria-hidden="true"></i>${item.title}
-        ${saved?'<i class="ti ti-check" style="font-size:10px;margin-left:2px;color:var(--teal)" aria-hidden="true"></i>':''}
-      </button>`;
-    }).join('');
-  } else {
-    picker.style.display = 'none';
+    if(pickerGrid){
+      pickerGrid.innerHTML = QL_CATALOG.map(item => {
+        const saved = qlLinks.includes(item.key);
+        const atMax = qlLinks.length >= QL_MAX;
+        const disabled = saved || atMax;
+        return `<button class="ql-add-chip${disabled?' already-saved':''}" onclick="qlAdd('${item.key}')" ${disabled?'disabled':''}>
+          <i class="ti ${item.icon}" style="color:${item.iconColor}" aria-hidden="true"></i>${item.title}
+          ${saved?'<i class="ti ti-check" style="font-size:12px;margin-left:2px;color:var(--teal)" aria-hidden="true"></i>':''}
+        </button>`;
+      }).join('');
+    }
   }
 }
 
@@ -2351,7 +2926,8 @@ const SEARCH_INDEX = [
   {page:'recordings',      label:'Recordings',                      group:'Meetings & learning',icon:'video'},
   // VBR & Reports
   {page:'vbr-metrics',     label:'VBR status',                      group:'VBR & reports',     icon:'chart-line'},
-  {page:'dashboard',       label:'Scorecards',                      group:'VBR & reports',     icon:'chart-bar'},
+  {page:'po-scorecard',    label:'PO scorecard 2025',               group:'VBR & reports',     icon:'chart-bar'},
+  {page:'practice-scorecard',label:'Practice scorecards 2025',      group:'VBR & reports',     icon:'building-community'},
   {page:'po-reports',      label:'Performance reports',             group:'VBR & reports',     icon:'report'},
   {page:'baseline-reports',label:'Baseline reports',                group:'VBR & reports',     icon:'chart-dots'},
   {page:'practice-reports',label:'Practice reports',                group:'VBR & reports',     icon:'file-analytics'},
@@ -2489,16 +3065,14 @@ function closeMobileMenu(){
 }
 
 function mobileSwitchView(v, btn){
-  // Update bottom nav active state
-  ['home','po','practices','menu'].forEach(id => {
-    const el = document.getElementById('mbn-'+id);
+  ['home','po-scorecard','practice-scorecard','menu'].forEach(id => {
+    const el = document.getElementById('mbn-'+id.replace('-scorecard','').replace('practice','practices'));
     if(el) el.classList.toggle('active', id === v);
   });
-  switchView(v);
+  if(v === 'home') nav('home', document.getElementById('nav-home'));
+  else if(v === 'po-scorecard') nav('po-scorecard', document.getElementById('nav-po-sc'));
+  else if(v === 'practice-scorecard') nav('practice-scorecard', document.getElementById('nav-pcp-sc'));
   closeMobileMenu();
-  // Scroll content to top on tab switch
-  const content = document.querySelector('.content');
-  if(content) content.scrollTop = 0;
   window.scrollTo(0,0);
 }
 
@@ -2512,13 +3086,198 @@ function sbNav(page, el){
 // Sync bottom nav with switchView calls
 const origSwitchView = window.switchView;
 
+/* ══════════ PHYSICIAN LC OVERLAY ══════════ */
+
+// LC activity options from learning-community page
+const LC_ACTIVITIES = [
+  {label:'Attend a live MCT2D webinar', icon:'ti-device-tv', url:'https://portal.mct2d.org/portal/events/learning-community'},
+  {label:'Watch a recorded event', icon:'ti-video', url:'https://portal.mct2d.org/portal/events/learning-community'},
+  {label:'Submit tool feedback', icon:'ti-message-circle', url:'https://portal.mct2d.org/portal/physician-tool-feedback-forms/new'},
+  {label:'Complete a tool review survey', icon:'ti-clipboard-list', url:'https://portal.mct2d.org/portal/tool-review-survey'},
+  {label:'Try a CGM + complete survey', icon:'ti-device-watch-heart', url:'https://portal.mct2d.org/cgm_program/interest_form/'},
+];
+
+// Generate physician roster from practice data
+// 108 physicians total across 9 practices, 95 incomplete, 13 complete
+function buildPhysicianRoster() {
+  const FIRST = ['James','Maria','David','Sarah','Robert','Jennifer','Michael','Lisa','William','Patricia','Richard','Linda','Thomas','Barbara','Charles','Susan','Daniel','Jessica','Paul','Karen','Mark','Nancy','Donald','Betty','George','Margaret','Kenneth','Sandra','Steven','Ashley','Edward','Dorothy','Brian','Kimberly','Ronald','Emily','Anthony','Donna','Kevin','Michelle','Jason','Carol','Matthew','Amanda','Gary','Melissa','Timothy','Deborah','Jose','Stephanie'];
+  const LAST  = ['Okafor','Walsh','Mendez','Nguyen','Patel','Brooks','Santos','Jensen','Reeves','Park','Chen','Rivera','Kumar','Kowalski','Williams','Thompson','Anderson','Martinez','Wilson','Taylor','Moore','Jackson','Harris','White','Lewis','Clark','Robinson','Walker','Hall','Young'];
+  const completedMethods = ['Attended live webinar — Apr 2026','Watched recorded event — Mar 2026','Submitted tool feedback — Feb 2026','Completed tool review survey — Apr 2026','CGM program completion — Mar 2026'];
+
+  // Use 9 PCP practices from generated data, fixed to first 9 for determinism
+  const practices = PCP_D.slice(0,9).map((p,i) => ({name:p.name, count: i < 2 ? 15 : i < 4 ? 13 : 12}));
+  // Total: 15+15+13+13+12+12+12+12+12 = 116 but cap at 108 for realism
+  const physCounts = [14,13,12,12,12,11,11,11,12]; // sums to 108
+  const completedPerPractice = [2,1,2,1,1,2,1,2,1]; // sums to 13
+
+  const roster = [];
+  let seed = 42;
+  function rng(){ seed = (seed * 1664525 + 1013904223) & 0xffffffff; return Math.abs(seed); }
+
+  practices.forEach((prac, pi) => {
+    const total = physCounts[pi];
+    const completed = completedPerPractice[pi];
+    for (let i = 0; i < total; i++) {
+      const first = FIRST[rng() % FIRST.length];
+      const last  = LAST[rng() % LAST.length];
+      const isComplete = i < completed;
+      roster.push({
+        id: `p${pi}_${i}`,
+        name: `Dr. ${first} ${last}`,
+        initials: `${first[0]}${last[0]}`,
+        practice: prac.name,
+        practiceIdx: pi,
+        complete: isComplete,
+        method: isComplete ? completedMethods[rng() % completedMethods.length] : null,
+        completedDate: isComplete ? ['Jan 2026','Feb 2026','Mar 2026','Apr 2026'][rng()%4] : null,
+      });
+    }
+  });
+  return roster;
+}
+
+let PHYSICIAN_ROSTER = [];
+let physTab = 'incomplete'; // 'incomplete' | 'complete'
+
+function openPhysicianOverlay() {
+  if (!PHYSICIAN_ROSTER.length) PHYSICIAN_ROSTER = buildPhysicianRoster();
+
+  // Populate practice filter
+  const sel = document.getElementById('phys-filter-practice');
+  const practices = [...new Set(PHYSICIAN_ROSTER.map(p => p.practice))].sort();
+  sel.innerHTML = '<option value="">All practices</option>' +
+    practices.map(p => `<option value="${p}">${p}</option>`).join('');
+
+  // Render LC activity options
+  document.getElementById('phys-lc-options').innerHTML = LC_ACTIVITIES.map(a =>
+    `<a class="phys-lc-opt" href="${a.url}" target="_blank" rel="noopener">
+       <i class="ti ${a.icon}"></i>${a.label}
+     </a>`
+  ).join('');
+
+  // Progress bar
+  const complete = PHYSICIAN_ROSTER.filter(p => p.complete).length;
+  const total = PHYSICIAN_ROSTER.length;
+  const pct = Math.round(complete/total*100);
+  document.getElementById('phys-progress-frac').textContent = `${complete} / ${total} (${pct}%)`;
+  document.getElementById('phys-progress-fill').style.width = pct + '%';
+  // Color the bar by scoring tier
+  const fill = document.getElementById('phys-progress-fill');
+  fill.style.background = pct >= 90 ? 'var(--teal)' : pct >= 80 ? '#60b8b9' : pct >= 70 ? 'var(--amber)' : '#c0392b';
+
+  // Clear search
+  document.getElementById('phys-search').value = '';
+  physTab = 'incomplete';
+  renderPhysicianList();
+
+  document.getElementById('phys-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePhysicianOverlay() {
+  document.getElementById('phys-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function switchPhysTab(tab) {
+  physTab = tab;
+  document.getElementById('ptab-incomplete').classList.toggle('on', tab === 'incomplete');
+  document.getElementById('ptab-complete').classList.toggle('on', tab === 'complete');
+  renderPhysicianList();
+}
+
+function renderPhysicianList() {
+  const q = (document.getElementById('phys-search').value || '').toLowerCase().trim();
+  const pracFilter = document.getElementById('phys-filter-practice').value;
+
+  let list = PHYSICIAN_ROSTER.filter(p => p.complete === (physTab === 'complete'));
+  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.practice.toLowerCase().includes(q));
+  if (pracFilter) list = list.filter(p => p.practice === pracFilter);
+
+  // Update tab counts (unfiltered)
+  const incTotal = PHYSICIAN_ROSTER.filter(p => !p.complete).length;
+  const comTotal = PHYSICIAN_ROSTER.filter(p => p.complete).length;
+  document.getElementById('ptab-count-incomplete').textContent = incTotal;
+  document.getElementById('ptab-count-complete').textContent = comTotal;
+
+  const container = document.getElementById('phys-list');
+  if (!list.length) {
+    container.innerHTML = `<div class="phys-empty"><i class="ti ti-search"></i>No physicians match this filter</div>`;
+    return;
+  }
+
+  // Group by practice
+  const byPractice = {};
+  list.forEach(p => {
+    if (!byPractice[p.practice]) byPractice[p.practice] = [];
+    byPractice[p.practice].push(p);
+  });
+
+  let html = '';
+  Object.keys(byPractice).sort().forEach(prac => {
+    const physicians = byPractice[prac];
+    html += `<div class="dl-section-lbl">${prac} — ${physicians.length} physician${physicians.length!==1?'s':''}</div>`;
+    html += physicians.map(p => {
+      const avCls = p.complete ? 'phys-av-complete' : 'phys-av-incomplete';
+      const badgeCls = p.complete ? 'psb-complete' : 'psb-incomplete';
+      const badgeLabel = p.complete ? '✓ Completed' : 'Incomplete';
+      const practiceUrl = 'https://portal.mct2d.org/scorecard/practice/2025/pcp/';
+      return `<div class="phys-row">
+        <div class="phys-avatar ${avCls}">${p.initials}</div>
+        <div class="phys-info">
+          <div class="phys-name">${p.name}</div>
+          <div class="phys-practice">
+            <a class="phys-practice-link" href="${practiceUrl}" target="_blank" rel="noopener">${p.practice}</a>
+          </div>
+          ${p.complete
+            ? `<div class="phys-completed-via"><i class="ti ti-circle-check" style="font-size:12px;margin-right:3px;color:var(--teal)"></i>${p.method}</div>`
+            : `<div class="phys-deadline"><i class="ti ti-calendar" style="font-size:12px;margin-right:3px"></i>Deadline: Jul 1, 2026</div>`
+          }
+        </div>
+        <div class="phys-status">
+          <div class="phys-status-badge ${badgeCls}">${badgeLabel}</div>
+          ${!p.complete ? `<div style="margin-top:5px;display:flex;flex-direction:column;gap:3px">
+            ${LC_ACTIVITIES.slice(0,2).map(a =>
+              `<a href="${a.url}" target="_blank" rel="noopener" style="font-size:12px;color:var(--teal);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:3px" title="${a.label}">
+                <i class="ti ${a.icon}" style="font-size:11px"></i>${a.label.split(' ').slice(0,3).join(' ')}…
+              </a>`
+            ).join('')}
+          </div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  });
+
+  container.innerHTML = html;
+}
+
+function exportIncomplete() {
+  const incomplete = PHYSICIAN_ROSTER.filter(p => !p.complete);
+  const rows = ['Name,Practice,Status,Deadline'];
+  incomplete.forEach(p => rows.push(`"${p.name}","${p.practice}","Incomplete","Jul 1, 2026"`));
+  const blob = new Blob([rows.join('\n')], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'physician_lc_incomplete.csv';
+  a.click();
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePhysicianOverlay();
+});
+
 /* ══════════ INIT ══════════ */
 renderCmdSummary();
 renderPendingList();
+renderRecentlyCompleted();
 renderApprovals();
 renderActions();
 renderActionCount();
-renderFeed();renderDeadlines();renderMessages();renderUpdates();renderPOMeasures();renderAllStats();renderTable();
+renderFeed();renderDeadlines();renderMessages();renderUpdates();
+// Wire df-panel panes after feed panels are rendered
+setTimeout(()=>{renderDfDeadlines();renderDfMessages();renderDfUpdates();},0);
+renderPOMeasures();renderAllStats();renderTable();
 qlLoad();
 recentLoad();
 </script>
