@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MCT2D CQI Admin Portal</title>
+<title>MCT2D Admin Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
@@ -35,11 +35,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-scroll::-webkit-scrollbar-thumb{background:rgba(185,226,227,.15);border-radius:3px}
 
 /* Logo */
-.sb-logo{padding:16px 14px 13px;border-bottom:.5px solid rgba(185,226,227,.12);flex-shrink:0;transition:background .13s}
+.sb-logo{padding:14px 14px 11px;border-bottom:.5px solid rgba(185,226,227,.12);flex-shrink:0;transition:background .13s}
 .sb-logo:hover{background:rgba(255,255,255,.06)}
-.sb-logo-top{font-size:11px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
-.sb-logo-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em}
-.sb-logo-sub{font-size:12px;color:rgba(185,226,227,.78);margin-top:1px}
+.sb-logo-img{display:block;width:148px;height:auto;margin-bottom:6px;opacity:.95}
+.sb-logo svg{display:block;width:148px;height:auto;margin-bottom:6px;opacity:.95}
+.sb-logo-sub{font-size:14px;color:rgba(185,226,227,.85);font-weight:600;letter-spacing:.02em;margin-top:2px}
 
 /* Search bar */
 .sb-search-wrap{padding:10px 12px;border-bottom:.5px solid rgba(185,226,227,.1);flex-shrink:0}
@@ -133,6 +133,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .tb-stat-lbl{font-size:11px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .tb-stat-val{font-size:20px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.01em}
 .tb-stat-sub{font-size:12px;color:var(--sky)}
+
+/* Breadcrumb bar */
+.breadcrumb-bar{background:var(--navy-lt);border-bottom:1px solid rgba(37,57,114,.15);padding:8px 24px;flex-shrink:0}
+.bc-trail{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.bc-item{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--gray-600)}
+.bc-link{color:var(--navy);font-weight:500;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:4px;padding:2px 4px;border-radius:var(--radius-sm);transition:background .12s}
+.bc-link:hover{background:rgba(37,57,114,.1);text-decoration:underline}
+.bc-link i{font-size:14px}
+.bc-sep{color:var(--gray-400);font-size:13px;line-height:1;user-select:none}
+.bc-current{font-size:13px;font-weight:500;color:var(--gray-900);padding:2px 4px}
 .tb-div{width:.5px;height:34px;background:rgba(185,226,227,.2)}
 
 /* Score bar */
@@ -236,8 +246,29 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 /* ══════════ HOME PAGE REDESIGN ══════════ */
 
-/* ── Zone 1: Status hero bar ── */
-.status-hero{background:var(--navy);padding:16px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:3px solid #bf5500;flex-shrink:0}
+/* ── PO Hero unified navy block ── */
+.po-hero-block{background:var(--navy);border-bottom:3px solid #bf5500;flex-shrink:0}
+.status-hero{background:transparent;padding:16px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;flex-shrink:0;border-bottom:.5px solid rgba(185,226,227,.15)}
+
+/* Participation overview tiles — navy-themed inside the hero block */
+.sh-tiles-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:0}
+.sh-tile{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:default;border-right:.5px solid rgba(185,226,227,.12);transition:background .12s}
+.sh-tile:last-child{border-right:none}
+.sh-tile.clickable{cursor:pointer}
+.sh-tile.clickable:hover{background:rgba(255,255,255,.07)}
+.sh-tile-icon{width:36px;height:36px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sh-tile-green{background:rgba(26,158,80,.2);color:#6effa8}
+.sh-tile-amber{background:rgba(158,93,21,.25);color:#FAC775}
+.sh-tile-orange{background:rgba(191,85,0,.25);color:#ffb380}
+.sh-tile-blue{background:rgba(3,105,161,.25);color:#7dd3fc}
+.sh-tile-body{min-width:0}
+.sh-tile-val{font-size:24px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.sh-tile-val-green{color:#6effa8}
+.sh-tile-val-amber{color:#FAC775}
+.sh-tile-val-orange{color:#ffb380}
+.sh-tile-val-blue{color:#7dd3fc}
+.sh-tile-label{font-size:13px;font-weight:500;color:#fff;margin-top:2px;line-height:1.3}
+.sh-tile-sub{font-size:11px;color:rgba(185,226,227,.6);margin-top:2px}
 .sh-score-block{display:flex;align-items:center;gap:16px;flex:0 0 auto}
 .sh-score-ring{position:relative;width:72px;height:72px;flex-shrink:0}
 .sh-score-ring svg{transform:rotate(-90deg)}
@@ -337,6 +368,20 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .df-tab:hover{color:var(--navy);background:var(--navy-lt)}
 .df-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;background:#fff}
 .df-pane{display:none}.df-pane.on{display:block}
+
+/* ── Home section drag-and-drop ── */
+.home-section{position:relative;transition:opacity .2s}
+.home-section.drag-over{outline:2px dashed var(--teal);outline-offset:3px;border-radius:var(--radius-lg);background:var(--teal-lt)}
+.home-section.dragging{opacity:.45;cursor:grabbing}
+.hsec-drag-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 4px;cursor:grab;user-select:none}
+.hsec-drag-bar:active{cursor:grabbing}
+.hsec-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);display:flex;align-items:center;gap:6px}
+.hsec-title i{font-size:15px}
+.hsec-drag-hint{font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:4px;opacity:0;transition:opacity .15s}
+.hsec-drag-bar:hover .hsec-drag-hint{opacity:1}
+.hsec-drag-hint i{font-size:14px}
+.drop-line{height:3px;background:var(--teal);border-radius:2px;margin:3px 0;display:none}
+.drop-line.active{display:block}
 
 /* Coordinator context bar */
 .coord-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
@@ -558,8 +603,88 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .mc-opt:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
 .mc-opt.sel{background:var(--navy);border-color:var(--navy);color:#fff}
 
-/* Practice table */
-.spec-tabs{display:flex;gap:0;border-bottom:1px solid var(--gray-200);margin-bottom:14px}
+/* ── Practice scorecard table — simplified ── */
+.prac-table{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
+
+/* Column header */
+.pt-header{display:grid;grid-template-columns:minmax(0,1fr) 140px 80px 110px 32px;gap:0;padding:8px 16px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400)}
+.pt-header .ph-status{text-align:center}
+.pt-header .ph-score{text-align:center}
+.pt-header .ph-tier{text-align:right}
+
+/* Practice summary row */
+.pt-row{border-bottom:.5px solid var(--gray-100)}
+.pt-row:last-child{border-bottom:none}
+.pt-summary{display:grid;grid-template-columns:minmax(0,1fr) 140px 80px 110px 32px;gap:0;padding:11px 16px;align-items:center;cursor:pointer;transition:background .12s}
+.pt-summary:hover{background:var(--gray-50)}
+.pt-row.pt-open>.pt-summary{background:var(--navy-lt)}
+
+/* Practice name + champion */
+.pt-name-block{}
+.pt-name{font-size:15px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:2px;text-decoration-color:transparent;transition:text-decoration-color .12s}
+.pt-summary:hover .pt-name{text-decoration-color:var(--navy)}
+.pt-champion{font-size:12px;color:var(--gray-600);margin-top:2px;display:flex;align-items:center;gap:5px}
+.pt-champion-icon{width:18px;height:18px;border-radius:50%;background:var(--navy-lt);display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--navy);flex-shrink:0}
+
+/* Status bar cell */
+.pt-status-cell{padding:0 8px}
+.pt-status-label{font-size:11px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.pt-bar-track{height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden}
+.pt-bar-fill{height:100%;border-radius:3px;transition:width .4s}
+
+/* Score cell */
+.pt-score-cell{text-align:center}
+.pt-score-num{font-size:18px;font-weight:800;line-height:1;letter-spacing:-.01em}
+.pt-score-max{font-size:12px;color:var(--gray-400);font-weight:400}
+
+/* Tier badge */
+.pt-tier-cell{text-align:right}
+.pt-tier{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap}
+.pt-tier-105{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
+.pt-tier-103{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.pt-tier-102{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.pt-tier-risk{background:#fff3f0;color:#bf5500;border:.5px solid #bf5500}
+
+/* Chevron */
+.pt-chev{font-size:16px;color:var(--gray-400);transition:transform .18s;text-align:right}
+.pt-row.pt-open .pt-chev{transform:rotate(180deg)}
+
+/* Expanded detail panel */
+.pt-detail{display:none;border-top:.5px solid var(--gray-200);background:#fff}
+.pt-row.pt-open>.pt-detail{display:block}
+.pt-detail-inner{padding:14px 16px 16px}
+
+/* Detail header: champion contact card */
+.pt-contact-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--navy-lt);border-radius:var(--radius-md);margin-bottom:14px;flex-wrap:wrap}
+.pt-contact-left{display:flex;align-items:center;gap:10px}
+.pt-contact-avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.pt-contact-name{font-size:14px;font-weight:600;color:var(--navy)}
+.pt-contact-role{font-size:12px;color:var(--gray-600);margin-top:1px}
+.pt-contact-actions{display:flex;gap:6px;flex-wrap:wrap}
+.pt-contact-btn{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:.5px solid rgba(37,57,114,.25);background:#fff;color:var(--navy);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.pt-contact-btn:hover{background:var(--navy);color:#fff}
+.pt-contact-btn i{font-size:13px}
+
+/* Open tasks inside detail */
+.pt-tasks-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.pt-task-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;margin-bottom:6px;cursor:pointer;transition:all .12s}
+.pt-task-item:last-child{margin-bottom:0}
+.pt-task-item:hover{border-color:var(--navy);background:var(--navy-lt)}
+.pt-task-accent{width:3px;min-height:36px;border-radius:2px;flex-shrink:0}
+.pt-task-body{flex:1;min-width:0}
+.pt-task-name{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
+.pt-task-meta{font-size:12px;color:var(--gray-600);margin-top:2px}
+.pt-task-right{flex-shrink:0;text-align:right}
+.pt-task-due{font-size:12px;font-weight:600;white-space:nowrap}
+.pt-task-pts{font-size:12px;color:var(--gray-400);margin-top:2px;white-space:nowrap}
+.pt-task-help{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.pt-help-btn{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.pt-help-btn:hover{background:var(--teal-lt);color:#005c5d;border-color:var(--teal)}
+.pt-help-btn i{font-size:12px}
+
+/* All-done state */
+.pt-all-done{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#e7f7ef;border-radius:var(--radius-md);color:#1a6640;font-size:14px;font-weight:500}
+.pt-all-done i{font-size:18px}
 .spec-tab{font-size:14px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
 .spec-tab:hover{color:var(--navy)}
 .spec-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
@@ -789,6 +914,34 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .phys-empty{padding:32px 18px;text-align:center;font-size:15px;color:var(--gray-400)}
 .phys-empty i{font-size:28px;display:block;margin-bottom:8px;color:var(--gray-200)}
 
+/* Practice summary rows */
+.prac-summary-row{border-bottom:.5px solid var(--gray-100);cursor:pointer;transition:background .1s}
+.prac-summary-row:last-child{border-bottom:none}
+.prac-summary-row:hover .psr-header{background:var(--gray-50)}
+.prac-summary-row.expanded>.psr-header{background:var(--navy-lt)}
+.psr-header{display:flex;align-items:center;gap:12px;padding:11px 18px;transition:background .1s}
+.psr-rank{width:22px;height:22px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gray-600);flex-shrink:0}
+.psr-rank-urg{background:var(--amber-lt);color:#7a4a0d}
+.psr-name{font-size:15px;font-weight:500;color:var(--gray-900);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.psr-stats{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.psr-stat{text-align:center}
+.psr-stat-val{font-size:16px;font-weight:700;line-height:1}
+.psr-stat-lbl{font-size:11px;color:var(--gray-400);margin-top:1px}
+.psr-stat-incomplete .psr-stat-val{color:var(--amber)}
+.psr-stat-complete .psr-stat-val{color:var(--teal)}
+.psr-bar-wrap{width:56px;flex-shrink:0}
+.psr-bar-track{height:5px;background:var(--gray-200);border-radius:3px;overflow:hidden}
+.psr-bar-fill{height:100%;border-radius:3px}
+.psr-pct{font-size:11px;color:var(--gray-600);margin-top:2px;text-align:center}
+.psr-chev{font-size:14px;color:var(--gray-400);transition:transform .18s;flex-shrink:0}
+.prac-summary-row.expanded>.psr-header>.psr-chev{transform:rotate(180deg)}
+.psr-physician-list{border-top:.5px solid var(--gray-200);display:none}
+.prac-summary-row.expanded>.psr-physician-list{display:block}
+.psr-divider-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:6px 18px 5px 54px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100);color:var(--gray-400);display:flex;align-items:center;gap:6px}
+.psr-phys-row{display:flex;align-items:center;gap:10px;padding:9px 18px 9px 54px;border-bottom:.5px solid var(--gray-100);transition:background .1s}
+.psr-phys-row:last-child{border-bottom:none}
+.psr-phys-row:hover{background:var(--navy-lt)}
+
 /* Footer */
 .phys-modal-footer{display:flex;align-items:center;gap:8px;padding:12px 18px;border-top:1px solid var(--gray-200);background:var(--gray-50);flex-shrink:0;flex-wrap:wrap}
 .phys-footer-btn{font-size:14px;font-weight:500;padding:6px 14px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);text-decoration:none}
@@ -958,9 +1111,97 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 <nav class="sidebar" id="sidebar">
 
   <div class="sb-logo" onclick="sbNav('home',document.getElementById('nav-home'))" style="cursor:pointer" title="Go to home page" role="button" tabindex="0" onkeydown="if(event.key==='Enter')sbNav('home',document.getElementById('nav-home'))">
-    <div class="sb-logo-top">Michigan Collaborative</div>
-    <div class="sb-logo-name">MCT2D</div>
-    <div class="sb-logo-sub">CQI Admin Portal</div>
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #33bdbc;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: #00a6a8;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="177.98" y1="460.28" x2="270.58" y2="460.28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#33bdbc"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-3" d="M656.02,561.25h98.84s18.14-29.31,18.4-30.1,3.94-16.83,3.94-16.83l.26-22.35s-1.31-19.45-4.21-26.03c-2.89-6.57-6.05-10.68-9.07-14.02-3.02-3.33-5.65-3.6-10.38-7.28-4.73-3.68-6.84-6.31-17.09-12.09-10.25-5.78-22.87-6.57-34.44-10.52-11.57-3.94-46.26,9.51-46.26,9.51"/>
+  <g>
+    <g>
+      <path class="cls-1" d="M653.66,305.79c10.01-3.71,1.85.37,12.98-1.85,11.12-2.22,2.6-4.82,12.98-5.93,10.38-1.11,22.62,8.16,29.29,11.86,6.67,3.71,1.11-5.93,1.48-9.7.37-3.76,3.34-1.06,14.09-.31,10.75.74,23.73.37,17.06-3.34-6.67-3.71-11.86-9.27-9.64-9.27s.37-5.93-1.85-14.46c-2.22-8.53,0,0-10.75,1.85-10.75,1.85-3.71-2.22-17.8-.37-14.09,1.85-11.86-14.46-10.01-20.02,1.85-5.56-13.72,5.93-34.85,7.79-21.13,1.85-25.21,10.01-32.63,17.07-7.42,7.06-5.56,2.21-14.09-1.87-8.53-4.08-10.01,2.22-17.06,1.85-7.04-.37-5.56-18.17-23.36-24.1-17.8-5.93-25.21,7.79-25.58-.37s11.86-19.28,25.21-28.92c13.35-9.64,7.42-7.42-12.98-5.19-20.39,2.22-32.63,26.7-55.99,36.34-23.36,9.64-10.38-3.71-20.76,5.93-10.38,9.64-16.68,7.79-20.39,11.49-3.71,3.71,9.27,4.82,9.27,4.82,4.9.75-3.71,9.64,6.3,13.07,10.01,3.43,35.59,6.21,46.72,15.11,11.12,8.9,28.92.74,38.93,5.56,10.01,4.82-4.45,8.9,6.3,11.49,10.75,2.6,8.9,10.01,5.19,18.54-3.71,8.53,3.34,4.08,8.53,4.45,5.19.37-3.71,14.83-1.11,18.17,2.6,3.34,14.46-27.44,21.71-36.34,7.25-8.9,7.58-15.2,11.28-15.57,3.71-.37-4.82,11.12,3.71,8.16,8.53-2.97,2.97-5.56,9.27-4.37,6.3,1.19-5.19,9.56-1.11,9.56s12.98-8.16,13.35-12.98c.37-4.82,6.3-4.45,16.31-8.16Z"/>
+      <g>
+        <path class="cls-3" d="M379.29,449.9c8.15,0,15.53,1.88,22.14,5.65,6.61,3.77,11.64,8.86,15.1,15.28l18.53-10.75c-5.56-9.51-13.31-17.05-23.25-22.6-9.94-5.56-20.78-8.34-32.52-8.34-19.52,0-35.7,6.46-48.54,19.36-12.85,12.91-19.27,28.88-19.27,47.89s6.42,34.99,19.27,47.9c12.85,12.91,29.02,19.36,48.54,19.36,11.86,0,22.76-2.81,32.7-8.43,9.94-5.62,17.63-13.18,23.07-22.7l-18.53-10.56c-3.33,6.42-8.34,11.52-15.01,15.28-6.67,3.77-14.08,5.65-22.23,5.65-13.83,0-25.05-4.38-33.63-13.16-8.59-8.77-12.88-19.88-12.88-33.35s4.29-24.58,12.88-33.35c8.58-8.77,19.79-13.16,33.63-13.16Z"/>
+        <polygon class="cls-3" points="441.54 451.94 478.22 451.94 478.22 561.25 499.53 561.25 499.53 451.94 536.03 451.94 536.03 431.56 441.54 431.56 441.54 451.94"/>
+        <path class="cls-3" d="M601.58,511.19c14.85-14.87,22.27-28.88,22.27-42.02,0-12.35-4.08-22.11-12.23-29.27-8.15-7.16-17.91-10.75-29.27-10.75-9.02,0-17.23,2.22-24.64,6.67-7.41,4.45-13.16,11-17.23,19.64l17.97,10.56c5.19-10.74,13.22-16.12,24.09-16.12,5.8,0,10.59,1.76,14.36,5.28,3.77,3.52,5.65,8.43,5.65,14.73,0,8.03-5.5,17.54-16.49,28.53l-45.21,46.13v16.67h85.41v-20.57h-54.1l29.42-29.49Z"/>
+        <g>
+          <path class="cls-1" d="M748.48,496.4c0-12.97-3.86-23.62-11.58-31.96-7.72-8.34-17.69-12.51-29.92-12.51h-29.64v88.93h29.64c12.23,0,22.2-4.2,29.92-12.6,7.72-8.4,11.58-19.02,11.58-31.87Z"/>
+          <path class="cls-1" d="M824.95,468.19c-8.9-13.35-12.24-47.46-20.02-50.05-7.79-2.6-14.83,5.19-22.62,15.57-7.79,10.38-11.86,17.43-14.46,13.35-2.6-4.08-14.09-4.08-8.53-18.17,5.56-14.09,15.57-13.35,16.09-26.32.51-12.98,5.79-29.66-.88-36.34-6.67-6.67-5.56-8.53-1.11-12.24,4.45-3.71,1.48-16.31-9.12-16.31s-16.84-4.45-25.74-7.04c-8.9-2.6-.74-8.9-15.94-9.64-15.2-.74-16.31-7.79-21.88,0-5.56,7.79-11.49,10.38-1.85,15.57,9.64,5.19.37,7.04-6.67,7.79-7.04.74,6.67,10.38,2.97,10.91-3.71.52-4.45-5.71-7.42-7.94-2.97-2.22-5.19,10.75,0,15.57,5.19,4.82,3.34,12.24,2.22,15.2-1.11,2.97-4.45,1.85-7.04-2.22-1.84-2.89-1.08.92-1.81,4.31-1.51,3.58-5.48,1.18-6.75.29-.13-.1-.26-.2-.41-.3h0c-.31-.21-.65-.41-1.05-.59-4.82-2.22,4.45-28.55,0-23.73-4.45,4.82-17.8,15.2-19.28,21.5-1.48,6.3-.37,11.86-4.08,13.35-3.71,1.48-1.11,8.16-1.11,16.68s-5.93,15.57-10.01,22.99c-4.08,7.42,6.67,11.49.74,18.17-5.93,6.67-4.08,13.35,5.99,28.55,10.06,15.2,8.9,46.01-.93,65.63-4.59,9.17-3.21,18.54-3.21,18.54h14.98v-129.69h50.95c17.79,0,32.58,6.24,44.37,18.71,11.79,12.48,17.69,27.86,17.69,46.13s-5.9,33.51-17.69,46.04c-11.79,12.53-26.58,18.8-44.36,18.81h83.48s11.49-11.49,10.01-24.84c-1.48-13.35,10.38-5.19,11.86-16.31,1.48-11.12,6.67-14.83,12.98-12.24,6.3,2.6,3.71-5.56,4.45-20.02.74-14.46,4.08-6.3-4.82-19.65Z"/>
+        </g>
+        <path class="cls-2" d="M229.8,496.08l-38.94-64.53h-22.97v129.69h21.31v-93.78l39.47,66.54h2.58c116.56-227.42,363.36-161.13,403.48-147.22-266.49-92.38-384.06,74.88-404.93,109.3Z"/>
+        <path class="cls-3" d="M270.71,504.94v56.31h21.31v-102.47c-7.31,7.21-14.42,15.01-21.31,23.44v22.72Z"/>
+      </g>
+    </g>
+    <g>
+      <g>
+        <path class="cls-4" d="M193.58,622.7l-.04-18.55-9.19,15.35h-2.32l-9.19-15.11v18.31h-4.96v-27.98h4.28l11.11,18.55,10.91-18.55h4.28l.04,27.98h-4.92Z"/>
+        <path class="cls-4" d="M210.04,594.72h5.2v27.98h-5.2v-27.98Z"/>
+        <path class="cls-4" d="M224.78,608.71c0-8.35,6.4-14.39,14.99-14.39,4.56,0,8.47,1.64,11.07,4.68l-3.36,3.16c-2.04-2.2-4.56-3.28-7.47-3.28-5.8,0-9.99,4.08-9.99,9.83s4.2,9.83,9.99,9.83c2.92,0,5.44-1.08,7.47-3.32l3.36,3.2c-2.6,3.04-6.51,4.68-11.11,4.68-8.55,0-14.95-6.04-14.95-14.39Z"/>
+        <path class="cls-4" d="M284.69,594.72v27.98h-5.2v-11.99h-14.47v11.99h-5.2v-27.98h5.2v11.55h14.47v-11.55h5.2Z"/>
+        <path class="cls-4" d="M296.19,594.72h5.2v27.98h-5.2v-27.98Z"/>
+        <path class="cls-4" d="M332.04,608.39h4.92v11.15c-2.92,2.36-6.99,3.56-10.95,3.56-8.67,0-15.07-6.04-15.07-14.39s6.4-14.39,15.15-14.39c4.68,0,8.59,1.56,11.23,4.56l-3.28,3.2c-2.2-2.2-4.72-3.2-7.71-3.2-5.96,0-10.15,4.04-10.15,9.83s4.2,9.83,10.11,9.83c2,0,3.96-.4,5.76-1.44v-8.71Z"/>
+        <path class="cls-4" d="M365.92,616.22h-13.99l-2.76,6.48h-5.36l12.59-27.98h5.12l12.63,27.98h-5.44l-2.8-6.48ZM364.21,612.15l-5.28-12.23-5.24,12.23h10.51Z"/>
+        <path class="cls-4" d="M406.56,594.72v27.98h-4.28l-15.43-18.95v18.95h-5.16v-27.98h4.28l15.43,18.94v-18.94h5.16Z"/>
+        <path class="cls-4" d="M431.09,608.71c0-8.35,6.4-14.39,14.99-14.39,4.56,0,8.47,1.64,11.07,4.68l-3.36,3.16c-2.04-2.2-4.56-3.28-7.47-3.28-5.8,0-9.99,4.08-9.99,9.83s4.2,9.83,9.99,9.83c2.92,0,5.44-1.08,7.47-3.32l3.36,3.2c-2.6,3.04-6.51,4.68-11.11,4.68-8.55,0-14.95-6.04-14.95-14.39Z"/>
+        <path class="cls-4" d="M463.54,608.71c0-8.27,6.4-14.39,15.07-14.39s15.07,6.08,15.07,14.39-6.4,14.39-15.07,14.39-15.07-6.12-15.07-14.39ZM488.44,608.71c0-5.72-4.2-9.83-9.83-9.83s-9.83,4.12-9.83,9.83,4.2,9.83,9.83,9.83,9.83-4.12,9.83-9.83Z"/>
+        <path class="cls-4" d="M503.18,594.72h5.2v23.58h14.63v4.4h-19.82v-27.98Z"/>
+        <path class="cls-4" d="M531.11,594.72h5.2v23.58h14.63v4.4h-19.82v-27.98Z"/>
+        <path class="cls-4" d="M577.39,616.22h-13.99l-2.76,6.48h-5.36l12.59-27.98h5.12l12.63,27.98h-5.44l-2.8-6.48ZM575.67,612.15l-5.28-12.23-5.24,12.23h10.51Z"/>
+        <path class="cls-4" d="M618.03,615.11c0,4.8-3.76,7.59-10.95,7.59h-13.91v-27.98h13.11c6.71,0,10.31,2.84,10.31,7.27,0,2.88-1.44,5-3.6,6.16,3,.96,5.04,3.32,5.04,6.95ZM598.36,598.8v7.71h7.35c3.6,0,5.64-1.28,5.64-3.84s-2.04-3.88-5.64-3.88h-7.35ZM612.79,614.59c0-2.8-2.12-4.04-6.03-4.04h-8.39v8.07h8.39c3.92,0,6.03-1.24,6.03-4.04Z"/>
+        <path class="cls-4" d="M625.57,608.71c0-8.27,6.4-14.39,15.07-14.39s15.07,6.08,15.07,14.39-6.4,14.39-15.07,14.39-15.07-6.12-15.07-14.39ZM650.48,608.71c0-5.72-4.2-9.83-9.83-9.83s-9.83,4.12-9.83,9.83,4.2,9.83,9.83,9.83,9.83-4.12,9.83-9.83Z"/>
+        <path class="cls-4" d="M683.52,622.7l-5.71-8.19c-.36.04-.72.04-1.08.04h-6.32v8.15h-5.2v-27.98h11.51c7.35,0,11.91,3.76,11.91,9.95,0,4.24-2.16,7.35-5.95,8.83l6.43,9.19h-5.6ZM676.49,599.12h-6.08v11.15h6.08c4.56,0,6.91-2.08,6.91-5.6s-2.36-5.56-6.91-5.56Z"/>
+        <path class="cls-4" d="M716.57,616.22h-13.99l-2.76,6.48h-5.36l12.59-27.98h5.12l12.63,27.98h-5.43l-2.8-6.48ZM714.85,612.15l-5.28-12.23-5.24,12.23h10.51Z"/>
+        <path class="cls-4" d="M736.62,599.12h-9.27v-4.4h23.74v4.4h-9.27v23.58h-5.2v-23.58Z"/>
+        <path class="cls-4" d="M759,594.72h5.2v27.98h-5.2v-27.98Z"/>
+        <path class="cls-4" d="M801.12,594.72l-12.19,27.98h-5.12l-12.23-27.98h5.64l9.31,21.58,9.39-21.58h5.2Z"/>
+        <path class="cls-4" d="M829.05,618.34v4.36h-20.98v-27.98h20.42v4.36h-15.23v7.28h13.51v4.28h-13.51v7.71h15.79Z"/>
+      </g>
+      <g>
+        <path class="cls-4" d="M241.17,648.85v8.51h13.51v4.4h-13.51v10.71h-5.2v-27.98h20.42v4.36h-15.23Z"/>
+        <path class="cls-4" d="M263.11,658.48c0-8.27,6.4-14.39,15.07-14.39s15.07,6.08,15.07,14.39-6.4,14.39-15.07,14.39-15.07-6.12-15.07-14.39ZM288.01,658.48c0-5.72-4.2-9.83-9.83-9.83s-9.83,4.12-9.83,9.83,4.2,9.83,9.83,9.83,9.83-4.12,9.83-9.83Z"/>
+        <path class="cls-4" d="M321.05,672.47l-5.72-8.19c-.36.04-.72.04-1.08.04h-6.31v8.15h-5.2v-27.98h11.51c7.35,0,11.91,3.76,11.91,9.95,0,4.24-2.16,7.35-5.96,8.83l6.43,9.19h-5.6ZM314.02,648.89h-6.08v11.15h6.08c4.56,0,6.91-2.08,6.91-5.6s-2.36-5.56-6.91-5.56Z"/>
+        <path class="cls-4" d="M356.65,648.89h-9.27v-4.4h23.74v4.4h-9.27v23.58h-5.2v-23.58Z"/>
+        <path class="cls-4" d="M390.7,662.59v9.87h-5.2v-9.79l-10.99-18.19h5.56l8.19,13.63,8.27-13.63h5.12l-10.95,18.11Z"/>
+        <path class="cls-4" d="M432.06,654.44c0,6.16-4.56,9.95-11.91,9.95h-6.31v8.07h-5.2v-27.98h11.51c7.35,0,11.91,3.76,11.91,9.95ZM426.82,654.44c0-3.52-2.36-5.56-6.91-5.56h-6.08v11.11h6.08c4.56,0,6.91-2.04,6.91-5.56Z"/>
+        <path class="cls-4" d="M462.23,668.11v4.36h-20.98v-27.98h20.42v4.36h-15.23v7.28h13.51v4.28h-13.51v7.71h15.79Z"/>
+        <path class="cls-4" d="M505.3,668.07v4.4h-20.62v-3.48l11.11-10.55c2.72-2.6,3.2-4.24,3.2-5.8,0-2.56-1.76-4.04-5.2-4.04-2.72,0-5,.92-6.56,2.92l-3.64-2.8c2.16-2.92,6.04-4.64,10.63-4.64,6.08,0,9.99,3.08,9.99,8.03,0,2.72-.76,5.2-4.64,8.83l-7.47,7.11h13.19Z"/>
+        <path class="cls-4" d="M529.31,644.49h12.23c9.07,0,15.27,5.6,15.27,13.99s-6.2,13.99-15.27,13.99h-12.23v-27.98ZM541.31,668.07c6.23,0,10.27-3.8,10.27-9.59s-4.04-9.59-10.27-9.59h-6.79v19.19h6.79Z"/>
+        <path class="cls-4" d="M566.32,644.49h5.2v27.98h-5.2v-27.98Z"/>
+        <path class="cls-4" d="M601.2,665.99h-13.99l-2.76,6.48h-5.36l12.59-27.98h5.12l12.63,27.98h-5.44l-2.8-6.48ZM599.49,661.92l-5.28-12.23-5.24,12.23h10.51Z"/>
+        <path class="cls-4" d="M641.84,664.87c0,4.8-3.76,7.59-10.95,7.59h-13.91v-27.98h13.11c6.71,0,10.31,2.84,10.31,7.27,0,2.88-1.44,5-3.6,6.16,3,.96,5.04,3.32,5.04,6.95ZM622.18,648.57v7.71h7.35c3.6,0,5.64-1.28,5.64-3.84s-2.04-3.88-5.64-3.88h-7.35ZM636.61,664.35c0-2.8-2.12-4.04-6.03-4.04h-8.39v8.07h8.39c3.92,0,6.03-1.24,6.03-4.04Z"/>
+        <path class="cls-4" d="M672.37,668.11v4.36h-20.98v-27.98h20.42v4.36h-15.23v7.28h13.51v4.28h-13.51v7.71h15.79Z"/>
+        <path class="cls-4" d="M687.83,648.89h-9.27v-4.4h23.74v4.4h-9.27v23.58h-5.2v-23.58Z"/>
+        <path class="cls-4" d="M731.19,668.11v4.36h-20.98v-27.98h20.42v4.36h-15.23v7.28h13.51v4.28h-13.51v7.71h15.79Z"/>
+        <path class="cls-4" d="M738.62,669.51l1.8-4.04c2.24,1.8,5.8,3.08,9.23,3.08,4.36,0,6.2-1.56,6.2-3.64,0-6.04-16.63-2.08-16.63-12.47,0-4.52,3.6-8.35,11.27-8.35,3.36,0,6.87.88,9.31,2.48l-1.64,4.04c-2.52-1.48-5.27-2.2-7.71-2.2-4.32,0-6.07,1.68-6.07,3.8,0,5.96,16.59,2.08,16.59,12.35,0,4.48-3.64,8.31-11.31,8.31-4.36,0-8.71-1.36-11.03-3.36Z"/>
+      </g>
+      <g>
+        <rect class="cls-3" x="771.87" y="657.39" width="57.18" height="2.17"/>
+        <rect class="cls-3" x="167.88" y="657.39" width="57.18" height="2.17"/>
+      </g>
+    </g>
+  </g>
+</svg>
+    <div class="sb-logo-sub">MCT2D Admin Portal</div>
   </div>
 
   <!-- Command search -->
@@ -1202,20 +1443,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <i class="ti ti-menu-2"></i>
       </button>
       <div>
-        <div class="tb-org">Midwest Health Partners</div>
+        <div class="tb-org">Michigan Collaborative for Type 2 Diabetes</div>
         <div class="tb-title" id="page-title">MCT2D Participation Management Center</div>
-        <div class="tb-coord">Coordinating 9 PCP practices · 2 endocrinology · 2 nephrology</div>
       </div>
     </div>
     <div class="tb-right">
-      <div class="tb-stat">
-        <div class="tb-stat-lbl">PO scorecard progress
-          <span class="tip-anchor"><i class="tip-icon ti-white" tabindex="0" onmouseenter="st('t-pos')" onmouseleave="ht('t-pos')" onfocus="st('t-pos')" onblur="ht('t-pos')">?</i>
-          <div class="tooltip tr" id="t-pos"><div class="tip-ttl">PO scorecard score</div>Your PO's current total across 7 weighted measures (max 100 pts). Updated as activities are verified by MCT2D.</div></span>
-        </div>
-        <div class="tb-stat-val" id="hdr-score">39<span style="font-size:13px;opacity:.55">/100</span></div>
-      </div>
-      <div class="tb-div"></div>
       <div class="tb-stat">
         <div class="tb-stat-lbl">VBR year ends</div>
         <div class="tb-stat-val" style="font-size:15px;padding-top:2px">Jul 1, 2026</div>
@@ -1224,13 +1456,19 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
     </div>
   </div>
 
+  <!-- Breadcrumb bar — hidden on home, shown on all other pages -->
+  <div class="breadcrumb-bar" id="breadcrumb-bar" style="display:none">
+    <div class="bc-trail" id="bc-trail"></div>
+  </div>
+
   <div class="content" id="main-content">
 
     <!-- HOME — MCT2D Participation Management Center -->
     <div class="view on" id="view-home">
 
-      <!-- ══ ZONE 1: Status Hero ══ -->
-      <div class="status-hero" id="status-hero">
+      <!-- ══ ZONE 1: PO Scorecard — unified navy block ══ -->
+      <div class="po-hero-block">
+        <div class="status-hero" id="status-hero">
         <!-- PO Score ring -->
         <div class="sh-score-block">
           <div class="sh-score-ring">
@@ -1250,171 +1488,156 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             <div class="sh-score-period">Sep 2025 – Jul 2026</div>
           </div>
         </div>
-
-        <div class="sh-divider"></div>
-
-        <!-- Key metrics -->
-        <div class="sh-metrics">
-          <div class="sh-metric">
-            <div class="sh-metric-val">9</div>
-            <div class="sh-metric-lbl">PCP practices</div>
-          </div>
-          <div class="sh-metric">
-            <div class="sh-metric-val" id="hero-open">15</div>
-            <div class="sh-metric-lbl">open tasks</div>
-          </div>
-          <div class="sh-metric">
-            <div class="sh-metric-val" style="color:#6de4e5">5</div>
-            <div class="sh-metric-lbl">completed<br>this month</div>
-          </div>
-          <div class="sh-metric">
-            <div class="sh-metric-val" style="color:#FAC775">3</div>
-            <div class="sh-metric-lbl">awaiting<br>credit</div>
-          </div>
-        </div>
-
-        <!-- VBR countdown -->
-        <div class="sh-vbr-block">
-          <div class="sh-vbr-days">56</div>
-          <div class="sh-vbr-label">days remaining</div>
-          <div class="sh-vbr-date">VBR year ends Jul 1, 2026</div>
-        </div>
       </div>
 
-      <!-- ══ ZONE 2: Participation tiles ══ -->
-      <div class="ptile-row" id="ptile-row">
-        <!-- Completed this VBR year — green signal -->
-        <div class="ptile">
-          <div class="ptile-accent ptile-accent-green"></div>
-          <div class="ptile-icon ptile-icon-green"><i class="ti ti-circle-check"></i></div>
-          <div class="ptile-val ptile-val-green">5</div>
-          <div class="ptile-label">Measures completed</div>
-          <div class="ptile-sub">out of 7 PO scorecard measures</div>
+      <!-- Participation overview tiles — inside the navy zone, below the hero bar -->
+      <div class="sh-tiles-row" id="ptile-row">
+        <div class="sh-tile clickable" onclick="nav('po-scorecard', document.getElementById('nav-po-sc'))">
+          <div class="sh-tile-icon sh-tile-green"><i class="ti ti-circle-check"></i></div>
+          <div class="sh-tile-body">
+            <div class="sh-tile-val sh-tile-val-green">5</div>
+            <div class="sh-tile-label">Measures completed</div>
+            <div class="sh-tile-sub">of 7 PO scorecard measures</div>
+          </div>
         </div>
-        <!-- Physicians incomplete — amber -->
-        <div class="ptile clickable" onclick="openPhysicianOverlay()">
-          <div class="ptile-accent ptile-accent-amber"></div>
-          <div class="ptile-icon ptile-icon-amber"><i class="ti ti-stethoscope"></i></div>
-          <div class="ptile-val ptile-val-amber">95</div>
-          <div class="ptile-label">PCP physicians incomplete</div>
-          <div class="ptile-sub">of 108 need LC activity</div>
+        <div class="sh-tile clickable" onclick="openPhysicianOverlay()">
+          <div class="sh-tile-icon sh-tile-amber"><i class="ti ti-stethoscope"></i></div>
+          <div class="sh-tile-body">
+            <div class="sh-tile-val sh-tile-val-amber">95</div>
+            <div class="sh-tile-label">PCP physicians incomplete</div>
+            <div class="sh-tile-sub">of 108 need LC activity</div>
+          </div>
         </div>
-        <!-- Practices at risk — orange -->
-        <div class="ptile clickable" onclick="nav('practice-scorecard', document.getElementById('nav-pcp-sc'))">
-          <div class="ptile-accent ptile-accent-orange"></div>
-          <div class="ptile-icon ptile-icon-orange"><i class="ti ti-alert-triangle"></i></div>
-          <div class="ptile-val ptile-val-orange">2</div>
-          <div class="ptile-label">Practices need attention</div>
-          <div class="ptile-sub">score &lt;55 · VBR at risk</div>
+        <div class="sh-tile clickable" onclick="nav('practice-scorecard', document.getElementById('nav-pcp-sc'))">
+          <div class="sh-tile-icon sh-tile-orange"><i class="ti ti-alert-triangle"></i></div>
+          <div class="sh-tile-body">
+            <div class="sh-tile-val sh-tile-val-orange">2</div>
+            <div class="sh-tile-label">Practices need attention</div>
+            <div class="sh-tile-sub">score &lt;55 · VBR at risk</div>
+          </div>
         </div>
-        <!-- Closing soon — blue urgency -->
-        <div class="ptile clickable" onclick="switchFeed('deadlines')">
-          <div class="ptile-accent ptile-accent-blue"></div>
-          <div class="ptile-icon ptile-icon-blue"><i class="ti ti-calendar-due"></i></div>
-          <div class="ptile-val ptile-val-blue" id="hero-closing">3</div>
-          <div class="ptile-label">Deadlines within 14 days</div>
-          <div class="ptile-sub">Jun 1 next · regional meeting</div>
+        <div class="sh-tile clickable" onclick="switchDfTab('deadlines')">
+          <div class="sh-tile-icon sh-tile-blue"><i class="ti ti-calendar-due"></i></div>
+          <div class="sh-tile-body">
+            <div class="sh-tile-val sh-tile-val-blue" id="hero-closing">3</div>
+            <div class="sh-tile-label">Deadlines within 14 days</div>
+            <div class="sh-tile-sub">Jun 1 next · regional meeting</div>
+          </div>
         </div>
-      </div>
+      </div><!-- /sh-tiles-row -->
+      </div><!-- /po-hero-block -->
 
-      <!-- ══ Quick links strip ══ -->
-      <div class="ql-strip" id="ql-strip">
-        <span class="ql-strip-label"><i class="ti ti-bookmark" aria-hidden="true"></i>Quick links</span>
-        <div class="ql-strip-chips" id="ql-strip-chips"><!-- rendered by JS --></div>
-        <button class="ql-strip-edit" id="ql-manage-btn" onclick="toggleManageLinks()">
-          <i class="ti ti-pencil" style="font-size:11px"></i>Edit
-        </button>
-      </div>
-      <!-- Quick link picker (edit mode) — still uses existing ql-wrap/ql-picker IDs -->
-      <div id="ql-wrap" style="display:none">
-        <div class="ql-grid" id="ql-grid"></div>
-        <div class="ql-picker" id="ql-picker" style="display:none">
-          <div class="ql-picker-label">Add a page to your quick links:</div>
-          <div class="ql-picker-grid" id="ql-picker-grid"></div>
+      <!-- ══ Quick links ══ -->
+      <div class="home-section" data-section="quick-links" id="hsec-quick-links">
+        <div class="hsec-drag-bar" draggable="true" data-section="quick-links">
+          <span class="hsec-title"><i class="ti ti-bookmark"></i>Quick Links</span>
+          <span class="hsec-drag-hint"><i class="ti ti-grip-horizontal"></i>Drag to rearrange</span>
         </div>
+        <div class="ql-strip" id="ql-strip">
+          <div class="ql-strip-chips" id="ql-strip-chips"></div>
+          <button class="ql-strip-edit" id="ql-manage-btn" onclick="toggleManageLinks()">
+            <i class="ti ti-pencil" style="font-size:11px"></i>Edit
+          </button>
+        </div>
+        <div id="ql-wrap" style="display:none">
+          <div class="ql-grid" id="ql-grid"></div>
+          <div class="ql-picker" id="ql-picker" style="display:none">
+            <div class="ql-picker-label">Add a page to your quick links:</div>
+            <div class="ql-picker-grid" id="ql-picker-grid"></div>
+          </div>
+        </div>
+        <span id="ql-hint" style="display:none"></span>
       </div>
-      <span id="ql-hint" style="display:none"></span>
 
       <!-- ══ ZONE 3: Workspace ══ -->
-      <div class="workspace">
+      <div class="workspace" id="home-workspace">
 
-        <!-- LEFT: Actions needed -->
-        <div>
-          <div class="zone-label"><i class="ti ti-alert-circle"></i>Actions needed</div>
-          <div class="an-panel">
-            <div class="an-panel-hdr">
-              <div class="an-panel-title"><i class="ti ti-alert-circle"></i>ACTIONS NEEDED</div>
-              <span class="an-total-count" id="action-count"></span>
+        <!-- LEFT col wrapper -->
+        <div id="workspace-left">
+          <!-- Actions Needed -->
+          <div class="home-section" data-section="actions-needed" id="hsec-actions-needed">
+            <div class="hsec-drag-bar" draggable="true" data-section="actions-needed">
+              <span class="hsec-title"><i class="ti ti-alert-circle"></i>Actions Needed</span>
+              <span class="hsec-drag-hint"><i class="ti ti-grip-horizontal"></i>Drag to rearrange</span>
             </div>
-            <div class="an-tabs" role="tablist">
-              <button class="an-tab on" id="antab-access" onclick="switchActionTab('access')" role="tab" aria-selected="true" aria-controls="anpane-access">
-                <i class="ti ti-user-plus" style="color:var(--amber)"></i>
-                <span class="an-tab-label">Access</span>
-                <span class="an-tab-badge an-badge-amber" id="antbadge-access"></span>
-              </button>
-              <button class="an-tab" id="antab-po" onclick="switchActionTab('po')" role="tab" aria-selected="false" aria-controls="anpane-po">
-                <i class="ti ti-chart-bar" style="color:var(--navy)"></i>
-                <span class="an-tab-label">PO</span>
-                <span class="an-tab-badge an-badge-navy" id="antbadge-po"></span>
-              </button>
-              <button class="an-tab" id="antab-pcp" onclick="switchActionTab('pcp')" role="tab" aria-selected="false" aria-controls="anpane-pcp">
-                <i class="ti ti-building-community" style="color:var(--teal)"></i>
-                <span class="an-tab-label">PCP</span>
-                <span class="an-tab-badge an-badge-teal" id="antbadge-pcp"></span>
-              </button>
-              <button class="an-tab" id="antab-endo" onclick="switchActionTab('endo')" role="tab" aria-selected="false" aria-controls="anpane-endo">
-                <i class="ti ti-stethoscope" style="color:#6D28D9"></i>
-                <span class="an-tab-label">Endo</span>
-                <span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span>
-              </button>
-              <button class="an-tab" id="antab-nephro" onclick="switchActionTab('nephro')" role="tab" aria-selected="false" aria-controls="anpane-nephro">
-                <i class="ti ti-droplet" style="color:#0369a1"></i>
-                <span class="an-tab-label">Nephro</span>
-                <span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span>
-              </button>
-            </div>
-            <div class="an-pane on" id="anpane-access" role="tabpanel"></div>
-            <div class="an-pane" id="anpane-po" role="tabpanel">
-              <div class="an-pane-subhdr an-subhdr-po">
-                <div class="an-subhdr-icon" id="sc-icon-po"></div>
-                <div><div class="an-subhdr-type">PO scorecard</div><div class="an-subhdr-name">2025–2026 Physician Organization scorecard · Sep 2025 – Jul 2026</div></div>
-                <span class="sc-section-count" id="sc-count-po"></span>
+            <div class="an-panel">
+              <div class="an-panel-hdr">
+                <div class="an-panel-title"><i class="ti ti-alert-circle"></i>ACTIONS NEEDED</div>
+                <span class="an-total-count" id="action-count"></span>
               </div>
-              <div id="sc-list-po"></div>
-            </div>
-            <div class="an-pane" id="anpane-pcp" role="tabpanel">
-              <div class="an-pane-subhdr an-subhdr-pcp">
-                <div class="an-subhdr-icon" id="sc-icon-pcp"></div>
-                <div><div class="an-subhdr-type">PCP practice scorecard</div><div class="an-subhdr-name">2025–2026 Primary care practice scorecard · Sep 2025 – Jul 2026</div></div>
-                <span class="sc-section-count" id="sc-count-pcp"></span>
+              <div class="an-tabs" role="tablist">
+                <button class="an-tab on" id="antab-po" onclick="switchActionTab('po')" role="tab" aria-selected="true" aria-controls="anpane-po">
+                  <i class="ti ti-chart-bar" style="color:var(--navy)"></i>
+                  <span class="an-tab-label">PO</span>
+                  <span class="an-tab-badge an-badge-navy" id="antbadge-po"></span>
+                </button>
+                <button class="an-tab" id="antab-pcp" onclick="switchActionTab('pcp')" role="tab" aria-selected="false" aria-controls="anpane-pcp">
+                  <i class="ti ti-building-community" style="color:var(--teal)"></i>
+                  <span class="an-tab-label">PCP</span>
+                  <span class="an-tab-badge an-badge-teal" id="antbadge-pcp"></span>
+                </button>
+                <button class="an-tab" id="antab-endo" onclick="switchActionTab('endo')" role="tab" aria-selected="false" aria-controls="anpane-endo">
+                  <i class="ti ti-stethoscope" style="color:#6D28D9"></i>
+                  <span class="an-tab-label">Endo</span>
+                  <span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span>
+                </button>
+                <button class="an-tab" id="antab-nephro" onclick="switchActionTab('nephro')" role="tab" aria-selected="false" aria-controls="anpane-nephro">
+                  <i class="ti ti-droplet" style="color:#0369a1"></i>
+                  <span class="an-tab-label">Nephro</span>
+                  <span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span>
+                </button>
+                <button class="an-tab" id="antab-access" onclick="switchActionTab('access')" role="tab" aria-selected="false" aria-controls="anpane-access">
+                  <i class="ti ti-user-plus" style="color:var(--amber)"></i>
+                  <span class="an-tab-label">Access</span>
+                  <span class="an-tab-badge an-badge-amber" id="antbadge-access"></span>
+                </button>
               </div>
-              <div id="sc-list-pcp"></div>
-            </div>
-            <div class="an-pane" id="anpane-endo" role="tabpanel">
-              <div class="an-pane-subhdr an-subhdr-endo">
-                <div class="an-subhdr-icon" id="sc-icon-endo"></div>
-                <div><div class="an-subhdr-type">Endocrinology SCP scorecard</div><div class="an-subhdr-name">2026–2027 Endocrinology specialty care practice scorecard · Mar 2026 – Dec 2026</div></div>
-                <span class="sc-section-count" id="sc-count-endo"></span>
+              <div class="an-pane" id="anpane-access" role="tabpanel"></div>
+              <div class="an-pane on" id="anpane-po" role="tabpanel">
+                <div class="an-pane-subhdr an-subhdr-po">
+                  <div class="an-subhdr-icon" id="sc-icon-po"></div>
+                  <div><div class="an-subhdr-type">PO scorecard</div><div class="an-subhdr-name">2025–2026 Physician Organization scorecard · Sep 2025 – Jul 2026</div></div>
+                  <span class="sc-section-count" id="sc-count-po"></span>
+                </div>
+                <div id="sc-list-po"></div>
               </div>
-              <div id="sc-list-endo"></div>
-            </div>
-            <div class="an-pane" id="anpane-nephro" role="tabpanel">
-              <div class="an-pane-subhdr an-subhdr-nephro">
-                <div class="an-subhdr-icon" id="sc-icon-nephro"></div>
-                <div><div class="an-subhdr-type">Nephrology SCP scorecard</div><div class="an-subhdr-name">2025–2026 Nephrology specialty care practice scorecard · Mar 2025 – Dec 2025</div></div>
-                <span class="sc-section-count" id="sc-count-nephro"></span>
+              <div class="an-pane" id="anpane-pcp" role="tabpanel">
+                <div class="an-pane-subhdr an-subhdr-pcp">
+                  <div class="an-subhdr-icon" id="sc-icon-pcp"></div>
+                  <div><div class="an-subhdr-type">PCP practice scorecard</div><div class="an-subhdr-name">2025–2026 Primary care practice scorecard · Sep 2025 – Jul 2026</div></div>
+                  <span class="sc-section-count" id="sc-count-pcp"></span>
+                </div>
+                <div id="sc-list-pcp"></div>
               </div>
-              <div id="sc-list-nephro"></div>
+              <div class="an-pane" id="anpane-endo" role="tabpanel">
+                <div class="an-pane-subhdr an-subhdr-endo">
+                  <div class="an-subhdr-icon" id="sc-icon-endo"></div>
+                  <div><div class="an-subhdr-type">Endocrinology SCP scorecard</div><div class="an-subhdr-name">2026–2027 Endocrinology specialty care practice scorecard · Mar 2026 – Dec 2026</div></div>
+                  <span class="sc-section-count" id="sc-count-endo"></span>
+                </div>
+                <div id="sc-list-endo"></div>
+              </div>
+              <div class="an-pane" id="anpane-nephro" role="tabpanel">
+                <div class="an-pane-subhdr an-subhdr-nephro">
+                  <div class="an-subhdr-icon" id="sc-icon-nephro"></div>
+                  <div><div class="an-subhdr-type">Nephrology SCP scorecard</div><div class="an-subhdr-name">2025–2026 Nephrology specialty care practice scorecard · Mar 2025 – Dec 2025</div></div>
+                  <span class="sc-section-count" id="sc-count-nephro"></span>
+                </div>
+                <div id="sc-list-nephro"></div>
+              </div>
             </div>
-          </div><!-- /an-panel -->
+          </div>
         </div>
 
-        <!-- RIGHT column -->
-        <div class="right-col">
+        <!-- RIGHT col wrapper -->
+        <div class="right-col" id="workspace-right">
 
-          <!-- Recently completed — restored -->
-          <div>
-            <div class="zone-label"><i class="ti ti-circle-check"></i>Recently completed</div>
+          <!-- Recently Completed -->
+          <div class="home-section" data-section="recently-completed" id="hsec-recently-completed">
+            <div class="hsec-drag-bar" draggable="true" data-section="recently-completed">
+              <span class="hsec-title"><i class="ti ti-circle-check"></i>Recently Completed</span>
+              <span class="hsec-drag-hint"><i class="ti ti-grip-horizontal"></i>Drag to rearrange</span>
+            </div>
             <div class="rc-panel">
               <div class="rc-hdr">
                 <div class="rc-hdr-left">
@@ -1429,17 +1652,23 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             </div>
           </div>
 
-          <!-- Awaiting credit -->
-          <div>
-            <div class="zone-label"><i class="ti ti-clock"></i>Awaiting credit confirmation</div>
+          <!-- Awaiting Credit -->
+          <div class="home-section" data-section="awaiting-credit" id="hsec-awaiting-credit">
+            <div class="hsec-drag-bar" draggable="true" data-section="awaiting-credit">
+              <span class="hsec-title"><i class="ti ti-clock"></i>Awaiting Credit Confirmation</span>
+              <span class="hsec-drag-hint"><i class="ti ti-grip-horizontal"></i>Drag to rearrange</span>
+            </div>
             <div class="sec-body" id="pending-list" style="margin-bottom:0;border-radius:var(--radius-lg)">
               <span id="pending-count" style="display:none"></span>
             </div>
           </div>
 
-          <!-- Deadlines & messages feed -->
-          <div>
-            <div class="zone-label"><i class="ti ti-calendar-due"></i>Deadlines &amp; updates</div>
+          <!-- Deadlines & Updates -->
+          <div class="home-section" data-section="deadlines-updates" id="hsec-deadlines-updates">
+            <div class="hsec-drag-bar" draggable="true" data-section="deadlines-updates">
+              <span class="hsec-title"><i class="ti ti-calendar-due"></i>Deadlines &amp; Updates</span>
+              <span class="hsec-drag-hint"><i class="ti ti-grip-horizontal"></i>Drag to rearrange</span>
+            </div>
             <div class="df-panel">
               <div class="df-tabs">
                 <button class="df-tab on" id="dftab-deadlines" onclick="switchDfTab('deadlines')"><i class="ti ti-calendar-due"></i>Deadlines</button>
@@ -1467,27 +1696,41 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
     <!-- PRACTICES -->
     <div class="view" id="view-practices">
-      <div class="stat-grid" id="all-stats"></div>
-      <div class="spec-tabs">
-        <button class="spec-tab on" onclick="setSpec('pcp',this)">Primary care <span class="spec-count" id="cnt-pcp"></span></button>
-        <button class="spec-tab" onclick="setSpec('endo',this)">Endocrinology <span class="spec-count" id="cnt-endo"></span></button>
-        <button class="spec-tab" onclick="setSpec('nephro',this)">Nephrology <span class="spec-count" id="cnt-nephro"></span></button>
+
+      <!-- Summary stats strip -->
+      <div class="stat-grid" id="all-stats" style="padding:16px 24px 0;background:#fff"></div>
+
+      <!-- Specialty tabs -->
+      <div style="padding:0 24px;background:#fff">
+        <div class="spec-tabs">
+          <button class="spec-tab on" onclick="setSpec('pcp',this)">Primary care <span class="spec-count" id="cnt-pcp"></span></button>
+          <button class="spec-tab" onclick="setSpec('endo',this)">Endocrinology <span class="spec-count" id="cnt-endo"></span></button>
+          <button class="spec-tab" onclick="setSpec('nephro',this)">Nephrology <span class="spec-count" id="cnt-nephro"></span></button>
+        </div>
       </div>
-      <div class="toolbar">
-        <div class="search-wrap"><i class="ti ti-search"></i><input class="search-input" type="text" placeholder="Search practices or champions…" id="search-input" oninput="renderTable()"></div>
+
+      <!-- Simplified toolbar: search + filter only -->
+      <div style="padding:12px 24px 8px;background:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--gray-200)">
+        <div class="search-wrap" style="max-width:280px">
+          <i class="ti ti-search"></i>
+          <input class="search-input" type="text" placeholder="Search practices or champions…" id="search-input" oninput="renderTable()">
+        </div>
         <div class="filter-row">
           <button class="pf-btn on" onclick="setPF('all',this)">All</button>
           <button class="pf-btn" onclick="setPF('risk',this)">Needs attention</button>
           <button class="pf-btn" onclick="setPF('track',this)">On track</button>
         </div>
-        <select class="sort-select" id="sort-sel" onchange="renderTable()">
+        <select class="sort-select" id="sort-sel" onchange="renderTable()" style="margin-left:auto">
+          <option value="score_asc">Sort: Needs attention first</option>
           <option value="name">Sort: Name A–Z</option>
-          <option value="score_asc">Sort: Score (low → high)</option>
-          <option value="score_desc">Sort: Score (high → low)</option>
+          <option value="score_desc">Sort: Highest score first</option>
         </select>
         <span class="result-count" id="result-count"></span>
       </div>
-      <div id="practice-table"></div>
+
+      <div style="padding:16px 24px;background:var(--gray-50);min-height:300px">
+        <div id="practice-table"></div>
+      </div>
     </div>
 
     <!-- PLACEHOLDER -->
@@ -1532,11 +1775,14 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="phys-scoring-hint">20 pts = 90–100% · 15 pts = 80–89% · 10 pts = 70–79% · 0 pts = &lt;70%</div>
     </div>
     <div class="phys-tabs">
-      <button class="phys-tab on" id="ptab-incomplete" onclick="switchPhysTab('incomplete')">
-        <i class="ti ti-clock"></i>Incomplete <span class="phys-tab-count" id="ptab-count-incomplete"></span>
+      <button class="phys-tab on" id="ptab-practices" onclick="switchPhysTab('practices')">
+        <i class="ti ti-building-community"></i>By practice <span class="phys-tab-count" id="ptab-count-practices"></span>
+      </button>
+      <button class="phys-tab" id="ptab-incomplete" onclick="switchPhysTab('incomplete')">
+        <i class="ti ti-clock"></i>All incomplete <span class="phys-tab-count" id="ptab-count-incomplete"></span>
       </button>
       <button class="phys-tab" id="ptab-complete" onclick="switchPhysTab('complete')">
-        <i class="ti ti-circle-check"></i>Completed <span class="phys-tab-count" id="ptab-count-complete"></span>
+        <i class="ti ti-circle-check"></i>All completed <span class="phys-tab-count" id="ptab-count-complete"></span>
       </button>
     </div>
     <div class="phys-toolbar">
@@ -1544,9 +1790,6 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <i class="ti ti-search"></i>
         <input class="phys-search-input" type="text" id="phys-search" placeholder="Search by name or practice…" oninput="renderPhysicianList()" autocomplete="off">
       </div>
-      <select class="phys-filter-sel" id="phys-filter-practice" onchange="renderPhysicianList()">
-        <option value="">All practices</option>
-      </select>
     </div>
     <div class="phys-list" id="phys-list"></div>
     <div class="phys-modal-footer">
@@ -1724,7 +1967,7 @@ const ACTION_GROUPS = [
         due:'2026-07-01', dueLabel:'Jul 1',
         incomplete:95, total:108,
         hint:'95 of 108 physicians still need to complete. Options: live webinar, recorded event, tool feedback, or CGM challenge.',
-        url:'https://portal.mct2d.org/portal/events/learning-community',
+        url:'__openPhysicianOverlay__',
         tip:{title:'Physician LC requirement (Measure 2)',body:'Scoring by completion rate: 20 pts = 90–100%, 15 pts = 80–89%, 10 pts = 70–79%, 0 pts = <70%. Physicians can: attend a live MCT2D webinar, watch a recording, submit tool feedback, or try a CGM.'},
       },
       {
@@ -1928,6 +2171,30 @@ function st(id){const e=document.getElementById(id);if(e)e.classList.add('vis');
 function ht(id){const e=document.getElementById(id);if(e)e.classList.remove('vis');}
 
 /* ══════════ NAVIGATION ══════════ */
+/* ══════════ BREADCRUMBS ══════════ */
+// Each breadcrumb item: { label, icon, onclick }
+function setBreadcrumb(crumbs) {
+  const bar = document.getElementById('breadcrumb-bar');
+  const trail = document.getElementById('bc-trail');
+  if (!bar || !trail) return;
+
+  if (!crumbs || crumbs.length === 0) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  bar.style.display = 'block';
+  trail.innerHTML = crumbs.map((c, i) => {
+    const isLast = i === crumbs.length - 1;
+    const sep = i > 0 ? '<span class="bc-sep"><i class="ti ti-chevron-right" style="font-size:12px"></i></span>' : '';
+    if (isLast) {
+      return `${sep}<span class="bc-current">${c.label}</span>`;
+    }
+    const click = c.onclick ? `onclick="${c.onclick}"` : '';
+    return `${sep}<a class="bc-link" ${click}>${c.icon ? `<i class="ti ${c.icon}"></i>` : ''}${c.label}</a>`;
+  }).join('');
+}
+
 const ALL_VIEWS = ['view-home','view-po','view-practices','view-placeholder'];
 
 function showView(id) {
@@ -1943,24 +2210,35 @@ function nav(page, el){
     document.getElementById('page-title').textContent = 'MCT2D Participation Management Center';
     const homeEl = document.getElementById('nav-home');
     if(homeEl) homeEl.classList.add('active');
+    setBreadcrumb([]); // no breadcrumb on home
     return;
   }
 
-  // PO and Practices scorecard pages — treated as full pages now
   if(page === 'po-scorecard'){
     showView('view-po');
     document.getElementById('page-title').textContent = 'PO scorecard 2025–2026';
     if(el) el.classList.add('active');
+    setBreadcrumb([
+      {label:'Home', icon:'ti-home', onclick:"nav('home',document.getElementById('nav-home'))"},
+      {label:'VBR & reports', icon:'ti-chart-bar', onclick:"sbToggleGroup('grp-vbr')"},
+      {label:'PO scorecard 2025–2026'},
+    ]);
     return;
   }
+
   if(page === 'practice-scorecard'){
     showView('view-practices');
     document.getElementById('page-title').textContent = 'Practice scorecards 2025–2026';
     if(el) el.classList.add('active');
+    setBreadcrumb([
+      {label:'Home', icon:'ti-home', onclick:"nav('home',document.getElementById('nav-home'))"},
+      {label:'VBR & reports', icon:'ti-chart-bar', onclick:"sbToggleGroup('grp-vbr')"},
+      {label:'Practice scorecards 2025–2026'},
+    ]);
     return;
   }
 
-  // All other pages — placeholder
+  // Placeholder pages — build breadcrumb from PH map section
   const info = PH[page] || {icon:'ti-file', title:page, url:'https://portal.mct2d.org/portal/', desc:'This page exists in the live portal.'};
   showView('view-placeholder');
   document.getElementById('ph-icon').className = 'ti ' + info.icon;
@@ -1969,10 +2247,54 @@ function nav(page, el){
   document.getElementById('ph-link').href = info.url;
   document.getElementById('ph-link').textContent = info.url.replace('https://','');
   document.getElementById('page-title').textContent = info.title;
+
+  // Determine which nav group this page lives in for breadcrumb
+  const sectionMap = buildSectionCrumb(page);
+  setBreadcrumb([
+    {label:'Home', icon:'ti-home', onclick:"nav('home',document.getElementById('nav-home'))"},
+    ...sectionMap,
+    {label: info.title},
+  ]);
+}
+
+// Map page keys to their sidebar section label for the breadcrumb middle crumb
+function buildSectionCrumb(page) {
+  const groups = {
+    'tasks':'My tasks & requirements', 'task-detail':'My tasks & requirements',
+    'recently-completed':'My tasks & requirements', 'awaiting-credit':'My tasks & requirements',
+    'requirement-options':'My tasks & requirements',
+    'practice-tasks':'Practice & PO coordination', 'missing-requirements':'Practice & PO coordination',
+    'physicians':'Practice & PO coordination', 'not-registered':'Practice & PO coordination',
+    'send-reminders':'Practice & PO coordination', 'pos':'Practice & PO coordination',
+    'lc':'Meetings & learning', 'events':'Meetings & learning', 'regional':'Meetings & learning',
+    'registrations':'Meetings & learning', 'attendance':'Meetings & learning', 'recordings':'Meetings & learning',
+    'vbr-metrics':'VBR & reports', 'po-reports':'VBR & reports', 'baseline-reports':'VBR & reports',
+    'practice-reports':'VBR & reports', 'report-schedule':'VBR & reports',
+    'a1c-data':'VBR & reports', 'uacr-data':'VBR & reports', 'cgm-baseline':'VBR & reports',
+    'data-sub':'VBR & reports', 'pro':'VBR & reports', 'scp25':'VBR & reports', 'scp26':'VBR & reports',
+    'people':'People & access', 'users':'People & access', 'pending':'People & access',
+    'roles':'People & access', 'add-person':'People & access', 'nonpart':'People & access',
+    'available-forms':'Surveys & forms', 'submitted-forms':'Surveys & forms',
+    'practice-forms':'Surveys & forms', 'physician-forms':'Surveys & forms', 'po-forms':'Surveys & forms',
+    'tool-review':'Surveys & forms', 'cgm':'Surveys & forms', 'progress-surveys':'Surveys & forms',
+    'best-practice':'Surveys & forms', 'case-summaries':'Surveys & forms',
+    'pcra':'Surveys & forms', 'feedback':'Surveys & forms', 'coverage':'Surveys & forms',
+    'quick-start':'Resources & support', 'resources':'Resources & support',
+    'faqs':'Resources & support', 'portal-updates':'Resources & support', 'support':'Resources & support',
+    'bps':'Resources & support', 'recruitment':'Resources & support', 'partnerships':'Resources & support',
+    'account':'Resources & support',
+    'printable-resources':'Print shop', 'start-order':'Print shop',
+    'checkout':'Print shop', 'order-history':'Print shop',
+    'admin-dashboard':'Admin tools', 'email-groups':'Admin tools',
+    'manage-learning':'Admin tools', 'imports':'Admin tools',
+    'exceptions':'Admin tools', 'duplicates':'Admin tools', 'audit-log':'Admin tools',
+  };
+  const section = groups[page];
+  if (!section) return [];
+  return [{label: section}];
 }
 
 function switchView(v){
-  // Legacy helper — maps old 'po' / 'practices' / 'home' keys to new nav calls
   if(v === 'po')        nav('po-scorecard', document.getElementById('nav-po-sc'));
   else if(v === 'practices') nav('practice-scorecard', document.getElementById('nav-pcp-sc'));
   else                  nav('home', document.getElementById('nav-home'));
@@ -2114,34 +2436,83 @@ function switchDfTab(tab){
     document.getElementById('dftab-'+t)?.classList.toggle('on',t===tab);
     document.getElementById('dfpane-'+t)?.classList.toggle('on',t===tab);
   });
-  // Also sync the old feed panel tabs if they exist
-  const oldTab=document.getElementById('fptab-'+tab);
-  if(oldTab) switchFeed(tab);
 }
 
-/* Render deadlines into the df-panel */
+/* Render directly into df-panel panes using existing data functions */
 function renderDfDeadlines(){
   const el=document.getElementById('dfpane-deadlines');
   if(!el||typeof DEADLINES==='undefined') return;
-  // reuse the existing renderDeadlines logic output
-  const pane=document.createElement('div');
-  pane.id='fpane-deadlines-tmp';
-  document.body.appendChild(pane);
-  const orig=document.getElementById('fpane-deadlines');
-  if(orig) el.innerHTML=orig.innerHTML;
-  pane.remove();
+  const now=TODAY;
+  const past=DEADLINES.filter(d=>new Date(d.date)<now).sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const upcoming=DEADLINES.filter(d=>new Date(d.date)>=now).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  function chipHtml(applies){
+    return applies.map(a=>{
+      const map={po:'PO scorecard',pcp:'PCP practices',endo:'Endocrinology',nephro:'Nephrology',all:'All participants'};
+      const cls={po:'dl-chip-po',pcp:'dl-chip-pcp',endo:'dl-chip-endo',nephro:'dl-chip-nephro',all:'dl-chip-all'};
+      return`<span class="dl-chip ${cls[a]}">${map[a]}</span>`;
+    }).join('');
+  }
+  function itemHtml(d){
+    const dt=new Date(d.date);
+    const days=Math.round((dt-now)/86400000);
+    const isPast=days<0;
+    const month=dt.toLocaleDateString('en-US',{month:'short'});
+    const day=dt.getDate();
+    const badgeCls=isPast?'dl-badge-past':days<=14?'dl-badge-urg':days<=60?'dl-badge-soon':'dl-badge-later';
+    const daysCls=isPast?'dl-days-past':days<=14?'dl-days-urg':days<=60?'dl-days-soon':'dl-days-later';
+    const daysLabel=isPast?`${Math.abs(days)}d ago`:days===0?'Today':`${days}d`;
+    return`<div class="dl-item">
+      <div class="dl-badge ${badgeCls}"><div class="dl-badge-month">${month}</div><div class="dl-badge-day">${day}</div></div>
+      <div class="dl-body">
+        <div class="dl-title">${d.label}</div>
+        <div class="dl-chips">${chipHtml(d.applies)}${d.pts?`<span class="dl-chip dl-chip-all">${d.pts}</span>`:''}</div>
+      </div>
+      <div class="dl-days ${daysCls}">${daysLabel}</div>
+    </div>`;
+  }
+  el.innerHTML=
+    `<div class="dl-section-lbl">Upcoming — ${upcoming.length} deadlines</div>`+
+    upcoming.map(itemHtml).join('')+
+    `<div class="dl-section-lbl">Past this VBR year</div>`+
+    past.map(itemHtml).join('');
 }
 
-/* Render messages/updates into df panes */
 function renderDfMessages(){
   const el=document.getElementById('dfpane-messages');
-  const orig=document.getElementById('fpane-messages');
-  if(el&&orig) el.innerHTML=orig.innerHTML;
+  if(!el||typeof MESSAGES==='undefined') return;
+  const tagCls={req:'mt-req',info:'mt-info',event:'mt-event'};
+  el.innerHTML=MESSAGES.map(m=>`
+    <div class="msg-item${m.unread?' unread':''}">
+      <div class="msg-row">
+        ${m.unread?'<div class="msg-unread-dot"></div>':'<div style="width:6px;flex-shrink:0"></div>'}
+        <div class="msg-body">
+          <div class="msg-from">${m.from}</div>
+          <div class="msg-subject">${m.subject}</div>
+          <div class="msg-preview">${m.preview}</div>
+          <span class="msg-tag ${tagCls[m.tag]}">${m.tagLabel}</span>
+        </div>
+        <div class="msg-date">${m.date}</div>
+      </div>
+    </div>`).join('');
 }
+
 function renderDfUpdates(){
   const el=document.getElementById('dfpane-updates');
-  const orig=document.getElementById('fpane-updates');
-  if(el&&orig) el.innerHTML=orig.innerHTML;
+  if(!el||typeof PORTAL_UPDATES==='undefined') return;
+  const iconCls={new:'upd-icon-new',fix:'upd-icon-fix',data:'upd-icon-data'};
+  const badgeCls={new:'ub-new',fix:'ub-fix',data:'ub-data'};
+  const badgeLabel={new:'New feature',fix:'Improvement',data:'Data refresh'};
+  el.innerHTML=PORTAL_UPDATES.map(u=>`
+    <div class="upd-item">
+      <div class="upd-row">
+        <div class="upd-icon ${iconCls[u.type]}"><i class="ti ${u.icon}"></i></div>
+        <div class="upd-body">
+          <div class="upd-title"><span class="upd-badge ${badgeCls[u.type]}">${badgeLabel[u.type]}</span>${u.title}</div>
+          <div class="upd-desc">${u.desc}</div>
+          <div class="upd-date">${u.date}</div>
+        </div>
+      </div>
+    </div>`).join('');
 }
 
 function copyLink(btn, text){
@@ -2185,7 +2556,10 @@ function renderActions(){
         ${group.type===SC_PCP?'<button class="ai-send-btn" onclick="event.stopPropagation()"><i class="ti ti-mail" aria-hidden="true"></i>Draft reminder</button>':''}
         ${hasProg&&a.incomplete>0?'<button class="ai-send-btn" onclick="event.stopPropagation()"><i class="ti ti-download" aria-hidden="true"></i>Export incomplete</button>':''}
       </div>`:'';
-      return`<div class="action-item${isDone?' ai-done':''}" onclick="if(event.target.closest('.tip-anchor,.ai-send-btn'))return;window.open('${a.url||'#'}','_blank')">
+      const clickAction = a.url === '__openPhysicianOverlay__'
+        ? 'openPhysicianOverlay()'
+        : `window.open('${a.url||'#'}','_blank')`;
+      return`<div class="action-item${isDone?' ai-done':''}" onclick="if(event.target.closest('.tip-anchor,.ai-send-btn'))return;${clickAction}">
         <div class="ai-accent ${isDone?'ac-done':acC(d)}"></div>
         <div class="ai-body">
           <div class="ai-title">${a.title}${tipH}</div>
@@ -2289,6 +2663,7 @@ function renderDeadlines() {
     </div>`;
   }
 
+  if(!pane) return;
   pane.innerHTML =
     `<div class="dl-section-lbl">Upcoming — ${upcoming.length} deadlines</div>` +
     upcoming.map(itemHtml).join('') +
@@ -2358,6 +2733,7 @@ const MESSAGES = [
 
 function renderMessages() {
   const pane = document.getElementById('fpane-messages');
+  if(!pane) return;
   const tagCls = {req:'mt-req', info:'mt-info', event:'mt-event'};
   pane.innerHTML = MESSAGES.map(m => `
     <div class="msg-item${m.unread?' unread':''}">
@@ -2428,6 +2804,7 @@ const PORTAL_UPDATES = [
 
 function renderUpdates() {
   const pane = document.getElementById('fpane-updates');
+  if(!pane) return;
   const iconCls = {new:'upd-icon-new', fix:'upd-icon-fix', data:'upd-icon-data'};
   const badgeCls = {new:'ub-new', fix:'ub-fix', data:'ub-data'};
   const badgeLabel = {new:'New feature', fix:'Improvement', data:'Data refresh'};
@@ -2490,30 +2867,49 @@ function setMS(i,v){mSc[i]=v;renderPOMeasures();updateHeader();}
 /* ══════════ PRACTICES ══════════ */
 let curSpec='pcp',curFilter='all',openRow=null;
 function specData(){return curSpec==='pcp'?PCP_D:curSpec==='endo'?ENDO_D:NEPHRO_D;}
+
 function renderAllStats(){
   const all=[...PCP_D,...ENDO_D,...NEPHRO_D];
   const pcts=all.map(p=>tot(p)/mxS(p)*100);
   const onT=pcts.filter(s=>s>=70).length;
   const atR=pcts.filter(s=>s<55).length;
   const avg=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length);
-  document.getElementById('all-stats').innerHTML=`
+  const statsEl=document.getElementById('all-stats');
+  if(!statsEl) return;
+  statsEl.innerHTML=`
     <div class="stat-card"><div class="sc-lbl">Total practices</div><div class="sc-val">${all.length}</div><div class="sc-sub">enrolled</div></div>
-    <div class="stat-card"><div class="sc-lbl">Primary care</div><div class="sc-val">${PCP_D.length}</div></div>
-    <div class="stat-card"><div class="sc-lbl">Endocrinology</div><div class="sc-val">${ENDO_D.length}</div></div>
-    <div class="stat-card"><div class="sc-lbl">Nephrology</div><div class="sc-val">${NEPHRO_D.length}</div></div>
     <div class="stat-card"><div class="sc-lbl">On track (≥70%)</div><div class="sc-val" style="color:var(--teal)">${onT}</div></div>
-    <div class="stat-card"><div class="sc-lbl">Needs attention</div><div class="sc-val" style="color:var(--amber)">${atR}</div></div>
-    <div class="stat-card"><div class="sc-lbl">Avg completion</div><div class="sc-val">${avg}<span style="font-size:11px;color:#9a9890">%</span></div></div>`;
-  document.getElementById('cnt-pcp').textContent=PCP_D.length;
-  document.getElementById('cnt-endo').textContent=ENDO_D.length;
-  document.getElementById('cnt-nephro').textContent=NEPHRO_D.length;
+    <div class="stat-card"><div class="sc-lbl">Needs attention</div><div class="sc-val" style="color:var(--amber)">${atR}</div><div class="sc-sub">score &lt;55</div></div>
+    <div class="stat-card"><div class="sc-lbl">Avg completion</div><div class="sc-val">${avg}<span style="font-size:13px;color:var(--gray-400)">%</span></div></div>`;
+  const cntPcp=document.getElementById('cnt-pcp');
+  const cntEndo=document.getElementById('cnt-endo');
+  const cntNephro=document.getElementById('cnt-nephro');
+  if(cntPcp) cntPcp.textContent=PCP_D.length;
+  if(cntEndo) cntEndo.textContent=ENDO_D.length;
+  if(cntNephro) cntNephro.textContent=NEPHRO_D.length;
 }
-function setSpec(s,btn){curSpec=s;openRow=null;document.querySelectorAll('.spec-tab').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('search-input').value='';renderTable();}
-function setPF(f,btn){curFilter=f;openRow=null;document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderTable();}
+
+function setSpec(s,btn){
+  curSpec=s;openRow=null;
+  document.querySelectorAll('.spec-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const si=document.getElementById('search-input');
+  if(si) si.value='';
+  renderTable();
+}
+function setPF(f,btn){
+  curFilter=f;openRow=null;
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderTable();
+}
+function toggleRow(key){openRow=openRow===key?null:key;renderTable();}
+
 function renderTable(){
   const data=specData();
-  const q=(document.getElementById('search-input').value||'').toLowerCase();
-  const sort=document.getElementById('sort-sel').value;
+  const q=(document.getElementById('search-input')?.value||'').toLowerCase();
+  const sort=document.getElementById('sort-sel')?.value||'score_asc';
+
   let rows=data.map((p,i)=>({...p,idx:i,t:tot(p),mx:mxS(p)}));
   rows=rows.filter(p=>{
     if(q&&!p.name.toLowerCase().includes(q)&&!p.champion.toLowerCase().includes(q)) return false;
@@ -2522,29 +2918,182 @@ function renderTable(){
     if(curFilter==='track') return pct>=70;
     return true;
   });
+
+  // Default sort: needs attention first (lowest %)
   if(sort==='score_asc') rows.sort((a,b)=>a.t/a.mx-b.t/b.mx);
   else if(sort==='score_desc') rows.sort((a,b)=>b.t/b.mx-a.t/a.mx);
   else rows.sort((a,b)=>a.name.localeCompare(b.name));
-  document.getElementById('result-count').textContent=`${rows.length} practice${rows.length!==1?'s':''}`;
-  if(!rows.length){document.getElementById('practice-table').innerHTML=`<div class="no-results"><i class="ti ti-search"></i>No practices match this filter</div>`;return;}
-  const gc='grid-'+curSpec;
-  const measures=rows[0].measures;
-  const thead=`<div class="prac-thead ${gc}"><div>Practice</div><div>Champion</div>${measures.map(m=>`<div style="text-align:center">${m.label}</div>`).join('')}<div style="text-align:center">Total</div><div style="text-align:right">VBR tier</div><div></div></div>`;
+
+  const rc=document.getElementById('result-count');
+  if(rc) rc.textContent=`${rows.length} practice${rows.length!==1?'s':''}`;
+
+  const container=document.getElementById('practice-table');
+  if(!container) return;
+
+  if(!rows.length){
+    container.innerHTML=`<div class="no-results"><i class="ti ti-search"></i>No practices match this filter</div>`;
+    return;
+  }
+
+  // Build simplified table
+  const header=`<div class="pt-header">
+    <div>Practice &amp; champion</div>
+    <div class="ph-status">Completion</div>
+    <div class="ph-score">Score</div>
+    <div class="ph-tier">VBR tier</div>
+    <div></div>
+  </div>`;
+
   const tbody=rows.map(p=>{
     const pct=Math.round(p.t/p.mx*100);
-    const tb=tBadge(p.t,p.mx);
-    const isOpen=openRow===p.idx+'_'+curSpec;
-    const sC=p.measures.map(m=>{const e=p.scores[m.key]||0;return`<div class="cell-score"><span class="score-pill ${spC(e,m.pts)}">${e}<span style="font-size:11px;opacity:.6">/${m.pts}</span></span></div>`;}).join('');
-    const dC=p.measures.map(m=>{const e=p.scores[m.key]||0;const p2=Math.round(e/m.pts*100);return`<div class="detail-mcard"><div class="dm-lbl"><i class="ti ti-chart-bar" style="font-size:11px"></i>${m.label}</div><div class="dm-val" style="color:${pCol(p2)}">${e}<span class="dm-max"> / ${m.pts} pts</span></div><div class="dm-bar"><div class="dm-fill" style="width:${p2}%;background:${pCol(p2)}"></div></div></div>`;}).join('');
     const key=p.idx+'_'+curSpec;
-    return`<div><div class="prac-row ${gc}${isOpen?' open':''}" onclick="toggleRow('${key}')"><div class="cell-name"><div class="prac-name">${p.name}</div></div><div class="cell-name"><div class="prac-champ">${p.champion}</div></div>${sC}<div class="cell-total"><div class="total-num" style="color:${pCol(pct)}">${p.t}</div><div class="total-pct">${pct}%</div></div><div class="cell-tier"><span class="tier-badge ${tb.cls}">${tb.txt}</span></div><div class="cell-chev"><i class="ti ti-chevron-down chev-r${isOpen?' open':''}"></i></div></div><div class="prac-detail${isOpen?' show':''}"><div class="detail-grid">${dC}</div></div></div>`;
+    const isOpen=openRow===key;
+    const barColor=pct>=85?'#1a9e50':pct>=70?'var(--teal)':pct>=55?'var(--amber)':'#bf5500';
+    const tb=tBadge(p.t,p.mx);
+    const tierCls={
+      '105% VBR':'pt-tier-105','103% VBR':'pt-tier-103','102% VBR':'pt-tier-102','At risk':'pt-tier-risk'
+    }[tb.txt]||'pt-tier-risk';
+
+    // Champion initials
+    const champParts=p.champion.replace(/^(Dr\.|NP|RN|PharmD)\s*/,'').split(' ');
+    const initials=(champParts[0]?.[0]||'')+(champParts[champParts.length-1]?.[0]||'');
+
+    // Generate open tasks for this practice
+    const openTasks=buildPracticeTasks(p, curSpec);
+    const hasOpenTasks=openTasks.some(t=>!t.done);
+
+    // Detail panel
+    const detailHtml=buildPracticeDetail(p, curSpec, p.champion, initials, openTasks);
+
+    return`<div class="pt-row${isOpen?' pt-open':''}" id="ptrow-${key}">
+      <div class="pt-summary" onclick="toggleRow('${key}')">
+        <div class="pt-name-block">
+          <div class="pt-name">${p.name}</div>
+          <div class="pt-champion">
+            <span class="pt-champion-icon">${initials}</span>
+            ${p.champion}
+            ${hasOpenTasks?`<span style="margin-left:4px;font-size:11px;font-weight:600;color:var(--amber)">· ${openTasks.filter(t=>!t.done).length} open task${openTasks.filter(t=>!t.done).length!==1?'s':''}</span>`:''}
+          </div>
+        </div>
+        <div class="pt-status-cell">
+          <div class="pt-status-label">
+            <span style="color:${barColor};font-weight:700">${pct}%</span>
+            <span style="font-size:11px;color:var(--gray-400)">${p.t}/${p.mx} pts</span>
+          </div>
+          <div class="pt-bar-track"><div class="pt-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+        </div>
+        <div class="pt-score-cell">
+          <span class="pt-score-num" style="color:${barColor}">${p.t}</span>
+          <span class="pt-score-max">/${p.mx}</span>
+        </div>
+        <div class="pt-tier-cell">
+          <span class="pt-tier ${tierCls}">${tb.txt}</span>
+        </div>
+        <div class="pt-chev"><i class="ti ti-chevron-down"></i></div>
+      </div>
+      <div class="pt-detail">
+        <div class="pt-detail-inner">${detailHtml}</div>
+      </div>
+    </div>`;
   }).join('');
-  document.getElementById('practice-table').innerHTML=`<div class="prac-table">${thead}${tbody}</div>`;
+
+  container.innerHTML=`<div class="prac-table">${header}${tbody}</div>`;
 }
-function toggleRow(key){openRow=openRow===key?null:key;renderTable();}
+
+/* Build open tasks for a practice based on its scores */
+function buildPracticeTasks(p, spec){
+  const tasks=[];
+  const practiceUrl='https://portal.mct2d.org/scorecard/practice/2025/pcp/';
+  if(spec==='pcp'){
+    const regionalDone=p.scores.regional>=25;
+    tasks.push({key:'regional',name:'Attend Spring 2026 regional meeting',done:regionalDone,pts:25,due:'Jun 1',dueColor:dU('2026-06-01')<=14?'var(--amber)':'var(--gray-600)',importance:'High',hint:regionalDone?null:'Clinical champion must register and attend.',url:'https://portal.mct2d.org/portal/registrations/spring-2026-regional-meeting-registration/'});
+    const physPct=Math.round(p.scores.phys_lc/25*100);
+    const physDone=p.scores.phys_lc>=20;
+    tasks.push({key:'phys_lc',name:'Physician level learning community requirement',done:physDone,pts:20,due:'Jul 1',dueColor:'var(--gray-600)',importance:'High',hint:physDone?null:`${physPct}% of physicians complete. Need ≥90% for full credit.`,url:'__openPhysicianOverlay__'});
+    const pracDone=p.scores.prac_lc>=25;
+    tasks.push({key:'prac_lc',name:'Practice level learning community requirement',done:pracDone,pts:25,due:'Jul 1',dueColor:'var(--gray-600)',importance:'High',hint:pracDone?null:'Options: site visit, user experience session, low-carb workshop.',url:'https://portal.mct2d.org/portal/events/learning-community'});
+    const a1cDone=p.scores.a1c>=20;
+    tasks.push({key:'a1c',name:'Meet HEDIS A1c performance target',done:a1cDone,pts:25,due:'Jul 1',dueColor:'var(--gray-600)',importance:'Medium',hint:a1cDone?null:'Target: 74.45% commercial / 91% Medicare.',url:'https://portal.mct2d.org/po-reports/a1c-data'});
+  } else if(spec==='endo'){
+    tasks.push({key:'regional',name:'Attend Spring 2026 regional meeting',done:p.scores.regional>=34,pts:34,due:'Jun 1',dueColor:dU('2026-06-01')<=14?'var(--amber)':'var(--gray-600)',importance:'High',hint:null,url:'https://portal.mct2d.org/portal/registrations/'});
+    tasks.push({key:'cgm',name:'Increase CGM billing (CPT 95251)',done:p.scores.cgm>=25,pts:33,due:'Aug 31',dueColor:'var(--gray-600)',importance:'Medium',hint:'Target: improve by 5% up to 89.59% benchmark.',url:'https://portal.mct2d.org/po-reports/endocrinology-cgm-baseline'});
+    tasks.push({key:'engagement',name:'Complete engagement activity',done:p.scores.engagement>=33,pts:33,due:'Dec 1',dueColor:'var(--gray-600)',importance:'Medium',hint:null,url:'https://portal.mct2d.org/portal/events/'});
+  } else {
+    tasks.push({key:'regional',name:'Attend Spring 2026 regional meeting',done:p.scores.regional>=34,pts:34,due:'Jun 1',dueColor:dU('2026-06-01')<=14?'var(--amber)':'var(--gray-600)',importance:'High',hint:null,url:'https://portal.mct2d.org/portal/registrations/'});
+    tasks.push({key:'uacr',name:'Complete uACR survey',done:p.scores.uacr>=20,pts:33,due:'Aug 1',dueColor:'var(--gray-600)',importance:'High',hint:'20 pts by Jul 1, 10 pts by Aug 1.',url:'https://portal.mct2d.org/portal/uacr-survey'});
+    tasks.push({key:'engagement',name:'Participate in engagement activity',done:p.scores.engagement>=33,pts:33,due:'Dec 1',dueColor:'var(--gray-600)',importance:'Medium',hint:null,url:'https://portal.mct2d.org/portal/events/'});
+  }
+  return tasks;
+}
+
+/* Build detail panel HTML */
+function buildPracticeDetail(p, spec, champion, initials, tasks){
+  const practiceUrl='https://portal.mct2d.org/scorecard/practice/2025/pcp/';
+  const openTasks=tasks.filter(t=>!t.done);
+  const doneTasks=tasks.filter(t=>t.done);
+
+  const contactBar=`<div class="pt-contact-bar">
+    <div class="pt-contact-left">
+      <div class="pt-contact-avatar">${initials}</div>
+      <div>
+        <div class="pt-contact-name">${champion}</div>
+        <div class="pt-contact-role">Clinical Champion · ${p.name}</div>
+      </div>
+    </div>
+    <div class="pt-contact-actions">
+      <button class="pt-contact-btn" onclick="event.stopPropagation()"><i class="ti ti-mail"></i>Email champion</button>
+      <button class="pt-contact-btn" onclick="event.stopPropagation();copyLink(this,'${practiceUrl}')"><i class="ti ti-link"></i>Copy scorecard link</button>
+      <a class="pt-contact-btn" href="${practiceUrl}" target="_blank" onclick="event.stopPropagation()"><i class="ti ti-external-link"></i>View full scorecard</a>
+    </div>
+  </div>`;
+
+  let tasksHtml='';
+  if(openTasks.length===0){
+    tasksHtml=`<div class="pt-all-done"><i class="ti ti-circle-check"></i>All tasks complete for this practice — ${doneTasks.length}/${tasks.length} measures done.</div>`;
+  } else {
+    const impColor={'High':'var(--amber)','Medium':'var(--teal)','Low':'var(--gray-400)'};
+    tasksHtml=`<div class="pt-tasks-label"><i class="ti ti-list-check"></i>Open tasks — ${openTasks.length} remaining</div>`;
+    tasksHtml+=openTasks.map(t=>{
+      const clickAction=t.url==='__openPhysicianOverlay__'?'openPhysicianOverlay()':t.url?`window.open('${t.url}','_blank')`:'';
+      return`<div class="pt-task-item" onclick="event.stopPropagation();${clickAction}">
+        <div class="pt-task-accent" style="background:${impColor[t.importance]||'var(--gray-200)'}"></div>
+        <div class="pt-task-body">
+          <div class="pt-task-name">${t.name}</div>
+          ${t.hint?`<div class="pt-task-meta">${t.hint}</div>`:''}
+          <div class="pt-task-help">
+            <button class="pt-help-btn" onclick="event.stopPropagation();copyLink(this,'${t.url&&t.url!=='__openPhysicianOverlay__'?t.url:'https://portal.mct2d.org/portal/events/learning-community'}')"><i class="ti ti-link"></i>Copy link</button>
+            <button class="pt-help-btn" onclick="event.stopPropagation()"><i class="ti ti-mail"></i>Send reminder</button>
+          </div>
+        </div>
+        <div class="pt-task-right">
+          <div class="pt-task-due" style="color:${t.dueColor}"><i class="ti ti-calendar" style="font-size:12px;margin-right:3px"></i>Due ${t.due}</div>
+          <div class="pt-task-pts">${t.pts} pts</div>
+          <div style="margin-top:4px"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:${t.importance==='High'?'var(--amber-lt)':'var(--teal-lt)'};color:${t.importance==='High'?'#7a4a0d':'#005c5d'};border:.5px solid ${t.importance==='High'?'var(--amber)':'var(--teal)'}">${t.importance} priority</span></div>
+        </div>
+      </div>`;
+    }).join('');
+
+    if(doneTasks.length>0){
+      tasksHtml+=`<div class="pt-tasks-label" style="margin-top:14px;color:var(--teal)"><i class="ti ti-circle-check"></i>Completed — ${doneTasks.length}</div>`;
+      tasksHtml+=doneTasks.map(t=>`
+        <div class="pt-task-item" style="opacity:.65;cursor:default" onclick="event.stopPropagation()">
+          <div class="pt-task-accent" style="background:var(--teal)"></div>
+          <div class="pt-task-body">
+            <div class="pt-task-name" style="color:var(--gray-600)">${t.name}</div>
+          </div>
+          <div class="pt-task-right">
+            <span style="font-size:12px;font-weight:600;color:#005c5d;background:var(--teal-lt);padding:2px 8px;border-radius:20px;border:.5px solid var(--teal)">✓ Complete</span>
+            <div class="pt-task-pts">${t.pts} pts</div>
+          </div>
+        </div>`).join('');
+    }
+  }
+
+  return contactBar+tasksHtml;
+}
 
 /* ══════════ ACTIONS NEEDED TABS ══════════ */
-const AN_TABS = ['access','po','pcp','endo','nephro'];
+const AN_TABS = ['po','pcp','endo','nephro','access'];
 
 function switchActionTab(tab) {
   AN_TABS.forEach(t => {
@@ -2856,9 +3405,9 @@ function sbNav(page, el) {
 
   // Route
   if (page === 'home') {
-    showDash(); switchView('home');
+    nav('home', el);
   } else if (page === 'dashboard') {
-    showDash();
+    nav('home', el);
   } else {
     nav(page, el);
   }
@@ -3137,16 +3686,11 @@ function buildPhysicianRoster() {
 }
 
 let PHYSICIAN_ROSTER = [];
-let physTab = 'incomplete'; // 'incomplete' | 'complete'
+let physTab = 'practices'; // 'practices' | 'incomplete' | 'complete'
+let expandedPractices = new Set(); // tracks which practice rows are open
 
 function openPhysicianOverlay() {
   if (!PHYSICIAN_ROSTER.length) PHYSICIAN_ROSTER = buildPhysicianRoster();
-
-  // Populate practice filter
-  const sel = document.getElementById('phys-filter-practice');
-  const practices = [...new Set(PHYSICIAN_ROSTER.map(p => p.practice))].sort();
-  sel.innerHTML = '<option value="">All practices</option>' +
-    practices.map(p => `<option value="${p}">${p}</option>`).join('');
 
   // Render LC activity options
   document.getElementById('phys-lc-options').innerHTML = LC_ACTIVITIES.map(a =>
@@ -3158,16 +3702,16 @@ function openPhysicianOverlay() {
   // Progress bar
   const complete = PHYSICIAN_ROSTER.filter(p => p.complete).length;
   const total = PHYSICIAN_ROSTER.length;
-  const pct = Math.round(complete/total*100);
+  const pct = Math.round(complete / total * 100);
   document.getElementById('phys-progress-frac').textContent = `${complete} / ${total} (${pct}%)`;
-  document.getElementById('phys-progress-fill').style.width = pct + '%';
-  // Color the bar by scoring tier
   const fill = document.getElementById('phys-progress-fill');
+  fill.style.width = pct + '%';
   fill.style.background = pct >= 90 ? 'var(--teal)' : pct >= 80 ? '#60b8b9' : pct >= 70 ? 'var(--amber)' : '#c0392b';
 
-  // Clear search
+  // Reset state
   document.getElementById('phys-search').value = '';
-  physTab = 'incomplete';
+  physTab = 'practices';
+  expandedPractices = new Set();
   renderPhysicianList();
 
   document.getElementById('phys-overlay').classList.add('open');
@@ -3181,32 +3725,130 @@ function closePhysicianOverlay() {
 
 function switchPhysTab(tab) {
   physTab = tab;
-  document.getElementById('ptab-incomplete').classList.toggle('on', tab === 'incomplete');
-  document.getElementById('ptab-complete').classList.toggle('on', tab === 'complete');
+  ['practices','incomplete','complete'].forEach(t => {
+    const el = document.getElementById('ptab-' + t);
+    if(el) el.classList.toggle('on', t === tab);
+  });
+  renderPhysicianList();
+}
+
+function togglePracticeRow(practiceName) {
+  if (expandedPractices.has(practiceName)) {
+    expandedPractices.delete(practiceName);
+  } else {
+    expandedPractices.add(practiceName);
+  }
   renderPhysicianList();
 }
 
 function renderPhysicianList() {
   const q = (document.getElementById('phys-search').value || '').toLowerCase().trim();
-  const pracFilter = document.getElementById('phys-filter-practice').value;
+  const container = document.getElementById('phys-list');
 
-  let list = PHYSICIAN_ROSTER.filter(p => p.complete === (physTab === 'complete'));
-  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.practice.toLowerCase().includes(q));
-  if (pracFilter) list = list.filter(p => p.practice === pracFilter);
-
-  // Update tab counts (unfiltered)
   const incTotal = PHYSICIAN_ROSTER.filter(p => !p.complete).length;
   const comTotal = PHYSICIAN_ROSTER.filter(p => p.complete).length;
-  document.getElementById('ptab-count-incomplete').textContent = incTotal;
-  document.getElementById('ptab-count-complete').textContent = comTotal;
+  const pracTotal = [...new Set(PHYSICIAN_ROSTER.map(p => p.practice))].length;
 
-  const container = document.getElementById('phys-list');
+  // Update all tab counts
+  const countEls = {
+    practices: document.getElementById('ptab-count-practices'),
+    incomplete: document.getElementById('ptab-count-incomplete'),
+    complete:   document.getElementById('ptab-count-complete'),
+  };
+  if(countEls.practices) countEls.practices.textContent = pracTotal;
+  if(countEls.incomplete) countEls.incomplete.textContent = incTotal;
+  if(countEls.complete)   countEls.complete.textContent   = comTotal;
+
+  const practiceUrl = 'https://portal.mct2d.org/scorecard/practice/2025/pcp/';
+
+  // ── BY PRACTICE (default) ──────────────────────────────────────
+  if (physTab === 'practices') {
+    // Build practice summary objects
+    const practiceMap = {};
+    PHYSICIAN_ROSTER.forEach(p => {
+      if (!practiceMap[p.practice]) practiceMap[p.practice] = { name: p.practice, incomplete: [], complete: [] };
+      if (p.complete) practiceMap[p.practice].complete.push(p);
+      else practiceMap[p.practice].incomplete.push(p);
+    });
+
+    let practices = Object.values(practiceMap);
+
+    // Apply search filter
+    if (q) practices = practices.filter(pr =>
+      pr.name.toLowerCase().includes(q) ||
+      [...pr.incomplete, ...pr.complete].some(p => p.name.toLowerCase().includes(q))
+    );
+
+    // Sort by most incomplete physicians first
+    practices.sort((a, b) => b.incomplete.length - a.incomplete.length);
+
+    if (!practices.length) {
+      container.innerHTML = `<div class="phys-empty"><i class="ti ti-search"></i>No practices match this search</div>`;
+      return;
+    }
+
+    let html = '';
+    practices.forEach((pr, idx) => {
+      const total = pr.incomplete.length + pr.complete.length;
+      const pct = Math.round(pr.complete.length / total * 100);
+      const isExpanded = expandedPractices.has(pr.name);
+      const isUrgent = pr.incomplete.length >= 8;
+      const barColor = pct >= 90 ? 'var(--teal)' : pct >= 70 ? '#60b8b9' : pct >= 50 ? 'var(--amber)' : '#c0392b';
+
+      // Physician rows within this practice
+      const physRows = [
+        pr.incomplete.length > 0 ? `
+          <div class="psr-divider-label">
+            <i class="ti ti-clock" style="font-size:12px;color:var(--amber)"></i>
+            Not yet completed — ${pr.incomplete.length}
+          </div>
+          ${pr.incomplete.map(p => physRowHtml(p, practiceUrl)).join('')}` : '',
+        pr.complete.length > 0 ? `
+          <div class="psr-divider-label">
+            <i class="ti ti-circle-check" style="font-size:12px;color:var(--teal)"></i>
+            Completed — ${pr.complete.length}
+          </div>
+          ${pr.complete.map(p => physRowHtml(p, practiceUrl)).join('')}` : '',
+      ].join('');
+
+      html += `<div class="prac-summary-row${isExpanded?' expanded':''}">
+        <div class="psr-header" onclick="togglePracticeRow(${JSON.stringify(pr.name)})">
+          <div class="psr-rank${isUrgent?' psr-rank-urg':''}">${idx+1}</div>
+          <div class="psr-name">${pr.name}</div>
+          <div class="psr-stats">
+            <div class="psr-stat psr-stat-incomplete">
+              <div class="psr-stat-val">${pr.incomplete.length}</div>
+              <div class="psr-stat-lbl">incomplete</div>
+            </div>
+            <div class="psr-stat psr-stat-complete">
+              <div class="psr-stat-val">${pr.complete.length}</div>
+              <div class="psr-stat-lbl">completed</div>
+            </div>
+            <div class="psr-bar-wrap">
+              <div class="psr-bar-track"><div class="psr-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+              <div class="psr-pct">${pct}%</div>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down psr-chev"></i>
+        </div>
+        <div class="psr-physician-list">${physRows}</div>
+      </div>`;
+    });
+
+    container.innerHTML = html;
+    return;
+  }
+
+  // ── FLAT LISTS (all incomplete / all completed) ────────────────
+  let list = PHYSICIAN_ROSTER.filter(p => p.complete === (physTab === 'complete'));
+  if (q) list = list.filter(p => p.name.toLowerCase().includes(q) || p.practice.toLowerCase().includes(q));
+
   if (!list.length) {
     container.innerHTML = `<div class="phys-empty"><i class="ti ti-search"></i>No physicians match this filter</div>`;
     return;
   }
 
-  // Group by practice
+  // Group by practice alphabetically for flat views
   const byPractice = {};
   list.forEach(p => {
     if (!byPractice[p.practice]) byPractice[p.practice] = [];
@@ -3215,40 +3857,31 @@ function renderPhysicianList() {
 
   let html = '';
   Object.keys(byPractice).sort().forEach(prac => {
-    const physicians = byPractice[prac];
-    html += `<div class="dl-section-lbl">${prac} — ${physicians.length} physician${physicians.length!==1?'s':''}</div>`;
-    html += physicians.map(p => {
-      const avCls = p.complete ? 'phys-av-complete' : 'phys-av-incomplete';
-      const badgeCls = p.complete ? 'psb-complete' : 'psb-incomplete';
-      const badgeLabel = p.complete ? '✓ Completed' : 'Incomplete';
-      const practiceUrl = 'https://portal.mct2d.org/scorecard/practice/2025/pcp/';
-      return `<div class="phys-row">
-        <div class="phys-avatar ${avCls}">${p.initials}</div>
-        <div class="phys-info">
-          <div class="phys-name">${p.name}</div>
-          <div class="phys-practice">
-            <a class="phys-practice-link" href="${practiceUrl}" target="_blank" rel="noopener">${p.practice}</a>
-          </div>
-          ${p.complete
-            ? `<div class="phys-completed-via"><i class="ti ti-circle-check" style="font-size:12px;margin-right:3px;color:var(--teal)"></i>${p.method}</div>`
-            : `<div class="phys-deadline"><i class="ti ti-calendar" style="font-size:12px;margin-right:3px"></i>Deadline: Jul 1, 2026</div>`
-          }
-        </div>
-        <div class="phys-status">
-          <div class="phys-status-badge ${badgeCls}">${badgeLabel}</div>
-          ${!p.complete ? `<div style="margin-top:5px;display:flex;flex-direction:column;gap:3px">
-            ${LC_ACTIVITIES.slice(0,2).map(a =>
-              `<a href="${a.url}" target="_blank" rel="noopener" style="font-size:12px;color:var(--teal);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:3px" title="${a.label}">
-                <i class="ti ${a.icon}" style="font-size:11px"></i>${a.label.split(' ').slice(0,3).join(' ')}…
-              </a>`
-            ).join('')}
-          </div>` : ''}
-        </div>
-      </div>`;
-    }).join('');
+    html += `<div class="dl-section-lbl">${prac} — ${byPractice[prac].length}</div>`;
+    html += byPractice[prac].map(p => physRowHtml(p, practiceUrl)).join('');
   });
 
   container.innerHTML = html;
+}
+
+function physRowHtml(p, practiceUrl) {
+  const avCls = p.complete ? 'phys-av-complete' : 'phys-av-incomplete';
+  const badgeCls = p.complete ? 'psb-complete' : 'psb-incomplete';
+  const badgeLabel = p.complete ? '✓ Completed' : 'Not yet';
+  return `<div class="psr-phys-row">
+    <div class="phys-avatar ${avCls}">${p.initials}</div>
+    <div class="phys-info" style="flex:1;min-width:0">
+      <div class="phys-name">${p.name}</div>
+      ${p.complete
+        ? `<div class="phys-completed-via"><i class="ti ti-circle-check" style="font-size:12px;margin-right:3px;color:var(--teal)"></i>${p.method}</div>`
+        : `<div class="phys-deadline"><i class="ti ti-calendar" style="font-size:12px;margin-right:3px"></i>Deadline: Jul 1, 2026</div>`
+      }
+    </div>
+    <div class="phys-status">
+      <div class="phys-status-badge ${badgeCls}">${badgeLabel}</div>
+      ${!p.complete ? `<a href="https://portal.mct2d.org/portal/events/learning-community" target="_blank" style="font-size:12px;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:3px;margin-top:4px;white-space:nowrap"><i class="ti ti-external-link" style="font-size:11px"></i>LC options</a>` : ''}
+    </div>
+  </div>`;
 }
 
 function exportIncomplete() {
@@ -3267,6 +3900,162 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePhysicianOverlay();
 });
 
+/* ══════════ HOME SECTION DRAG & DROP ══════════
+   Sections are draggable within their column context:
+   - "participation-overview" and "quick-links" live above the workspace (full-width)
+   - "actions-needed" lives in the left column
+   - "recently-completed", "awaiting-credit", "deadlines-updates" live in the right column
+   Users can drag sections within their column. Order persists via window.storage.
+═══════════════════════════════════════════════ */
+
+const SECTION_ORDER_KEY = 'home-section-order';
+
+// Default order per region
+const DEFAULT_ORDER = {
+  top:   ['participation-overview', 'quick-links'],
+  left:  ['actions-needed'],
+  right: ['recently-completed', 'awaiting-credit', 'deadlines-updates'],
+};
+
+// Map section → which region it belongs to
+const SECTION_REGION = {
+  'participation-overview': 'top',
+  'quick-links':            'top',
+  'actions-needed':         'left',
+  'recently-completed':     'right',
+  'awaiting-credit':        'right',
+  'deadlines-updates':      'right',
+};
+
+// Map region → parent container ID
+const REGION_CONTAINER = {
+  top:   'view-home',   // direct children of view-home before workspace
+  left:  'workspace-left',
+  right: 'workspace-right',
+};
+
+let dragSrcSection = null;
+
+function initDragAndDrop() {
+  document.querySelectorAll('.hsec-drag-bar').forEach(bar => {
+    bar.addEventListener('dragstart', onDragStart);
+    bar.addEventListener('dragend', onDragEnd);
+  });
+  document.querySelectorAll('.home-section').forEach(sec => {
+    sec.addEventListener('dragover', onDragOver);
+    sec.addEventListener('dragleave', onDragLeave);
+    sec.addEventListener('drop', onDrop);
+  });
+}
+
+function onDragStart(e) {
+  dragSrcSection = e.currentTarget.closest('.home-section');
+  dragSrcSection.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragSrcSection.dataset.section);
+}
+
+function onDragEnd(e) {
+  document.querySelectorAll('.home-section').forEach(s => {
+    s.classList.remove('dragging', 'drag-over');
+  });
+  dragSrcSection = null;
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const target = e.currentTarget;
+  if (target === dragSrcSection) return;
+  // Only allow drops within the same region
+  const srcRegion = SECTION_REGION[dragSrcSection?.dataset?.section];
+  const tgtRegion = SECTION_REGION[target.dataset.section];
+  if (srcRegion !== tgtRegion) return;
+  target.classList.add('drag-over');
+}
+
+function onDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function onDrop(e) {
+  e.preventDefault();
+  const target = e.currentTarget;
+  target.classList.remove('drag-over');
+  if (!dragSrcSection || target === dragSrcSection) return;
+
+  const srcRegion = SECTION_REGION[dragSrcSection.dataset.section];
+  const tgtRegion = SECTION_REGION[target.dataset.section];
+  if (srcRegion !== tgtRegion) return;
+
+  // Determine drop position (before or after target based on cursor)
+  const rect = target.getBoundingClientRect();
+  const midY = rect.top + rect.height / 2;
+  const insertBefore = e.clientY < midY;
+
+  const parent = target.parentElement;
+  if (insertBefore) {
+    parent.insertBefore(dragSrcSection, target);
+  } else {
+    parent.insertBefore(dragSrcSection, target.nextSibling);
+  }
+
+  saveSectionOrder();
+}
+
+async function saveSectionOrder() {
+  const order = {};
+  ['left','right'].forEach(region => {
+    const container = document.getElementById(REGION_CONTAINER[region]);
+    if (!container) return;
+    order[region] = [...container.querySelectorAll(':scope > .home-section')]
+      .map(s => s.dataset.section);
+  });
+  // Top region (above workspace)
+  const homeView = document.getElementById('view-home');
+  if (homeView) {
+    const topSections = [...homeView.querySelectorAll(':scope > .home-section')]
+      .map(s => s.dataset.section);
+    if (topSections.length) order.top = topSections;
+  }
+  try {
+    await window.storage.set(SECTION_ORDER_KEY, JSON.stringify(order));
+  } catch(e) {}
+}
+
+async function loadSectionOrder() {
+  try {
+    const res = await window.storage.get(SECTION_ORDER_KEY);
+    if (!res || !res.value) { initDragAndDrop(); return; }
+    const saved = JSON.parse(res.value);
+
+    // Re-order right column (most likely to be rearranged)
+    const rightContainer = document.getElementById('workspace-right');
+    if (rightContainer && saved.right) {
+      saved.right.forEach(id => {
+        const el = document.getElementById('hsec-' + id);
+        if (el && el.parentElement === rightContainer) {
+          rightContainer.appendChild(el);
+        }
+      });
+    }
+
+    // Re-order top sections
+    const homeView = document.getElementById('view-home');
+    if (homeView && saved.top) {
+      const workspace = document.getElementById('home-workspace');
+      saved.top.forEach(id => {
+        const el = document.getElementById('hsec-' + id);
+        if (el && workspace) {
+          homeView.insertBefore(el, workspace);
+        }
+      });
+    }
+  } catch(e) {}
+
+  initDragAndDrop();
+}
+
 /* ══════════ INIT ══════════ */
 renderCmdSummary();
 renderPendingList();
@@ -3275,11 +4064,11 @@ renderApprovals();
 renderActions();
 renderActionCount();
 renderFeed();renderDeadlines();renderMessages();renderUpdates();
-// Wire df-panel panes after feed panels are rendered
-setTimeout(()=>{renderDfDeadlines();renderDfMessages();renderDfUpdates();},0);
+renderDfDeadlines();renderDfMessages();renderDfUpdates();
 renderPOMeasures();renderAllStats();renderTable();
 qlLoad();
 recentLoad();
+loadSectionOrder();
 </script>
 </body>
 </html>
