@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCT2D Performance Measure Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root {
+  --navy: #253972;
+  --navy-lt: #eceef5;
+  --navy-mid: #3a518a;
+  --teal: #007475;
+  --teal-lt: #e0f5f5;
+  --amber: #9e5d15;
+  --amber-lt: #faf0e2;
+  --sky: #b9e2e3;
+  --gray-50: #f8f8f7;
+  --gray-100: #f0efec;
+  --gray-200: #e4e2dc;
+  --gray-400: #9a9890;
+  --gray-600: #6b6a64;
+  --gray-900: #1e1e1c;
+  --purple: #6D28D9;
+  --purple-lt: #f4f0fa;
+  --blue: #0369a1;
+  --blue-lt: #e0f2fe;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--gray-50); color: var(--gray-900); min-height: 100vh; }
+
+/* ── TOP NAV ── */
+.topnav {
+  background: var(--navy);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--teal);
+}
+.topnav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.topnav-logo-text { }
+.topnav-org { font-size: 11px; font-weight: 600; color: var(--sky); text-transform: uppercase; letter-spacing: .1em; }
+.topnav-name { font-size: 15px; font-weight: 700; color: #fff; }
+.topnav-links { display: flex; align-items: center; gap: 4px; }
+.topnav-link {
+  font-size: 13px; font-weight: 500; color: rgba(185,226,227,.75);
+  text-decoration: none; padding: 6px 12px; border-radius: var(--radius-md);
+  transition: all .13s; display: flex; align-items: center; gap: 5px;
+}
+.topnav-link:hover { background: rgba(255,255,255,.1); color: #fff; }
+.topnav-link.active { background: rgba(255,255,255,.12); color: #fff; }
+
+/* ── LAYOUT ── */
+.layout { display: flex; min-height: calc(100vh - 56px); }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 260px; flex-shrink: 0;
+  background: #fff; border-right: 1px solid var(--gray-200);
+  position: sticky; top: 56px; height: calc(100vh - 56px);
+  overflow-y: auto; padding: 16px 0;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+.sb-section-lbl {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--gray-400); padding: 12px 16px 6px; margin-top: 4px;
+}
+.sb-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px; font-size: 13px; font-weight: 400; color: var(--gray-600);
+  cursor: pointer; transition: all .12s; border-left: 2px solid transparent;
+  text-decoration: none;
+}
+.sb-item i { font-size: 15px; flex-shrink: 0; }
+.sb-item:hover { background: var(--gray-50); color: var(--navy); }
+.sb-item.active { background: var(--navy-lt); color: var(--navy); border-left-color: var(--navy); font-weight: 600; }
+.sb-item-badge {
+  margin-left: auto; font-size: 10px; font-weight: 600; padding: 1px 6px;
+  border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+}
+.badge-pcp { background: var(--teal-lt); color: var(--teal); border: .5px solid var(--teal); }
+.badge-nephro { background: var(--blue-lt); color: var(--blue); border: .5px solid var(--blue); }
+.badge-endo { background: var(--purple-lt); color: var(--purple); border: .5px solid var(--purple); }
+.sb-divider { height: 1px; background: var(--gray-100); margin: 8px 0; }
+
+/* ── MAIN CONTENT ── */
+.main { flex: 1; min-width: 0; padding: 0; }
+
+/* ── LIBRARY INDEX ── */
+.library-header {
+  background: var(--navy);
+  padding: 32px 40px;
+  border-bottom: 3px solid var(--teal);
+}
+.library-title { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -.01em; margin-bottom: 6px; }
+.library-sub { font-size: 15px; color: rgba(185,226,227,.75); line-height: 1.5; max-width: 640px; }
+.library-meta { margin-top: 16px; display: flex; gap: 20px; flex-wrap: wrap; }
+.library-meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(185,226,227,.65); }
+.library-meta-item i { font-size: 14px; }
+
+.library-body { padding: 32px 40px; }
+.library-section-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--gray-400); margin-bottom: 16px; display: flex; align-items: center; gap: 6px;
+}
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.doc-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+  padding: 20px; cursor: pointer; transition: all .15s; text-decoration: none;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.doc-card:hover { border-color: var(--navy); box-shadow: 0 3px 14px rgba(37,57,114,.12); transform: translateY(-1px); }
+.doc-card-top { display: flex; align-items: flex-start; gap: 12px; }
+.doc-card-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.doc-icon-pcp { background: var(--teal-lt); color: var(--teal); }
+.doc-icon-nephro { background: var(--blue-lt); color: var(--blue); }
+.doc-icon-endo { background: var(--purple-lt); color: var(--purple); }
+.doc-icon-po { background: var(--navy-lt); color: var(--navy); }
+.doc-card-title { font-size: 15px; font-weight: 600; color: var(--gray-900); line-height: 1.35; }
+.doc-card-specialty { font-size: 12px; font-weight: 600; margin-top: 2px; }
+.doc-card-specialty-pcp { color: var(--teal); }
+.doc-card-specialty-nephro { color: var(--blue); }
+.doc-card-specialty-endo { color: var(--purple); }
+.doc-card-body { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+.doc-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.doc-card-version {
+  font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px;
+  background: var(--gray-100); color: var(--gray-600);
+}
+.doc-card-arrow { font-size: 16px; color: var(--gray-400); }
+.doc-card:hover .doc-card-arrow { color: var(--navy); }
+.doc-card-period { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+
+/* ── MEASURE DETAIL PAGE ── */
+.measure-page { display: none; }
+.measure-page.active { display: block; }
+
+.measure-header {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.measure-breadcrumb {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 13px; color: var(--gray-600); margin-bottom: 16px;
+}
+.measure-breadcrumb a { color: var(--navy); text-decoration: none; font-weight: 500; cursor: pointer; }
+.measure-breadcrumb a:hover { text-decoration: underline; }
+.measure-breadcrumb i { font-size: 12px; color: var(--gray-400); }
+
+.measure-title-row { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.measure-icon {
+  width: 52px; height: 52px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0;
+}
+.measure-title-text { flex: 1; min-width: 0; }
+.measure-specialty-tag {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 6px; display: flex; align-items: center; gap: 5px;
+}
+.measure-title { font-size: 24px; font-weight: 700; color: var(--gray-900); line-height: 1.25; letter-spacing: -.01em; }
+.measure-period { font-size: 14px; color: var(--gray-600); margin-top: 4px; }
+.measure-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.measure-badge {
+  font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px;
+  display: flex; align-items: center; gap: 5px; white-space: nowrap;
+}
+.mb-outline { border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600); }
+.mb-teal { background: var(--teal-lt); color: var(--teal); border: .5px solid var(--teal); }
+.mb-amber { background: var(--amber-lt); color: var(--amber); border: .5px solid var(--amber); }
+.mb-navy { background: var(--navy-lt); color: var(--navy); border: .5px solid rgba(37,57,114,.3); }
+
+.measure-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.measure-btn {
+  font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600);
+  cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all .12s;
+  font-family: var(--font); text-decoration: none;
+}
+.measure-btn:hover { border-color: var(--navy); background: var(--navy-lt); color: var(--navy); }
+.measure-btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+.measure-btn-primary:hover { background: var(--navy-mid); }
+.measure-btn i { font-size: 15px; }
+
+/* Version bar */
+.version-bar {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 10px 40px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200);
+  font-size: 13px; color: var(--gray-600);
+}
+.version-item { display: flex; align-items: center; gap: 6px; }
+.version-item i { font-size: 14px; color: var(--gray-400); }
+.version-history-btn {
+  margin-left: auto; font-size: 12px; font-weight: 500; padding: 3px 10px;
+  border-radius: 20px; border: .5px solid var(--gray-200); background: #fff;
+  color: var(--gray-600); cursor: pointer; display: flex; align-items: center; gap: 4px;
+  font-family: var(--font); transition: all .12s;
+}
+.version-history-btn:hover { background: var(--navy-lt); color: var(--navy); border-color: rgba(37,57,114,.3); }
+
+/* Document body */
+.measure-body { display: flex; gap: 0; }
+.measure-content { flex: 1; min-width: 0; padding: 32px 40px; max-width: 820px; }
+.measure-toc { width: 220px; flex-shrink: 0; padding: 24px 20px; position: sticky; top: 100px; align-self: flex-start; }
+.toc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: 8px; }
+.toc-item { font-size: 13px; color: var(--gray-600); padding: 5px 0; cursor: pointer; transition: color .12s; display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.toc-item:hover { color: var(--navy); }
+.toc-item.active { color: var(--navy); font-weight: 600; }
+.toc-item i { font-size: 12px; opacity: 0; transition: opacity .12s; }
+.toc-item.active i { opacity: 1; }
+
+/* Content sections */
+.content-section { margin-bottom: 36px; scroll-margin-top: 80px; }
+.section-heading {
+  font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--gray-100);
+}
+.section-heading i { font-size: 18px; }
+.section-heading-icon-pcp { color: var(--teal); }
+.section-heading-icon-nephro { color: var(--blue); }
+.section-heading-icon-endo { color: var(--purple); }
+.section-heading-icon-po { color: var(--navy); }
+
+.section-body { font-size: 15px; line-height: 1.7; color: var(--gray-900); margin-top: 14px; }
+.section-body p { margin-bottom: 12px; }
+.section-body p:last-child { margin-bottom: 0; }
+.section-body ul, .section-body ol { padding-left: 20px; margin-bottom: 12px; }
+.section-body li { margin-bottom: 6px; line-height: 1.65; }
+.section-body strong { font-weight: 600; }
+
+/* Callout boxes */
+.callout {
+  border-radius: var(--radius-md); padding: 14px 16px; margin: 16px 0; display: flex; gap: 12px;
+}
+.callout i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-body { flex: 1; min-width: 0; font-size: 14px; line-height: 1.6; }
+.callout-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.callout-info { background: var(--navy-lt); border-left: 3px solid var(--navy); }
+.callout-info i { color: var(--navy); }
+.callout-info .callout-title { color: var(--navy); }
+.callout-warn { background: var(--amber-lt); border-left: 3px solid var(--amber); }
+.callout-warn i { color: var(--amber); }
+.callout-warn .callout-title { color: #7a4a0d; }
+.callout-tip { background: var(--teal-lt); border-left: 3px solid var(--teal); }
+.callout-tip i { color: var(--teal); }
+.callout-tip .callout-title { color: #005c5d; }
+
+/* Data table */
+.measure-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+.measure-table th { background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.measure-table td { padding: 10px 14px; border-bottom: .5px solid var(--gray-200); vertical-align: top; color: var(--gray-900); }
+.measure-table tr:hover td { background: var(--gray-50); }
+
+/* Scoring tiers */
+.scoring-tiers { display: flex; gap: 0; margin: 16px 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--gray-200); }
+.tier { flex: 1; padding: 14px 16px; text-align: center; border-right: 1px solid var(--gray-200); }
+.tier:last-child { border-right: none; }
+.tier-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+.tier-range { font-size: 20px; font-weight: 800; line-height: 1; letter-spacing: -.01em; margin-bottom: 4px; }
+.tier-desc { font-size: 12px; color: var(--gray-600); }
+.tier-102 { background: var(--amber-lt); }
+.tier-102 .tier-range { color: var(--amber); }
+.tier-102 .tier-label { color: #7a4a0d; }
+.tier-103 { background: var(--teal-lt); }
+.tier-103 .tier-range { color: var(--teal); }
+.tier-103 .tier-label { color: #005c5d; }
+.tier-105 { background: #e7f7ef; }
+.tier-105 .tier-range { color: #1a9e50; }
+.tier-105 .tier-label { color: #1a6640; }
+
+/* Timeline */
+.timeline { margin: 16px 0; }
+.timeline-item { display: flex; align-items: flex-start; gap: 12px; padding-bottom: 16px; position: relative; }
+.timeline-item::before { content: ''; position: absolute; left: 19px; top: 28px; bottom: 0; width: 1px; background: var(--gray-200); }
+.timeline-item:last-child::before { display: none; }
+.timeline-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 4px; border: 2px solid #fff; outline: 1px solid var(--teal); }
+.timeline-dot-past { background: var(--gray-400); outline-color: var(--gray-400); }
+.timeline-dot-future { background: #fff; outline: 2px solid var(--teal); }
+.timeline-body { flex: 1; }
+.timeline-date { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.timeline-label { font-size: 14px; color: var(--gray-900); }
+.timeline-sub { font-size: 13px; color: var(--gray-600); margin-top: 2px; }
+
+/* Version history panel */
+.version-panel {
+  display: none; padding: 16px 40px; background: var(--navy-lt);
+  border-bottom: 1px solid var(--gray-200);
+}
+.version-panel.open { display: block; }
+.version-entry { display: flex; gap: 16px; padding: 10px 0; border-bottom: .5px solid var(--gray-200); font-size: 13px; }
+.version-entry:last-child { border-bottom: none; }
+.version-num { font-weight: 600; color: var(--navy); min-width: 80px; }
+.version-date { color: var(--gray-600); min-width: 100px; }
+.version-by { color: var(--gray-600); min-width: 160px; }
+.version-changes { color: var(--gray-900); flex: 1; }
+
+/* FAQ */
+.faq-item { border: 1px solid var(--gray-200); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; font-size: 15px; font-weight: 500; color: var(--gray-900); transition: background .12s; gap: 12px; }
+.faq-q:hover { background: var(--gray-50); }
+.faq-q i { font-size: 16px; color: var(--gray-400); flex-shrink: 0; transition: transform .2s; }
+.faq-item.open .faq-q i { transform: rotate(180deg); }
+.faq-a { display: none; padding: 0 16px 14px; font-size: 14px; color: var(--gray-600); line-height: 1.7; border-top: 1px solid var(--gray-100); padding-top: 14px; }
+.faq-item.open .faq-a { display: block; }
+
+/* Related docs */
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+.related-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+  padding: 14px; cursor: pointer; transition: all .12s; text-decoration: none;
+}
+.related-card:hover { border-color: var(--navy); background: var(--navy-lt); }
+.related-card-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; line-height: 1.35; }
+.related-card-sub { font-size: 12px; color: var(--gray-600); }
+
+/* Responsive */
+@media(max-width:900px){
+  .measure-toc { display: none; }
+  .measure-content { padding: 20px 20px; }
+  .library-body { padding: 20px; }
+  .library-header { padding: 24px 20px; }
+  .measure-header { padding: 20px; }
+  .version-bar { padding: 10px 20px; }
+}
+@media(max-width:640px){
+  .sidebar { display: none; }
+  .layout { display: block; }
+  .doc-grid { grid-template-columns: 1fr; }
+  .scoring-tiers { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ── -->
+<nav class="topnav">
+  <div class="topnav-logo" onclick="showLibrary()">
+    <div class="topnav-logo-text">
+      <div class="topnav-org">Michigan Collaborative for Type 2 Diabetes</div>
+      <div class="topnav-name">MCT2D Performance Measure Library</div>
+    </div>
+  </div>
+  <div class="topnav-links">
+    <a class="topnav-link" href="https://www.mct2d.org/resource-library" target="_blank"><i class="ti ti-external-link"></i>mct2d.org</a>
+    <a class="topnav-link" href="https://portal.mct2d.org" target="_blank"><i class="ti ti-layout-dashboard"></i>Admin Portal</a>
+  </div>
+</nav>
+
+<!-- ── LAYOUT ── -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sb-section-lbl">Knowledge Base</div>
+    <a class="sb-item active" id="sb-library" onclick="showLibrary()">
+      <i class="ti ti-books"></i>All documents
+    </a>
+    <a class="sb-item" id="sb-overview" onclick="showDoc('overview')">
+      <i class="ti ti-layout-dashboard"></i>2025–2026 VBR overview
+    </a>
+
+    <div class="sb-divider"></div>
+    <div class="sb-section-lbl">Primary Care (PCP)</div>
+    <a class="sb-item" id="sb-a1c-yr2" onclick="showDoc('a1c-yr2')">
+      <i class="ti ti-chart-dots" style="color:var(--teal)"></i>
+      HbA1c — Year 2
+      <span class="sb-item-badge badge-pcp">PCP</span>
+    </a>
+    <a class="sb-item" id="sb-uacr-pcp" onclick="showDoc('uacr-pcp')">
+      <i class="ti ti-droplet" style="color:var(--teal)"></i>
+      uACR — Year 1
+      <span class="sb-item-badge badge-pcp">PCP</span>
+    </a>
+
+    <div class="sb-divider"></div>
+    <div class="sb-section-lbl">Nephrology</div>
+    <a class="sb-item" id="sb-uacr-nephro" onclick="showDoc('uacr-nephro')">
+      <i class="ti ti-droplet" style="color:var(--blue)"></i>
+      uACR — Year 1
+      <span class="sb-item-badge badge-nephro">Nephro</span>
+    </a>
+
+    <div class="sb-divider"></div>
+    <div class="sb-section-lbl">Endocrinology</div>
+    <a class="sb-item" id="sb-cgm-endo" onclick="showDoc('cgm-endo')">
+      <i class="ti ti-device-watch-heart" style="color:var(--purple)"></i>
+      CGM Interpretation — Year 1
+      <span class="sb-item-badge badge-endo">Endo</span>
+    </a>
+
+    <div class="sb-divider"></div>
+    <div class="sb-section-lbl">External links</div>
+    <a class="sb-item" href="https://www.mct2d.org/news/2025-2026-pcp-vbr-year" target="_blank">
+      <i class="ti ti-external-link"></i>Welcome to 2025–2026 VBR Year
+    </a>
+    <a class="sb-item" href="https://www.mct2d.org/news/new-2025-2026-pcp-performance-measure" target="_blank">
+      <i class="ti ti-external-link"></i>New 2025–2026 PCP uACR Measure
+    </a>
+    <a class="sb-item" href="https://michmed.org/dYXYq" target="_blank">
+      <i class="ti ti-external-link"></i>PCP Learning Community Options (PDF)
+    </a>
+    <a class="sb-item" href="https://portal.mct2d.org" target="_blank">
+      <i class="ti ti-layout-dashboard"></i>MCT2D Admin Portal
+    </a>
+  </nav>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- ════════ LIBRARY INDEX ════════ -->
+    <div id="page-library">
+
+      <div class="library-header">
+        <div class="library-title">Performance Measure Knowledge Base</div>
+        <div class="library-sub">Official MCT2D measure specifications and program overview for the 2025–2026 VBR year. 351 primary care practices enrolled. Each document includes eligible population criteria, goal rates, data definitions, timelines, and scoring tiers.</div>
+        <div class="library-meta">
+          <div class="library-meta-item"><i class="ti ti-calendar"></i>VBR Year: Sep 1, 2025 – Aug 31, 2026</div>
+          <div class="library-meta-item"><i class="ti ti-building-community"></i>351 enrolled PCP practices</div>
+          <div class="library-meta-item"><i class="ti ti-file-description"></i>4 performance measure documents</div>
+          <div class="library-meta-item"><i class="ti ti-refresh"></i>Most recent update: Feb 11, 2026</div>
+        </div>
+      </div>
+
+      <div class="library-body">
+
+        <div class="library-section-title"><i class="ti ti-layout-dashboard"></i>Program Overview</div>
+        <div class="doc-grid" style="margin-bottom:32px">
+          <div class="doc-card" onclick="showDoc('overview')" style="border-color:var(--navy);background:var(--navy-lt)">
+            <div class="doc-card-top">
+              <div class="doc-card-icon" style="background:var(--navy);color:#fff"><i class="ti ti-layout-dashboard"></i></div>
+              <div>
+                <div class="doc-card-specialty" style="color:var(--navy)">Program Guide</div>
+                <div class="doc-card-title">2025–2026 VBR Year Overview</div>
+                <div class="doc-card-period">All measures · PCP + Specialty Care</div>
+              </div>
+            </div>
+            <div class="doc-card-body">Summary of all 2025–2026 VBR performance measures, learning community options, reporting schedules, and MCT2D support resources. Start here.</div>
+            <div class="doc-card-footer">
+              <span class="doc-card-version">Sep 22, 2025</span>
+              <i class="ti ti-arrow-right doc-card-arrow"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="library-section-title"><i class="ti ti-building-community"></i>Primary Care (PCP) Measures</div>
+        <div class="doc-grid">
+
+          <div class="doc-card" onclick="showDoc('a1c-yr2')">
+            <div class="doc-card-top">
+              <div class="doc-card-icon doc-icon-pcp"><i class="ti ti-chart-dots"></i></div>
+              <div>
+                <div class="doc-card-specialty doc-card-specialty-pcp">Primary Care · Year 2</div>
+                <div class="doc-card-title">HbA1c Performance Measure</div>
+                <div class="doc-card-period">Jun 1, 2025 – Apr 30, 2026</div>
+              </div>
+            </div>
+            <div class="doc-card-body">A1c control targets for BCBSM/BCN patients with type 2 diabetes. Measures percent of patients with A1c &lt;8% (commercial) and ≤9% (Medicare) at the practice level.</div>
+            <div class="doc-card-footer">
+              <span class="doc-card-version">v02/11/2026</span>
+              <i class="ti ti-arrow-right doc-card-arrow"></i>
+            </div>
+          </div>
+
+          <div class="doc-card" onclick="showDoc('uacr-pcp')">
+            <div class="doc-card-top">
+              <div class="doc-card-icon doc-icon-pcp"><i class="ti ti-droplet"></i></div>
+              <div>
+                <div class="doc-card-specialty doc-card-specialty-pcp">Primary Care · Year 1</div>
+                <div class="doc-card-title">uACR Screening Performance Measure</div>
+                <div class="doc-card-period">Jul 1, 2025 – Aug 31, 2026</div>
+              </div>
+            </div>
+            <div class="doc-card-body">New measure for 2025–2026: urine albumin-creatinine ratio screening for eligible patients aged 18–85. Practice-level performance with a 10% absolute improvement goal.</div>
+            <div class="doc-card-footer">
+              <span class="doc-card-version">v12/18/2025</span>
+              <i class="ti ti-arrow-right doc-card-arrow"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="library-section-title"><i class="ti ti-stethoscope"></i>Specialty Care Measures</div>
+        <div class="doc-grid">
+
+          <div class="doc-card" onclick="showDoc('uacr-nephro')">
+            <div class="doc-card-top">
+              <div class="doc-card-icon doc-icon-nephro"><i class="ti ti-droplet"></i></div>
+              <div>
+                <div class="doc-card-specialty doc-card-specialty-nephro">Nephrology · Year 1</div>
+                <div class="doc-card-title">uACR Screening Performance Measure</div>
+                <div class="doc-card-period">Jul 1, 2025 – Aug 31, 2026</div>
+              </div>
+            </div>
+            <div class="doc-card-body">Nephrology-specific uACR screening measure for BCBSM patients attributed to MCT2D participating nephrology practices. Practice-level measurement with 10% improvement goal.</div>
+            <div class="doc-card-footer">
+              <span class="doc-card-version">v12/18/2025</span>
+              <i class="ti ti-arrow-right doc-card-arrow"></i>
+            </div>
+          </div>
+
+          <div class="doc-card" onclick="showDoc('cgm-endo')">
+            <div class="doc-card-top">
+              <div class="doc-card-icon doc-icon-endo"><i class="ti ti-device-watch-heart"></i></div>
+              <div>
+                <div class="doc-card-specialty doc-card-specialty-endo">Endocrinology · Year 1</div>
+                <div class="doc-card-title">CGM Interpretation Performance Measure</div>
+                <div class="doc-card-period">Jul 1, 2025 – Aug 31, 2026</div>
+              </div>
+            </div>
+            <div class="doc-card-body">Measures the percent of eligible endocrinology patients with a CGM device who receive at least one CPT 95251 (CGM data interpretation) billing claim during the 14-month intervention period.</div>
+            <div class="doc-card-footer">
+              <span class="doc-card-version">v12/18/2025</span>
+              <i class="ti ti-arrow-right doc-card-arrow"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="library-section-title"><i class="ti ti-chart-bar"></i>VBR Scoring Reference</div>
+        <div style="background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:32px">
+          <div style="font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:8px">2025–2026 VBR Scorecard Scoring Thresholds</div>
+          <div style="font-size:14px;color:var(--gray-600);margin-bottom:16px">All measures (participation + performance) combine into a single 100-point scorecard. VBR earnings are determined by total point threshold reached.</div>
+          <div class="scoring-tiers">
+            <div class="tier tier-102">
+              <div class="tier-label">102% VBR</div>
+              <div class="tier-range">55–69</div>
+              <div class="tier-desc">points</div>
+            </div>
+            <div class="tier tier-103">
+              <div class="tier-label">103% VBR</div>
+              <div class="tier-range">70–84</div>
+              <div class="tier-desc">points</div>
+            </div>
+            <div class="tier tier-105">
+              <div class="tier-label">105% VBR</div>
+              <div class="tier-range">85+</div>
+              <div class="tier-desc">points</div>
+            </div>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);margin-top:8px">Source: MCT2D Performance Measure documents (all specialties), 2025–2026</div>
+        </div>
+
+      </div>
+    </div><!-- /page-library -->
+
+    <!-- ════════ 2025–2026 VBR OVERVIEW ════════ -->
+    <div id="page-overview" class="measure-page">
+      <div class="measure-header">
+        <div class="measure-breadcrumb">
+          <a onclick="showLibrary()"><i class="ti ti-books"></i>Knowledge Base</a>
+          <i class="ti ti-chevron-right"></i>
+          <span>2025–2026 VBR Year Overview</span>
+        </div>
+        <div class="measure-title-row">
+          <div class="measure-icon" style="background:var(--navy);color:#fff"><i class="ti ti-layout-dashboard"></i></div>
+          <div class="measure-title-text">
+            <div class="measure-specialty-tag" style="color:var(--navy)"><i class="ti ti-building-community"></i>All Specialties — Program Guide</div>
+            <div class="measure-title">2025–2026 VBR Year Overview</div>
+            <div class="measure-period">VBR Year: Sep 1, 2025 – Jul 1, 2026 (PCP) &nbsp;·&nbsp; 351 enrolled primary care practices</div>
+          </div>
+        </div>
+        <div class="measure-badges">
+          <span class="measure-badge mb-teal"><i class="ti ti-building-community"></i>Primary Care</span>
+          <span class="measure-badge" style="background:var(--blue-lt);color:var(--blue);border:.5px solid var(--blue)"><i class="ti ti-stethoscope"></i>Nephrology</span>
+          <span class="measure-badge" style="background:var(--purple-lt);color:var(--purple);border:.5px solid var(--purple)"><i class="ti ti-device-watch-heart"></i>Endocrinology</span>
+        </div>
+        <div class="measure-actions">
+          <a class="measure-btn measure-btn-primary" href="https://www.mct2d.org/news/2025-2026-pcp-vbr-year" target="_blank"><i class="ti ti-external-link"></i>Read full web post</a>
+          <a class="measure-btn" href="https://www.mct2d.org/news/new-2025-2026-pcp-performance-measure" target="_blank"><i class="ti ti-external-link"></i>uACR announcement post</a>
+        </div>
+      </div>
+
+      <div class="version-bar">
+        <div class="version-item"><i class="ti ti-calendar"></i>Published: <strong>Sep 22, 2025</strong></div>
+        <div class="version-item"><i class="ti ti-user"></i>MCT2D Coordinating Center</div>
+        <div class="version-item"><i class="ti ti-mail"></i>ccteam@mct2d.org</div>
+      </div>
+
+      <div class="measure-body">
+        <div class="measure-content">
+
+          <div class="callout callout-info">
+            <i class="ti ti-confetti"></i>
+            <div class="callout-body">
+              <div class="callout-title">Welcome to the 2025–2026 PCP VBR Year</div>
+              MCT2D welcomes 351 primary care practices to the 2025–2026 PCP Value Based Reimbursement year, which launched September 1, 2025. This page summarizes all active performance measures, learning community options, reporting schedules, and available support.
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s1">
+            <div class="section-heading"><i class="ti ti-building-community" style="color:var(--teal)"></i>Primary Care (PCP) Performance Measures</div>
+            <div class="section-body">
+              <p>MCT2D is focusing on <strong>two primary care performance measures</strong> for the 2025–2026 VBR year:</p>
+            </div>
+
+            <!-- PCP measure cards -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px">
+              <div style="background:#fff;border:1px solid var(--gray-200);border-top:3px solid var(--teal);border-radius:var(--radius-lg);padding:18px;cursor:pointer" onclick="showDoc('uacr-pcp')">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal);margin-bottom:6px"><i class="ti ti-droplet"></i> uACR Screening — Year 1 · New</div>
+                <div style="font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:8px">PCP Practice-Level uACR Screening</div>
+                <div style="font-size:14px;color:var(--gray-600);line-height:1.6">Work toward a <strong>10% absolute improvement</strong> in uACR screening rates from the practice's baseline, up to a maximum goal of 90%.</div>
+                <div style="font-size:13px;color:var(--teal);margin-top:10px;font-weight:500">Jul 1, 2025 – Aug 31, 2026 · <a onclick="showDoc('uacr-pcp')" style="color:var(--teal);cursor:pointer">View full measure →</a></div>
+              </div>
+              <div style="background:#fff;border:1px solid var(--gray-200);border-top:3px solid var(--teal);border-radius:var(--radius-lg);padding:18px;cursor:pointer" onclick="showDoc('a1c-yr2')">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal);margin-bottom:6px"><i class="ti ti-chart-dots"></i> HbA1c — Year 2 · Continuing</div>
+                <div style="font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:8px">PCP Practice-Level A1c Control</div>
+                <div style="font-size:14px;color:var(--gray-600);line-height:1.6">Continuing for a second year. Target: <strong>74.45%</strong> of commercial patients A1c &lt;8%; <strong>91%</strong> of Medicare patients A1c ≤9%.</div>
+                <div style="font-size:13px;color:var(--teal);margin-top:10px;font-weight:500">Jun 1, 2025 – Apr 30, 2026 · <a onclick="showDoc('a1c-yr2')" style="color:var(--teal);cursor:pointer">View full measure →</a></div>
+              </div>
+            </div>
+
+            <div style="margin-top:20px">
+              <div style="font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:8px">PCP Reporting Schedule</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:14px">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:8px">uACR Reports</div>
+                  <div style="font-size:13px;color:var(--gray-900);line-height:1.8">Baseline · May 2025<br>November 2025<br>March 2026<br>August 2026<br><strong>Final · February 2027</strong></div>
+                </div>
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:14px">
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:8px">HbA1c Reports</div>
+                  <div style="font-size:13px;color:var(--gray-900);line-height:1.8">Baseline · Aug 2025<br>November 2025<br>February 2026<br><strong>Final · July 2026</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s2">
+            <div class="section-heading"><i class="ti ti-stethoscope" style="color:var(--blue)"></i>Specialty Care Program (SCP) Performance Measures</div>
+            <div class="section-body">
+              <p>Specialty care measurement period: <strong>Jul 1, 2025 – Aug 31, 2026</strong></p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px">
+              <div style="background:#fff;border:1px solid var(--gray-200);border-top:3px solid var(--blue);border-radius:var(--radius-lg);padding:18px;cursor:pointer" onclick="showDoc('uacr-nephro')">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--blue);margin-bottom:6px"><i class="ti ti-droplet"></i> Nephrology · Year 1</div>
+                <div style="font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:8px">Nephrology uACR Performance Measure</div>
+                <div style="font-size:14px;color:var(--gray-600);line-height:1.6"><strong>Focus:</strong> Ensure patients receive appropriate screening to detect early kidney disease.<br><strong>Goal:</strong> 5% absolute improvement from baseline, up to 90% maximum.</div>
+                <div style="font-size:13px;color:var(--blue);margin-top:10px;font-weight:500"><a onclick="showDoc('uacr-nephro')" style="color:var(--blue);cursor:pointer">View full measure →</a></div>
+              </div>
+              <div style="background:#fff;border:1px solid var(--gray-200);border-top:3px solid var(--purple);border-radius:var(--radius-lg);padding:18px;cursor:pointer" onclick="showDoc('cgm-endo')">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--purple);margin-bottom:6px"><i class="ti ti-device-watch-heart"></i> Endocrinology · Year 1</div>
+                <div style="font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:8px">Endocrinology CGM Interpretation Measure</div>
+                <div style="font-size:14px;color:var(--gray-600);line-height:1.6"><strong>Focus:</strong> Ensure CGM patients receive interpretation and guidance (CPT 95251).<br><strong>Goal:</strong> 5% improvement, up to 89.59% (collaborative 95th percentile).</div>
+                <div style="font-size:13px;color:var(--purple);margin-top:10px;font-weight:500"><a onclick="showDoc('cgm-endo')" style="color:var(--purple);cursor:pointer">View full measure →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s3">
+            <div class="section-heading"><i class="ti ti-school" style="color:var(--navy)"></i>Learning Community — PCP</div>
+            <div class="section-body">
+              <p>MCT2D has refreshed the Learning Community to make participation easier while staying aligned with workflows and shared goals. Options for 2025–2026:</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
+              <div style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:var(--radius-md);padding:16px">
+                <div style="font-size:13px;font-weight:700;color:#005c5d;margin-bottom:10px"><i class="ti ti-stethoscope"></i> Physician Level Options</div>
+                <ul style="font-size:14px;color:var(--gray-900);line-height:1.8;padding-left:18px">
+                  <li>Live webinars</li>
+                  <li>CGM trial</li>
+                  <li>Recorded sessions + quiz</li>
+                  <li>Tool feedback</li>
+                </ul>
+              </div>
+              <div style="background:var(--navy-lt);border:1px solid rgba(37,57,114,.2);border-radius:var(--radius-md);padding:16px">
+                <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px"><i class="ti ti-building-community"></i> Practice Level Options</div>
+                <ul style="font-size:14px;color:var(--gray-900);line-height:1.8;padding-left:18px">
+                  <li>Portal/website feedback</li>
+                  <li>Focus groups</li>
+                  <li>Motivational interviewing coaching/simulation</li>
+                  <li>uACR provider-facing tool feedback survey</li>
+                </ul>
+              </div>
+            </div>
+            <div class="callout callout-tip" style="margin-top:16px">
+              <i class="ti ti-star"></i>
+              <div class="callout-body">
+                <div class="callout-title">5-Point Extra Credit Opportunity</div>
+                Any practice with both physician-level <em>and</em> practice-level learning community requirements complete by <strong>January 1, 2026</strong> earns 5 bonus points on their VBR scorecard.
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <a class="measure-btn" href="https://michmed.org/dYXYq" target="_blank"><i class="ti ti-file-description"></i>Download: 2025–2026 PCP Learning Community Options (PDF)</a>
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s4">
+            <div class="section-heading"><i class="ti ti-heart-handshake" style="color:var(--navy)"></i>MCT2D Support for uACR</div>
+            <div class="section-body">
+              <p>MCT2D is committed to helping participating practices succeed in improving uACR screening rates. During the 2025–2026 performance year, the Coordinating Center offers:</p>
+              <ul>
+                <li><strong>Patient-facing materials</strong> — handouts and clinic posters highlighting the importance of uACR testing</li>
+                <li><strong>Individualized practice support</strong> — provided in partnership with the National Kidney Foundation of Michigan (NKFM)</li>
+                <li><strong>Best practice sharing</strong> — presentations from high-performing sites at MCT2D regional meetings</li>
+              </ul>
+              <p>Have an idea or suggestion? Contact the Coordinating Center at <a href="mailto:ccteam@mct2d.org" style="color:var(--teal)">ccteam@mct2d.org</a></p>
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s5">
+            <div class="section-heading"><i class="ti ti-droplet" style="color:var(--teal)"></i>Why uACR Matters</div>
+            <div class="section-body">
+              <p>MCT2D's new uACR screening measure focuses on a critical tool for the early detection of diabetic kidney disease, which affects nearly <strong>1 in 3 adults with type 2 diabetes</strong>. Detecting elevated uACR levels enables earlier intervention, slowing progression to end-stage kidney disease and reducing cardiovascular risk.</p>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px">
+                <div style="background:var(--teal-lt);border-radius:var(--radius-md);padding:14px;text-align:center">
+                  <div style="font-size:28px;font-weight:800;color:var(--teal);line-height:1">1 in 3</div>
+                  <div style="font-size:13px;color:#005c5d;margin-top:4px">adults with T2D affected by diabetic kidney disease</div>
+                </div>
+                <div style="background:var(--navy-lt);border-radius:var(--radius-md);padding:14px;text-align:center">
+                  <div style="font-size:28px;font-weight:800;color:var(--navy);line-height:1">10%</div>
+                  <div style="font-size:13px;color:var(--navy);margin-top:4px">absolute improvement goal for screening rates</div>
+                </div>
+                <div style="background:var(--amber-lt);border-radius:var(--radius-md);padding:14px;text-align:center">
+                  <div style="font-size:28px;font-weight:800;color:var(--amber);line-height:1">90%</div>
+                  <div style="font-size:13px;color:#7a4a0d;margin-top:4px">maximum goal rate target</div>
+                </div>
+              </div>
+            </div>
+            <div class="callout callout-info" style="margin-top:16px">
+              <i class="ti ti-info-circle"></i>
+              <div class="callout-body">
+                <div class="callout-title">How MCT2D's measure compares to HEDIS</div>
+                The MCT2D uACR measure closely aligns with the HEDIS Kidney Health Evaluation definition, with two differences: it focuses exclusively on adults with type 2 diabetes, and it does not include eGFR at this time (due to inconsistent eGFR reporting across data sources). This alignment reduces burden for practices participating in multiple programs.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section" id="ov-s6">
+            <div class="section-heading"><i class="ti ti-link" style="color:var(--navy)"></i>Quick Links</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">
+              <a class="measure-btn" href="https://portal.mct2d.org/portal/events/learning-community" target="_blank"><i class="ti ti-school"></i>Learning Community Webinars</a>
+              <a class="measure-btn" href="https://portal.mct2d.org" target="_blank"><i class="ti ti-layout-dashboard"></i>MCT2D Admin Portal</a>
+              <a class="measure-btn" href="https://michmed.org/yOwg6" target="_blank"><i class="ti ti-chart-bar"></i>Patient Data Dashboard</a>
+              <a class="measure-btn" href="https://michmed.org/dYXYq" target="_blank"><i class="ti ti-file-description"></i>PCP LC Options PDF</a>
+              <a class="measure-btn" href="https://www.mct2d.org/member-requirements" target="_blank"><i class="ti ti-list-check"></i>Member VBR Requirements</a>
+              <a class="measure-btn" href="mailto:ccteam@mct2d.org"><i class="ti ti-mail"></i>Email MCT2D CC</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="measure-toc">
+          <div class="toc-label">On this page</div>
+          <a class="toc-item" href="#ov-s1"><i class="ti ti-arrow-right"></i>PCP Measures</a>
+          <a class="toc-item" href="#ov-s2"><i class="ti ti-arrow-right"></i>Specialty Measures</a>
+          <a class="toc-item" href="#ov-s3"><i class="ti ti-arrow-right"></i>Learning Community</a>
+          <a class="toc-item" href="#ov-s4"><i class="ti ti-arrow-right"></i>MCT2D Support</a>
+          <a class="toc-item" href="#ov-s5"><i class="ti ti-arrow-right"></i>Why uACR Matters</a>
+          <a class="toc-item" href="#ov-s6"><i class="ti ti-arrow-right"></i>Quick Links</a>
+        </div>
+      </div>
+    </div><!-- /page-overview -->
+
+    <!-- ════════ A1C YEAR 2 ════════ -->
+    <div id="page-a1c-yr2" class="measure-page">
+
+      <div class="measure-header">
+        <div class="measure-breadcrumb">
+          <a onclick="showLibrary()"><i class="ti ti-books"></i>Knowledge Base</a>
+          <i class="ti ti-chevron-right"></i>
+          <span>Primary Care</span>
+          <i class="ti ti-chevron-right"></i>
+          <span>HbA1c Year 2</span>
+        </div>
+        <div class="measure-title-row">
+          <div class="measure-icon doc-icon-pcp"><i class="ti ti-chart-dots"></i></div>
+          <div class="measure-title-text">
+            <div class="measure-specialty-tag doc-card-specialty-pcp"><i class="ti ti-building-community"></i>Primary Care — Performance Measure</div>
+            <div class="measure-title">HbA1c Performance Measure — Year 2</div>
+            <div class="measure-period">Performance Period: Jun 1, 2025 – Apr 30, 2026 &nbsp;·&nbsp; VBR Reward Year: Sep 1, 2026 – Aug 31, 2027</div>
+          </div>
+        </div>
+        <div class="measure-badges">
+          <span class="measure-badge mb-teal"><i class="ti ti-building-community"></i>Primary Care</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-calendar"></i>Year 2 measure</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-chart-bar"></i>Practice-level measurement</span>
+          <span class="measure-badge mb-amber"><i class="ti ti-clock"></i>Active</span>
+        </div>
+        <div class="measure-actions">
+          <a class="measure-btn measure-btn-primary" href="https://www.mct2d.org/resource-library/mct2d-pcp-a1c-performance-measure-2025-2026" target="_blank"><i class="ti ti-external-link"></i>View on mct2d.org</a>
+          <a class="measure-btn" href="/mnt/user-data/uploads/MCT2D_A1C_Performance_Measure_Details__Year_2__updated_2-12-26_JR.pdf" target="_blank"><i class="ti ti-file-description"></i>Download PDF</a>
+        </div>
+      </div>
+
+      <div class="version-bar">
+        <div class="version-item"><i class="ti ti-history"></i>Current version: <strong>Feb 11, 2026</strong></div>
+        <div class="version-item"><i class="ti ti-user"></i>Updated by: MCT2D Coordinating Center (JR)</div>
+        <div class="version-item"><i class="ti ti-file"></i>Document ID: MCT2D-PM-A1C-Y2</div>
+        <button class="version-history-btn" onclick="toggleVersionHistory('a1c-yr2')"><i class="ti ti-history"></i>Version history</button>
+      </div>
+
+      <div class="version-panel" id="vp-a1c-yr2">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px">Version History</div>
+        <div class="version-entry">
+          <span class="version-num">v02/11/2026</span>
+          <span class="version-date">Feb 11, 2026</span>
+          <span class="version-by">MCT2D CC (JR)</span>
+          <span class="version-changes">Current version. FAQ section added. Clarification on age 75/76 drop-out logic for locked period.</span>
+        </div>
+        <div class="version-entry">
+          <span class="version-num">v09/2025</span>
+          <span class="version-date">Sep 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Initial Year 2 release. Added upper age limit &lt;76, commercial/Medicare delineation by age 65, removed aggregate groups, removed denominator lock until final 2 months.</span>
+        </div>
+      </div>
+
+      <div class="measure-body">
+        <div class="measure-content">
+
+          <div class="callout callout-info">
+            <i class="ti ti-info-circle"></i>
+            <div class="callout-body">
+              <div class="callout-title">Year 2 Changes from Year 1</div>
+              Added upper age limit of &lt;76 years; commercial/Medicare delineation by age 65 or BCBSM indicator; removal of aggregate groups; inclusion of POs with fewer than 100 eligible patients; denominator not locked until final 2 months; removed requirement to submit data dashboard dissemination plan or uncontrolled A1c forms.
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s1">
+            <div class="section-heading"><i class="ti ti-users section-heading-icon-pcp"></i>Eligible Population (Denominator)</div>
+            <div class="section-body">
+              <p>For all BCBSM/BCN/BCBS-MA/BCN-A patients attributed to an MCT2D participating primary care physician who are:</p>
+              <ul>
+                <li>Aged ≥18 and ≤75 (patients turn 76, they drop out of the measure)</li>
+                <li>Meet the MCT2D criteria for inclusion in the data registry</li>
+                <li>Have had at least one A1c record (clinical or claims) between the start of the lookback period (Jun 1, 2024) and the end of the performance period (Apr 30, 2026)</li>
+              </ul>
+              <p>Patients who are 75 years old will remain in the measure until they turn 76. During the two-month locked period, patients who will turn 76 before Apr 30, 2026 are proactively dropped.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s2">
+            <div class="section-heading"><i class="ti ti-coin section-heading-icon-pcp"></i>Reward Amount</div>
+            <div class="section-body">
+              <p>BCBSM uses a single scorecard adding up to 100 points, combining both performance and participation measures. VBR earnings are determined by the total points reached:</p>
+            </div>
+            <div class="scoring-tiers">
+              <div class="tier tier-102"><div class="tier-label">102% VBR</div><div class="tier-range">55–69</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-103"><div class="tier-label">103% VBR</div><div class="tier-range">70–84</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-105"><div class="tier-label">105% VBR</div><div class="tier-range">85+</div><div class="tier-desc">points</div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s3">
+            <div class="section-heading"><i class="ti ti-stethoscope section-heading-icon-pcp"></i>Eligible Physicians</div>
+            <div class="section-body">
+              <p>All physicians at MCT2D participating primary care practices deemed eligible for VBR by BCBSM are eligible for the A1c Year 2 performance measure VBR.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s4">
+            <div class="section-heading"><i class="ti ti-chart-bar section-heading-icon-pcp"></i>Measurement Level</div>
+            <div class="section-body">
+              <p><strong>Practice-level measurement.</strong> All primary care practices, regardless of the size of their patient population, are measured at the practice level.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s5">
+            <div class="section-heading"><i class="ti ti-clipboard-data section-heading-icon-pcp"></i>Measurement Population Definition</div>
+            <div class="section-body">
+              <p>The percent of members aged ≥18 and ≤75 with type 2 diabetes whose most recent glycemic status (A1c) was at the following level during the measurement year:</p>
+              <ul>
+                <li><strong>A1c &lt;8.0%</strong> for commercial insurance</li>
+                <li><strong>A1c ≤9.0%</strong> for Medicare insurance</li>
+              </ul>
+              <p>Commercial vs. Medicare distinction is made by whether a patient is 65 years of age or older, or via a specific indicator from BCBSM/BCN indicating Medicare enrollment.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s6">
+            <div class="section-heading"><i class="ti ti-target section-heading-icon-pcp"></i>Goal Rate</div>
+            <div class="section-body">
+              <p>MCT2D aligns with the HEDIS 90th percentile rate:</p>
+              <ul>
+                <li><strong>74.45%</strong> of patients with A1c &lt;8% for the commercial population</li>
+                <li><strong>91%</strong> of patients with A1c ≤9% for the Medicare population</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s7">
+            <div class="section-heading"><i class="ti ti-database section-heading-icon-pcp"></i>Data</div>
+            <div class="section-body">
+              <p>MCT2D uses dashboards developed by the Michigan Data Collaborative, drawing on A1c rates from both clinical (PPQC) and claims data.</p>
+              <p>The denominator is not locked until the final 2 months. It remains open to change until <strong>Feb 28, 2026</strong>, at which point it is held steady — no new patients are added for the final 2 months (Mar 1 – Apr 30, 2026). Because the denominator is not locked, MCT2D will not provide baseline patient lists.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s8">
+            <div class="section-heading"><i class="ti ti-calendar-event section-heading-icon-pcp"></i>Timeline</div>
+            <div class="section-body">
+              <p><strong>Lookback period:</strong> Jun 1, 2024 – May 31, 2025<br>
+              <strong>Performance period:</strong> Jun 1, 2025 – Apr 30, 2026<br>
+              <strong>Measurement period:</strong> Jun 1, 2024 – Apr 30, 2026</p>
+              <p>The most recent A1c within the full measurement period is used. Any patient without an A1c in this timeframe will not be counted.</p>
+            </div>
+            <div class="timeline" style="margin-top:16px">
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jun 1, 2024</div><div class="timeline-label">Lookback period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jul 25, 2025</div><div class="timeline-label">Data refresh (through May 31, 2025)</div><div class="timeline-sub">Baseline performance report provided Aug 2025</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Oct 31, 2025</div><div class="timeline-label">Data refresh (through Aug 31, 2025)</div><div class="timeline-sub">Progress report provided Nov 2025</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jan 30, 2026</div><div class="timeline-label">Data refresh (through Nov 30, 2025)</div><div class="timeline-sub">Progress report provided Feb 2026</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Feb 28, 2026</div><div class="timeline-label">Denominator locked</div><div class="timeline-sub">No new patients added for final 2 months</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Apr 30, 2026</div><div class="timeline-label">Performance period ends</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Jun 30, 2026</div><div class="timeline-label">Final data refresh (through Apr 30, 2026)</div><div class="timeline-sub">Final performance report provided Jul 2026</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Jul 15, 2026</div><div class="timeline-label">MCT2D submits VBR-eligible physician list to BCBSM</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Sep 1, 2026</div><div class="timeline-label">VBR reward year begins</div></div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="a1c-y2-s9">
+            <div class="section-heading"><i class="ti ti-help-circle section-heading-icon-pcp"></i>FAQs</div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Why is MCT2D removing aggregate groups and measuring each practice individually?<i class="ti ti-chevron-down"></i></div>
+              <div class="faq-a">While aggregation can be valuable, it introduces administrative and analytical challenges — particularly during organizational changes like PO and practice merges, provider migration, and retirements. Instability of patient populations means re-aggregation undermines consistency over time. Additionally, aggregation creates interdependence: a single underperforming practice can lower the group's overall score. Measuring practices individually maintains transparency, stability, and meaningful practice-level insight. MCT2D will evaluate smaller practices at the end of the cycle and revisit aggregation in the future.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Why doesn't my practice-level patient count match the sum of individual provider attribution counts?<i class="ti ti-chevron-down"></i></div>
+              <div class="faq-a">Patients may be attributed to multiple providers within a practice. In provider-level counts, one patient may appear under two providers. For practice-level performance, a patient is counted only once — so the practice total may be lower than the sum of individual provider counts.</div>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <div class="section-heading"><i class="ti ti-files section-heading-icon-pcp"></i>Related Documents</div>
+            <div class="related-grid">
+              <div class="related-card" onclick="showDoc('uacr-pcp')">
+                <div class="related-card-title">PCP uACR Measure — Year 1</div>
+                <div class="related-card-sub">New 2025–2026 PCP performance measure</div>
+              </div>
+              <div class="related-card" onclick="showLibrary()">
+                <div class="related-card-title">← Back to full library</div>
+                <div class="related-card-sub">View all performance measure documents</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="measure-toc">
+          <div class="toc-label">On this page</div>
+          <a class="toc-item" href="#a1c-y2-s1"><i class="ti ti-arrow-right"></i>Eligible Population</a>
+          <a class="toc-item" href="#a1c-y2-s2"><i class="ti ti-arrow-right"></i>Reward Amount</a>
+          <a class="toc-item" href="#a1c-y2-s3"><i class="ti ti-arrow-right"></i>Eligible Physicians</a>
+          <a class="toc-item" href="#a1c-y2-s4"><i class="ti ti-arrow-right"></i>Measurement Level</a>
+          <a class="toc-item" href="#a1c-y2-s5"><i class="ti ti-arrow-right"></i>Measurement Definition</a>
+          <a class="toc-item" href="#a1c-y2-s6"><i class="ti ti-arrow-right"></i>Goal Rate</a>
+          <a class="toc-item" href="#a1c-y2-s7"><i class="ti ti-arrow-right"></i>Data</a>
+          <a class="toc-item" href="#a1c-y2-s8"><i class="ti ti-arrow-right"></i>Timeline</a>
+          <a class="toc-item" href="#a1c-y2-s9"><i class="ti ti-arrow-right"></i>FAQs</a>
+        </div>
+      </div>
+    </div><!-- /a1c-yr2 -->
+
+    <!-- ════════ uACR PCP ════════ -->
+    <div id="page-uacr-pcp" class="measure-page">
+      <div class="measure-header">
+        <div class="measure-breadcrumb">
+          <a onclick="showLibrary()"><i class="ti ti-books"></i>Knowledge Base</a>
+          <i class="ti ti-chevron-right"></i><span>Primary Care</span>
+          <i class="ti ti-chevron-right"></i><span>uACR Year 1</span>
+        </div>
+        <div class="measure-title-row">
+          <div class="measure-icon doc-icon-pcp"><i class="ti ti-droplet"></i></div>
+          <div class="measure-title-text">
+            <div class="measure-specialty-tag doc-card-specialty-pcp"><i class="ti ti-building-community"></i>Primary Care — Performance Measure</div>
+            <div class="measure-title">uACR Screening Performance Measure — Year 1</div>
+            <div class="measure-period">Measurement Period: Jul 1, 2025 – Aug 31, 2026 &nbsp;·&nbsp; VBR Reward Year: Sep 1, 2027 – Aug 31, 2028</div>
+          </div>
+        </div>
+        <div class="measure-badges">
+          <span class="measure-badge mb-teal"><i class="ti ti-building-community"></i>Primary Care</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-calendar"></i>Year 1 — new measure</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-chart-bar"></i>Practice-level measurement</span>
+          <span class="measure-badge mb-amber"><i class="ti ti-clock"></i>Active</span>
+        </div>
+        <div class="measure-actions">
+          <a class="measure-btn measure-btn-primary" href="https://www.mct2d.org/resource-library/mct2d-pcp-uacr-performance-measure-2025-2026" target="_blank"><i class="ti ti-external-link"></i>View on mct2d.org</a>
+          <a class="measure-btn" href="https://images.ctfassets.net/1p0t6jhbvwk9/15mQtrcomTrIM40SU98zJp/e2956d1c8d94e66bea15f07d002026c0/MCT2D_PCP_PM_UACR_Details__1_.pdf" target="_blank"><i class="ti ti-file-description"></i>Download PDF</a>
+        </div>
+      </div>
+      <div class="version-bar">
+        <div class="version-item"><i class="ti ti-history"></i>Current version: <strong>Dec 18, 2025</strong></div>
+        <div class="version-item"><i class="ti ti-user"></i>Updated by: MCT2D Coordinating Center</div>
+        <div class="version-item"><i class="ti ti-file"></i>Document ID: MCT2D-PM-UACR-PCP-Y1</div>
+        <button class="version-history-btn" onclick="toggleVersionHistory('uacr-pcp')"><i class="ti ti-history"></i>Version history</button>
+      </div>
+      <div class="version-panel" id="vp-uacr-pcp">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px">Version History</div>
+        <div class="version-entry">
+          <span class="version-num">v12/18/2025</span>
+          <span class="version-date">Dec 18, 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Current version. Added FAQ section. Highlighted denominator lock language.</span>
+        </div>
+        <div class="version-entry">
+          <span class="version-num">v09/24/2025</span>
+          <span class="version-date">Sep 24, 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Initial release of new uACR Year 1 measure for PCP practices.</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-content">
+
+          <div class="callout callout-tip">
+            <i class="ti ti-sparkles"></i>
+            <div class="callout-body">
+              <div class="callout-title">New for 2025–2026</div>
+              This is a brand-new performance measure for primary care practices. Urine albumin-creatinine ratio (uACR) screening is an evidence-based approach to detecting early kidney disease in patients with type 2 diabetes.
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s1">
+            <div class="section-heading"><i class="ti ti-users section-heading-icon-pcp"></i>Eligible Population (Denominator)</div>
+            <div class="section-body">
+              <p>For all BCBSM/BCN/BCBS-MA/BCN-A patients attributed to an MCT2D participating primary care practice who are:</p>
+              <ul>
+                <li>Aged 18–85</li>
+                <li>Meet MCT2D criteria for inclusion in the data registry</li>
+                <li>Have at least one claim (for any service) since the baseline start (Jan 1, 2024) through the population lock date (May 31, 2026), as received by MCT2D</li>
+              </ul>
+              <div class="callout callout-warn" style="margin-top:12px">
+                <i class="ti ti-alert-triangle"></i>
+                <div class="callout-body">
+                  <div class="callout-title">Population Lock</div>
+                  The denominator is open to change until <strong>May 31, 2026</strong>, at which point it is held steady. No new patients are added for the final 3 months. A patient list will not be provided after the denominator is locked, as MCT2D will not receive the 5/31/2026 data update until after the end of the measurement period.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s2">
+            <div class="section-heading"><i class="ti ti-coin section-heading-icon-pcp"></i>Reward Amount</div>
+            <div class="section-body"><p>Combined scorecard: 100 points total (participation + performance). Specific VBR point thresholds for this year to be available by early June 2025.</p></div>
+            <div class="scoring-tiers">
+              <div class="tier tier-102"><div class="tier-label">102% VBR</div><div class="tier-range">55–69</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-103"><div class="tier-label">103% VBR</div><div class="tier-range">70–84</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-105"><div class="tier-label">105% VBR</div><div class="tier-range">85+</div><div class="tier-desc">points</div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s3">
+            <div class="section-heading"><i class="ti ti-stethoscope section-heading-icon-pcp"></i>Eligible Physicians</div>
+            <div class="section-body">
+              <p>Any physicians deemed VBR-eligible by BCBSM are eligible. BCBSM finalizes the eligible physician list on Sep 1, 2025, shared via the MCT2D Admin Portal.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s4">
+            <div class="section-heading"><i class="ti ti-chart-bar section-heading-icon-pcp"></i>Measurement Level</div>
+            <div class="section-body"><p><strong>Practice-level measurement.</strong> All primary care practices are measured at the practice level, regardless of patient population size.</p></div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s5">
+            <div class="section-heading"><i class="ti ti-clipboard-data section-heading-icon-pcp"></i>Measurement Population Definition (Numerator)</div>
+            <div class="section-body">
+              <p>Patients meeting the eligibility criteria who have a urine albumin-creatinine ratio (uACR) record during the measurement year (Jul 1, 2025 – Aug 31, 2026).</p>
+              <p>Data sources: clinical (PPQC) <em>and</em> BCBSM/BCN medical claims data.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s6">
+            <div class="section-heading"><i class="ti ti-target section-heading-icon-pcp"></i>Goal Rate</div>
+            <div class="section-body">
+              <p>Practices must achieve a <strong>10% absolute improvement</strong> over their baseline rate (e.g., baseline 54.5% → goal 64.5%), up to a maximum of 90%.</p>
+              <ul>
+                <li>Baseline 80%–90%: only need to improve to 90%</li>
+                <li>Baseline &gt;90%: must maintain at least 90% during the measurement year</li>
+              </ul>
+              <p><strong>Baseline period:</strong> Jan 1, 2024 – Feb 28, 2025 (based on April 2025 data refresh).</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s7">
+            <div class="section-heading"><i class="ti ti-database section-heading-icon-pcp"></i>Data &amp; Intervention Period</div>
+            <div class="section-body">
+              <p><strong>Intervention period:</strong> Jul 1, 2025 – Aug 31, 2026 (14 months)</p>
+              <p>uACR values collected between Mar 1, 2025 – Jun 30, 2025 do <strong>not</strong> count toward meeting the measure. The 14-month intervention period ensures clinical appropriateness for repeat annual testing.</p>
+              <p>Both a list of patients who have received a uACR screening and a list of those who have not can be identified using filters on the Renal Details page of the MCT2D Patient Data Dashboard.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s8">
+            <div class="section-heading"><i class="ti ti-calendar-event section-heading-icon-pcp"></i>Timeline</div>
+            <div class="timeline" style="margin-top:12px">
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jan 1, 2024</div><div class="timeline-label">Baseline period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">May 2025</div><div class="timeline-label">Baseline performance report distributed</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jul 1, 2025</div><div class="timeline-label">Intervention period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Nov 2025</div><div class="timeline-label">Progress report provided</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Apr 2026</div><div class="timeline-label">Progress report provided</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">May 31, 2026</div><div class="timeline-label">Denominator locked</div><div class="timeline-sub">No new patients added for final 3 months</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Aug 31, 2026</div><div class="timeline-label">Measurement period ends</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Aug 2026</div><div class="timeline-label">Final performance report</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Feb 2027</div><div class="timeline-label">Final performance report</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Sep 1, 2027</div><div class="timeline-label">VBR reward year begins</div></div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s9">
+            <div class="section-heading"><i class="ti ti-list-check section-heading-icon-pcp"></i>Additional Requirements</div>
+            <div class="section-body">
+              <ul>
+                <li>The PO must log into the MCT2D Patient Data Dashboard on a <strong>quarterly basis</strong> and disseminate information to their practices. Verified via Michigan Data Collaborative login/usage records.</li>
+                <li>Practices with a baseline rate &gt;90% are required to <strong>present at the MCT2D fall regional meeting</strong> to share their approach to uACR testing.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-pcp-s10">
+            <div class="section-heading"><i class="ti ti-help-circle section-heading-icon-pcp"></i>FAQs</div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Why is MCT2D not aligning with HEDIS and including the eGFR component?<i class="ti ti-chevron-down"></i></div>
+              <div class="faq-a">eGFR data has not been consistently reported across MCT2D data sources, which would have made performance tracking across practices more difficult and less equitable.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <div class="faq-q">Will this measure be shown on the MCT2D Patient Data Dashboard?<i class="ti ti-chevron-down"></i></div>
+              <div class="faq-a">Yes. uACR screening information is included on the Summary Measures page, beginning with the October dashboard enhancement (data through Jul 31, 2025).</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="measure-toc">
+          <div class="toc-label">On this page</div>
+          <a class="toc-item" href="#uacr-pcp-s1"><i class="ti ti-arrow-right"></i>Eligible Population</a>
+          <a class="toc-item" href="#uacr-pcp-s2"><i class="ti ti-arrow-right"></i>Reward Amount</a>
+          <a class="toc-item" href="#uacr-pcp-s3"><i class="ti ti-arrow-right"></i>Eligible Physicians</a>
+          <a class="toc-item" href="#uacr-pcp-s4"><i class="ti ti-arrow-right"></i>Measurement Level</a>
+          <a class="toc-item" href="#uacr-pcp-s5"><i class="ti ti-arrow-right"></i>Numerator Definition</a>
+          <a class="toc-item" href="#uacr-pcp-s6"><i class="ti ti-arrow-right"></i>Goal Rate</a>
+          <a class="toc-item" href="#uacr-pcp-s7"><i class="ti ti-arrow-right"></i>Data &amp; Intervention</a>
+          <a class="toc-item" href="#uacr-pcp-s8"><i class="ti ti-arrow-right"></i>Timeline</a>
+          <a class="toc-item" href="#uacr-pcp-s9"><i class="ti ti-arrow-right"></i>Additional Requirements</a>
+          <a class="toc-item" href="#uacr-pcp-s10"><i class="ti ti-arrow-right"></i>FAQs</a>
+        </div>
+      </div>
+    </div><!-- /uacr-pcp -->
+
+    <!-- ════════ uACR NEPHRO ════════ -->
+    <div id="page-uacr-nephro" class="measure-page">
+      <div class="measure-header">
+        <div class="measure-breadcrumb">
+          <a onclick="showLibrary()"><i class="ti ti-books"></i>Knowledge Base</a>
+          <i class="ti ti-chevron-right"></i><span>Nephrology</span>
+          <i class="ti ti-chevron-right"></i><span>uACR Year 1</span>
+        </div>
+        <div class="measure-title-row">
+          <div class="measure-icon doc-icon-nephro"><i class="ti ti-droplet"></i></div>
+          <div class="measure-title-text">
+            <div class="measure-specialty-tag doc-card-specialty-nephro"><i class="ti ti-stethoscope"></i>Nephrology — Performance Measure</div>
+            <div class="measure-title">uACR Screening Performance Measure — Year 1</div>
+            <div class="measure-period">Measurement Period: Jul 1, 2025 – Aug 31, 2026 &nbsp;·&nbsp; VBR Reward Year: Sep 1, 2027 – Aug 31, 2028</div>
+          </div>
+        </div>
+        <div class="measure-badges">
+          <span class="measure-badge" style="background:var(--blue-lt);color:var(--blue);border:.5px solid var(--blue)"><i class="ti ti-stethoscope"></i>Nephrology</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-calendar"></i>Year 1 — new measure</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-chart-bar"></i>Practice-level measurement</span>
+          <span class="measure-badge mb-amber"><i class="ti ti-clock"></i>Active</span>
+        </div>
+        <div class="measure-actions">
+          <a class="measure-btn measure-btn-primary" href="https://www.mct2d.org/resource-library/mct2d-nephrology-uacr-performance-measure-2025-2026" target="_blank"><i class="ti ti-external-link"></i>View on mct2d.org</a>
+        </div>
+      </div>
+      <div class="version-bar">
+        <div class="version-item"><i class="ti ti-history"></i>Current version: <strong>Dec 18, 2025</strong></div>
+        <div class="version-item"><i class="ti ti-user"></i>Updated by: MCT2D Coordinating Center</div>
+        <div class="version-item"><i class="ti ti-file"></i>Document ID: MCT2D-PM-UACR-NEPHRO-Y1</div>
+        <button class="version-history-btn" onclick="toggleVersionHistory('uacr-nephro')"><i class="ti ti-history"></i>Version history</button>
+      </div>
+      <div class="version-panel" id="vp-uacr-nephro">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px">Version History</div>
+        <div class="version-entry">
+          <span class="version-num">v12/18/2025</span>
+          <span class="version-date">Dec 18, 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Current version. Nephrology-specific uACR measure details.</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-content">
+          <div class="callout callout-info" style="border-color:var(--blue);background:var(--blue-lt)">
+            <i class="ti ti-info-circle" style="color:var(--blue)"></i>
+            <div class="callout-body">
+              <div class="callout-title" style="color:var(--blue)">Same measure, nephrology context</div>
+              The nephrology uACR measure uses the same eligible population criteria, goal rate structure, and timeline as the PCP uACR measure. Key parameters are identical; this document provides the nephrology-specific context.
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s1">
+            <div class="section-heading"><i class="ti ti-users section-heading-icon-nephro"></i>Eligible Population (Denominator)</div>
+            <div class="section-body">
+              <p>For all BCBSM/BCN/BCBS-MA/BCN-A patients attributed to an MCT2D participating nephrology practice who are:</p>
+              <ul>
+                <li>Aged 18–85</li>
+                <li>Meet MCT2D criteria for inclusion in the data registry</li>
+                <li>Have at least one claim (for any service) since Jan 1, 2024 through the population lock date (May 31, 2026) as received by MCT2D</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s2">
+            <div class="section-heading"><i class="ti ti-coin section-heading-icon-nephro"></i>Reward Amount</div>
+            <div class="section-body"><p>Combined 100-point scorecard (participation + performance). Specific VBR thresholds to be available by early June 2025.</p></div>
+            <div class="scoring-tiers">
+              <div class="tier tier-102"><div class="tier-label">102% VBR</div><div class="tier-range">55–69</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-103"><div class="tier-label">103% VBR</div><div class="tier-range">70–84</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-105"><div class="tier-label">105% VBR</div><div class="tier-range">85+</div><div class="tier-desc">points</div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s3">
+            <div class="section-heading"><i class="ti ti-stethoscope section-heading-icon-nephro"></i>Eligible Physicians</div>
+            <div class="section-body"><p>Any nephrologist deemed VBR-eligible by BCBSM. BCBSM finalizes the eligible physician list on Sep 1, 2025, shared via the MCT2D Admin Portal.</p></div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s4">
+            <div class="section-heading"><i class="ti ti-chart-bar section-heading-icon-nephro"></i>Measurement Level</div>
+            <div class="section-body"><p><strong>Practice-level measurement.</strong> All nephrology practices are measured at the practice level, regardless of patient population size.</p></div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s5">
+            <div class="section-heading"><i class="ti ti-clipboard-data section-heading-icon-nephro"></i>Measurement Population Definition (Numerator)</div>
+            <div class="section-body">
+              <p>Patients meeting eligibility criteria who have a urine albumin-creatinine ratio (uACR) record during the measurement year (Jul 1, 2025 – Aug 31, 2026).</p>
+              <p>Data sources: clinical (PPQC) and BCBSM/BCN medical claims data.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s6">
+            <div class="section-heading"><i class="ti ti-target section-heading-icon-nephro"></i>Goal Rate</div>
+            <div class="section-body">
+              <p><strong>10% absolute improvement</strong> over baseline rate, up to 90% maximum.</p>
+              <ul>
+                <li>Baseline 80%–90%: only need to reach 90%</li>
+                <li>Baseline &gt;90%: must maintain at least 90%</li>
+              </ul>
+              <p><strong>Baseline period:</strong> Jan 1, 2024 – Feb 28, 2025 (April 2025 data refresh).</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s7">
+            <div class="section-heading"><i class="ti ti-database section-heading-icon-nephro"></i>Data &amp; Intervention Period</div>
+            <div class="section-body">
+              <p><strong>Intervention period:</strong> Jul 1, 2025 – Aug 31, 2026 (14 months)</p>
+              <p>uACR values collected between Mar 1, 2025 – Jun 30, 2025 do <strong>not</strong> count. Denominator locked at May 31, 2026.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="uacr-nephro-s8">
+            <div class="section-heading"><i class="ti ti-calendar-event section-heading-icon-nephro"></i>Timeline</div>
+            <div class="timeline" style="margin-top:12px">
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jan 1, 2024</div><div class="timeline-label">Baseline period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jul 1, 2025</div><div class="timeline-label">Intervention period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">May 31, 2026</div><div class="timeline-label">Denominator locked</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Aug 31, 2026</div><div class="timeline-label">Measurement period ends</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Feb 2027</div><div class="timeline-label">Final performance report</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Sep 1, 2027</div><div class="timeline-label">VBR reward year begins</div></div></div>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <div class="section-heading"><i class="ti ti-files section-heading-icon-nephro"></i>Related Documents</div>
+            <div class="related-grid">
+              <div class="related-card" onclick="showDoc('uacr-pcp')">
+                <div class="related-card-title">PCP uACR Measure — Year 1</div>
+                <div class="related-card-sub">Same measure, primary care context</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="measure-toc">
+          <div class="toc-label">On this page</div>
+          <a class="toc-item" href="#uacr-nephro-s1"><i class="ti ti-arrow-right"></i>Eligible Population</a>
+          <a class="toc-item" href="#uacr-nephro-s2"><i class="ti ti-arrow-right"></i>Reward Amount</a>
+          <a class="toc-item" href="#uacr-nephro-s3"><i class="ti ti-arrow-right"></i>Eligible Physicians</a>
+          <a class="toc-item" href="#uacr-nephro-s4"><i class="ti ti-arrow-right"></i>Measurement Level</a>
+          <a class="toc-item" href="#uacr-nephro-s5"><i class="ti ti-arrow-right"></i>Numerator Definition</a>
+          <a class="toc-item" href="#uacr-nephro-s6"><i class="ti ti-arrow-right"></i>Goal Rate</a>
+          <a class="toc-item" href="#uacr-nephro-s7"><i class="ti ti-arrow-right"></i>Data &amp; Intervention</a>
+          <a class="toc-item" href="#uacr-nephro-s8"><i class="ti ti-arrow-right"></i>Timeline</a>
+        </div>
+      </div>
+    </div><!-- /uacr-nephro -->
+
+    <!-- ════════ CGM ENDO ════════ -->
+    <div id="page-cgm-endo" class="measure-page">
+      <div class="measure-header">
+        <div class="measure-breadcrumb">
+          <a onclick="showLibrary()"><i class="ti ti-books"></i>Knowledge Base</a>
+          <i class="ti ti-chevron-right"></i><span>Endocrinology</span>
+          <i class="ti ti-chevron-right"></i><span>CGM Year 1</span>
+        </div>
+        <div class="measure-title-row">
+          <div class="measure-icon doc-icon-endo"><i class="ti ti-device-watch-heart"></i></div>
+          <div class="measure-title-text">
+            <div class="measure-specialty-tag doc-card-specialty-endo"><i class="ti ti-stethoscope"></i>Endocrinology — Performance Measure</div>
+            <div class="measure-title">CGM Interpretation Performance Measure — Year 1</div>
+            <div class="measure-period">Measurement Year: Jul 1, 2025 – Aug 31, 2026 &nbsp;·&nbsp; Reward Year: Mar 1, 2027 – Feb 28, 2028</div>
+          </div>
+        </div>
+        <div class="measure-badges">
+          <span class="measure-badge" style="background:var(--purple-lt);color:var(--purple);border:.5px solid var(--purple)"><i class="ti ti-stethoscope"></i>Endocrinology</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-calendar"></i>Year 1 — new measure</span>
+          <span class="measure-badge mb-outline"><i class="ti ti-device-watch-heart"></i>CPT 95251</span>
+          <span class="measure-badge mb-amber"><i class="ti ti-clock"></i>Active</span>
+        </div>
+        <div class="measure-actions">
+          <a class="measure-btn measure-btn-primary" href="https://www.mct2d.org/resource-library/mct2d-endocrinology-cgm-performance-measure-2025-2026" target="_blank"><i class="ti ti-external-link"></i>View on mct2d.org</a>
+        </div>
+      </div>
+      <div class="version-bar">
+        <div class="version-item"><i class="ti ti-history"></i>Current version: <strong>Dec 18, 2025</strong></div>
+        <div class="version-item"><i class="ti ti-user"></i>Updated by: MCT2D Coordinating Center</div>
+        <div class="version-item"><i class="ti ti-file"></i>Document ID: MCT2D-PM-CGM-ENDO-Y1</div>
+        <button class="version-history-btn" onclick="toggleVersionHistory('cgm-endo')"><i class="ti ti-history"></i>Version history</button>
+      </div>
+      <div class="version-panel" id="vp-cgm-endo">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px">Version History</div>
+        <div class="version-entry">
+          <span class="version-num">v12/18/2025</span>
+          <span class="version-date">Dec 18, 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Current version. Updated NDC code appendix.</span>
+        </div>
+        <div class="version-entry">
+          <span class="version-num">v07/2025</span>
+          <span class="version-date">Jul 2025</span>
+          <span class="version-by">MCT2D CC</span>
+          <span class="version-changes">Initial release of CGM Year 1 endocrinology performance measure.</span>
+        </div>
+      </div>
+      <div class="measure-body">
+        <div class="measure-content">
+
+          <div class="callout callout-info" style="border-color:var(--purple);background:var(--purple-lt)">
+            <i class="ti ti-device-watch-heart" style="color:var(--purple)"></i>
+            <div class="callout-body">
+              <div class="callout-title" style="color:var(--purple)">Key CPT Code: 95251</div>
+              This measure specifically tracks CGM <em>data interpretation</em> (CPT 95251), not simply having a CGM device. Eligible patients are those already on a CGM who need annual data review documented via 95251 billing.
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s1">
+            <div class="section-heading"><i class="ti ti-users section-heading-icon-endo"></i>Eligible Population (Denominator)</div>
+            <div class="section-body">
+              <p>For all BCBSM/BCN/BCBS-MA/BCN-A patients attributed to an MCT2D participating endocrinology practice who are:</p>
+              <ul>
+                <li>Aged 18 and above</li>
+                <li>Meet MCT2D criteria for inclusion in the data registry</li>
+                <li>Have had at least one claim for a CGM device within the 12-month intervention period (including CPT 95251)</li>
+              </ul>
+              <p>See appendix for the full list of CGM device codes (CPT, HCPCS, and NDC pharmacy claims) used to determine CGM device use.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s2">
+            <div class="section-heading"><i class="ti ti-coin section-heading-icon-endo"></i>Reward Amount</div>
+            <div class="section-body"><p>Combined 100-point scorecard (participation + performance).</p></div>
+            <div class="scoring-tiers">
+              <div class="tier tier-102"><div class="tier-label">102% VBR</div><div class="tier-range">55–69</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-103"><div class="tier-label">103% VBR</div><div class="tier-range">70–84</div><div class="tier-desc">points</div></div>
+              <div class="tier tier-105"><div class="tier-label">105% VBR</div><div class="tier-range">85+</div><div class="tier-desc">points</div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s3">
+            <div class="section-heading"><i class="ti ti-stethoscope section-heading-icon-endo"></i>Eligible Physicians</div>
+            <div class="section-body">
+              <p>Any endocrinologist who is part of a <strong>continuing practice</strong> (started in MCT2D prior to 2025) and is deemed VBR-eligible by BCBSM.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s4">
+            <div class="section-heading"><i class="ti ti-chart-bar section-heading-icon-endo"></i>Measurement Level</div>
+            <div class="section-body"><p><strong>Practice-level measurement.</strong> All continuing endocrinology practices, regardless of patient population size, are measured at the practice level.</p></div>
+          </div>
+
+          <div class="content-section" id="cgm-s5">
+            <div class="section-heading"><i class="ti ti-clipboard-data section-heading-icon-endo"></i>Measurement Population Definition (Numerator)</div>
+            <div class="section-body">
+              <p>The percent of eligible patients (on a CGM device, per above) who have had at least one <strong>CPT 95251</strong> billing claim within the 14-month measurement period (Jul 1, 2025 – Aug 31, 2026).</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s6">
+            <div class="section-heading"><i class="ti ti-target section-heading-icon-endo"></i>Goal Rate</div>
+            <div class="section-body">
+              <p>Practices must achieve a <strong>5% absolute improvement</strong> over baseline rate (e.g., baseline 54.5% → goal 59.5%), up to the collaborative-wide 95th percentile benchmark of <strong>89.59%</strong>.</p>
+              <p>Practices already above 89.59% must maintain performance throughout the measurement period.</p>
+              <p><strong>Baseline measurement periods:</strong></p>
+              <ul>
+                <li>CGM device claims (denominator): Jan 1, 2024 – Dec 31, 2024</li>
+                <li>95251 billing claims (numerator): Jan 1, 2024 – Feb 28, 2025</li>
+              </ul>
+              <p>Final baseline data based on April 2025 data refresh.</p>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s7">
+            <div class="section-heading"><i class="ti ti-database section-heading-icon-endo"></i>Data &amp; Intervention Period</div>
+            <div class="section-body">
+              <p><strong>Denominator (CGM device claims):</strong> Jul 1, 2025 – Jun 30, 2026<br>
+              <strong>Numerator (95251 billing):</strong> Jul 1, 2025 – Aug 31, 2026</p>
+              <p>Claims collected between Mar 1, 2025 – Jun 30, 2025 do <strong>not</strong> count toward the measure.</p>
+              <div class="callout callout-warn">
+                <i class="ti ti-lock"></i>
+                <div class="callout-body">
+                  <div class="callout-title">Population Lock Dates</div>
+                  <ul style="margin:4px 0 0 16px">
+                    <li><strong>May 31, 2026</strong> — last date a new patient can be attributed to your practice</li>
+                    <li><strong>Jun 30, 2026</strong> — last date for a CGM device claim (denominator)</li>
+                    <li><strong>Aug 31, 2026</strong> — last date for 95251 billing (numerator)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s8">
+            <div class="section-heading"><i class="ti ti-calendar-event section-heading-icon-endo"></i>Timeline</div>
+            <div class="timeline" style="margin-top:12px">
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jan 1, 2024</div><div class="timeline-label">Baseline period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jul 2025</div><div class="timeline-label">Baseline report distributed</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Jul 1, 2025</div><div class="timeline-label">Intervention period begins</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Nov 2025</div><div class="timeline-label">Progress report provided</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-past"></div><div class="timeline-body"><div class="timeline-date">Apr 2026</div><div class="timeline-label">Progress report provided</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">May 31, 2026</div><div class="timeline-label">Last date for new patient attribution</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Jun 30, 2026</div><div class="timeline-label">Last date for CGM device claim (denominator)</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Aug 31, 2026</div><div class="timeline-label">Last date for 95251 billing (numerator)</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Aug 2026</div><div class="timeline-label">Progress report provided</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Jan 2027</div><div class="timeline-label">Final data release used to calculate performance</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Feb 2027</div><div class="timeline-label">Final performance report</div></div></div>
+              <div class="timeline-item"><div class="timeline-dot timeline-dot-future"></div><div class="timeline-body"><div class="timeline-date">Mar 1, 2027</div><div class="timeline-label">VBR reward year begins</div></div></div>
+            </div>
+          </div>
+
+          <div class="content-section" id="cgm-s9">
+            <div class="section-heading"><i class="ti ti-table section-heading-icon-endo"></i>CGM Device Code Appendix (Partial)</div>
+            <div class="section-body"><p>The following codes are used to determine whether a patient is on a CGM device (denominator). For the complete code list, see the full PDF.</p></div>
+            <table class="measure-table">
+              <thead><tr><th>Code System</th><th>Code</th><th>Definition</th></tr></thead>
+              <tbody>
+                <tr><td>CPT</td><td>95249</td><td>Personal CGM — Startup/Instruction</td></tr>
+                <tr><td>CPT</td><td>95251</td><td>CGM Data Interpretation</td></tr>
+                <tr><td>HCPCS</td><td>A9276</td><td>Sensor; invasive (subcutaneous), disposable, for interstitial CGM system</td></tr>
+                <tr><td>HCPCS</td><td>A9277</td><td>Transmitter; external, for interstitial CGM system</td></tr>
+                <tr><td>HCPCS</td><td>K0553</td><td>Supply allowance for therapeutic CGM, 1 month supply</td></tr>
+                <tr><td>HCPCS</td><td>G0308/G0309</td><td>Continuous glucose monitoring for 180-day period (effective Jul 1, 2022)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="measure-toc">
+          <div class="toc-label">On this page</div>
+          <a class="toc-item" href="#cgm-s1"><i class="ti ti-arrow-right"></i>Eligible Population</a>
+          <a class="toc-item" href="#cgm-s2"><i class="ti ti-arrow-right"></i>Reward Amount</a>
+          <a class="toc-item" href="#cgm-s3"><i class="ti ti-arrow-right"></i>Eligible Physicians</a>
+          <a class="toc-item" href="#cgm-s4"><i class="ti ti-arrow-right"></i>Measurement Level</a>
+          <a class="toc-item" href="#cgm-s5"><i class="ti ti-arrow-right"></i>Numerator Definition</a>
+          <a class="toc-item" href="#cgm-s6"><i class="ti ti-arrow-right"></i>Goal Rate</a>
+          <a class="toc-item" href="#cgm-s7"><i class="ti ti-arrow-right"></i>Data &amp; Intervention</a>
+          <a class="toc-item" href="#cgm-s8"><i class="ti ti-arrow-right"></i>Timeline</a>
+          <a class="toc-item" href="#cgm-s9"><i class="ti ti-arrow-right"></i>Code Appendix</a>
+        </div>
+      </div>
+    </div><!-- /cgm-endo -->
+
+  </main>
+</div><!-- /layout -->
+
+<script>
+// ── Navigation ──────────────────────────────────────────────────────
+function showLibrary() {
+  ['page-library','page-overview','page-a1c-yr2','page-uacr-pcp','page-uacr-nephro','page-cgm-endo']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = id === 'page-library' ? 'block' : 'none';
+    });
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('sb-library').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showDoc(docId) {
+  const pageMap = {
+    'overview':    'page-overview',
+    'a1c-yr2':     'page-a1c-yr2',
+    'uacr-pcp':    'page-uacr-pcp',
+    'uacr-nephro': 'page-uacr-nephro',
+    'cgm-endo':    'page-cgm-endo',
+  };
+  const sbMap = {
+    'overview':    'sb-overview',
+    'a1c-yr2':     'sb-a1c-yr2',
+    'uacr-pcp':    'sb-uacr-pcp',
+    'uacr-nephro': 'sb-uacr-nephro',
+    'cgm-endo':    'sb-cgm-endo',
+  };
+
+  ['page-library','page-overview','page-a1c-yr2','page-uacr-pcp','page-uacr-nephro','page-cgm-endo']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = id === pageMap[docId] ? 'block' : 'none';
+    });
+
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  const sbEl = document.getElementById(sbMap[docId]);
+  if (sbEl) sbEl.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Version history toggle ──────────────────────────────────────────
+function toggleVersionHistory(docId) {
+  const panel = document.getElementById('vp-' + docId);
+  if (panel) panel.classList.toggle('open');
+}
+
+// ── FAQ toggle ──────────────────────────────────────────────────────
+function toggleFaq(item) {
+  item.classList.toggle('open');
+}
+
+// ── Init ────────────────────────────────────────────────────────────
+showLibrary();
+</script>
+</body>
+</html>

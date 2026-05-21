@@ -48,7 +48,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-search i{font-size:16px;color:rgba(185,226,227,.5);flex-shrink:0}
 .sb-search input{background:none;border:none;outline:none;font-size:16px;color:#fff;width:100%;font-family:var(--font);caret-color:var(--teal)}
 .sb-search input::placeholder{color:rgba(185,226,227,.72)}
-.sb-search-kbd{font-size:11px;color:rgba(185,226,227,.70);background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.15);border-radius:3px;padding:1px 5px;flex-shrink:0;font-family:var(--font-mono,monospace);white-space:nowrap}
+.sb-search-kbd{font-size:12px;color:rgba(185,226,227,.70);background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.15);border-radius:3px;padding:1px 5px;flex-shrink:0;font-family:var(--font-mono,monospace);white-space:nowrap}
 
 /* Search results overlay */
 .sb-results{position:absolute;left:0;right:0;top:0;background:var(--navy);z-index:300;display:none;flex-direction:column}
@@ -64,7 +64,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-result-text{flex:1;min-width:0}
 .sb-result-name{font-size:14px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-result-group{font-size:12px;color:rgba(185,226,167,.5);margin-top:1px}
-.sb-result-badge{font-size:11px;padding:1px 6px;border-radius:10px;background:rgba(211,135,44,.25);color:#FAC775;white-space:nowrap;flex-shrink:0}
+.sb-result-badge{font-size:12px;padding:1px 6px;border-radius:10px;background:rgba(211,135,44,.25);color:#FAC775;white-space:nowrap;flex-shrink:0}
 .sb-no-results{padding:20px 14px;font-size:14px;color:rgba(185,226,227,.4);text-align:center}
 
 /* Home item */
@@ -75,7 +75,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 /* Recently visited */
 .sb-recent{padding:8px 0 4px;border-bottom:.5px solid rgba(185,226,227,.1)}
-.sb-recent-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.70);padding:0 14px 5px;display:flex;align-items:center;gap:5px}
+.sb-recent-lbl{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.70);padding:0 14px 5px;display:flex;align-items:center;gap:5px}
 .sb-recent-lbl i{font-size:13px}
 .sb-recent-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:14px;font-weight:400;color:rgba(185,226,227,.82);transition:all .13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-recent-item i{font-size:15px;flex-shrink:0;color:rgba(185,226,227,.70)}
@@ -91,7 +91,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sb-group-label{font-size:14px;font-weight:500;color:rgba(185,226,227,.72);flex:1;transition:color .13s}
 .sb-group-header:hover .sb-group-label,.sb-group-header.active-group .sb-group-label{color:#fff}
 .sb-group-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.sb-group-badge{font-size:11px;font-weight:700;padding:1px 6px;border-radius:10px;white-space:nowrap}
+.sb-group-badge{font-size:12px;font-weight:700;padding:1px 6px;border-radius:10px;white-space:nowrap}
 .sgb-amber{background:rgba(211,135,44,.3);color:#FAC775}
 .sgb-teal{background:rgba(0,166,168,.25);color:var(--sky)}
 .sgb-gray{background:rgba(255,255,255,.1);color:rgba(185,226,227,.78)}
@@ -130,7 +130,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .tb-coord{font-size:12px;color:rgba(185,226,227,.75);margin-top:2px;font-weight:400}
 .tb-right{display:flex;align-items:center;gap:18px}
 .tb-stat{text-align:right}
-.tb-stat-lbl{font-size:11px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.tb-stat-lbl{font-size:12px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .tb-stat-val{font-size:20px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.01em}
 .tb-stat-sub{font-size:12px;color:var(--sky)}
 
@@ -181,18 +181,31 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .an-panel-title i{font-size:16px}
 .an-total-count{font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap}
 
-/* Tab row — 5 tabs that always fit */
+/* Tab row — 5 horizontal tabs, icon left, label right */
 .an-tabs{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
-.an-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-  padding:8px 4px 7px;font-size:11px;font-weight:500;color:var(--gray-600);
+.an-tab{flex:1;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;
+  padding:12px 6px;font-size:14px;font-weight:500;color:var(--gray-600);
   background:transparent;border:none;border-bottom:2px solid transparent;
   margin-bottom:-1px;cursor:pointer;transition:all .13s;font-family:var(--font);
-  min-width:0;text-align:center;line-height:1.2}
+  min-width:0;position:relative}
 .an-tab:hover{color:var(--navy);background:var(--navy-lt)}
 .an-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:700;background:#fff}
-.an-tab i{font-size:16px;margin-bottom:1px}
-.an-tab-label{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.an-tab-badge{font-size:10px;font-weight:700;min-width:18px;text-align:center;padding:1px 5px;border-radius:20px;line-height:1.4;margin-top:1px}
+/* Icon wrapper — gives badge something to anchor to */
+.an-tab-icon{position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px;height:24px}
+.an-tab-icon i{font-size:20px;display:block}
+.an-tab-label{font-size:14px;font-weight:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Badge overlaps top-right corner of icon */
+.an-tab-badge{
+  position:absolute;top:-7px;right:-9px;
+  font-size:11px;font-weight:700;
+  min-width:18px;height:18px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;border-radius:20px;
+  line-height:1;border:2px solid var(--gray-50);
+  white-space:nowrap;pointer-events:none;
+}
+.an-tab-badge:empty{display:none}
+.an-tab.on .an-tab-badge{border-color:#fff}
 .an-badge-amber{background:var(--amber);color:#fff}
 .an-badge-navy{background:var(--navy);color:#fff}
 .an-badge-teal{background:var(--teal);color:#fff}
@@ -211,7 +224,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 /* Sub-header within each scorecard pane */
 .an-pane-subhdr{display:flex;align-items:center;gap:11px;padding:10px 14px;border-bottom:1px solid var(--gray-200)}
 .an-subhdr-icon{flex-shrink:0}
-.an-subhdr-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.an-subhdr-type{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
 .an-subhdr-name{font-size:13px;color:var(--gray-600)}
 .an-subhdr-po{background:var(--navy-lt)}
 .an-subhdr-po .an-subhdr-type{color:var(--navy)}
@@ -227,7 +240,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sc-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px}
 .sc-section-head-left{display:flex;align-items:center;gap:11px;min-width:0;flex:1}
 .sc-section-icon{flex-shrink:0}
-.sc-section-type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.sc-section-type{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
 .sc-section-name{font-size:13px;font-weight:500;color:var(--gray-900);line-height:1.3}
 .sc-section-count{font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
 .sc-section-body{border-top:1px solid var(--gray-200);background:#fff}
@@ -268,29 +281,30 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sh-tile-val-orange{color:#ffb380}
 .sh-tile-val-blue{color:#7dd3fc}
 .sh-tile-label{font-size:13px;font-weight:500;color:#fff;margin-top:2px;line-height:1.3}
-.sh-tile-sub{font-size:11px;color:rgba(185,226,227,.6);margin-top:2px}
+.sh-tile-sub{font-size:12px;color:rgba(185,226,227,.6);margin-top:2px}
 .sh-score-block{display:flex;align-items:center;gap:16px;flex:0 0 auto}
 .sh-score-ring{position:relative;width:72px;height:72px;flex-shrink:0}
 .sh-score-ring svg{transform:rotate(-90deg)}
 .sh-score-ring-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .sh-score-val{font-size:20px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
-.sh-score-denom{font-size:11px;color:rgba(185,226,227,.65);line-height:1}
+.sh-score-denom{font-size:12px;color:rgba(185,226,227,.65);line-height:1}
 .sh-score-meta{min-width:0}
-.sh-score-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.65);margin-bottom:4px}
+.sh-score-label{font-size:13px;font-weight:700;color:#fff;letter-spacing:.01em;margin-bottom:1px}
+.sh-score-sublabel{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.65);margin-bottom:5px}
 .sh-tier-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700}
 .sh-tier-102{background:rgba(211,135,44,.25);color:#FAC775;border:.5px solid rgba(211,135,44,.4)}
 .sh-tier-103{background:rgba(0,116,117,.3);color:#6de4e5;border:.5px solid rgba(0,116,117,.5)}
 .sh-tier-105{background:rgba(29,197,94,.2);color:#6effa8;border:.5px solid rgba(29,197,94,.3)}
 .sh-tier-risk{background:rgba(190,80,0,.3);color:#ffc47a;border:.5px solid rgba(190,80,0,.5)}
-.sh-score-period{font-size:11px;color:rgba(185,226,227,.55);margin-top:5px}
+.sh-score-period{font-size:12px;color:rgba(185,226,227,.55);margin-top:5px}
 .sh-divider{width:.5px;height:56px;background:rgba(185,226,227,.18);flex-shrink:0}
 .sh-metrics{display:flex;gap:24px;flex:1;flex-wrap:wrap}
 .sh-metric{text-align:center}
 .sh-metric-val{font-size:22px;font-weight:700;color:#fff;line-height:1;letter-spacing:-.01em}
-.sh-metric-lbl{font-size:11px;color:rgba(185,226,227,.65);margin-top:3px;white-space:nowrap}
+.sh-metric-lbl{font-size:12px;color:rgba(185,226,227,.65);margin-top:3px;white-space:nowrap}
 .sh-vbr-block{margin-left:auto;text-align:right;flex-shrink:0}
 .sh-vbr-days{font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
-.sh-vbr-label{font-size:11px;color:rgba(185,226,227,.65);margin-top:2px}
+.sh-vbr-label{font-size:12px;color:rgba(185,226,227,.65);margin-top:2px}
 .sh-vbr-date{font-size:12px;color:rgba(185,226,227,.5);margin-top:1px}
 
 /* ── Zone 2: Participation tiles ── */
@@ -331,7 +345,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 /* ── Zone 3: Workspace ── */
 .workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px;padding:20px 24px;align-items:start;background:#fff}
 .right-col{display:flex;flex-direction:column;gap:16px}
-.zone-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-400);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.zone-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-400);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .zone-label i{font-size:13px}
 
 /* ── Recently completed panel ── */
@@ -345,6 +359,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .rc-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100);transition:background .1s}
 .rc-item:last-child{border-bottom:none}
 .rc-item:hover{background:var(--teal-lt)}
+.rc-item-link{cursor:pointer}
+.rc-link-icon{font-size:13px;color:var(--teal);margin-left:5px;opacity:0;transition:opacity .13s;vertical-align:middle}
+.rc-item-link:hover .rc-link-icon{opacity:1}
+.rc-link-label{font-size:12px;color:var(--teal);font-weight:500;margin-top:5px;display:none;align-items:center;gap:3px}
+.rc-item-link:hover .rc-link-label{display:flex}
 .rc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px}
 .rc-dot-credited{background:var(--teal)}
 .rc-dot-submitted{background:var(--amber)}
@@ -353,12 +372,12 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .rc-title{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
 .rc-who{font-size:12px;color:var(--gray-600);margin-top:2px}
 .rc-status-row{display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap}
-.rc-status{font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.rc-status{font-size:12px;font-weight:600;padding:1px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
 .rc-status-credited{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .rc-status-submitted{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .rc-status-completed{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
-.rc-when{font-size:11px;color:var(--gray-400)}
-.rc-pts{font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-lt);padding:1px 7px;border-radius:20px;border:.5px solid var(--teal)}
+.rc-when{font-size:12px;color:var(--gray-400)}
+.rc-pts{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-lt);padding:1px 7px;border-radius:20px;border:.5px solid var(--teal)}
 
 /* ── Deadlines/messages/updates feed panel ── */
 .df-panel{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;background:#fff}
@@ -370,14 +389,16 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .df-pane{display:none}.df-pane.on{display:block}
 
 /* ── Home section drag-and-drop ── */
-.home-section{position:relative;transition:opacity .2s}
+.home-section{position:relative;transition:opacity .2s;width:100%}
 .home-section.drag-over{outline:2px dashed var(--teal);outline-offset:3px;border-radius:var(--radius-lg);background:var(--teal-lt)}
 .home-section.dragging{opacity:.45;cursor:grabbing}
+.col-drop-zone{transition:background .15s,outline .15s;border-radius:var(--radius-lg);min-height:80px}
+.col-drop-zone.col-drag-over{background:rgba(0,116,117,.06);outline:2px dashed var(--teal);outline-offset:4px}
 .hsec-drag-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 4px;cursor:grab;user-select:none}
 .hsec-drag-bar:active{cursor:grabbing}
 .hsec-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);display:flex;align-items:center;gap:6px}
 .hsec-title i{font-size:15px}
-.hsec-drag-hint{font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:4px;opacity:0;transition:opacity .15s}
+.hsec-drag-hint{font-size:12px;color:var(--gray-400);display:flex;align-items:center;gap:4px;opacity:0;transition:opacity .15s}
 .hsec-drag-bar:hover .hsec-drag-hint{opacity:1}
 .hsec-drag-hint i{font-size:14px}
 .drop-line{height:3px;background:var(--teal);border-radius:2px;margin:3px 0;display:none}
@@ -607,7 +628,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .prac-table{border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
 
 /* Column header */
-.pt-header{display:grid;grid-template-columns:minmax(0,1fr) 140px 80px 110px 32px;gap:0;padding:8px 16px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400)}
+.pt-header{display:grid;grid-template-columns:minmax(0,1fr) 140px 80px 110px 32px;gap:0;padding:8px 16px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400)}
 .pt-header .ph-status{text-align:center}
 .pt-header .ph-score{text-align:center}
 .pt-header .ph-tier{text-align:right}
@@ -624,11 +645,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .pt-name{font-size:15px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:2px;text-decoration-color:transparent;transition:text-decoration-color .12s}
 .pt-summary:hover .pt-name{text-decoration-color:var(--navy)}
 .pt-champion{font-size:12px;color:var(--gray-600);margin-top:2px;display:flex;align-items:center;gap:5px}
-.pt-champion-icon{width:18px;height:18px;border-radius:50%;background:var(--navy-lt);display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--navy);flex-shrink:0}
+.pt-champion-icon{width:18px;height:18px;border-radius:50%;background:var(--navy-lt);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--navy);flex-shrink:0}
 
 /* Status bar cell */
 .pt-status-cell{padding:0 8px}
-.pt-status-label{font-size:11px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.pt-status-label{font-size:12px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
 .pt-bar-track{height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden}
 .pt-bar-fill{height:100%;border-radius:3px;transition:width .4s}
 
@@ -666,7 +687,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .pt-contact-btn i{font-size:13px}
 
 /* Open tasks inside detail */
-.pt-tasks-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.pt-tasks-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-bottom:8px;display:flex;align-items:center;gap:5px}
 .pt-task-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;margin-bottom:6px;cursor:pointer;transition:all .12s}
 .pt-task-item:last-child{margin-bottom:0}
 .pt-task-item:hover{border-color:var(--navy);background:var(--navy-lt)}
@@ -678,7 +699,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .pt-task-due{font-size:12px;font-weight:600;white-space:nowrap}
 .pt-task-pts{font-size:12px;color:var(--gray-400);margin-top:2px;white-space:nowrap}
 .pt-task-help{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
-.pt-help-btn{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.pt-help-btn{font-size:12px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
 .pt-help-btn:hover{background:var(--teal-lt);color:#005c5d;border-color:var(--teal)}
 .pt-help-btn i{font-size:12px}
 
@@ -721,7 +742,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .sp-none{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
 .cell-total{text-align:center}
 .total-num{font-size:15px;font-weight:700}
-.total-pct{font-size:11px;color:var(--gray-400)}
+.total-pct{font-size:12px;color:var(--gray-400)}
 .cell-tier{text-align:right}
 .tier-badge{font-size:12px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
 .tb-105{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
@@ -745,7 +766,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
 /* Tooltip */
 .tip-anchor{position:relative;display:inline-flex;align-items:center}
-.tip-icon{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .12s;font-style:normal;line-height:1;user-select:none}
+.tip-icon{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .12s;font-style:normal;line-height:1;user-select:none}
 .ti-white{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff}
 .ti-white:hover{background:rgba(255,255,255,.4)}
 .ti-teal{background:var(--teal-lt);border:1px solid rgba(0,166,168,.4);color:var(--teal)}
@@ -775,7 +796,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .dl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100)}
 .dl-item:last-child{border-bottom:none}
 .dl-badge{width:36px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:var(--radius-sm);padding:4px 2px;margin-top:1px}
-.dl-badge-month{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.dl-badge-month{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1}
 .dl-badge-day{font-size:16px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .dl-badge-urg{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .dl-badge-soon{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
@@ -796,7 +817,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .dl-days-soon{color:var(--teal)}
 .dl-days-later{color:var(--gray-600)}
 .dl-days-past{color:var(--gray-400)}
-.dl-section-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-600);padding:8px 14px 4px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100)}
+.dl-section-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-600);padding:8px 14px 4px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100)}
+.dl-show-more{width:100%;border:none;border-top:1px solid var(--gray-100);background:var(--gray-50);padding:9px 14px;font-size:13px;color:var(--teal);font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font)}
+.dl-show-more:hover{background:var(--teal-lt);color:#005c5d}
+.dl-show-more i{font-size:14px}
 
 /* Message items */
 .msg-item{padding:11px 14px;border-bottom:.5px solid var(--gray-100);cursor:pointer;transition:background .1s}
@@ -810,7 +834,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .msg-subject{font-size:14px;color:var(--gray-900);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .msg-preview{font-size:13px;color:var(--gray-600);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .msg-date{font-size:12px;color:var(--gray-600);flex-shrink:0;white-space:nowrap}
-.msg-tag{display:inline-flex;font-size:11px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:4px}
+.msg-tag{display:inline-flex;font-size:12px;font-weight:600;padding:1px 6px;border-radius:20px;margin-top:4px}
 .mt-req{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
 .mt-info{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .mt-event{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
@@ -827,7 +851,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .upd-title{font-size:14px;font-weight:500;color:var(--gray-900);line-height:1.35}
 .upd-desc{font-size:13px;color:var(--gray-600);margin-top:2px;line-height:1.45}
 .upd-date{font-size:12px;color:var(--gray-400);margin-top:3px}
-.upd-badge{display:inline-flex;font-size:11px;font-weight:600;padding:1px 6px;border-radius:20px;margin-right:4px}
+.upd-badge{display:inline-flex;font-size:12px;font-weight:600;padding:1px 6px;border-radius:20px;margin-right:4px}
 .ub-new{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
 .ub-fix{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
 .ub-data{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
@@ -920,24 +944,24 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 .prac-summary-row:hover .psr-header{background:var(--gray-50)}
 .prac-summary-row.expanded>.psr-header{background:var(--navy-lt)}
 .psr-header{display:flex;align-items:center;gap:12px;padding:11px 18px;transition:background .1s}
-.psr-rank{width:22px;height:22px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gray-600);flex-shrink:0}
+.psr-rank{width:22px;height:22px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray-600);flex-shrink:0}
 .psr-rank-urg{background:var(--amber-lt);color:#7a4a0d}
 .psr-name{font-size:15px;font-weight:500;color:var(--gray-900);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .psr-stats{display:flex;align-items:center;gap:14px;flex-shrink:0}
 .psr-stat{text-align:center}
 .psr-stat-val{font-size:16px;font-weight:700;line-height:1}
-.psr-stat-lbl{font-size:11px;color:var(--gray-400);margin-top:1px}
+.psr-stat-lbl{font-size:12px;color:var(--gray-400);margin-top:1px}
 .psr-stat-incomplete .psr-stat-val{color:var(--amber)}
 .psr-stat-complete .psr-stat-val{color:var(--teal)}
 .psr-bar-wrap{width:56px;flex-shrink:0}
 .psr-bar-track{height:5px;background:var(--gray-200);border-radius:3px;overflow:hidden}
 .psr-bar-fill{height:100%;border-radius:3px}
-.psr-pct{font-size:11px;color:var(--gray-600);margin-top:2px;text-align:center}
+.psr-pct{font-size:12px;color:var(--gray-600);margin-top:2px;text-align:center}
 .psr-chev{font-size:14px;color:var(--gray-400);transition:transform .18s;flex-shrink:0}
 .prac-summary-row.expanded>.psr-header>.psr-chev{transform:rotate(180deg)}
 .psr-physician-list{border-top:.5px solid var(--gray-200);display:none}
 .prac-summary-row.expanded>.psr-physician-list{display:block}
-.psr-divider-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:6px 18px 5px 54px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100);color:var(--gray-400);display:flex;align-items:center;gap:6px}
+.psr-divider-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:6px 18px 5px 54px;background:var(--gray-50);border-bottom:.5px solid var(--gray-100);color:var(--gray-400);display:flex;align-items:center;gap:6px}
 .psr-phys-row{display:flex;align-items:center;gap:10px;padding:9px 18px 9px 54px;border-bottom:.5px solid var(--gray-100);transition:background .1s}
 .psr-phys-row:last-child{border-bottom:none}
 .psr-phys-row:hover{background:var(--navy-lt)}
@@ -979,7 +1003,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   .mob-menu-btn{display:flex;align-items:center}
   .topbar{padding:10px 14px;gap:8px}
   .tb-title{font-size:16px}
-  .tb-org{font-size:11px}
+  .tb-org{font-size:12px}
   .tb-right{gap:10px}
   .tb-stat-val{font-size:16px}
   .tb-div{display:none}
@@ -1053,7 +1077,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
 
   /* ── Message items ── */
   .msg-preview{display:none}
-  .msg-date{font-size:11px}
+  .msg-date{font-size:12px}
 
   /* ── Pending items ── */
   .pending-timing{display:none}
@@ -1084,9 +1108,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
   .mob-bn-item.active{color:var(--navy)}
   .mob-bn-item:hover{color:var(--navy)}
   /* ── Actions needed tab panel ── */
-  .an-tab{padding:7px 2px 6px;font-size:10px}
-  .an-tab i{font-size:14px}
-  .an-tab-badge{font-size:9px;padding:1px 4px}
+  .an-tab{padding:9px 4px;gap:5px}
+  .an-tab-label{font-size:12px}
+  .an-tab-icon i{font-size:16px}
   .phys-overlay{padding:0}
   .phys-modal{max-width:100%;border-radius:0;min-height:100vh}
   .phys-toolbar{flex-direction:column;align-items:stretch}
@@ -1444,7 +1468,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       </button>
       <div>
         <div class="tb-org">Michigan Collaborative for Type 2 Diabetes</div>
-        <div class="tb-title" id="page-title">MCT2D Participation Management Center</div>
+        <div class="tb-title" id="page-title">Participation Management Center</div>
       </div>
     </div>
     <div class="tb-right">
@@ -1483,7 +1507,8 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
             </div>
           </div>
           <div class="sh-score-meta">
-            <div class="sh-score-label">PO Scorecard</div>
+            <div class="sh-score-label">Midwest Health Partners</div>
+            <div class="sh-score-sublabel">PO Scorecard</div>
             <div class="sh-tier-badge sh-tier-102" id="hero-tier">102% VBR eligible</div>
             <div class="sh-score-period">Sep 2025 – Jul 2026</div>
           </div>
@@ -1536,7 +1561,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
         <div class="ql-strip" id="ql-strip">
           <div class="ql-strip-chips" id="ql-strip-chips"></div>
           <button class="ql-strip-edit" id="ql-manage-btn" onclick="toggleManageLinks()">
-            <i class="ti ti-pencil" style="font-size:11px"></i>Edit
+            <i class="ti ti-pencil" style="font-size:12px"></i>Edit
           </button>
         </div>
         <div id="ql-wrap" style="display:none">
@@ -1552,8 +1577,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <!-- ══ ZONE 3: Workspace ══ -->
       <div class="workspace" id="home-workspace">
 
-        <!-- LEFT col wrapper -->
-        <div id="workspace-left">
+        <!-- LEFT col wrapper — also a drop zone -->
+        <div id="workspace-left" class="col-drop-zone" data-col="left"
+          ondragover="onColDragOver(event,'left')" ondragleave="onColDragLeave(event,'left')" ondrop="onColDrop(event,'left')">
           <!-- Actions Needed -->
           <div class="home-section" data-section="actions-needed" id="hsec-actions-needed">
             <div class="hsec-drag-bar" draggable="true" data-section="actions-needed">
@@ -1567,29 +1593,24 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
               </div>
               <div class="an-tabs" role="tablist">
                 <button class="an-tab on" id="antab-po" onclick="switchActionTab('po')" role="tab" aria-selected="true" aria-controls="anpane-po">
-                  <i class="ti ti-chart-bar" style="color:var(--navy)"></i>
+                  <span class="an-tab-icon"><i class="ti ti-chart-bar" style="color:var(--navy)"></i><span class="an-tab-badge an-badge-navy" id="antbadge-po"></span></span>
                   <span class="an-tab-label">PO</span>
-                  <span class="an-tab-badge an-badge-navy" id="antbadge-po"></span>
                 </button>
                 <button class="an-tab" id="antab-pcp" onclick="switchActionTab('pcp')" role="tab" aria-selected="false" aria-controls="anpane-pcp">
-                  <i class="ti ti-building-community" style="color:var(--teal)"></i>
+                  <span class="an-tab-icon"><i class="ti ti-building-community" style="color:var(--teal)"></i><span class="an-tab-badge an-badge-teal" id="antbadge-pcp"></span></span>
                   <span class="an-tab-label">PCP</span>
-                  <span class="an-tab-badge an-badge-teal" id="antbadge-pcp"></span>
                 </button>
                 <button class="an-tab" id="antab-endo" onclick="switchActionTab('endo')" role="tab" aria-selected="false" aria-controls="anpane-endo">
-                  <i class="ti ti-stethoscope" style="color:#6D28D9"></i>
+                  <span class="an-tab-icon"><i class="ti ti-stethoscope" style="color:#6D28D9"></i><span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span></span>
                   <span class="an-tab-label">Endo</span>
-                  <span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span>
                 </button>
                 <button class="an-tab" id="antab-nephro" onclick="switchActionTab('nephro')" role="tab" aria-selected="false" aria-controls="anpane-nephro">
-                  <i class="ti ti-droplet" style="color:#0369a1"></i>
+                  <span class="an-tab-icon"><i class="ti ti-droplet" style="color:#0369a1"></i><span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span></span>
                   <span class="an-tab-label">Nephro</span>
-                  <span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span>
                 </button>
                 <button class="an-tab" id="antab-access" onclick="switchActionTab('access')" role="tab" aria-selected="false" aria-controls="anpane-access">
-                  <i class="ti ti-user-plus" style="color:var(--amber)"></i>
+                  <span class="an-tab-icon"><i class="ti ti-user-plus" style="color:var(--amber)"></i><span class="an-tab-badge an-badge-amber" id="antbadge-access"></span></span>
                   <span class="an-tab-label">Access</span>
-                  <span class="an-tab-badge an-badge-amber" id="antbadge-access"></span>
                 </button>
               </div>
               <div class="an-pane" id="anpane-access" role="tabpanel"></div>
@@ -1629,8 +1650,9 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           </div>
         </div>
 
-        <!-- RIGHT col wrapper -->
-        <div class="right-col" id="workspace-right">
+        <!-- RIGHT col wrapper — also a drop zone -->
+        <div class="right-col col-drop-zone" id="workspace-right" data-col="right"
+          ondragover="onColDragOver(event,'right')" ondragleave="onColDragLeave(event,'right')" ondrop="onColDrop(event,'right')">
 
           <!-- Recently Completed -->
           <div class="home-section" data-section="recently-completed" id="hsec-recently-completed">
@@ -1645,7 +1667,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
                   <span class="rc-hdr-count" id="rc-count"></span>
                 </div>
                 <a class="rc-hdr-link" onclick="sbNav('recently-completed', document.getElementById('nav-recently-completed'))">
-                  View all <i class="ti ti-arrow-right" style="font-size:11px"></i>
+                  View all <i class="ti ti-arrow-right" style="font-size:12px"></i>
                 </a>
               </div>
               <div id="rc-list"></div>
@@ -1763,7 +1785,7 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
       <div class="phys-lc-banner-label"><i class="ti ti-books"></i>How physicians can complete this requirement</div>
       <div class="phys-lc-options" id="phys-lc-options"></div>
       <a class="phys-lc-link" href="https://portal.mct2d.org/portal/events/learning-community" target="_blank" rel="noopener">
-        View all options on Learning requirements &amp; options <i class="ti ti-external-link" style="font-size:11px"></i>
+        View all options on Learning requirements &amp; options <i class="ti ti-external-link" style="font-size:12px"></i>
       </a>
     </div>
     <div class="phys-progress-wrap">
@@ -2207,7 +2229,7 @@ function nav(page, el){
 
   if(page === 'home' || page === 'dashboard'){
     showView('view-home');
-    document.getElementById('page-title').textContent = 'MCT2D Participation Management Center';
+    document.getElementById('page-title').textContent = 'Participation Management Center';
     const homeEl = document.getElementById('nav-home');
     if(homeEl) homeEl.classList.add('active');
     setBreadcrumb([]); // no breadcrumb on home
@@ -2325,6 +2347,8 @@ const RECENTLY_COMPLETED=[
     pts:'15/15 pts',
     status:'credited', statusLabel:'Credited',
     when:'Apr 10, 2026',
+    url:'https://portal.mct2d.org/portal/tasks',
+    urlLabel:'View task summary',
   },
   {
     type:'credited',
@@ -2334,6 +2358,8 @@ const RECENTLY_COMPLETED=[
     pts:'10/10 pts',
     status:'credited', statusLabel:'Credited',
     when:'Mar 2026',
+    url:'https://portal.mct2d.org/portal/tasks',
+    urlLabel:'View task summary',
   },
   {
     type:'completed',
@@ -2343,6 +2369,8 @@ const RECENTLY_COMPLETED=[
     pts:'Pending credit',
     status:'submitted', statusLabel:'Awaiting credit',
     when:'May 7, 2026',
+    url:'https://portal.mct2d.org/portal/registrations',
+    urlLabel:'View registration & attendance',
   },
   {
     type:'completed',
@@ -2352,6 +2380,8 @@ const RECENTLY_COMPLETED=[
     pts:null,
     status:'submitted', statusLabel:'Awaiting verification',
     when:'May 1–7, 2026',
+    url:'__openPhysicianOverlay__',
+    urlLabel:'View physician completion list',
   },
   {
     type:'credited',
@@ -2361,6 +2391,8 @@ const RECENTLY_COMPLETED=[
     pts:'10/10 pts',
     status:'credited', statusLabel:'Credited',
     when:'Feb 28, 2026',
+    url:'https://portal.mct2d.org/portal/tasks',
+    urlLabel:'View task summary',
   },
   {
     type:'completed',
@@ -2370,6 +2402,8 @@ const RECENTLY_COMPLETED=[
     pts:'5 pts per practice',
     status:'credited', statusLabel:'Credited',
     when:'Nov–Dec 2025',
+    url:'https://portal.mct2d.org/portal/tasks',
+    urlLabel:'View task summary',
   },
   {
     type:'completed',
@@ -2379,6 +2413,8 @@ const RECENTLY_COMPLETED=[
     pts:'25 pts per practice',
     status:'credited', statusLabel:'Credited',
     when:'Nov 15, 2025',
+    url:'https://portal.mct2d.org/portal/registrations',
+    urlLabel:'View registration & attendance',
   },
 ];
 
@@ -2390,21 +2426,33 @@ function renderRecentlyCompleted(){
   if(count) count.textContent=RECENTLY_COMPLETED.length+' recent';
   const dotCls={credited:'rc-dot-credited',submitted:'rc-dot-submitted',completed:'rc-dot-completed'};
   const stCls={credited:'rc-status-credited',submitted:'rc-status-submitted',completed:'rc-status-completed'};
-  list.innerHTML=RECENTLY_COMPLETED.slice(0,SHOW).map(r=>`
-    <div class="rc-item">
+
+  list.innerHTML=RECENTLY_COMPLETED.slice(0,SHOW).map(r=>{
+    const clickAction = r.url === '__openPhysicianOverlay__'
+      ? 'openPhysicianOverlay()'
+      : r.url ? `window.open('${r.url}','_blank')` : '';
+    const hasLink = !!clickAction;
+
+    return`<div class="rc-item${hasLink?' rc-item-link':''}" ${hasLink?`onclick="${clickAction}"`:''}
+      title="${hasLink?r.urlLabel:''}">
       <div class="rc-dot ${dotCls[r.status]||'rc-dot-completed'}"></div>
       <div class="rc-body">
-        <div class="rc-title">${r.title}</div>
+        <div class="rc-title">
+          ${r.title}
+          ${hasLink?`<i class="ti ti-external-link rc-link-icon"></i>`:''}
+        </div>
         <div class="rc-who">${r.who}</div>
         <div class="rc-status-row">
           <span class="rc-status ${stCls[r.status]||'rc-status-completed'}">
-            <i class="ti ti-circle-check" style="font-size:10px"></i>${r.statusLabel}
+            <i class="ti ti-circle-check" style="font-size:12px"></i>${r.statusLabel}
           </span>
           ${r.pts?`<span class="rc-pts">${r.pts}</span>`:''}
           <span class="rc-when">${r.scorecard} · ${r.when}</span>
         </div>
+        ${hasLink?`<div class="rc-link-label">${r.urlLabel} <i class="ti ti-arrow-right" style="font-size:11px"></i></div>`:''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 /* Pending credit items */
@@ -2439,12 +2487,23 @@ function switchDfTab(tab){
 }
 
 /* Render directly into df-panel panes using existing data functions */
+let deadlinesExpanded = false;
+
+function toggleDeadlines() {
+  deadlinesExpanded = !deadlinesExpanded;
+  renderDfDeadlines();
+}
+
 function renderDfDeadlines(){
   const el=document.getElementById('dfpane-deadlines');
   if(!el||typeof DEADLINES==='undefined') return;
   const now=TODAY;
   const past=DEADLINES.filter(d=>new Date(d.date)<now).sort((a,b)=>new Date(b.date)-new Date(a.date));
   const upcoming=DEADLINES.filter(d=>new Date(d.date)>=now).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const PREVIEW = 5;
+  const visibleUpcoming = deadlinesExpanded ? upcoming : upcoming.slice(0, PREVIEW);
+  const hiddenCount = upcoming.length - PREVIEW;
+
   function chipHtml(applies){
     return applies.map(a=>{
       const map={po:'PO scorecard',pcp:'PCP practices',endo:'Endocrinology',nephro:'Nephrology',all:'All participants'};
@@ -2470,9 +2529,23 @@ function renderDfDeadlines(){
       <div class="dl-days ${daysCls}">${daysLabel}</div>
     </div>`;
   }
+
+  const showMoreBtn = !deadlinesExpanded && hiddenCount > 0
+    ? `<button class="dl-show-more" onclick="toggleDeadlines()">
+        <i class="ti ti-chevron-down"></i>Show ${hiddenCount} more deadline${hiddenCount!==1?'s':''}
+       </button>`
+    : '';
+  const showLessBtn = deadlinesExpanded && upcoming.length > PREVIEW
+    ? `<button class="dl-show-more" onclick="toggleDeadlines()">
+        <i class="ti ti-chevron-up"></i>Show less
+       </button>`
+    : '';
+
   el.innerHTML=
-    `<div class="dl-section-lbl">Upcoming — ${upcoming.length} deadlines</div>`+
-    upcoming.map(itemHtml).join('')+
+    `<div class="dl-section-lbl">Upcoming — ${upcoming.length} deadline${upcoming.length!==1?'s':''}</div>`+
+    visibleUpcoming.map(itemHtml).join('')+
+    showMoreBtn+
+    showLessBtn+
     `<div class="dl-section-lbl">Past this VBR year</div>`+
     past.map(itemHtml).join('');
 }
@@ -2972,13 +3045,13 @@ function renderTable(){
           <div class="pt-champion">
             <span class="pt-champion-icon">${initials}</span>
             ${p.champion}
-            ${hasOpenTasks?`<span style="margin-left:4px;font-size:11px;font-weight:600;color:var(--amber)">· ${openTasks.filter(t=>!t.done).length} open task${openTasks.filter(t=>!t.done).length!==1?'s':''}</span>`:''}
+            ${hasOpenTasks?`<span style="margin-left:4px;font-size:12px;font-weight:600;color:var(--amber)">· ${openTasks.filter(t=>!t.done).length} open task${openTasks.filter(t=>!t.done).length!==1?'s':''}</span>`:''}
           </div>
         </div>
         <div class="pt-status-cell">
           <div class="pt-status-label">
             <span style="color:${barColor};font-weight:700">${pct}%</span>
-            <span style="font-size:11px;color:var(--gray-400)">${p.t}/${p.mx} pts</span>
+            <span style="font-size:12px;color:var(--gray-400)">${p.t}/${p.mx} pts</span>
           </div>
           <div class="pt-bar-track"><div class="pt-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
         </div>
@@ -3068,7 +3141,7 @@ function buildPracticeDetail(p, spec, champion, initials, tasks){
         <div class="pt-task-right">
           <div class="pt-task-due" style="color:${t.dueColor}"><i class="ti ti-calendar" style="font-size:12px;margin-right:3px"></i>Due ${t.due}</div>
           <div class="pt-task-pts">${t.pts} pts</div>
-          <div style="margin-top:4px"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:${t.importance==='High'?'var(--amber-lt)':'var(--teal-lt)'};color:${t.importance==='High'?'#7a4a0d':'#005c5d'};border:.5px solid ${t.importance==='High'?'var(--amber)':'var(--teal)'}">${t.importance} priority</span></div>
+          <div style="margin-top:4px"><span style="font-size:12px;font-weight:600;padding:2px 8px;border-radius:20px;background:${t.importance==='High'?'var(--amber-lt)':'var(--teal-lt)'};color:${t.importance==='High'?'#7a4a0d':'#005c5d'};border:.5px solid ${t.importance==='High'?'var(--amber)':'var(--teal)'}">${t.importance} priority</span></div>
         </div>
       </div>`;
     }).join('');
@@ -3167,8 +3240,8 @@ function renderApprovals() {
       actionBtns = `<div class="approval-actions"><span class="approval-btn st-denied"><i class="ti ti-circle-x" style="font-size:12px"></i>Denied</span></div>`;
     } else {
       actionBtns = `<div class="approval-actions">
-        <button class="approval-btn approval-btn-approve" onclick="event.stopPropagation();approveUser('${u.id}')"><i class="ti ti-check" style="font-size:11px"></i>Approve</button>
-        <button class="approval-btn approval-btn-review" onclick="event.stopPropagation();nav('pending',document.getElementById('nav-pending'))"><i class="ti ti-external-link" style="font-size:11px"></i>Review</button>
+        <button class="approval-btn approval-btn-approve" onclick="event.stopPropagation();approveUser('${u.id}')"><i class="ti ti-check" style="font-size:12px"></i>Approve</button>
+        <button class="approval-btn approval-btn-review" onclick="event.stopPropagation();nav('pending',document.getElementById('nav-pending'))"><i class="ti ti-external-link" style="font-size:12px"></i>Review</button>
       </div>`;
     }
     return `<div class="approval-item" style="${isActioned?'opacity:.6':''}">
@@ -3186,10 +3259,10 @@ function renderApprovals() {
     <div class="an-pane-subhdr" style="background:var(--amber-lt);border-bottom:1px solid var(--gray-200)">
       <div class="approvals-icon" style="background:var(--navy)"><i class="ti ti-user-plus"></i></div>
       <div style="flex:1;min-width:0">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--navy);margin-bottom:2px">Portal access requests</div>
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--navy);margin-bottom:2px">Portal access requests</div>
         <div style="font-size:13px;color:var(--gray-600)">${count > 0 ? count + ' pending · review and approve or deny' : 'No pending requests'}</div>
       </div>
-      <a class="approvals-link" onclick="nav('pending',document.getElementById('nav-pending'))">View all <i class="ti ti-arrow-right" style="font-size:11px"></i></a>
+      <a class="approvals-link" onclick="nav('pending',document.getElementById('nav-pending'))">View all <i class="ti ti-arrow-right" style="font-size:12px"></i></a>
     </div>
     ${items}`;
 }
@@ -3322,8 +3395,8 @@ function toggleManageLinks() {
   const btn = document.getElementById('ql-manage-btn');
   if(btn){
     btn.innerHTML = qlManageMode
-      ? '<i class="ti ti-check" aria-hidden="true" style="font-size:11px"></i>Done'
-      : '<i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit';
+      ? '<i class="ti ti-check" aria-hidden="true" style="font-size:12px"></i>Done'
+      : '<i class="ti ti-pencil" aria-hidden="true" style="font-size:12px"></i>Edit';
     btn.classList.toggle('active', qlManageMode);
   }
   renderQuickLinks();
@@ -3879,7 +3952,7 @@ function physRowHtml(p, practiceUrl) {
     </div>
     <div class="phys-status">
       <div class="phys-status-badge ${badgeCls}">${badgeLabel}</div>
-      ${!p.complete ? `<a href="https://portal.mct2d.org/portal/events/learning-community" target="_blank" style="font-size:12px;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:3px;margin-top:4px;white-space:nowrap"><i class="ti ti-external-link" style="font-size:11px"></i>LC options</a>` : ''}
+      ${!p.complete ? `<a href="https://portal.mct2d.org/portal/events/learning-community" target="_blank" style="font-size:12px;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:3px;margin-top:4px;white-space:nowrap"><i class="ti ti-external-link" style="font-size:12px"></i>LC options</a>` : ''}
     </div>
   </div>`;
 }
@@ -3901,38 +3974,24 @@ document.addEventListener('keydown', e => {
 });
 
 /* ══════════ HOME SECTION DRAG & DROP ══════════
-   Sections are draggable within their column context:
-   - "participation-overview" and "quick-links" live above the workspace (full-width)
-   - "actions-needed" lives in the left column
-   - "recently-completed", "awaiting-credit", "deadlines-updates" live in the right column
-   Users can drag sections within their column. Order persists via window.storage.
+   Sections can be dragged between left and right columns freely.
+   Top sections (participation-overview, quick-links) stay full-width above the workspace.
+   Left/right sections resize to fit whichever column they land in.
+   Order and column assignment persist via window.storage.
 ═══════════════════════════════════════════════ */
 
 const SECTION_ORDER_KEY = 'home-section-order';
 
-// Default order per region
-const DEFAULT_ORDER = {
-  top:   ['participation-overview', 'quick-links'],
-  left:  ['actions-needed'],
-  right: ['recently-completed', 'awaiting-credit', 'deadlines-updates'],
+// Which column each workspace section starts in (can change via drag)
+const SECTION_DEFAULT_COL = {
+  'actions-needed':     'left',
+  'recently-completed': 'right',
+  'awaiting-credit':    'right',
+  'deadlines-updates':  'right',
 };
 
-// Map section → which region it belongs to
-const SECTION_REGION = {
-  'participation-overview': 'top',
-  'quick-links':            'top',
-  'actions-needed':         'left',
-  'recently-completed':     'right',
-  'awaiting-credit':        'right',
-  'deadlines-updates':      'right',
-};
-
-// Map region → parent container ID
-const REGION_CONTAINER = {
-  top:   'view-home',   // direct children of view-home before workspace
-  left:  'workspace-left',
-  right: 'workspace-right',
-};
+// Top sections are fixed full-width, not draggable between columns
+const TOP_SECTIONS = ['participation-overview', 'quick-links'];
 
 let dragSrcSection = null;
 
@@ -3940,84 +3999,111 @@ function initDragAndDrop() {
   document.querySelectorAll('.hsec-drag-bar').forEach(bar => {
     bar.addEventListener('dragstart', onDragStart);
     bar.addEventListener('dragend', onDragEnd);
+    // Only enable dragging between columns for workspace sections
+    const section = bar.closest('.home-section');
+    if (section && TOP_SECTIONS.includes(section.dataset.section)) {
+      bar.setAttribute('draggable', 'false');
+    }
   });
-  document.querySelectorAll('.home-section').forEach(sec => {
-    sec.addEventListener('dragover', onDragOver);
-    sec.addEventListener('dragleave', onDragLeave);
-    sec.addEventListener('drop', onDrop);
+  // Section-to-section drop (positional reorder within or across columns)
+  document.querySelectorAll('.home-section:not([data-section="participation-overview"]):not([data-section="quick-links"])').forEach(sec => {
+    sec.addEventListener('dragover', onSectionDragOver);
+    sec.addEventListener('dragleave', onSectionDragLeave);
+    sec.addEventListener('drop', onSectionDrop);
   });
 }
 
 function onDragStart(e) {
-  dragSrcSection = e.currentTarget.closest('.home-section');
+  const section = e.currentTarget.closest('.home-section');
+  if (!section || TOP_SECTIONS.includes(section.dataset.section)) {
+    e.preventDefault(); return;
+  }
+  dragSrcSection = section;
   dragSrcSection.classList.add('dragging');
   e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('text/plain', dragSrcSection.dataset.section);
+  e.dataTransfer.setData('text/plain', section.dataset.section);
 }
 
 function onDragEnd(e) {
-  document.querySelectorAll('.home-section').forEach(s => {
-    s.classList.remove('dragging', 'drag-over');
+  document.querySelectorAll('.home-section, .col-drop-zone').forEach(s => {
+    s.classList.remove('dragging', 'drag-over', 'col-drag-over');
   });
   dragSrcSection = null;
 }
 
-function onDragOver(e) {
-  e.preventDefault();
+// Drop onto another section — place before or after it based on cursor Y
+function onSectionDragOver(e) {
+  if (!dragSrcSection) return;
+  e.preventDefault(); e.stopPropagation();
   e.dataTransfer.dropEffect = 'move';
   const target = e.currentTarget;
   if (target === dragSrcSection) return;
-  // Only allow drops within the same region
-  const srcRegion = SECTION_REGION[dragSrcSection?.dataset?.section];
-  const tgtRegion = SECTION_REGION[target.dataset.section];
-  if (srcRegion !== tgtRegion) return;
+  // Clear other highlights, set this one
+  document.querySelectorAll('.home-section').forEach(s => s.classList.remove('drag-over'));
+  document.querySelectorAll('.col-drop-zone').forEach(c => c.classList.remove('col-drag-over'));
   target.classList.add('drag-over');
 }
 
-function onDragLeave(e) {
-  e.currentTarget.classList.remove('drag-over');
+function onSectionDragLeave(e) {
+  // Only remove if leaving entirely (not entering a child)
+  if (!e.currentTarget.contains(e.relatedTarget)) {
+    e.currentTarget.classList.remove('drag-over');
+  }
 }
 
-function onDrop(e) {
-  e.preventDefault();
+function onSectionDrop(e) {
+  e.preventDefault(); e.stopPropagation();
   const target = e.currentTarget;
   target.classList.remove('drag-over');
   if (!dragSrcSection || target === dragSrcSection) return;
 
-  const srcRegion = SECTION_REGION[dragSrcSection.dataset.section];
-  const tgtRegion = SECTION_REGION[target.dataset.section];
-  if (srcRegion !== tgtRegion) return;
-
-  // Determine drop position (before or after target based on cursor)
   const rect = target.getBoundingClientRect();
-  const midY = rect.top + rect.height / 2;
-  const insertBefore = e.clientY < midY;
-
+  const insertBefore = e.clientY < rect.top + rect.height / 2;
   const parent = target.parentElement;
-  if (insertBefore) {
-    parent.insertBefore(dragSrcSection, target);
-  } else {
-    parent.insertBefore(dragSrcSection, target.nextSibling);
-  }
+  parent.insertBefore(dragSrcSection, insertBefore ? target : target.nextSibling);
+  saveSectionOrder();
+}
 
+// Drop onto column background (when no section is under cursor)
+function onColDragOver(e, col) {
+  if (!dragSrcSection) return;
+  // Don't fire if cursor is over a child section
+  if (e.target.closest('.home-section') && e.target.closest('.home-section') !== dragSrcSection) return;
+  e.preventDefault(); e.stopPropagation();
+  document.querySelectorAll('.home-section').forEach(s => s.classList.remove('drag-over'));
+  document.querySelectorAll('.col-drop-zone').forEach(c => c.classList.remove('col-drag-over'));
+  document.getElementById('workspace-' + col)?.classList.add('col-drag-over');
+}
+
+function onColDragLeave(e, col) {
+  const container = document.getElementById('workspace-' + col);
+  if (container && !container.contains(e.relatedTarget)) {
+    container.classList.remove('col-drag-over');
+  }
+}
+
+function onColDrop(e, col) {
+  e.preventDefault(); e.stopPropagation();
+  const container = document.getElementById('workspace-' + col);
+  if (!container) return;
+  container.classList.remove('col-drag-over');
+  if (!dragSrcSection) return;
+  // Only move if dropping on the column background, not on a section
+  const overSection = e.target.closest('.home-section');
+  if (overSection && overSection !== dragSrcSection) return;
+  // Append to bottom of column
+  container.appendChild(dragSrcSection);
   saveSectionOrder();
 }
 
 async function saveSectionOrder() {
-  const order = {};
-  ['left','right'].forEach(region => {
-    const container = document.getElementById(REGION_CONTAINER[region]);
+  const order = { left: [], right: [] };
+  ['left', 'right'].forEach(col => {
+    const container = document.getElementById('workspace-' + col);
     if (!container) return;
-    order[region] = [...container.querySelectorAll(':scope > .home-section')]
+    order[col] = [...container.querySelectorAll(':scope > .home-section')]
       .map(s => s.dataset.section);
   });
-  // Top region (above workspace)
-  const homeView = document.getElementById('view-home');
-  if (homeView) {
-    const topSections = [...homeView.querySelectorAll(':scope > .home-section')]
-      .map(s => s.dataset.section);
-    if (topSections.length) order.top = topSections;
-  }
   try {
     await window.storage.set(SECTION_ORDER_KEY, JSON.stringify(order));
   } catch(e) {}
@@ -4026,33 +4112,19 @@ async function saveSectionOrder() {
 async function loadSectionOrder() {
   try {
     const res = await window.storage.get(SECTION_ORDER_KEY);
-    if (!res || !res.value) { initDragAndDrop(); return; }
-    const saved = JSON.parse(res.value);
-
-    // Re-order right column (most likely to be rearranged)
-    const rightContainer = document.getElementById('workspace-right');
-    if (rightContainer && saved.right) {
-      saved.right.forEach(id => {
-        const el = document.getElementById('hsec-' + id);
-        if (el && el.parentElement === rightContainer) {
-          rightContainer.appendChild(el);
-        }
-      });
-    }
-
-    // Re-order top sections
-    const homeView = document.getElementById('view-home');
-    if (homeView && saved.top) {
-      const workspace = document.getElementById('home-workspace');
-      saved.top.forEach(id => {
-        const el = document.getElementById('hsec-' + id);
-        if (el && workspace) {
-          homeView.insertBefore(el, workspace);
-        }
+    if (res && res.value) {
+      const saved = JSON.parse(res.value);
+      // Restore left column order and column membership
+      ['left', 'right'].forEach(col => {
+        const container = document.getElementById('workspace-' + col);
+        if (!container || !saved[col]) return;
+        saved[col].forEach(sectionId => {
+          const el = document.getElementById('hsec-' + sectionId);
+          if (el) container.appendChild(el);
+        });
       });
     }
   } catch(e) {}
-
   initDragAndDrop();
 }
 
