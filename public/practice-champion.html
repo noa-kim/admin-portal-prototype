@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCT2D CQI Admin Portal — Clinical Champion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --navy:#253972;--navy-lt:#eceef5;
+  --teal:#00A6A8;--teal-lt:#e0f5f5;
+  --amber:#d3872c;--amber-lt:#faf0e2;
+  --sky:#b9e2e3;--sky-lt:#f0fafb;
+  --gray-50:#f8f8f7;--gray-100:#f0efec;--gray-200:#e4e2dc;
+  --gray-400:#9a9890;--gray-600:#6b6a64;--gray-900:#1e1e1c;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+  --font:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min-height:100vh}
+
+/* Layout */
+.layout{display:flex;min-height:100vh}
+
+/* ── Sidebar ── */
+.sidebar{width:240px;flex-shrink:0;background:var(--navy);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(185,226,227,.2);border-radius:3px}
+.sb-scroll{flex:1;overflow-y:auto;overflow-x:hidden}
+.sb-scroll::-webkit-scrollbar{width:3px}
+.sb-scroll::-webkit-scrollbar-thumb{background:rgba(185,226,227,.15);border-radius:3px}
+
+/* Logo */
+.sb-logo{padding:16px 14px 13px;border-bottom:.5px solid rgba(185,226,227,.12);flex-shrink:0}
+.sb-logo-top{font-size:9px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.sb-logo-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.sb-logo-sub{font-size:10px;color:rgba(185,226,227,.55);margin-top:1px}
+
+/* Search bar */
+.sb-search-wrap{padding:10px 12px;border-bottom:.5px solid rgba(185,226,227,.1);flex-shrink:0}
+.sb-search{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.2);border-radius:var(--radius-md);padding:7px 10px;cursor:text;transition:background .13s}
+.sb-search:hover,.sb-search.focused{background:rgba(255,255,255,.12);border-color:rgba(185,226,227,.4)}
+.sb-search i{font-size:14px;color:rgba(185,226,227,.5);flex-shrink:0}
+.sb-search input{background:none;border:none;outline:none;font-size:12px;color:#fff;width:100%;font-family:var(--font);caret-color:var(--teal)}
+.sb-search input::placeholder{color:rgba(185,226,227,.45)}
+.sb-search-kbd{font-size:9px;color:rgba(185,226,227,.35);background:rgba(255,255,255,.08);border:.5px solid rgba(185,226,227,.15);border-radius:3px;padding:1px 5px;flex-shrink:0;font-family:var(--font-mono,monospace);white-space:nowrap}
+
+/* Search results overlay */
+.sb-results{position:absolute;left:0;right:0;top:0;background:var(--navy);z-index:300;display:none;flex-direction:column}
+.sb-results.open{display:flex}
+.sb-results-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 8px;border-bottom:.5px solid rgba(185,226,227,.12)}
+.sb-results-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(185,226,227,.45)}
+.sb-results-close{font-size:13px;color:rgba(185,226,227,.5);cursor:pointer;background:none;border:none;padding:2px;font-family:var(--font)}
+.sb-results-close:hover{color:#fff}
+.sb-results-list{overflow-y:auto;max-height:calc(100vh - 80px);padding:4px 0 8px}
+.sb-result-item{display:flex;align-items:center;gap:9px;padding:8px 14px;cursor:pointer;transition:background .1s}
+.sb-result-item:hover,.sb-result-item.highlighted{background:rgba(255,255,255,.1)}
+.sb-result-icon{width:22px;height:22px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.sb-result-text{flex:1;min-width:0}
+.sb-result-name{font-size:12px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-result-group{font-size:10px;color:rgba(185,226,167,.5);margin-top:1px}
+.sb-result-badge{font-size:9px;padding:1px 6px;border-radius:10px;background:rgba(211,135,44,.25);color:#FAC775;white-space:nowrap;flex-shrink:0}
+.sb-no-results{padding:20px 14px;font-size:12px;color:rgba(185,226,227,.4);text-align:center}
+
+/* Home item */
+.sb-home-item{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;font-size:12px;font-weight:600;color:rgba(185,226,227,.85);transition:all .13s;border-left:2px solid transparent;text-decoration:none}
+.sb-home-item i{font-size:15px}
+.sb-home-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-home-item.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--teal)}
+
+/* Recently visited */
+.sb-recent{padding:8px 0 4px;border-bottom:.5px solid rgba(185,226,227,.1)}
+.sb-recent-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,226,227,.35);padding:0 14px 5px;display:flex;align-items:center;gap:5px}
+.sb-recent-lbl i{font-size:11px}
+.sb-recent-item{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:400;color:rgba(185,226,227,.58);transition:all .13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-recent-item i{font-size:13px;flex-shrink:0;color:rgba(185,226,227,.35)}
+.sb-recent-item:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+/* Collapsible section groups */
+.sb-group{border-bottom:.5px solid rgba(185,226,227,.08)}
+.sb-group-header{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;transition:background .13s;user-select:none}
+.sb-group-header:hover{background:rgba(255,255,255,.05)}
+.sb-group-header.active-group{background:rgba(255,255,255,.07)}
+.sb-group-icon{font-size:14px;color:rgba(185,226,227,.55);flex-shrink:0;transition:color .13s}
+.sb-group-header:hover .sb-group-icon,.sb-group-header.active-group .sb-group-icon{color:rgba(185,226,227,.85)}
+.sb-group-label{font-size:12px;font-weight:500;color:rgba(185,226,227,.72);flex:1;transition:color .13s}
+.sb-group-header:hover .sb-group-label,.sb-group-header.active-group .sb-group-label{color:#fff}
+.sb-group-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.sb-group-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;white-space:nowrap}
+.sgb-amber{background:rgba(211,135,44,.3);color:#FAC775}
+.sgb-teal{background:rgba(0,166,168,.25);color:var(--sky)}
+.sgb-gray{background:rgba(255,255,255,.1);color:rgba(185,226,227,.55)}
+.sb-group-chev{font-size:12px;color:rgba(185,226,227,.3);transition:transform .2s}
+.sb-group.open .sb-group-chev{transform:rotate(180deg)}
+
+/* Group body — items */
+.sb-group-body{display:none;padding-bottom:4px}
+.sb-group.open .sb-group-body{display:block}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px 7px 36px;cursor:pointer;font-size:11px;font-weight:400;color:rgba(185,226,227,.62);transition:all .13s;border-left:2px solid transparent;text-decoration:none;white-space:nowrap;overflow:hidden}
+.sb-item i{font-size:13px;flex-shrink:0}
+.sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-item.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--teal)}
+.sb-item-hint{font-size:10px;color:rgba(185,226,227,.38);margin-top:1px;white-space:normal;line-height:1.35;padding:0 14px 5px 36px}
+
+/* Context hints under group header */
+.sb-group-hint{font-size:10px;color:rgba(185,226,227,.42);padding:0 14px 7px 36px;line-height:1.4;display:none}
+.sb-group.open .sb-group-hint{display:none}
+
+/* Footer */
+.sb-footer{padding:11px 14px;border-top:.5px solid rgba(185,226,227,.1);flex-shrink:0}
+.sb-user{display:flex;align-items:center;gap:9px}
+.sb-avatar{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--navy);flex-shrink:0}
+.sb-user-name{font-size:11px;font-weight:600;color:#fff}
+.sb-user-role{font-size:10px;color:rgba(185,226,227,.55)}
+
+/* Main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{background:var(--navy);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;flex-shrink:0}
+.tb-org{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--sky);margin-bottom:2px}
+.tb-title{font-size:17px;font-weight:600;color:#fff;letter-spacing:-.01em}
+.tb-right{display:flex;align-items:center;gap:18px}
+.tb-stat{text-align:right}
+.tb-stat-lbl{font-size:9px;color:rgba(185,226,227,.72);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.tb-stat-val{font-size:20px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.01em}
+.tb-stat-sub{font-size:10px;color:var(--sky)}
+.tb-div{width:.5px;height:34px;background:rgba(185,226,227,.2)}
+
+/* Score bar */
+.scorebar{background:var(--teal-lt);border-bottom:1px solid var(--sky);padding:8px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;flex-shrink:0}
+.sbl{font-size:12px;font-weight:600;color:#005c5d;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.sb-track{flex:1;min-width:80px;max-width:200px;height:7px;background:rgba(0,166,168,.18);border-radius:4px;overflow:hidden;border:.5px solid rgba(0,166,168,.3)}
+.sb-fill{height:100%;border-radius:4px;background:var(--teal);transition:width .5s}
+.sb-pts{font-size:12px;font-weight:700;color:#005c5d;white-space:nowrap}
+.sb-period{font-size:11px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
+
+/* View tabs */
+.view-tabs{padding:12px 24px 0;display:flex;gap:0;border-bottom:1px solid var(--gray-200);background:#fff;flex-shrink:0}
+.vt{font-size:12px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
+.vt i{font-size:14px}
+.vt:hover{color:var(--navy)}
+.vt.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+
+/* Content */
+.content{padding:20px 24px;flex:1;background:#fff}
+.view{display:none}.view.on{display:block}
+
+/* Stat grid */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:18px}
+.stat-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:11px 13px}
+.sc-lbl{font-size:11px;color:var(--gray-400);margin-bottom:4px}
+.sc-val{font-size:22px;font-weight:700;color:var(--gray-900);line-height:1;letter-spacing:-.01em}
+.sc-sub{font-size:10px;color:var(--gray-400);margin-top:3px}
+
+/* Section header bars */
+.sec-head{padding:8px 14px;border-radius:var(--radius-md) var(--radius-md) 0 0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sh-amber{background:var(--amber)}.sh-teal{background:var(--teal)}.sh-navy{background:var(--navy)}
+.sh-title{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+.sh-right{font-size:11px;color:rgba(255,255,255,.75)}
+.sec-body{border:1px solid var(--gray-200);border-top:none;border-radius:0 0 var(--radius-md) var(--radius-md);overflow:hidden;margin-bottom:18px;background:#fff}
+
+/* Home two-col */
+.two-col{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;align-items:start}
+
+/* Coordinator context bar */
+.coord-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 14px;background:var(--navy-lt);border:1px solid rgba(37,57,114,.12);
+  border-radius:var(--radius-md);margin-bottom:14px;flex-wrap:wrap}
+.coord-context{font-size:12px;color:var(--navy);display:flex;align-items:center;gap:7px}
+.coord-context i{font-size:14px;color:var(--teal)}
+.coord-context strong{font-weight:600}
+.coord-actions{display:flex;gap:6px;flex-wrap:wrap}
+.coord-btn{font-size:11px;font-weight:500;padding:5px 11px;border-radius:20px;
+  border:.5px solid rgba(37,57,114,.25);background:#fff;color:var(--navy);
+  cursor:pointer;display:flex;align-items:center;gap:5px;
+  transition:all .12s;font-family:var(--font)}
+.coord-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.coord-btn i{font-size:12px}
+
+/* Command summary row */
+.cmd-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:18px}
+.cmd-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:11px 13px;cursor:default}
+.cmd-card.clickable{cursor:pointer;transition:border-color .12s}
+.cmd-card.clickable:hover{border-color:var(--navy)}
+.cmd-card-lbl{font-size:11px;color:var(--gray-400);margin-bottom:4px;line-height:1.3}
+.cmd-card-val{font-size:22px;font-weight:700;line-height:1;letter-spacing:-.01em}
+.cmd-card-sub{font-size:10px;color:var(--gray-400);margin-top:3px}
+.cmd-val-amber{color:var(--amber)}
+.cmd-val-navy{color:var(--navy)}
+.cmd-val-teal{color:var(--teal)}
+.cmd-val-ok{color:var(--gray-400)}
+
+/* Quick links */
+.ql-wrap{margin-bottom:18px}
+.ql-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ql-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);display:flex;align-items:center;gap:5px}
+.ql-label i{font-size:13px}
+.ql-hint{font-size:11px;color:var(--gray-400);margin-left:2px}
+.ql-manage-btn{margin-left:auto;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font)}
+.ql-manage-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.ql-manage-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.ql-grid{display:flex;flex-wrap:wrap;gap:7px}
+
+.ql-chip{display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-family:var(--font);text-decoration:none;max-width:280px}
+.ql-chip:hover{border-color:var(--navy);background:var(--navy-lt)}
+.ql-chip-icon{width:24px;height:24px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ql-chip-text{flex:1;min-width:0}
+.ql-chip-title{font-size:12px;font-weight:500;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ql-chip-group{font-size:10px;color:var(--gray-400);margin-top:1px}
+.ql-chip-remove{font-size:14px;color:var(--gray-400);flex-shrink:0;opacity:0;transition:opacity .12s;margin-left:2px;background:none;border:none;cursor:pointer;padding:0;line-height:1;font-family:var(--font)}
+.ql-chip:hover .ql-chip-remove{opacity:1}
+.ql-chip-remove:hover{color:var(--amber)}
+
+.ql-empty{font-size:12px;color:var(--gray-400);padding:10px 2px;display:flex;align-items:center;gap:6px}
+.ql-empty i{font-size:14px}
+
+/* Add link picker */
+.ql-picker{margin-top:12px;padding:12px 14px;background:var(--gray-50);border:1px dashed var(--gray-200);border-radius:var(--radius-md)}
+.ql-picker-label{font-size:11px;color:var(--gray-600);margin-bottom:10px;font-weight:500}
+.ql-picker-grid{display:flex;flex-wrap:wrap;gap:6px}
+.ql-add-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--radius-md);border:.5px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-size:11px;font-weight:500;color:var(--gray-600);font-family:var(--font)}
+.ql-add-chip i{font-size:13px;color:var(--gray-400)}
+.ql-add-chip:hover{border-color:var(--teal);background:var(--teal-lt);color:#005c5d}
+.ql-add-chip:hover i{color:var(--teal)}
+.ql-add-chip.already-saved{opacity:.45;cursor:default;pointer-events:none}
+
+/* Action items */
+.action-item{border-bottom:1px solid var(--gray-100);padding:11px 14px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .12s}
+.action-item:last-child{border-bottom:none}
+.action-item:hover{background:var(--navy-lt)}
+.ai-accent{width:3px;flex-shrink:0;align-self:stretch;min-height:32px;border-radius:2px}
+.ac-urg{background:var(--amber)}.ac-soon{background:var(--teal)}.ac-later{background:var(--sky)}
+.ai-body{flex:1;min-width:0}
+.ai-title{font-size:13px;font-weight:500;line-height:1.35;color:var(--gray-900)}
+.ai-chips{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;align-items:center}
+.chip{font-size:10px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:500}
+.c-urg{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.c-soon{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.c-later{background:var(--sky-lt);color:#2a6e70;border:.5px solid var(--sky)}
+.c-po{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.25)}
+.c-pcp{background:var(--teal-lt);color:#005c5d;border:.5px solid rgba(0,166,168,.3)}
+.c-nephro{background:#f4f0fa;color:#3d2a70;border:.5px solid #c4b0e8}
+.c-endo{background:#fdf3e8;color:#7a4a0d;border:.5px solid #f0c890}
+.ai-hint{font-size:11px;color:var(--gray-400);margin-top:4px;line-height:1.45}
+.ai-prog{display:flex;align-items:center;gap:8px;margin-top:7px}
+.prog-track{flex:1;height:3px;background:var(--gray-100);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px}
+.prog-txt{font-size:10px;color:var(--gray-400);white-space:nowrap}
+.ai-arrow{font-size:13px;color:var(--gray-400);flex-shrink:0;padding-top:1px}
+.show-more-btn{width:100%;border:none;border-top:1px solid var(--gray-100);background:var(--gray-50);padding:9px;font-size:11px;color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .12s;font-family:var(--font)}
+.show-more-btn:hover{background:var(--navy-lt);color:var(--navy)}
+
+/* Send/copy micro-actions on action items */
+.ai-footer{display:flex;align-items:center;gap:6px;margin-top:7px;padding-top:6px;border-top:.5px solid var(--gray-100)}
+.ai-send-btn{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.ai-send-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.ai-send-btn i{font-size:11px}
+.ai-send-btn.copied{background:var(--teal-lt);color:#005c5d;border-color:var(--teal)}
+
+/* Status badges */
+.status-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+.sb-notstarted{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
+.sb-registered{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
+.sb-submitted{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.sb-awaitingcredit{background:#fdf3e8;color:#7a4a0d;border:.5px solid var(--amber)}
+.sb-credited{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.sb-complete{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
+
+/* Pending credit list */
+.pending-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:.5px solid var(--gray-100)}
+.pending-item:last-child{border-bottom:none}
+.pending-icon{width:22px;height:22px;border-radius:50%;background:var(--amber-lt);border:.5px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--amber);flex-shrink:0;margin-top:1px}
+.pending-body{flex:1;min-width:0}
+.pending-title{font-size:12px;font-weight:500;line-height:1.3;color:var(--gray-900)}
+.pending-meta{font-size:11px;color:var(--gray-600);margin-top:2px}
+.pending-timing{font-size:10px;color:var(--gray-400);margin-top:2px}
+
+/* Feed status chips */
+.feed-status{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;margin-top:3px}
+.fs-credited{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.fs-complete{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
+.fs-registered{background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
+.action-group{border-bottom:1px solid var(--gray-200)}
+.action-group:last-child{border-bottom:none}
+.ag-header{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;transition:background .12s}
+.ag-header:hover{background:var(--gray-50)}
+.ag-header-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.ag-svg-icon{flex-shrink:0;display:flex;align-items:center}
+.ag-text{min-width:0;flex:1}
+.ag-type-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px}
+.ag-full-name{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.3;margin-bottom:1px}
+.ag-period{font-size:11px;color:var(--gray-400)}
+.ag-header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ag-task-count{font-size:11px;color:var(--gray-400);background:var(--gray-100);border:.5px solid var(--gray-200);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.ag-chev{font-size:13px;color:var(--gray-400)}
+.ag-body{}
+
+.action-item{border-bottom:1px solid var(--gray-100);padding:10px 14px 10px 22px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .12s}
+.action-item:last-child{border-bottom:none}
+.action-item:hover{background:var(--navy-lt)}
+.action-item.ai-done{opacity:.62}
+.action-item.ai-done:hover{background:var(--gray-50)}
+.ac-done{background:var(--gray-200)}
+.ai-measure-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-400);margin-top:3px}
+.c-done{background:#e7f7ef;color:#1a6640;border:.5px solid #7fcfa3}
+
+.group-show-more{width:100%;border:none;border-top:1px solid var(--gray-100);background:transparent;padding:8px 14px 8px 22px;font-size:11px;color:var(--teal);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:var(--font);text-align:left;font-weight:500}
+.group-show-more:hover{background:var(--teal-lt)}
+
+/* Pending user approvals block */
+.approvals-block{border-bottom:1px solid var(--gray-200)}
+.approvals-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200)}
+.approvals-subhead-left{display:flex;align-items:center;gap:8px}
+.approvals-icon{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.approvals-title{font-size:12px;font-weight:600;color:var(--navy)}
+.approvals-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--amber);color:#fff;white-space:nowrap}
+.approvals-link{font-size:11px;color:var(--teal);font-weight:500;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0}
+.approvals-link:hover{text-decoration:underline}
+.approval-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.approval-item:last-child{border-bottom:none}
+.approval-item:hover{background:var(--navy-lt)}
+.approval-avatar{width:28px;height:28px;border-radius:50%;background:var(--navy-lt);border:.5px solid rgba(37,57,114,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--navy);flex-shrink:0}
+.approval-body{flex:1;min-width:0}
+.approval-name{font-size:13px;font-weight:500;color:var(--gray-900)}
+.approval-meta{font-size:11px;color:var(--gray-600);margin-top:2px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.approval-role{font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;background:var(--navy-lt);color:var(--navy);border:.5px solid rgba(37,57,114,.2)}
+.approval-date{font-size:10px;color:var(--gray-400);margin-top:3px;display:flex;align-items:center;gap:3px}
+.approval-actions{display:flex;gap:6px;flex-shrink:0;padding-top:2px}
+.approval-btn{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:none;cursor:pointer;font-family:var(--font);transition:all .12s;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.approval-btn-approve{background:var(--teal);color:#fff}
+.approval-btn-approve:hover{background:#008a8b}
+.approval-btn-review{background:#fff;color:var(--navy);border:.5px solid rgba(37,57,114,.3)}
+.approval-btn-review:hover{background:var(--navy-lt)}
+.approval-btn.st-approved{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal);cursor:default;pointer-events:none}
+.approval-btn.st-denied{background:var(--gray-100);color:var(--gray-400);border:.5px solid var(--gray-200);cursor:default;pointer-events:none}
+
+/* Feed */
+.feed-item{border-bottom:1px solid var(--gray-100);padding:10px 14px;display:flex;gap:10px;align-items:flex-start}
+.feed-item:last-child{border-bottom:none}
+.feed-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.fd-done{background:var(--teal)}.fd-event{background:var(--navy)}.fd-pts{background:var(--amber)}
+.feed-body{flex:1;min-width:0}
+.feed-title{font-size:12px;font-weight:500;line-height:1.35}
+.feed-sub{font-size:11px;color:var(--gray-600);margin-top:1px}
+.feed-when{font-size:10px;color:var(--gray-400);margin-top:3px}
+.feed-pts{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:1px 7px;border-radius:20px;background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber);margin-top:3px;font-weight:600}
+
+/* PO scorecard measures */
+.measure-card{border-bottom:1px solid var(--gray-100);overflow:hidden}
+.measure-card:last-child{border-bottom:none}
+.mc-row{display:grid;grid-template-columns:28px 1fr auto auto auto;gap:10px;align-items:center;padding:11px 14px;cursor:pointer;transition:background .12s}
+.mc-row:hover{background:var(--navy-lt)}
+.mc-num{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.mc-info{min-width:0}
+.mc-name{font-size:12px;font-weight:500;line-height:1.3}
+.mc-wt{font-size:10px;color:var(--gray-400);margin-top:1px}
+.mc-scored{text-align:right;flex-shrink:0}
+.mc-pts{font-size:16px;font-weight:700}
+.mc-max{font-size:10px;color:var(--gray-400)}
+.mc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-full{background:var(--teal)}.dot-part{background:var(--amber)}.dot-none{background:var(--gray-200)}
+.mc-chev{font-size:14px;color:var(--gray-400);transition:transform .2s}
+.measure-card.open .mc-chev{transform:rotate(180deg)}
+.mc-detail{display:none;padding:0 14px 14px 50px;background:var(--navy-lt)}
+.measure-card.open .mc-detail{display:block;padding-top:12px}
+.mc-desc{font-size:11px;color:var(--gray-600);line-height:1.6;margin-bottom:10px}
+.mc-tiers{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.mc-tier{display:flex;align-items:center;gap:8px;font-size:11px}
+.tier-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tier-pts{font-size:11px;font-weight:700;min-width:24px;text-align:right}
+.tier-desc{color:var(--gray-600);flex:1}
+.mc-opts-lbl{font-size:10px;font-weight:600;color:var(--gray-400);margin-bottom:5px}
+.mc-opts{display:flex;gap:5px;flex-wrap:wrap}
+.mc-opt{font-size:10px;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
+.mc-opt:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.mc-opt.sel{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* Practice table */
+.spec-tabs{display:flex;gap:0;border-bottom:1px solid var(--gray-200);margin-bottom:14px}
+.spec-tab{font-size:12px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--gray-600);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;transition:color .13s;font-family:var(--font)}
+.spec-tab:hover{color:var(--navy)}
+.spec-tab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:600}
+.spec-count{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--gray-100);color:var(--gray-400)}
+.spec-tab.on .spec-count{background:var(--navy-lt);color:var(--navy)}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:150px;max-width:280px}
+.search-wrap i{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}
+.search-input{width:100%;padding:7px 10px 7px 32px;font-size:12px;border:1px solid var(--gray-200);border-radius:var(--radius-md);background:#fff;color:var(--gray-900);font-family:var(--font);transition:border-color .13s}
+.search-input:focus{outline:none;border-color:var(--teal)}
+.search-input::placeholder{color:var(--gray-400)}
+.filter-row{display:flex;gap:5px;flex-wrap:wrap}
+.pf-btn{font-size:11px;padding:5px 11px;border-radius:20px;border:1px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
+.pf-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.pf-btn:not(.on):hover{background:var(--navy-lt);color:var(--navy)}
+.sort-select{font-size:11px;padding:5px 9px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;font-family:var(--font)}
+.sort-select:focus{outline:none;border-color:var(--teal)}
+.result-count{font-size:11px;color:var(--gray-400);margin-left:auto;white-space:nowrap}
+.prac-table{border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden}
+.prac-thead{display:grid;padding:7px 14px;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em}
+.prac-row{display:grid;padding:9px 14px;border-bottom:1px solid var(--gray-100);align-items:center;cursor:pointer;transition:background .1s;background:#fff}
+.prac-row:last-child{border-bottom:none}
+.prac-row:hover,.prac-row.open{background:var(--navy-lt)}
+.grid-pcp{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 54px 54px 54px 54px 72px 22px}
+.grid-endo{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 66px 66px 66px 72px 22px}
+.grid-nephro{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) 66px 66px 66px 72px 22px}
+.cell-name{min-width:0}
+.prac-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prac-champ{font-size:10px;color:var(--gray-400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell-score{text-align:center}
+.score-pill{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.sp-full{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.sp-part{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.sp-none{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
+.cell-total{text-align:center}
+.total-num{font-size:13px;font-weight:700}
+.total-pct{font-size:9px;color:var(--gray-400)}
+.cell-tier{text-align:right}
+.tier-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.tb-105{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.tb-103{background:var(--teal-lt);color:#005c5d;border:.5px solid var(--teal)}
+.tb-102{background:var(--amber-lt);color:#7a4a0d;border:.5px solid var(--amber)}
+.tb-risk{background:var(--gray-100);color:var(--gray-600);border:.5px solid var(--gray-200)}
+.cell-chev{text-align:right;font-size:13px;color:var(--gray-400)}
+.chev-r{transition:transform .18s;display:inline-block}
+.open .chev-r{transform:rotate(180deg)}
+.prac-detail{display:none;background:var(--navy-lt);border-bottom:1px solid var(--gray-200);padding:12px 14px}
+.prac-detail.show{display:block}
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.detail-mcard{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:10px 12px}
+.dm-lbl{font-size:10px;color:var(--gray-400);margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.dm-val{font-size:17px;font-weight:700}
+.dm-max{font-size:10px;color:var(--gray-400);font-weight:400}
+.dm-bar{height:3px;background:var(--gray-100);border-radius:2px;overflow:hidden;margin-top:6px}
+.dm-fill{height:100%;border-radius:2px}
+.no-results{text-align:center;padding:40px 20px;font-size:13px;color:var(--gray-400)}
+.no-results i{font-size:28px;display:block;margin-bottom:8px}
+
+/* Tooltip */
+.tip-anchor{position:relative;display:inline-flex;align-items:center}
+.tip-icon{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .12s;font-style:normal;line-height:1;user-select:none}
+.ti-white{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff}
+.ti-white:hover{background:rgba(255,255,255,.4)}
+.ti-teal{background:var(--teal-lt);border:1px solid rgba(0,166,168,.4);color:var(--teal)}
+.ti-teal:hover{background:var(--teal);color:#fff}
+.ti-dark{background:var(--navy-lt);border:1px solid rgba(37,57,114,.3);color:var(--navy)}
+.ti-dark:hover{background:var(--navy);color:#fff}
+.tooltip{position:absolute;z-index:200;background:var(--navy);color:#fff;font-size:11px;line-height:1.55;padding:10px 13px;border-radius:var(--radius-md);width:230px;pointer-events:none;opacity:0;transition:opacity .15s;top:calc(100% + 8px);left:50%;transform:translateX(-50%)}
+.tooltip.tr{left:auto;right:0;transform:none}
+.tooltip.tl{left:0;transform:none}
+.tooltip::before{content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-bottom-color:var(--navy)}
+.tooltip.tr::before{left:auto;right:12px;transform:none}
+.tooltip.tl::before{left:12px;transform:none}
+.tooltip.vis{opacity:1}
+.tip-ttl{font-size:11px;font-weight:700;color:var(--sky);margin-bottom:4px}
+
+/* Placeholder pages */
+.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 32px;color:var(--gray-400);min-height:300px}
+.placeholder i{font-size:42px;margin-bottom:14px;color:var(--gray-200)}
+.placeholder h2{font-size:17px;font-weight:600;color:var(--gray-600);margin-bottom:8px}
+.placeholder p{font-size:12px;line-height:1.7;max-width:380px;color:var(--gray-400)}
+.placeholder a{color:var(--teal);text-decoration:none;font-weight:500}
+.placeholder a:hover{text-decoration:underline}
+.ph-url{display:inline-block;margin-top:12px;font-size:11px;font-family:monospace;background:var(--gray-100);color:var(--gray-600);padding:5px 12px;border-radius:var(--radius-sm);border:1px solid var(--gray-200)}
+</style>
+<style>
+/* ════════ Practice-champion additions — same tokens, new components ════════ */
+
+/* Role / specialty accent — set per champion type via body class */
+body{--role:var(--teal);--role-lt:var(--teal-lt);--role-dk:#005c5d}
+body.role-endo{--role:#8B5CF6;--role-lt:#f4f0fa;--role-dk:#5b3fa6}
+body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
+
+/* Champion-type pill in topbar / context */
+.role-pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  padding:2px 9px;border-radius:20px;background:var(--role-lt);color:var(--role-dk);
+  border:.5px solid var(--role);white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.role-pill i{font-size:11px}
+
+/* Practice switcher chips in the coordinator bar */
+.prac-switch{display:flex;gap:5px;flex-wrap:wrap}
+.prac-chip{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:.5px solid rgba(37,57,114,.25);
+  background:#fff;color:var(--navy);cursor:pointer;transition:all .12s;font-family:var(--font);display:flex;align-items:center;gap:5px}
+.prac-chip:hover{background:var(--navy-lt)}
+.prac-chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.prac-chip .pc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* Scorebar — multi-practice mini tracks */
+.sb-prac{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.sb-prac-name{font-size:11px;font-weight:600;color:var(--role-dk);max-width:150px;overflow:hidden;text-overflow:ellipsis}
+.sb-mini-track{width:90px;height:6px;background:rgba(0,166,168,.18);border-radius:4px;overflow:hidden;border:.5px solid rgba(0,166,168,.3)}
+.sb-mini-fill{height:100%;border-radius:4px;background:var(--role);transition:width .5s}
+.sb-mini-pts{font-size:11px;font-weight:700;color:var(--role-dk)}
+.sb-sep{width:.5px;height:20px;background:rgba(0,166,168,.3)}
+
+/* Physician LC follow-up roster */
+.roster-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+.roster-filter{font-size:11px;padding:4px 11px;border-radius:20px;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;transition:all .12s;font-family:var(--font)}
+.roster-filter.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.roster-filter:not(.on):hover{background:var(--navy-lt);color:var(--navy)}
+.roster-bulk{margin-left:auto;font-size:11px;font-weight:500;padding:5px 11px;border-radius:20px;border:none;background:var(--role);color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--font);transition:filter .12s}
+.roster-bulk:hover{filter:brightness(.93)}
+.roster-bulk i{font-size:12px}
+.phys-row{display:grid;grid-template-columns:26px minmax(0,1.5fr) minmax(0,1.4fr) auto auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.phys-row:last-child{border-bottom:none}
+.phys-row:hover{background:var(--navy-lt)}
+.phys-avatar{width:26px;height:26px;border-radius:50%;background:var(--navy-lt);border:.5px solid rgba(37,57,114,.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--navy);flex-shrink:0}
+.phys-name{font-size:12px;font-weight:500;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phys-prac{font-size:10px;color:var(--gray-400);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phys-status{font-size:10px;color:var(--gray-600);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phys-actions{display:flex;gap:6px;flex-shrink:0;justify-self:end}
+.phys-btn{font-size:10px;font-weight:500;padding:4px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .12s;font-family:var(--font);white-space:nowrap}
+.phys-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.phys-btn.sent{background:var(--teal-lt);color:#005c5d;border-color:var(--teal);pointer-events:none}
+.phys-btn i{font-size:11px}
+
+/* "How my practices help the PO" panel */
+.po-panel{border:1px solid var(--gray-200);border-radius:var(--radius-md);overflow:hidden;margin-bottom:18px;background:#fff}
+.po-panel-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--gray-100)}
+.po-panel-row:last-child{border-bottom:none}
+.po-panel-icon{width:24px;height:24px;border-radius:var(--radius-sm);background:var(--navy-lt);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.po-panel-body{flex:1;min-width:0}
+.po-panel-title{font-size:12px;font-weight:500;color:var(--gray-900);line-height:1.3}
+.po-panel-sub{font-size:11px;color:var(--gray-600);margin-top:1px}
+.po-panel-val{font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap}
+
+/* Reports to disseminate */
+.report-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.report-item:last-child{border-bottom:none}
+.report-item:hover{background:var(--navy-lt)}
+.report-icon{width:30px;height:30px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--role-lt);color:var(--role-dk)}
+.report-body{flex:1;min-width:0}
+.report-title{font-size:12px;font-weight:500;color:var(--gray-900);line-height:1.3}
+.report-meta{font-size:10px;color:var(--gray-400);margin-top:2px}
+.report-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* Tip banner / cheerleader nudge */
+.nudge{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--role-lt);border:1px solid var(--role);border-radius:var(--radius-md);margin-bottom:18px}
+.nudge i{font-size:16px;color:var(--role-dk);flex-shrink:0;margin-top:1px}
+.nudge-body{flex:1;font-size:12px;color:var(--role-dk);line-height:1.5}
+.nudge-body strong{font-weight:600}
+.nudge-close{background:none;border:none;color:var(--role-dk);opacity:.6;cursor:pointer;font-size:14px;padding:0;line-height:1;flex-shrink:0;font-family:var(--font)}
+.nudge-close:hover{opacity:1}
+
+/* per-practice action group accent dot */
+.ag-prac-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-right:2px}
+
+/* Actions-needed selector bar — horizontal pill buttons w/ icons + count badges */
+.an-filter{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
+.an-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:20px;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;font-family:var(--font);transition:all .12s;white-space:nowrap}
+.an-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.an-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.an-btn i{font-size:14px}
+.an-btn .an-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.an-badge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;background:var(--amber);color:#fff;flex-shrink:0}
+.an-btn.on .an-badge{background:rgba(255,255,255,.28);color:#fff}
+.an-badge-done{background:var(--teal);color:#fff}
+.an-badge-done i{font-size:11px}
+.an-btn.on .an-badge-done{background:rgba(255,255,255,.28)}
+.an-sep{width:1px;height:20px;background:var(--gray-200);margin:0 1px}
+.an-select{font-size:12px;font-weight:600;padding:6px 28px 6px 11px;border-radius:20px;border:1px solid var(--gray-200);background:#fff;color:var(--navy);font-family:var(--font);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6a64' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
+.an-select.on{background-color:var(--navy);color:#fff;border-color:var(--navy);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.an-select:focus{outline:none;border-color:var(--teal)}
+
+/* Per-practice LC follow-up rows */
+.lcp-row{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.lcp-row:last-child{border-bottom:none}
+.lcp-row:hover{background:var(--navy-lt)}
+.lcp-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.lcp-body{flex:1;min-width:0}
+.lcp-name{font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.3}
+.lcp-count{font-size:12px;margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.lcp-count .big{font-weight:700}
+.lcp-pending{font-size:10px;color:var(--gray-400)}
+.lcp-alldone{font-size:11px;font-weight:500;color:#1a6640;display:inline-flex;align-items:center;gap:4px}
+.lcp-gen-btn{font-size:11px;font-weight:500;padding:6px 13px;border-radius:20px;border:none;background:var(--role);color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--font);transition:filter .12s;white-space:nowrap;flex-shrink:0}
+.lcp-gen-btn:hover{filter:brightness(.93)}
+.lcp-gen-btn i{font-size:13px}
+
+/* Reminder modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(30,30,28,.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:560px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(30,30,28,.3)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 18px 13px;border-bottom:1px solid var(--gray-200)}
+.modal-title{font-size:15px;font-weight:600;color:var(--gray-900);line-height:1.3}
+.modal-sub{font-size:11px;color:var(--gray-400);margin-top:3px}
+.modal-close{background:none;border:none;color:var(--gray-400);font-size:18px;cursor:pointer;line-height:1;padding:2px;font-family:var(--font)}
+.modal-close:hover{color:var(--gray-900)}
+.modal-body{padding:14px 18px;overflow-y:auto}
+.modal-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.modal-textarea{width:100%;min-height:230px;font-family:var(--font);font-size:12px;line-height:1.6;color:var(--gray-900);background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 13px;resize:vertical}
+.modal-textarea:focus{outline:none;border-color:var(--teal)}
+.modal-hint{font-size:11px;color:var(--gray-400);margin-top:8px;display:flex;align-items:center;gap:5px;line-height:1.5}
+.modal-foot{display:flex;align-items:center;gap:8px;padding:13px 18px;border-top:1px solid var(--gray-200);background:var(--gray-50)}
+.modal-btn{font-size:12px;font-weight:500;padding:8px 15px;border-radius:20px;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:6px;transition:all .12s;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600)}
+.modal-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.modal-btn-primary{background:var(--role);color:#fff;border-color:var(--role)}
+.modal-btn-primary:hover{filter:brightness(.93);background:var(--role);color:#fff}
+.modal-btn-primary.copied{background:var(--teal);border-color:var(--teal)}
+.modal-foot-spacer{flex:1}
+</style>
+</head>
+<body class="role-pcp">
+<div class="layout">
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+
+  <div class="sb-logo">
+    <div class="sb-logo-top">Michigan Collaborative</div>
+    <div class="sb-logo-name">MCT2D</div>
+    <div class="sb-logo-sub">CQI Admin Portal</div>
+  </div>
+
+  <!-- Command search -->
+  <div class="sb-search-wrap">
+    <div class="sb-search" id="sb-search-trigger" onclick="openSearch()">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <input type="text" placeholder="Search pages &amp; tasks…" id="sb-search-input" oninput="onSearchInput(event)" onkeydown="onSearchKey(event)" autocomplete="off" aria-label="Search portal pages and tasks">
+      <span class="sb-search-kbd">/</span>
+    </div>
+  </div>
+
+  <div class="sb-results" id="sb-results" role="listbox" aria-label="Search results">
+    <div class="sb-results-header">
+      <span class="sb-results-label">Results</span>
+      <button class="sb-results-close" onclick="closeSearch()" aria-label="Close search"><i class="ti ti-x" aria-hidden="true"></i> Esc</button>
+    </div>
+    <div class="sb-results-list" id="sb-results-list"></div>
+  </div>
+
+  <div class="sb-scroll" id="sb-scroll">
+
+    <a class="sb-home-item active" id="nav-home" onclick="sbNav('home',this)"><i class="ti ti-home" aria-hidden="true"></i>Home</a>
+
+    <div class="sb-recent" id="sb-recent-section" style="display:none">
+      <div class="sb-recent-lbl"><i class="ti ti-history" aria-hidden="true"></i>Recently visited</div>
+      <div id="sb-recent-list"></div>
+    </div>
+
+    <!-- My tasks & requirements -->
+    <div class="sb-group open" id="grp-tasks">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-tasks')">
+        <i class="ti ti-list-check sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">My tasks &amp; requirements</span>
+        <div class="sb-group-meta">
+          <span class="sb-group-badge sgb-amber" id="badge-tasks">6 open</span>
+          <i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-tasks" onclick="sbNav('tasks',this)"><i class="ti ti-list-check"></i>My champion tasks</a>
+        <a class="sb-item" id="nav-task-detail" onclick="sbNav('task-detail',this)"><i class="ti ti-circle-check"></i>Task details &amp; credit status</a>
+        <a class="sb-item" id="nav-trainings" onclick="sbNav('trainings',this)"><i class="ti ti-certificate"></i>Clinical champion trainings</a>
+      </div>
+    </div>
+
+    <!-- My practice(s) -->
+    <div class="sb-group open" id="grp-practice">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-practice')">
+        <i class="ti ti-building-community sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">My practice(s)</span>
+        <div class="sb-group-meta">
+          <span class="sb-group-badge sgb-amber" id="badge-practice">2 need action</span>
+          <i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-practice-overview" onclick="sbNav('practice-overview',this)"><i class="ti ti-building-community"></i>Practice overview</a>
+        <a class="sb-item" id="nav-physicians" onclick="sbNav('physicians',this)"><i class="ti ti-stethoscope"></i>Physician LC follow-up</a>
+        <a class="sb-item" id="nav-not-registered" onclick="sbNav('not-registered',this)"><i class="ti ti-calendar-x"></i>Regional meeting status</a>
+        <div class="sb-item-hint">1 practice hasn't registered for Spring 2026</div>
+      </div>
+    </div>
+
+    <!-- Meetings & learning -->
+    <div class="sb-group open" id="grp-meetings">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-meetings')">
+        <i class="ti ti-school sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">Meetings &amp; learning</span>
+        <div class="sb-group-meta">
+          <span class="sb-group-badge sgb-teal" id="badge-meetings">Jun 1 deadline</span>
+          <i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-lc" onclick="sbNav('lc',this)"><i class="ti ti-school"></i>Learning requirements &amp; options</a>
+        <a class="sb-item" id="nav-events" onclick="sbNav('events',this)"><i class="ti ti-calendar-event"></i>Upcoming meetings &amp; deadlines</a>
+        <a class="sb-item" id="nav-regional" onclick="sbNav('regional',this)"><i class="ti ti-map-pin"></i>Regional meeting requirements</a>
+        <a class="sb-item" id="nav-registrations" onclick="sbNav('registrations',this)"><i class="ti ti-ticket"></i>Registration status</a>
+        <a class="sb-item" id="nav-attendance" onclick="sbNav('attendance',this)"><i class="ti ti-clipboard-check"></i>Meeting attendance sign-in</a>
+      </div>
+    </div>
+
+    <!-- Reports (practice-scoped only) -->
+    <div class="sb-group" id="grp-reports">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-reports')">
+        <i class="ti ti-file-analytics sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">My practice reports</span>
+        <div class="sb-group-meta">
+          <span class="sb-group-badge sgb-gray" id="badge-reports">2 new</span>
+          <i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-practice-reports" onclick="sbNav('practice-reports',this)"><i class="ti ti-file-analytics"></i>Practice performance reports</a>
+        <a class="sb-item" id="nav-a1c-data" onclick="sbNav('a1c-data',this)"><i class="ti ti-chart-dots"></i>Practice-level A1c report</a>
+        <a class="sb-item" id="nav-data-sub" onclick="sbNav('data-sub',this)"><i class="ti ti-database"></i>Data submission status</a>
+      </div>
+    </div>
+
+    <!-- Surveys & forms -->
+    <div class="sb-group" id="grp-surveys">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-surveys')">
+        <i class="ti ti-forms sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">Surveys &amp; forms</span>
+        <div class="sb-group-meta"><i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i></div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-census" onclick="sbNav('census',this)"><i class="ti ti-clipboard-list"></i>Practice census survey</a>
+        <a class="sb-item" id="nav-tool-review" onclick="sbNav('tool-review',this)"><i class="ti ti-clipboard-list"></i>Tool review survey</a>
+        <a class="sb-item" id="nav-feedback" onclick="sbNav('feedback',this)"><i class="ti ti-message-circle"></i>Tool feedback</a>
+        <a class="sb-item" id="nav-case-summaries" onclick="sbNav('case-summaries',this)"><i class="ti ti-file-text"></i>Case summaries</a>
+        <a class="sb-item" id="nav-cgm" onclick="sbNav('cgm',this)"><i class="ti ti-device-watch-heart"></i>CGM program interest form</a>
+      </div>
+    </div>
+
+    <!-- Resources & support -->
+    <div class="sb-group" id="grp-support">
+      <div class="sb-group-header" onclick="toggleSbGroup('grp-support')">
+        <i class="ti ti-folder sb-group-icon" aria-hidden="true"></i>
+        <span class="sb-group-label">Resources &amp; support</span>
+        <div class="sb-group-meta"><i class="ti ti-chevron-down sb-group-chev" aria-hidden="true"></i></div>
+      </div>
+      <div class="sb-group-body">
+        <a class="sb-item" id="nav-resources" onclick="sbNav('resources',this)"><i class="ti ti-folder"></i>Champion resources</a>
+        <a class="sb-item" id="nav-faqs" onclick="sbNav('faqs',this)"><i class="ti ti-help-circle"></i>Help &amp; FAQs</a>
+        <a class="sb-item" id="nav-support" onclick="sbNav('support',this)"><i class="ti ti-ticket"></i>Submit a ticket</a>
+        <a class="sb-item" id="nav-print" onclick="sbNav('print',this)"><i class="ti ti-printer"></i>Print shop</a>
+        <a class="sb-item" id="nav-account" onclick="sbNav('account',this)"><i class="ti ti-settings"></i>My account &amp; notifications</a>
+      </div>
+    </div>
+
+  </div><!-- /sb-scroll -->
+
+  <div class="sb-footer">
+    <div class="sb-user">
+      <div class="sb-avatar" id="user-initials">AP</div>
+      <div>
+        <div class="sb-user-name" id="user-name">Dr. A. Patel</div>
+        <div class="sb-user-role" id="user-role">PCP Clinical Champion</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+
+  <div class="topbar">
+    <div>
+      <div class="tb-org">Great Lakes Medical Group · MCT2D</div>
+      <div class="tb-title" id="page-title">My Practice Participation Center</div>
+    </div>
+    <div class="tb-right">
+      <div class="tb-stat">
+        <div class="tb-stat-lbl">My role</div>
+        <div style="margin-top:3px"><span class="role-pill" id="role-pill"><i class="ti ti-stethoscope"></i>PCP Champion</span></div>
+      </div>
+      <div class="tb-div"></div>
+      <div class="tb-stat">
+        <div class="tb-stat-lbl">Practices I represent
+          <span class="tip-anchor"><i class="tip-icon ti-white" tabindex="0" onmouseenter="st('t-prac')" onmouseleave="ht('t-prac')" onfocus="st('t-prac')" onblur="ht('t-prac')">?</i>
+          <div class="tooltip tr" id="t-prac"><div class="tip-ttl">Your assigned practices</div>As a clinical champion you may represent more than one practice. Your view is limited to the data of the practices assigned to you.</div></span>
+        </div>
+        <div class="tb-stat-val" id="hdr-prac-count">2</div>
+      </div>
+      <div class="tb-div"></div>
+      <div class="tb-stat">
+        <div class="tb-stat-lbl">VBR year ends</div>
+        <div class="tb-stat-val" style="font-size:15px;padding-top:2px">Jul 1, 2026</div>
+        <div class="tb-stat-sub">56 days remaining</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multi-practice scorebar -->
+  <div class="scorebar" id="scorebar">
+    <span class="sbl">My practice scorecard progress
+      <span class="tip-anchor"><i class="tip-icon ti-teal" tabindex="0" onmouseenter="st('t-prog')" onmouseleave="ht('t-prog')" onfocus="st('t-prog')" onblur="ht('t-prog')">?</i>
+      <div class="tooltip" id="t-prog"><div class="tip-ttl">Practice scorecard · 100 pts</div>Regional meetings (25) · Physician LC requirement (20) · Practice census survey (5) · Practice LC requirement (25) · HEDIS A1c target (25). Shown per practice you represent.</div></span>
+    </span>
+    <div id="scorebar-practices" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"></div>
+    <span class="sb-period" id="sb-period">Measurement period: Sep 1, 2025 – Jul 1, 2026</span>
+  </div>
+
+  <div class="view-tabs" id="view-tabs">
+    <button class="vt on" id="vt-home" onclick="switchView('home')"><i class="ti ti-home"></i>Home</button>
+    <button class="vt" id="vt-scorecards" onclick="switchView('scorecards')"><i class="ti ti-chart-bar"></i>My practice scorecards</button>
+    <button class="vt" id="vt-physicians" onclick="switchView('physicians')"><i class="ti ti-stethoscope"></i>Physician LC follow-up</button>
+  </div>
+
+  <div class="content" id="main-content">
+
+    <!-- ░░░░ HOME ░░░░ -->
+    <div class="view on" id="view-home">
+
+      <!-- Context bar -->
+      <div class="coord-bar">
+        <div class="coord-context">
+          <i class="ti ti-building-community" aria-hidden="true"></i>
+          Clinical champion for <strong id="ctx-prac-count">2 primary care practices</strong>
+        </div>
+        <div class="prac-switch" id="prac-switch"></div>
+      </div>
+
+      <!-- Cheerleader nudge -->
+      <div class="nudge" id="nudge">
+        <i class="ti ti-confetti" aria-hidden="true"></i>
+        <div class="nudge-body" id="nudge-body"></div>
+        <button class="nudge-close" onclick="document.getElementById('nudge').style.display='none'" aria-label="Dismiss">✕</button>
+      </div>
+
+      <!-- At-a-glance summary -->
+      <div class="cmd-summary" id="cmd-summary"></div>
+
+      <!-- Quick links -->
+      <div class="ql-wrap" id="ql-wrap">
+        <div class="ql-header">
+          <span class="ql-label"><i class="ti ti-bookmark" aria-hidden="true"></i>Quick links</span>
+          <span class="ql-hint" id="ql-hint"></span>
+          <button class="ql-manage-btn" id="ql-manage-btn" onclick="toggleManageLinks()"><i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit</button>
+        </div>
+        <div class="ql-grid" id="ql-grid"></div>
+        <div class="ql-picker" id="ql-picker" style="display:none">
+          <div class="ql-picker-label">Add a page to your quick links:</div>
+          <div class="ql-picker-grid" id="ql-picker-grid"></div>
+        </div>
+      </div>
+
+      <!-- Two column -->
+      <div class="two-col">
+        <div>
+          <div class="sec-head sh-amber">
+            <span class="sh-title">Actions needed</span>
+            <span class="sh-right" id="action-count"></span>
+          </div>
+          <div class="sec-body">
+            <div class="an-filter" id="an-filter"></div>
+            <div id="action-list"></div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Physician LC follow-up snapshot -->
+          <div class="sec-head sh-teal" style="margin-bottom:0">
+            <span class="sh-title">Physician LC follow-up</span>
+            <span class="sh-right" id="lc-snapshot-count"></span>
+          </div>
+          <div class="sec-body" style="margin-bottom:14px">
+            <div id="lc-snapshot"></div>
+            <button class="show-more-btn" onclick="switchView('physicians')"><i class="ti ti-arrow-right" style="font-size:11px"></i>Open full physician LC follow-up</button>
+          </div>
+
+          <!-- Reports to disseminate -->
+          <div class="sec-head sh-navy" style="margin-bottom:0">
+            <span class="sh-title">Reports to share with my practice</span>
+          </div>
+          <div class="sec-body" style="margin-bottom:14px"><div id="reports-list"></div></div>
+
+          <!-- How my practices help the PO -->
+          <div class="sec-head sh-navy" style="margin-bottom:0">
+            <span class="sh-title">How my practices help the PO</span>
+          </div>
+          <div class="po-panel" id="po-panel"></div>
+
+          <!-- Recently completed -->
+          <div class="sec-head sh-teal">
+            <span class="sh-title">Recently completed</span>
+          </div>
+          <div class="sec-body"><div id="feed-list"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ░░░░ MY PRACTICE SCORECARDS ░░░░ -->
+    <div class="view" id="view-scorecards">
+      <div class="coord-bar">
+        <div class="coord-context"><i class="ti ti-info-circle"></i>These are the scorecards for the practice(s) you represent. You don't have access to the PO scorecard or other practices.</div>
+      </div>
+      <div id="scorecards-body"></div>
+    </div>
+
+    <!-- ░░░░ PHYSICIAN ROSTER ░░░░ -->
+    <div class="view" id="view-physicians">
+      <div class="stat-grid" id="roster-stats"></div>
+      <div class="sec-head sh-teal" style="margin-bottom:0">
+        <span class="sh-title">Physician-level learning community requirement</span>
+        <span class="sh-right">Annual · due Jul 1, 2026</span>
+      </div>
+      <div class="sec-body" style="margin-bottom:0">
+        <div id="roster-list"></div>
+      </div>
+    </div>
+
+    <!-- ░░░░ PLACEHOLDER ░░░░ -->
+    <div class="view" id="view-placeholder">
+      <div class="placeholder">
+        <i id="ph-icon" class="ti ti-file"></i>
+        <h2 id="ph-title"></h2>
+        <p id="ph-desc"></p>
+        <a class="ph-url" id="ph-link" href="#" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════ REMINDER MODAL ═══════ -->
+<div class="modal-overlay" id="reminder-modal" onclick="if(event.target===this)closeReminder()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reminder-title">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="reminder-title">Reminder email</div>
+        <div class="modal-sub" id="reminder-sub"></div>
+      </div>
+      <button class="modal-close" onclick="closeReminder()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-label"><i class="ti ti-mail" aria-hidden="true"></i>Sample email — edit as needed, then copy</div>
+      <textarea class="modal-textarea" id="reminder-text" spellcheck="false"></textarea>
+      <div class="modal-hint"><i class="ti ti-info-circle" aria-hidden="true" style="font-size:12px"></i>Activity options are drawn from the MCT2D Learning Community menu. Copy this text into your email client to send.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="modal-btn" onclick="closeReminder()">Cancel</button>
+      <div class="modal-foot-spacer"></div>
+      <button class="modal-btn" onclick="openLcMenu()"><i class="ti ti-external-link"></i>View LC menu</button>
+      <button class="modal-btn modal-btn-primary" id="reminder-copy-btn" onclick="copyReminder()"><i class="ti ti-copy"></i>Copy text</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════ DATE HELPERS ══════════ */
+const TODAY=new Date('2026-05-07');
+function dU(s){return Math.round((new Date(s)-TODAY)/86400000);}
+function fD(s){return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function dL(s,l){const d=dU(s);if(d<0)return'Overdue';if(d===0)return'Due today';return`Due ${l||fD(s)}`;}
+function dcC(d){return d<=30?'c-urg':d<=90?'c-soon':'c-later';}
+function acC(d){return d<=30?'ac-urg':d<=90?'ac-soon':'ac-later';}
+function pCol(p){return p>=70?'var(--teal)':p>=35?'var(--amber)':'#9a9890';}
+function st(id){const e=document.getElementById(id);if(e)e.classList.add('vis');}
+function ht(id){const e=document.getElementById(id);if(e)e.classList.remove('vis');}
+function tBadge(s,mx){const p=s/mx*100;if(p>=85)return{cls:'tb-105',txt:'105% VBR'};if(p>=70)return{cls:'tb-103',txt:'103% VBR'};if(p>=55)return{cls:'tb-102',txt:'102% VBR'};return{cls:'tb-risk',txt:'At risk'};}
+
+/* ══════════ CHAMPION + PRACTICE DATA ══════════
+   This portal view is scoped to ONE champion who represents one or more
+   practices of a SINGLE type (PCP, Endo, or Nephro). No PO-wide data,
+   no cross-practice data, no user-authorization capability. */
+const CHAMPION = { name:'Dr. A. Patel', initials:'AP', type:'pcp', po:'Great Lakes Medical Group', poLead:'Sarah M.' };
+
+const TYPE_LABEL = {pcp:'PCP', endo:'Endocrinology', nephro:'Nephrology'};
+const PRAC_COLORS = ['#00A6A8','#253972','#d3872c','#8B5CF6'];
+
+/* Physician-level LC: status one of 'complete' | 'pending' | 'none' */
+const PRACTICES = [
+  {
+    id:'lakeside', name:'Lakeside Family Medicine', color:PRAC_COLORS[0],
+    regionalSpring:'registered', regionalFall:'not_started',
+    practiceLC:'none', census:'complete', a1cMet:false,
+    physicians:[
+      {n:'Dr. Helen Frost', s:'complete', m:'Live webinar (CME)', d:'2026-03-12'},
+      {n:'Dr. Omar Haddad', s:'complete', m:'Recorded event', d:'2026-02-20'},
+      {n:'Dr. Lena Vogel', s:'complete', m:'Tool feedback', d:'2026-04-02'},
+      {n:'Dr. Sam Okafor', s:'complete', m:'CGM challenge', d:'2026-01-30'},
+      {n:'NP Rachel Dunn', s:'complete', m:'Live webinar (CME)', d:'2026-04-15'},
+      {n:'Dr. Marcus Reed', s:'pending', m:'Recorded event — awaiting verification', d:'2026-05-02'},
+      {n:'Dr. Joy Tan', s:'none', m:'No activity yet', d:null},
+      {n:'Dr. Ibrahim Ali', s:'none', m:'No activity yet', d:null},
+    ],
+  },
+  {
+    id:'harbor', name:'Harbor Primary Care', color:PRAC_COLORS[1],
+    regionalSpring:'not_started', regionalFall:'not_started',
+    practiceLC:'complete', census:'complete', a1cMet:true,
+    physicians:[
+      {n:'Dr. Grace Lim', s:'complete', m:'Live webinar (CME)', d:'2026-03-08'},
+      {n:'Dr. Paul Ndiaye', s:'complete', m:'CGM challenge', d:'2026-02-11'},
+      {n:'Dr. Erin Walsh', s:'complete', m:'Recorded event', d:'2026-03-22'},
+      {n:'PA Devon Cole', s:'complete', m:'Tool feedback', d:'2026-04-09'},
+      {n:'Dr. Nadia Petrov', s:'complete', m:'Live webinar (CME)', d:'2026-04-18'},
+      {n:'Dr. Hugo Marsh', s:'none', m:'No activity yet', d:null},
+    ],
+  },
+];
+
+/* PCP practice scorecard measures (100 pts) */
+function physLcScore(p){
+  const credited=p.physicians.filter(x=>x.s==='complete').length;
+  const rate=credited/p.physicians.length*100;
+  if(rate>=90)return 20; if(rate>=80)return 15; if(rate>=70)return 10; return 0;
+}
+function pracMeasures(p){
+  return [
+    {key:'regional', label:'Regional meetings', pts:25,
+      score:(p.regionalSpring==='attended'||p.regionalSpring==='registered'?(p.regionalFall==='attended'?25:13):0)},
+    {key:'phys_lc', label:'Physician LC', pts:20, score:physLcScore(p)},
+    {key:'census', label:'Census survey', pts:5, score:p.census==='complete'?5:0},
+    {key:'prac_lc', label:'Practice LC', pts:25, score:p.practiceLC==='complete'?25:0},
+    {key:'a1c', label:'HEDIS A1c', pts:25, score:p.a1cMet?25:0},
+  ];
+}
+function pracTotal(p){return pracMeasures(p).reduce((a,m)=>a+m.score,0);}
+
+/* ══════════ NAVIGATION ══════════ */
+let activeView='home';
+function showDash(){
+  document.getElementById('view-tabs').style.display='flex';
+  document.getElementById('scorebar').style.display='flex';
+  document.getElementById('view-placeholder').classList.remove('on');
+}
+function nav(page, el){
+  document.querySelectorAll('.sb-item,.sb-home-item').forEach(i=>i.classList.remove('active'));
+  if(el&&el.classList) el.classList.add('active');
+  if(page==='home'){ sbNav('home', document.getElementById('nav-home')); return; }
+  pushRecent(page);
+  const info=PH[page]||{icon:'ti-file',title:page,url:'https://portal.mct2d.org/portal/',desc:'This page exists in the live portal.'};
+  document.getElementById('view-tabs').style.display='none';
+  document.getElementById('scorebar').style.display='none';
+  ['view-home','view-scorecards','view-physicians','view-placeholder'].forEach(v=>document.getElementById(v).classList.remove('on'));
+  document.getElementById('view-placeholder').classList.add('on');
+  document.getElementById('ph-icon').className='ti '+info.icon;
+  document.getElementById('ph-title').textContent=info.title;
+  document.getElementById('ph-desc').textContent=info.desc+' This prototype focuses on the practice clinical champion home, scorecards, and physician follow-up views.';
+  document.getElementById('ph-link').href=info.url;
+  document.getElementById('ph-link').textContent=info.url.replace('https://','');
+  document.getElementById('page-title').textContent=info.title;
+}
+function switchView(v){
+  showDash();
+  activeView=v;
+  ['home','scorecards','physicians'].forEach(id=>{
+    document.getElementById('view-'+id).classList.toggle('on',id===v);
+    document.getElementById('vt-'+id).classList.toggle('on',id===v);
+  });
+  const titles={home:'My Practice Participation Center',scorecards:'My practice scorecards',physicians:'Physician LC follow-up'};
+  document.getElementById('page-title').textContent=titles[v];
+  document.querySelectorAll('.sb-item,.sb-home-item').forEach(i=>i.classList.remove('active'));
+  const map={home:'nav-home',scorecards:'nav-practice-overview',physicians:'nav-physicians'};
+  const el=document.getElementById(map[v]); if(el) el.classList.add('active');
+  if(v==='scorecards') renderScorecards();
+  if(v==='physicians') renderRoster();
+}
+/* Sidebar item → either a dashboard view or a placeholder page */
+const VIEW_NAV={home:'home',physicians:'physicians','practice-overview':'scorecards'};
+function sbNav(page, el){
+  if(page in VIEW_NAV){ switchView(VIEW_NAV[page]); return; }
+  nav(page, el);
+}
+function toggleSbGroup(id){ document.getElementById(id).classList.toggle('open'); }
+
+/* ══════════ RECENTLY VISITED ══════════ */
+let recents=[];
+function pushRecent(page){
+  if(!PH[page]) return;
+  recents=[page,...recents.filter(p=>p!==page)].slice(0,4);
+  renderRecent();
+}
+function renderRecent(){
+  const sec=document.getElementById('sb-recent-section');
+  const list=document.getElementById('sb-recent-list');
+  if(!recents.length){sec.style.display='none';return;}
+  sec.style.display='block';
+  list.innerHTML=recents.map(p=>{
+    const info=PH[p]; if(!info)return'';
+    return `<div class="sb-recent-item" onclick="nav('${p}',null)"><i class="ti ${info.icon}"></i>${info.title}</div>`;
+  }).join('');
+}
+
+/* ══════════ COMMAND SEARCH ══════════ */
+const SEARCH_INDEX=[
+  {key:'home',title:'Home',group:'Dashboard',isView:true,view:'home',icon:'ti-home',color:'#eceef5',ic:'var(--navy)'},
+  {key:'scorecards',title:'My practice scorecards',group:'Dashboard',isView:true,view:'scorecards',icon:'ti-chart-bar',color:'#eceef5',ic:'var(--navy)'},
+  {key:'physicians',title:'Physician LC follow-up',group:'My practice(s)',isView:true,view:'physicians',icon:'ti-stethoscope',color:'#e0f5f5',ic:'var(--teal)'},
+];
+function buildSearchIndex(){
+  Object.keys(PH).forEach(k=>{const i=PH[k];SEARCH_INDEX.push({key:k,title:i.title,group:'Page',icon:i.icon,color:'#f8f8f7',ic:'var(--gray-600)'});});
+}
+let searchHi=-1, searchResults=[];
+function openSearch(){document.getElementById('sb-search-input').focus();document.getElementById('sb-search-trigger').classList.add('focused');}
+function closeSearch(){document.getElementById('sb-results').classList.remove('open');document.getElementById('sb-search-input').value='';document.getElementById('sb-search-trigger').classList.remove('focused');searchHi=-1;}
+function onSearchInput(e){
+  const q=e.target.value.trim().toLowerCase();
+  const box=document.getElementById('sb-results'), list=document.getElementById('sb-results-list');
+  if(!q){box.classList.remove('open');return;}
+  box.classList.add('open');
+  searchResults=SEARCH_INDEX.filter(s=>s.title.toLowerCase().includes(q)).slice(0,10);
+  searchHi=-1;
+  if(!searchResults.length){list.innerHTML=`<div class="sb-no-results">No pages match “${e.target.value}”</div>`;return;}
+  list.innerHTML=searchResults.map((s,i)=>`
+    <div class="sb-result-item" id="sr-${i}" onclick="pickSearch(${i})">
+      <div class="sb-result-icon" style="background:${s.color};color:${s.ic}"><i class="ti ${s.icon}"></i></div>
+      <div class="sb-result-text"><div class="sb-result-name">${s.title}</div><div class="sb-result-group">${s.group}</div></div>
+    </div>`).join('');
+}
+function pickSearch(i){
+  const s=searchResults[i]; if(!s)return;
+  closeSearch();
+  if(s.isView) switchView(s.view); else nav(s.key, document.getElementById('nav-'+s.key)||null);
+}
+function onSearchKey(e){
+  if(e.key==='Escape'){closeSearch();e.target.blur();return;}
+  if(e.key==='Enter'&&searchResults.length){pickSearch(searchHi>=0?searchHi:0);return;}
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+    e.preventDefault();
+    searchHi=(searchHi+(e.key==='ArrowDown'?1:-1)+searchResults.length)%searchResults.length;
+    searchResults.forEach((_,i)=>document.getElementById('sr-'+i)?.classList.toggle('highlighted',i===searchHi));
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();openSearch();}});
+
+/* ══════════ SCOREBAR ══════════ */
+function renderScorebar(){
+  document.getElementById('scorebar-practices').innerHTML=PRACTICES.map((p,i)=>{
+    const t=pracTotal(p);
+    return `${i>0?'<span class="sb-sep"></span>':''}
+      <span class="sb-prac">
+        <span class="pc-dot" style="width:8px;height:8px;border-radius:50%;background:${p.color};display:inline-block"></span>
+        <span class="sb-prac-name">${p.name}</span>
+        <span class="sb-mini-track"><span class="sb-mini-fill" style="width:${t}%"></span></span>
+        <span class="sb-mini-pts">${t}/100</span>
+      </span>`;
+  }).join('');
+}
+
+/* ══════════ HOME: CONTEXT + NUDGE + SUMMARY ══════════ */
+function renderContext(){
+  const n=PRACTICES.length, tl=TYPE_LABEL[CHAMPION.type].toLowerCase();
+  document.getElementById('ctx-prac-count').textContent=`${n} ${tl==='pcp'?'primary care':tl} practice${n!==1?'s':''}`;
+  document.getElementById('prac-switch').innerHTML=
+    `<button class="prac-chip on"><i class="ti ti-layout-grid" style="font-size:12px"></i>All practices</button>`+
+    PRACTICES.map(p=>`<button class="prac-chip" onclick="switchView('scorecards')"><span class="pc-dot" style="background:${p.color}"></span>${p.name}</button>`).join('');
+  // topbar role pill + sidebar identity
+  const rp=document.getElementById('role-pill');
+  rp.innerHTML=`<i class="ti ti-stethoscope"></i>${TYPE_LABEL[CHAMPION.type]} Champion`;
+  document.getElementById('user-initials').textContent=CHAMPION.initials;
+  document.getElementById('user-name').textContent=CHAMPION.name;
+  document.getElementById('user-role').textContent=`${TYPE_LABEL[CHAMPION.type]} Clinical Champion`;
+  document.getElementById('hdr-prac-count').textContent=n;
+}
+function totals(){
+  let physTotal=0,physDone=0,physNone=0,physPending=0,pending=0;
+  PRACTICES.forEach(p=>p.physicians.forEach(x=>{physTotal++;if(x.s==='complete')physDone++;else if(x.s==='pending'){physPending++;pending++;}else physNone++;}));
+  const pracLcDone=PRACTICES.filter(p=>p.practiceLC==='complete').length;
+  const regReg=PRACTICES.filter(p=>p.regionalSpring==='registered'||p.regionalSpring==='attended').length;
+  const avg=Math.round(PRACTICES.reduce((a,p)=>a+pracTotal(p),0)/PRACTICES.length);
+  return {physTotal,physDone,physNone,physPending,pending,pracLcDone,regReg,avg};
+}
+function renderNudge(){
+  const t=totals();
+  const incomplete=t.physNone+t.physPending;
+  document.getElementById('nudge-body').innerHTML=
+    `<strong>You're so close.</strong> ${t.physDone} of ${t.physTotal} of your physicians have met their learning community requirement. A quick nudge to the remaining ${incomplete} keeps both practices on track for full VBR credit before July 1 — and you're the reason it happens.`;
+}
+function renderCmdSummary(){
+  const t=totals();
+  document.getElementById('cmd-summary').innerHTML=`
+    <div class="cmd-card clickable" onclick="switchView('scorecards')">
+      <div class="cmd-card-lbl">My practices' avg score</div>
+      <div class="cmd-card-val cmd-val-navy">${t.avg}<span style="font-size:13px;font-weight:400;color:var(--gray-400)">/100</span></div>
+      <div class="cmd-card-sub">across ${PRACTICES.length} practices</div>
+    </div>
+    <div class="cmd-card clickable" onclick="switchView('physicians')">
+      <div class="cmd-card-lbl">Physicians needing LC activity</div>
+      <div class="cmd-card-val cmd-val-amber">${t.physNone+t.physPending}</div>
+      <div class="cmd-card-sub">of ${t.physTotal} · ${t.physDone} complete</div>
+    </div>
+    <div class="cmd-card clickable" onclick="switchView('scorecards')">
+      <div class="cmd-card-lbl">Practice LC requirement</div>
+      <div class="cmd-card-val ${t.pracLcDone===PRACTICES.length?'cmd-val-teal':'cmd-val-amber'}">${t.pracLcDone}/${PRACTICES.length}</div>
+      <div class="cmd-card-sub">practices complete</div>
+    </div>
+    <div class="cmd-card clickable" onclick="nav('not-registered',document.getElementById('nav-not-registered'))">
+      <div class="cmd-card-lbl">Spring regional meeting</div>
+      <div class="cmd-card-val ${t.regReg===PRACTICES.length?'cmd-val-teal':'cmd-val-amber'}">${t.regReg}/${PRACTICES.length}</div>
+      <div class="cmd-card-sub">registered · due Jun 1</div>
+    </div>
+    <div class="cmd-card">
+      <div class="cmd-card-lbl">Awaiting credit</div>
+      <div class="cmd-card-val cmd-val-navy">${t.pending+2}</div>
+      <div class="cmd-card-sub">items pending verification</div>
+    </div>`;
+}
+
+/* ══════════ HOME: ACTIONS NEEDED (grouped) ══════════ */
+function buildActionGroups(){
+  const groups=[];
+  // Personal champion responsibilities
+  const me=[];
+  PRACTICES.forEach(p=>{
+    if(!(p.regionalSpring==='registered'||p.regionalSpring==='attended'))
+      me.push({title:`Register & attend Spring 2026 regional meeting — ${p.name}`,measure:'Measure 1 · 25 pts',due:'2026-06-01',dueLabel:'Jun 1',scope:p.name,
+        hint:'You (or a substitute clinician) represent this practice at the in-person regional meeting. Spring + fall attendance = 25 pts.',
+        url:'https://portal.mct2d.org/portal/registrations/spring-2026-regional-meeting-registration/',actions:['copy'],
+        tip:{title:'Regional meeting (Measure 1)',body:'As clinical champion you represent your practice at the twice-yearly regional meetings. 25 pts for both spring + fall; 15 pts if one is missed but the makeup quiz is completed.'}});
+  });
+  me.push({title:'Complete clinical champion trainings (CGM, medication, low-carb)',measure:'Year 1 requirement',due:'2026-07-01',dueLabel:'Jul 1',scope:'You',incomplete:1,total:3,
+    hint:'2 of 3 recorded trainings done. ~6 hours total, CME offered. Required in your first year as champion.',
+    url:'https://portal.mct2d.org/portal/events/learning-community',actions:['copy'],
+    tip:{title:'Champion trainings',body:'New clinical champions complete ~6 hours of training on continuous glucose monitors, medication interventions, and low-carbohydrate eating patterns in their first year. CME is offered.'}});
+  me.push({title:'Attend the PO clinical champion meeting',measure:'Required by your PO',due:'2026-06-18',dueLabel:'Jun 18',scope:'You',
+    hint:'Great Lakes Medical Group hosts its clinical champion meeting on Jun 18. Your PO needs all PCP champions to attend.',
+    url:'https://portal.mct2d.org/portal/events/',actions:['copy'],
+    tip:{title:'PO clinical champion meeting',body:'Your PO is required to host a clinical champion meeting covering performance measures, practice changes, and upcoming events. Attending supports your PO\'s scorecard (Measure 6).'}});
+  me.push({title:'Share the latest practice performance reports with your clinicians',measure:'Dissemination',due:'2026-05-20',dueLabel:'May 20',scope:'You',
+    hint:'2 refreshed reports are ready. Forwarding results to your practice is a core champion responsibility.',
+    url:'https://portal.mct2d.org/po-reports/practice-reports',actions:['share'],
+    tip:{title:'Disseminate results',body:'Clinical champions take what is learned and share performance / QI / educational information with the other clinicians in their practice.'}});
+  groups.push({id:'me',kind:'me',label:'My champion responsibilities',sublabel:'Tasks only you can complete',period:'Across all your practices',count:me.length,items:me});
+
+  // Per-practice requirements
+  PRACTICES.forEach(p=>{
+    const items=[];
+    const incompletePhys=p.physicians.filter(x=>x.s!=='complete').length;
+    if(incompletePhys>0)
+      items.push({title:'Follow up with physicians on their LC requirement',measure:'Measure 2 · 20 pts',due:'2026-07-01',dueLabel:'Jul 1',scope:p.name,incomplete:incompletePhys,total:p.physicians.length,
+        hint:`${incompletePhys} of ${p.physicians.length} physicians still need to complete. Options: live webinar, recorded event, tool feedback, or CGM challenge.`,
+        url:'#physicians',isPhysRoster:true,actions:['remind','export'],
+        tip:{title:'Physician LC (Measure 2)',body:'Scored by completion rate: 20 pts = 90–100%, 15 = 80–89%, 10 = 70–79%, 0 = <70%. Following up with physicians to complete this is a core champion responsibility.'}});
+    if(p.practiceLC!=='complete')
+      items.push({title:'Complete a practice-level LC activity',measure:'Measure 4 · 25 pts',due:'2026-07-01',dueLabel:'Jul 1',scope:p.name,
+        hint:'Options: host a site visit, attend the low-carb workshop, give input via a user-experience session, and others.',
+        url:'https://portal.mct2d.org/portal/events/learning-community',actions:['copy'],
+        tip:{title:'Practice LC (Measure 4)',body:'25 pts if completed by Jul 1, 0 pts otherwise. You ensure your practice has met this requirement.'}});
+    if(!p.a1cMet)
+      items.push({title:'HEDIS A1c performance target',measure:'Measure 5 · 25 pts',due:'2026-07-01',dueLabel:'Jul 1',scope:p.name,
+        hint:'This practice hasn\'t met the 74.45% commercial / 91% Medicare benchmark yet. Review the A1c report and rally the care team.',
+        url:'https://portal.mct2d.org/po-reports/a1c-data',actions:['share'],
+        tip:{title:'HEDIS A1c (Measure 5)',body:'Determined at year-end from claims data. As champion you can review the practice A1c report and encourage the team on guideline-directed prescribing.'}});
+    groups.push({id:p.id,kind:'practice',practice:p,label:p.name,sublabel:`${TYPE_LABEL[CHAMPION.type]} practice scorecard`,period:`${pracTotal(p)}/100 pts · Sep 2025 – Jul 2026`,count:items.length,items});
+  });
+  return groups;
+}
+let ACTION_GROUPS=[];
+let anFilter='me';                 // selected bucket: 'me' or a practice id
+const AN_MAX_BTNS=3;               // > this many practices → use a dropdown
+let tipSeq=0;
+
+function abbr(name){return name.replace(/[^A-Za-z ]/g,'').trim().slice(0,3).toUpperCase();}
+function anCount(g){return g?g.items.length:0;}
+function anBadge(n){return n>0?`<span class="an-badge">${n}</span>`:`<span class="an-badge an-badge-done"><i class="ti ti-check"></i></span>`;}
+function setAnFilter(id){anFilter=id;renderActions();}
+function onAnSelect(v){if(v)anFilter=v;renderActions();}
+
+function renderActionFilter(){
+  const me=ACTION_GROUPS.find(g=>g.id==='me');
+  const pracs=ACTION_GROUPS.filter(g=>g.kind==='practice');
+  let html=`<button class="an-btn ${anFilter==='me'?'on':''}" onclick="setAnFilter('me')" title="My champion responsibilities"><i class="ti ti-user"></i>Me${anBadge(anCount(me))}</button>`;
+  html+=`<span class="an-sep"></span>`;
+  if(pracs.length>AN_MAX_BTNS){
+    const onPrac=anFilter!=='me';
+    const opts=pracs.map(g=>`<option value="${g.id}" ${anFilter===g.id?'selected':''}>${g.practice.name} — ${anCount(g)} open</option>`).join('');
+    html+=`<select class="an-select ${onPrac?'on':''}" onchange="onAnSelect(this.value)" aria-label="Select a practice">
+      <option value="" ${onPrac?'':'selected'} disabled hidden>Select a practice…</option>${opts}</select>`;
+  } else {
+    html+=pracs.map(g=>`<button class="an-btn ${anFilter===g.id?'on':''}" onclick="setAnFilter('${g.id}')" title="${g.practice.name}"><span class="an-dot" style="background:${g.practice.color}"></span>${abbr(g.practice.name)}${anBadge(anCount(g))}</button>`).join('');
+  }
+  document.getElementById('an-filter').innerHTML=html;
+}
+
+function actionItemHtml(a,g){
+  const d=dU(a.due);
+  const hasProg=a.incomplete!=null&&a.total!=null;
+  const done=hasProg?a.total-a.incomplete:0;
+  const pct=hasProg?Math.round(done/a.total*100):0;
+  const tid='tip-'+tipSeq++;
+  const tipH=a.tip?`<span class="tip-anchor" style="margin-left:5px"><i class="tip-icon ti-dark" tabindex="0" onmouseenter="st('${tid}')" onmouseleave="ht('${tid}')" onfocus="st('${tid}')" onblur="ht('${tid}')">?</i><div class="tooltip tl" id="${tid}"><div class="tip-ttl">${a.tip.title}</div>${a.tip.body}</div></span>`:'';
+  const btns=(a.actions||[]).map(act=>{
+    if(act==='copy') return `<button class="ai-send-btn" onclick="event.stopPropagation();copyLink(this,'${a.url}')" title="Copy direct link"><i class="ti ti-link"></i>Copy link</button>`;
+    if(act==='remind') return `<button class="ai-send-btn" onclick="event.stopPropagation();switchView('physicians')" title="Open follow-up to generate reminders"><i class="ti ti-mail"></i>Generate reminder</button>`;
+    if(act==='export') return `<button class="ai-send-btn" onclick="event.stopPropagation();markBtn(this,'Exported')" title="Export who still needs to complete"><i class="ti ti-download"></i>Export list</button>`;
+    if(act==='share') return `<button class="ai-send-btn" onclick="event.stopPropagation();copyLink(this,'${a.url}')" title="Copy a shareable link for your clinicians"><i class="ti ti-send"></i>Share link</button>`;
+    return '';
+  }).join('');
+  const clickTarget=a.isPhysRoster?`switchView('physicians')`:`window.open('${a.url}','_blank')`;
+  return `<div class="action-item" onclick="if(event.target.closest('.tip-anchor,.ai-send-btn'))return;${clickTarget}">
+    <div class="ai-accent ${acC(d)}"></div>
+    <div class="ai-body">
+      <div class="ai-title">${a.title}${tipH}</div>
+      <div class="ai-measure-label">${a.measure}${g.kind==='me'&&a.scope!=='You'?' · '+a.scope:''}</div>
+      <div class="ai-chips"><span class="chip ${dcC(d)}"><i class="ti ti-calendar" style="font-size:9px;margin-right:2px"></i>${dL(a.due,a.dueLabel)}</span></div>
+      ${a.hint?`<div class="ai-hint">${a.hint}</div>`:''}
+      ${hasProg?`<div class="ai-prog"><div class="prog-track"><div class="prog-fill" style="width:${pct}%;background:${pCol(pct)}"></div></div><div class="prog-txt">${done}/${a.total} ${a.isPhysRoster?'physicians':'done'}</div></div>`:''}
+      ${btns?`<div class="ai-footer">${btns}</div>`:''}
+    </div>
+    <i class="ti ti-external-link ai-arrow"></i>
+  </div>`;
+}
+
+function renderGroupPanel(g){
+  const sorted=[...g.items].sort((a,b)=>dU(a.due)-dU(b.due));
+  const icon=g.kind==='me'
+    ?`<div class="sb-avatar" style="width:30px;height:30px;font-size:11px">${CHAMPION.initials}</div>`
+    :`<span class="ag-prac-dot" style="background:${g.practice.color};width:14px;height:14px"></span>`;
+  const header=`<div class="ag-header" style="cursor:default">
+    <div class="ag-header-left">
+      <div class="ag-svg-icon">${icon}</div>
+      <div class="ag-text">
+        <div class="ag-type-label" style="color:${g.kind==='me'?'var(--navy)':'var(--role-dk)'}">${g.kind==='me'?'My responsibilities':TYPE_LABEL[CHAMPION.type]+' practice'}</div>
+        <div class="ag-full-name">${g.label}</div>
+        <div class="ag-period">${g.period}</div>
+      </div>
+    </div>
+    <div class="ag-header-right"><span class="ag-task-count">${g.items.length} task${g.items.length!==1?'s':''}</span></div>
+  </div>`;
+  const body=sorted.length
+    ? sorted.map(a=>actionItemHtml(a,g)).join('')
+    : `<div class="no-results" style="padding:30px 20px"><i class="ti ti-circle-check" style="color:var(--teal)"></i>All caught up — no open actions for ${g.kind==='me'?'you right now':g.label}.</div>`;
+  return `<div class="action-group" style="border-bottom:none">${header}<div class="ag-body">${body}</div></div>`;
+}
+
+function renderActions(){
+  ACTION_GROUPS=buildActionGroups();
+  if(!ACTION_GROUPS.find(g=>g.id===anFilter)) anFilter='me';
+  let open=0; ACTION_GROUPS.forEach(g=>open+=g.items.length);
+  document.getElementById('action-count').textContent=open+' open';
+  tipSeq=0;
+  renderActionFilter();
+  const g=ACTION_GROUPS.find(x=>x.id===anFilter)||ACTION_GROUPS[0];
+  document.getElementById('action-list').innerHTML=renderGroupPanel(g);
+}
+function copyLink(btn,text){try{navigator.clipboard.writeText(text);}catch(e){}markBtn(btn,'Copied');}
+function markBtn(btn,label){btn.classList.add('copied');const o=btn.innerHTML;btn.innerHTML=`<i class="ti ti-check"></i>${label}`;setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=o;},1800);}
+
+/* ══════════ HOME: LC SNAPSHOT (per-practice) ══════════ */
+function renderLcSnapshot(){
+  const totalNone=PRACTICES.reduce((a,p)=>a+notDone(p).length,0);
+  document.getElementById('lc-snapshot-count').textContent=`${totalNone} to remind`;
+  document.getElementById('lc-snapshot').innerHTML=PRACTICES.map(p=>lcRowHtml(p)).join('');
+}
+
+/* ══════════ HOME: REPORTS TO DISSEMINATE ══════════ */
+function renderReports(){
+  const reports=[
+    {t:'Lakeside Family Medicine — 2025 practice performance report',m:'PDF · refreshed Apr 2026 · NEW',url:'https://portal.mct2d.org/po-reports/practice-reports'},
+    {t:'Harbor Primary Care — 2025 practice performance report',m:'PDF · refreshed Apr 2026 · NEW',url:'https://portal.mct2d.org/po-reports/practice-reports'},
+    {t:'Practice-level A1c report (both practices)',m:'Interactive · controlled A1c by practice',url:'https://portal.mct2d.org/po-reports/a1c-data'},
+  ];
+  document.getElementById('reports-list').innerHTML=reports.map(r=>`
+    <div class="report-item">
+      <div class="report-icon"><i class="ti ti-file-analytics"></i></div>
+      <div class="report-body"><div class="report-title">${r.t}</div><div class="report-meta">${r.m}</div></div>
+      <div class="report-actions">
+        <button class="phys-btn" onclick="window.open('${r.url}','_blank')"><i class="ti ti-eye"></i>Open</button>
+        <button class="phys-btn" onclick="copyLink(this,'${r.url}')"><i class="ti ti-send"></i>Share</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ══════════ HOME: PO CONTRIBUTION PANEL ══════════ */
+function renderPoPanel(){
+  const t=totals();
+  const lcRate=Math.round(t.physDone/t.physTotal*100);
+  document.getElementById('po-panel').innerHTML=`
+    <div class="po-panel-row">
+      <div class="po-panel-icon"><i class="ti ti-calendar-check"></i></div>
+      <div class="po-panel-body"><div class="po-panel-title">Regional meeting attendance</div><div class="po-panel-sub">Your practices attending supports the PO's participation requirements</div></div>
+      <div class="po-panel-val">${t.regReg}/${PRACTICES.length}</div>
+    </div>
+    <div class="po-panel-row">
+      <div class="po-panel-icon"><i class="ti ti-stethoscope"></i></div>
+      <div class="po-panel-body"><div class="po-panel-title">Physician LC completion</div><div class="po-panel-sub">PO needs ≥90% across practices for full A1c-measure credit</div></div>
+      <div class="po-panel-val" style="color:${pCol(lcRate)}">${lcRate}%</div>
+    </div>
+    <div class="po-panel-row">
+      <div class="po-panel-icon"><i class="ti ti-messages"></i></div>
+      <div class="po-panel-body"><div class="po-panel-title">Coordinate with your PO lead</div><div class="po-panel-sub">${CHAMPION.poLead} · ${CHAMPION.po}</div></div>
+      <button class="phys-btn" onclick="markBtn(this,'Drafted')"><i class="ti ti-mail"></i>Message</button>
+    </div>`;
+}
+
+/* ══════════ HOME: FEED ══════════ */
+function renderFeed(){
+  const FEED=[
+    {t:'Fall 2025 regional meeting — attended',s:'You represented both practices',w:'Credited Nov 15, 2025',cls:'fs-credited',label:'Credited'},
+    {t:'Practice census survey — both practices',s:'Completed before Dec 1, 2025 · 5 pts each',w:'Credited Dec 3, 2025',cls:'fs-credited',label:'Credited'},
+    {t:'Harbor Primary Care — practice LC activity',s:'Low-carb workshop attended',w:'Apr 28, 2026',cls:'fs-complete',label:'25/25 pts'},
+    {t:'13 physicians completed LC last month',s:'Across both practices · via recorded webinar',w:'Apr 2026',cls:'fs-credited',label:'Credited'},
+  ];
+  document.getElementById('feed-list').innerHTML=FEED.map(f=>`
+    <div class="feed-item">
+      <div class="feed-dot fd-pts"></div>
+      <div class="feed-body"><div class="feed-title">${f.t}</div><div class="feed-sub">${f.s}</div>
+      <span class="feed-status ${f.cls}"><i class="ti ti-circle-check" style="font-size:10px"></i>${f.label}</span>
+      <div class="feed-when">${f.w}</div></div>
+    </div>`).join('');
+}
+
+/* ══════════ SCORECARDS VIEW ══════════ */
+function renderScorecards(){
+  document.getElementById('scorecards-body').innerHTML=PRACTICES.map(p=>{
+    const ms=pracMeasures(p), t=pracTotal(p), tb=tBadge(t,100);
+    const rows=ms.map(m=>{
+      const pct=Math.round(m.score/m.pts*100);
+      const dCls=m.score>=m.pts?'dot-full':m.score>0?'dot-part':'dot-none';
+      return `<div class="measure-card"><div class="mc-row" style="cursor:default">
+        <div class="mc-num" style="background:${p.color}">${m.pts}</div>
+        <div class="mc-info"><div class="mc-name">${m.label}</div><div class="mc-wt">${m.pts} pts possible</div></div>
+        <div class="mc-scored"><div class="mc-pts" style="color:${m.score>0?'var(--teal)':'#9a9890'}">${m.score}</div><div class="mc-max">/ ${m.pts}</div></div>
+        <div class="mc-dot ${dCls}"></div><span style="width:14px"></span>
+      </div></div>`;
+    }).join('');
+    return `<div class="sec-head sh-teal" style="margin-bottom:0;background:${p.color}">
+        <span class="sh-title"><span class="pc-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;margin-right:6px"></span>${p.name}</span>
+        <span class="sh-right">${t}/100 pts · <span style="font-weight:600">${tb.txt}</span></span>
+      </div>
+      <div class="sec-body" style="margin-bottom:18px">${rows}</div>`;
+  }).join('');
+}
+
+/* ══════════ PHYSICIAN LC FOLLOW-UP (per-practice) ══════════ */
+function rosterRows(){
+  const rows=[];
+  PRACTICES.forEach(p=>p.physicians.forEach(x=>rows.push({...x,prac:p.name,pracColor:p.color})));
+  return rows;
+}
+function notDone(p){return p.physicians.filter(x=>x.s==='none');}      // not yet completed
+function awaiting(p){return p.physicians.filter(x=>x.s==='pending');}  // done, awaiting credit
+
+/* Shared per-practice row: practice name, # not yet completed, Generate Reminder */
+function lcRowHtml(p){
+  const n=notDone(p).length, pend=awaiting(p).length;
+  const right=n>0
+    ? `<button class="lcp-gen-btn" onclick="openReminder('${p.id}')"><i class="ti ti-mail" aria-hidden="true"></i>Generate Reminder</button>`
+    : `<span class="lcp-alldone"><i class="ti ti-circle-check"></i>All complete</span>`;
+  const countHtml=n>0
+    ? `<span class="big" style="color:var(--amber)">${n}</span> physician${n!==1?'s':''} not yet completed`
+    : `<span class="big" style="color:var(--teal)">0</span> not yet completed`;
+  return `<div class="lcp-row">
+    <span class="lcp-dot" style="background:${p.color}"></span>
+    <div class="lcp-body">
+      <div class="lcp-name">${p.name}</div>
+      <div class="lcp-count">${countHtml}${pend?`<span class="lcp-pending">· ${pend} awaiting credit</span>`:''}</div>
+    </div>
+    ${right}
+  </div>`;
+}
+
+function renderRosterStats(){
+  const r=rosterRows();
+  const done=r.filter(x=>x.s==='complete').length, pend=r.filter(x=>x.s==='pending').length, none=r.filter(x=>x.s==='none').length;
+  const rate=Math.round(done/r.length*100);
+  document.getElementById('roster-stats').innerHTML=`
+    <div class="stat-card"><div class="sc-lbl">Physicians</div><div class="sc-val">${r.length}</div><div class="sc-sub">across ${PRACTICES.length} practices</div></div>
+    <div class="stat-card"><div class="sc-lbl">Complete</div><div class="sc-val" style="color:var(--teal)">${done}</div></div>
+    <div class="stat-card"><div class="sc-lbl">Awaiting credit</div><div class="sc-val" style="color:var(--amber)">${pend}</div></div>
+    <div class="stat-card"><div class="sc-lbl">Not yet completed</div><div class="sc-val" style="color:var(--amber)">${none}</div></div>
+    <div class="stat-card"><div class="sc-lbl">Completion rate</div><div class="sc-val" style="color:${pCol(rate)}">${rate}<span style="font-size:11px;color:#9a9890">%</span></div></div>`;
+}
+function renderRoster(){
+  renderRosterStats();
+  document.getElementById('roster-list').innerHTML=PRACTICES.map(p=>lcRowHtml(p)).join('');
+}
+
+/* ── Reminder email modal ── */
+const LC_DUE='2026-07-01';
+const LC_MENU_URL='https://portal.mct2d.org/portal/events/learning-community';
+/* Physician-level LC options — drawn from the MCT2D Learning Community menu */
+const LC_ACTIVITIES=[
+  'Attend an upcoming live Learning Community webinar (CME offered)',
+  'Watch a recent recorded Learning Community webinar',
+  'Submit feedback on a physician-focused MCT2D tool',
+  'Try a continuous glucose monitor (CGM) and complete the program survey',
+];
+function fmtDue(s){const d=new Date(s);return `${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}/${d.getFullYear()}`;}
+function lastName(name){return name.trim().split(/\s+/).pop();}
+function buildReminderEmail(p){
+  const recips=notDone(p);
+  const names=recips.map(x=>lastName(x.n)).join(', ');
+  const salutation=recips.length===1?'Dr.':'Drs.';
+  const bullets=LC_ACTIVITIES.map(a=>'  •  '+a).join('\n');
+  return `Greetings ${salutation} ${names}:
+
+This is a reminder to complete your MCT2D Learning Community requirement by ${fmtDue(LC_DUE)}.
+
+To meet this requirement, you can:
+${bullets}
+
+You can review all current options and register here:
+${LC_MENU_URL}
+
+If you have any questions, I am here to help!
+
+Warm regards,
+${CHAMPION.name}
+${TYPE_LABEL[CHAMPION.type]} Clinical Champion`;
+}
+function openReminder(pid){
+  const p=PRACTICES.find(x=>x.id===pid); if(!p)return;
+  const n=notDone(p).length;
+  document.getElementById('reminder-title').textContent=`Reminder email — ${p.name}`;
+  document.getElementById('reminder-sub').textContent=`${n} physician${n!==1?'s':''} not yet completed · due ${fmtDue(LC_DUE)}`;
+  document.getElementById('reminder-text').value=buildReminderEmail(p);
+  document.getElementById('reminder-modal').classList.add('open');
+  const btn=document.getElementById('reminder-copy-btn');
+  btn.classList.remove('copied'); btn.innerHTML='<i class="ti ti-copy"></i>Copy text';
+}
+function closeReminder(){document.getElementById('reminder-modal').classList.remove('open');}
+function copyReminder(){
+  const ta=document.getElementById('reminder-text');
+  try{navigator.clipboard.writeText(ta.value);}catch(e){ta.select();try{document.execCommand('copy');}catch(_){}}
+  const btn=document.getElementById('reminder-copy-btn');
+  btn.classList.add('copied'); btn.innerHTML='<i class="ti ti-check"></i>Copied';
+  setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<i class="ti ti-copy"></i>Copy text';},1800);
+}
+function openLcMenu(){window.open(LC_MENU_URL,'_blank');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReminder();});
+
+/* ══════════ PLACEHOLDER PAGE MAP (practice-scoped) ══════════ */
+const PH={
+  'tasks':{icon:'ti-list-check',title:'My champion tasks',url:'https://portal.mct2d.org/portal/tasks',desc:'All open tasks assigned to you as clinical champion, across the practices you represent, sorted by deadline.'},
+  'task-detail':{icon:'ti-circle-check',title:'Task details & credit status',url:'https://portal.mct2d.org/portal/tasks',desc:'Details for a specific task, including completion status and credit applied.'},
+  'trainings':{icon:'ti-certificate',title:'Clinical champion trainings',url:'https://portal.mct2d.org/portal/events/learning-community',desc:'Your first-year champion trainings on CGM, medication interventions, and low-carb eating patterns. CME offered.'},
+  'practice-overview':{icon:'ti-building-community',title:'Practice overview',url:'https://portal.mct2d.org/portal/practices',desc:'Overview of the practice(s) you represent, their completion status, and outstanding requirements. Scoped to your assigned practices only.'},
+  'physicians':{icon:'ti-stethoscope',title:'Physician LC follow-up',url:'https://portal.mct2d.org/portal/cqi',desc:'The physicians in your practice(s) and their learning-community completion status.'},
+  'not-registered':{icon:'ti-calendar-x',title:'Regional meeting status',url:'https://portal.mct2d.org/vbr/view-practices-not-yet-registered-for-regional-meeting/',desc:'Which of your practices have not yet registered for the upcoming regional meeting.'},
+  'lc':{icon:'ti-school',title:'Learning requirements & options',url:'https://portal.mct2d.org/portal/events/learning-community',desc:'All options for completing physician-level and practice-level learning requirements.'},
+  'events':{icon:'ti-calendar-event',title:'Upcoming meetings & deadlines',url:'https://portal.mct2d.org/portal/events',desc:'Upcoming MCT2D meetings, events, and requirement deadlines.'},
+  'regional':{icon:'ti-map-pin',title:'Regional meeting requirements',url:'https://portal.mct2d.org/portal/events/regional-meetings',desc:'Spring and fall regional meeting requirements, registration deadlines, and your practices\' status.'},
+  'registrations':{icon:'ti-ticket',title:'Registration status',url:'https://portal.mct2d.org/portal/registrations',desc:'Register your practices for the Spring 2026 regional meeting and view registered / attended / credited status.'},
+  'attendance':{icon:'ti-clipboard-check',title:'Meeting attendance sign-in',url:'https://portal.mct2d.org/portal/events/regional-meetings',desc:'Event sign-in sheet for in-person and virtual meetings.'},
+  'practice-reports':{icon:'ti-file-analytics',title:'Practice performance reports',url:'https://portal.mct2d.org/po-reports/practice-reports',desc:'Performance reports for the practice(s) you represent. Download and share with your clinicians.'},
+  'a1c-data':{icon:'ti-chart-dots',title:'Practice-level A1c report',url:'https://portal.mct2d.org/po-reports/a1c-data',desc:'Controlled A1c rates for your practice(s).'},
+  'data-sub':{icon:'ti-database',title:'Data submission status',url:'https://portal.mct2d.org/portal/data-submission-status',desc:'BCBSM data submission status for your practice(s).'},
+  'census':{icon:'ti-clipboard-list',title:'Practice census survey',url:'https://portal.mct2d.org/portal/tasks',desc:'The annual practice census survey for the practice(s) you represent.'},
+  'tool-review':{icon:'ti-clipboard-list',title:'Tool review survey',url:'https://portal.mct2d.org/portal/tool-review-survey',desc:'Tool review survey — one of the ways physicians can meet the learning-community requirement.'},
+  'feedback':{icon:'ti-message-circle',title:'Tool feedback',url:'https://portal.mct2d.org/portal/physician-tool-feedback-forms/new',desc:'Physician and patient tool feedback forms.'},
+  'case-summaries':{icon:'ti-file-text',title:'Case summaries',url:'https://portal.mct2d.org/portal/case-summaries',desc:'Submit and view case summaries for your practice(s).'},
+  'cgm':{icon:'ti-device-watch-heart',title:'CGM program interest form',url:'https://portal.mct2d.org/cgm_program/interest_form/',desc:'CGM program interest, attestation, and testimonial forms.'},
+  'resources':{icon:'ti-folder',title:'Champion resources',url:'https://portal.mct2d.org/po-resources/',desc:'Reference materials and guides for clinical champions.'},
+  'faqs':{icon:'ti-help-circle',title:'Help & FAQs',url:'https://portal.mct2d.org/faqs/',desc:'Frequently asked questions and portal support documentation.'},
+  'support':{icon:'ti-ticket',title:'Submit a ticket',url:'https://portal.mct2d.org/portal/tickets/new',desc:'Submit a support request to the MCT2D coordinating center.'},
+  'print':{icon:'ti-printer',title:'Print shop',url:'https://portal.mct2d.org/print-shop/',desc:'Order print materials for your practice(s).'},
+  'account':{icon:'ti-settings',title:'My account & notifications',url:'https://portal.mct2d.org/portal/account',desc:'Update your account information and notification preferences.'},
+};
+
+/* ══════════ QUICK LINKS ══════════ */
+const QL_CATALOG=[
+  {key:'lc',title:'Learning requirements & options',group:'Meetings & learning',icon:'ti-school',color:'#e0f5f5',iconColor:'var(--teal)'},
+  {key:'events',title:'Upcoming meetings & deadlines',group:'Meetings & learning',icon:'ti-calendar-event',color:'#e0f5f5',iconColor:'var(--teal)'},
+  {key:'regional',title:'Regional meeting requirements',group:'Meetings & learning',icon:'ti-map-pin',color:'#e0f5f5',iconColor:'var(--teal)'},
+  {key:'registrations',title:'Registration status',group:'Meetings & learning',icon:'ti-ticket',color:'#e0f5f5',iconColor:'var(--teal)'},
+  {key:'physicians-view',title:'Physician LC follow-up',group:'My practice(s)',icon:'ti-stethoscope',color:'#e0f5f5',iconColor:'var(--teal)',isView:true,view:'physicians'},
+  {key:'scorecards-view',title:'My practice scorecards',group:'My practice(s)',icon:'ti-chart-bar',color:'#eceef5',iconColor:'var(--navy)',isView:true,view:'scorecards'},
+  {key:'not-registered',title:'Regional meeting status',group:'My practice(s)',icon:'ti-calendar-x',color:'#faf0e2',iconColor:'var(--amber)'},
+  {key:'practice-reports',title:'Practice performance reports',group:'Reports',icon:'ti-file-analytics',color:'#eceef5',iconColor:'var(--navy)'},
+  {key:'a1c-data',title:'Practice-level A1c report',group:'Reports',icon:'ti-chart-dots',color:'#eceef5',iconColor:'var(--navy)'},
+  {key:'census',title:'Practice census survey',group:'Surveys & forms',icon:'ti-clipboard-list',color:'#f0fafb',iconColor:'#2a6e70'},
+  {key:'tasks',title:'My champion tasks',group:'Tasks',icon:'ti-list-check',color:'#faf0e2',iconColor:'var(--amber)'},
+  {key:'resources',title:'Champion resources',group:'Resources',icon:'ti-folder',color:'#f0fafb',iconColor:'#2a6e70'},
+  {key:'faqs',title:'Help & FAQs',group:'Resources',icon:'ti-help-circle',color:'#f0fafb',iconColor:'#2a6e70'},
+];
+const QL_DEFAULTS=['physicians-view','lc','regional','practice-reports','tasks','registrations'];
+const QL_MAX=8, QL_KEY='ql-bookmarks-champion';
+let qlLinks=[...QL_DEFAULTS], qlManageMode=false;
+async function qlLoad(){try{const r=await window.storage.get(QL_KEY);if(r&&r.value){const p=JSON.parse(r.value);if(Array.isArray(p)&&p.length)qlLinks=p;}}catch(e){}renderQuickLinks();}
+async function qlSave(){try{await window.storage.set(QL_KEY,JSON.stringify(qlLinks));}catch(e){}}
+function qlItem(k){return QL_CATALOG.find(c=>c.key===k);}
+function qlNavigate(item){if(item.isView)switchView(item.view);else nav(item.key,document.getElementById('nav-'+item.key));}
+async function qlRemove(k){qlLinks=qlLinks.filter(x=>x!==k);await qlSave();renderQuickLinks();}
+async function qlAdd(k){if(qlLinks.includes(k)||qlLinks.length>=QL_MAX)return;qlLinks.push(k);await qlSave();renderQuickLinks();}
+function toggleManageLinks(){qlManageMode=!qlManageMode;const b=document.getElementById('ql-manage-btn');b.innerHTML=qlManageMode?'<i class="ti ti-check" style="font-size:11px"></i>Done':'<i class="ti ti-pencil" style="font-size:11px"></i>Edit';b.classList.toggle('active',qlManageMode);renderQuickLinks();}
+function renderQuickLinks(){
+  const hint=document.getElementById('ql-hint'),grid=document.getElementById('ql-grid'),picker=document.getElementById('ql-picker'),pg=document.getElementById('ql-picker-grid');
+  hint.textContent=qlLinks.length?`${qlLinks.length} of ${QL_MAX} saved`:'';
+  grid.innerHTML=qlLinks.length?qlLinks.map(k=>{const item=qlItem(k);if(!item)return'';
+    const rm=qlManageMode?`<button class="ql-chip-remove" onclick="event.stopPropagation();qlRemove('${k}')" aria-label="Remove"><i class="ti ti-x"></i></button>`:'';
+    return `<div class="ql-chip" onclick='qlNavigate(${JSON.stringify(item).replace(/'/g,"&#39;")})' role="button" tabindex="0">
+      <div class="ql-chip-icon" style="background:${item.color};color:${item.iconColor}"><i class="ti ${item.icon}"></i></div>
+      <div class="ql-chip-text"><div class="ql-chip-title">${item.title}</div><div class="ql-chip-group">${item.group}</div></div>${rm}
+    </div>`;}).join(''):`<div class="ql-empty"><i class="ti ti-bookmark"></i>No quick links yet — click Edit to add pages you visit often.</div>`;
+  if(qlManageMode){picker.style.display='block';pg.innerHTML=QL_CATALOG.map(item=>{const saved=qlLinks.includes(item.key);const max=qlLinks.length>=QL_MAX;const dis=saved||max;
+    return `<button class="ql-add-chip${dis?' already-saved':''}" onclick="qlAdd('${item.key}')" ${dis?'disabled':''}><i class="ti ${item.icon}" style="color:${item.iconColor}"></i>${item.title}${saved?'<i class="ti ti-check" style="font-size:10px;margin-left:2px;color:var(--teal)"></i>':''}</button>`;}).join('');}
+  else picker.style.display='none';
+}
+
+/* ══════════ INIT ══════════ */
+buildSearchIndex();
+renderScorebar();
+renderContext();
+renderNudge();
+renderCmdSummary();
+renderActions();
+renderLcSnapshot();
+renderReports();
+renderPoPanel();
+renderFeed();
+qlLoad();
+</script>
+</body>
+</html>
