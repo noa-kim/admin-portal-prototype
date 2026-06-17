@@ -567,6 +567,42 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
 .an-select.on{background-color:var(--navy);color:#fff;border-color:var(--navy);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .an-select:focus{outline:none;border-color:var(--teal)}
 
+/* ── Section visibility / Customize home ── */
+.two-col.one-col{grid-template-columns:minmax(0,1fr)}
+.coord-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.customize-btn{font-size:11px;font-weight:500;padding:5px 11px;border-radius:20px;border:.5px solid var(--gray-200);background:#fff;color:var(--gray-600);cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-family:var(--font);transition:all .12s;white-space:nowrap}
+.customize-btn:hover{background:var(--navy-lt);color:var(--navy);border-color:rgba(37,57,114,.3)}
+.customize-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.customize-btn i{font-size:13px}
+.sh-rgroup{display:flex;align-items:center;gap:8px}
+.sec-hide-btn{background:rgba(255,255,255,.18);border:none;color:#fff;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:11px;flex-shrink:0;transition:background .12s;padding:0;font-family:var(--font);line-height:1}
+.sec-hide-btn:hover{background:rgba(255,255,255,.34)}
+body.customizing .sec-hide-btn{display:inline-flex}
+.ql-hide-btn{display:none;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:.5px solid var(--gray-200);background:transparent;color:var(--gray-600);cursor:pointer;align-items:center;gap:4px;font-family:var(--font)}
+.ql-hide-btn:hover{background:var(--navy-lt);color:var(--navy)}
+body.customizing .ql-hide-btn{display:inline-flex}
+.section-manager{display:none;margin-bottom:18px;padding:14px;background:var(--gray-50);border:1px dashed var(--gray-300);border-radius:var(--radius-md)}
+.section-manager.open{display:block}
+.sm-head{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.sm-title{font-size:12px;font-weight:600;color:var(--gray-900);display:flex;align-items:center;gap:6px}
+.sm-title i{font-size:14px;color:var(--navy)}
+.sm-reset{margin-left:auto;font-size:11px;font-weight:500;color:var(--navy);background:none;border:none;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.sm-reset:hover{text-decoration:underline}
+.sm-sub{font-size:11px;color:var(--gray-500);margin-bottom:11px;line-height:1.5}
+.sm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px}
+.sm-chip{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-md);border:1px solid var(--gray-200);background:#fff;cursor:pointer;transition:all .12s;font-family:var(--font);text-align:left}
+.sm-chip:hover{border-color:rgba(37,57,114,.3);background:var(--navy-lt)}
+.sm-chip-icon{width:26px;height:26px;border-radius:var(--radius-sm);background:var(--gray-100);color:var(--gray-400);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sm-chip.shown .sm-chip-icon{background:var(--teal-lt);color:#005c5d}
+.sm-chip-body{flex:1;min-width:0}
+.sm-chip-label{font-size:12px;font-weight:500;color:var(--gray-900);line-height:1.2}
+.sm-chip-state{font-size:10px;margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-400)}
+.sm-chip.shown .sm-chip-state{color:var(--teal)}
+.sm-toggle{width:34px;height:19px;border-radius:20px;background:var(--gray-200);position:relative;flex-shrink:0;transition:background .15s}
+.sm-chip.shown .sm-toggle{background:var(--teal)}
+.sm-toggle::after{content:'';position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;transition:transform .15s}
+.sm-chip.shown .sm-toggle::after{transform:translateX(15px)}
+
 /* Per-practice LC follow-up rows */
 .lcp-row{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--gray-100);transition:background .1s}
 .lcp-row:last-child{border-bottom:none}
@@ -581,6 +617,34 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
 .lcp-gen-btn{font-size:11px;font-weight:500;padding:6px 13px;border-radius:20px;border:none;background:var(--role);color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--font);transition:filter .12s;white-space:nowrap;flex-shrink:0}
 .lcp-gen-btn:hover{filter:brightness(.93)}
 .lcp-gen-btn i{font-size:13px}
+
+/* Physician drill-down (full follow-up view) */
+.lcp-card{border-bottom:1px solid var(--gray-100)}
+.lcp-card:last-child{border-bottom:none}
+.lcp-card .lcp-row{border-bottom:none}
+.lcp-row-expandable{cursor:pointer}
+.lcp-chev{font-size:16px;color:var(--gray-400);transition:transform .15s;flex-shrink:0}
+.lcp-physlist{display:none;background:var(--gray-50);border-top:1px solid var(--gray-100)}
+.lcp-physlist.open{display:block}
+.lcp-physlist-cap{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);padding:9px 14px 5px 36px}
+.phys-d-row{display:flex;align-items:center;gap:10px;padding:9px 14px 9px 36px;border-bottom:1px solid var(--gray-100)}
+.phys-d-row:last-child{border-bottom:none}
+.phys-d-row.clickable{cursor:pointer;transition:background .1s}
+.phys-d-row.clickable:hover{background:#fff}
+.phys-d-main{flex:1;min-width:0}
+.phys-d-sub{font-size:11px;color:var(--gray-600);margin-top:2px;display:flex;align-items:center;gap:5px;min-width:0}
+.phys-d-sub .pd-act{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phys-d-sub .pd-noted{color:var(--gray-400);flex-shrink:0}
+.phys-d-right{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.phys-d-chev{font-size:15px;color:var(--gray-400);transition:transform .15s}
+.phys-detail{display:none;padding:0 14px 12px 36px;background:#fff;border-bottom:1px solid var(--gray-100)}
+.phys-detail.open{display:block}
+.pd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 18px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);padding:13px 15px}
+.pd-cell-full{grid-column:1/-1}
+.pd-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-400);margin-bottom:3px;display:flex;align-items:center;gap:4px}
+.pd-val{font-size:12px;color:var(--gray-900);font-weight:500;line-height:1.4}
+.pd-val.muted{color:var(--gray-400);font-weight:400;font-style:italic}
+.pd-act-icon{width:30px;height:30px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--role-lt);color:var(--role-dk)}
 
 /* Reminder modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(30,30,28,.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
@@ -816,14 +880,20 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
           <i class="ti ti-building-community" aria-hidden="true"></i>
           Clinical champion for <strong id="ctx-prac-count">2 primary care practices</strong>
         </div>
-        <div class="prac-switch" id="prac-switch"></div>
+        <div class="coord-right">
+          <div class="prac-switch" id="prac-switch"></div>
+          <button class="customize-btn" id="customize-btn" onclick="toggleCustomize()"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Customize home</button>
+        </div>
       </div>
+
+      <!-- Section manager (hide / re-enable sections) -->
+      <div class="section-manager" id="section-manager"></div>
 
       <!-- Cheerleader nudge -->
       <div class="nudge" id="nudge">
         <i class="ti ti-confetti" aria-hidden="true"></i>
         <div class="nudge-body" id="nudge-body"></div>
-        <button class="nudge-close" onclick="document.getElementById('nudge').style.display='none'" aria-label="Dismiss">✕</button>
+        <button class="nudge-close" onclick="hideSection('nudge')" aria-label="Hide">✕</button>
       </div>
 
       <!-- At-a-glance summary -->
@@ -835,6 +905,7 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
           <span class="ql-label"><i class="ti ti-bookmark" aria-hidden="true"></i>Quick links</span>
           <span class="ql-hint" id="ql-hint"></span>
           <button class="ql-manage-btn" id="ql-manage-btn" onclick="toggleManageLinks()"><i class="ti ti-pencil" aria-hidden="true" style="font-size:11px"></i>Edit</button>
+          <button class="ql-hide-btn" onclick="hideSection('quicklinks')"><i class="ti ti-eye-off" style="font-size:11px"></i>Hide</button>
         </div>
         <div class="ql-grid" id="ql-grid"></div>
         <div class="ql-picker" id="ql-picker" style="display:none">
@@ -845,45 +916,49 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
 
       <!-- Two column -->
       <div class="two-col">
-        <div>
-          <div class="sec-head sh-amber">
-            <span class="sh-title">Actions needed</span>
-            <span class="sh-right" id="action-count"></span>
-          </div>
-          <div class="sec-body">
-            <div class="an-filter" id="an-filter"></div>
-            <div id="action-list"></div>
+        <div id="col-left">
+          <div id="sec-actions">
+            <div class="sec-head sh-amber">
+              <span class="sh-title">Actions needed</span>
+              <span class="sh-rgroup"><span class="sh-right" id="action-count"></span><button class="sec-hide-btn" onclick="hideSection('actions')" title="Hide section" aria-label="Hide Actions needed">✕</button></span>
+            </div>
+            <div class="sec-body">
+              <div class="an-filter" id="an-filter"></div>
+              <div id="action-list"></div>
+            </div>
           </div>
         </div>
 
-        <div>
+        <div id="col-right">
           <!-- Physician LC follow-up snapshot -->
-          <div class="sec-head sh-teal" style="margin-bottom:0">
-            <span class="sh-title">Physician LC follow-up</span>
-            <span class="sh-right" id="lc-snapshot-count"></span>
-          </div>
-          <div class="sec-body" style="margin-bottom:14px">
-            <div id="lc-snapshot"></div>
-            <button class="show-more-btn" onclick="switchView('physicians')"><i class="ti ti-arrow-right" style="font-size:11px"></i>Open full physician LC follow-up</button>
+          <div id="sec-lc">
+            <div class="sec-head sh-teal" style="margin-bottom:0">
+              <span class="sh-title">Physician LC follow-up</span>
+              <span class="sh-rgroup"><span class="sh-right" id="lc-snapshot-count"></span><button class="sec-hide-btn" onclick="hideSection('lc')" title="Hide section" aria-label="Hide Physician LC follow-up">✕</button></span>
+            </div>
+            <div class="sec-body" style="margin-bottom:14px">
+              <div id="lc-snapshot"></div>
+              <button class="show-more-btn" onclick="switchView('physicians')"><i class="ti ti-arrow-right" style="font-size:11px"></i>Open full physician LC follow-up</button>
+            </div>
           </div>
 
-          <!-- Reports to disseminate -->
-          <div class="sec-head sh-navy" style="margin-bottom:0">
-            <span class="sh-title">Reports to share with my practice</span>
+          <!-- Awaiting credit confirmation -->
+          <div id="sec-pending">
+            <div class="sec-head sh-navy" style="margin-bottom:0">
+              <span class="sh-title">Awaiting credit confirmation</span>
+              <span class="sh-rgroup"><span class="sh-right" id="pending-count"></span><button class="sec-hide-btn" onclick="hideSection('pending')" title="Hide section" aria-label="Hide Awaiting credit confirmation">✕</button></span>
+            </div>
+            <div class="sec-body" id="pending-list" style="margin-bottom:14px"></div>
           </div>
-          <div class="sec-body" style="margin-bottom:14px"><div id="reports-list"></div></div>
-
-          <!-- How my practices help the PO -->
-          <div class="sec-head sh-navy" style="margin-bottom:0">
-            <span class="sh-title">How my practices help the PO</span>
-          </div>
-          <div class="po-panel" id="po-panel"></div>
 
           <!-- Recently completed -->
-          <div class="sec-head sh-teal">
-            <span class="sh-title">Recently completed</span>
+          <div id="sec-feed">
+            <div class="sec-head sh-teal">
+              <span class="sh-title">Recently completed</span>
+              <span class="sh-rgroup"><button class="sec-hide-btn" onclick="hideSection('feed')" title="Hide section" aria-label="Hide Recently completed">✕</button></span>
+            </div>
+            <div class="sec-body"><div id="feed-list"></div></div>
           </div>
-          <div class="sec-body"><div id="feed-list"></div></div>
         </div>
       </div>
     </div>
@@ -951,6 +1026,7 @@ body.role-nephro{--role:#0369a1;--role-lt:#e0f2fe;--role-dk:#0c4a6e}
 const TODAY=new Date('2026-05-07');
 function dU(s){return Math.round((new Date(s)-TODAY)/86400000);}
 function fD(s){return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function fDY(s){return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
 function dL(s,l){const d=dU(s);if(d<0)return'Overdue';if(d===0)return'Due today';return`Due ${l||fD(s)}`;}
 function dcC(d){return d<=30?'c-urg':d<=90?'c-soon':'c-later';}
 function acC(d){return d<=30?'ac-urg':d<=90?'ac-soon':'ac-later';}
@@ -968,21 +1044,25 @@ const CHAMPION = { name:'Dr. A. Patel', initials:'AP', type:'pcp', po:'Great Lak
 const TYPE_LABEL = {pcp:'PCP', endo:'Endocrinology', nephro:'Nephrology'};
 const PRAC_COLORS = ['#00A6A8','#253972','#d3872c','#8B5CF6'];
 
-/* Physician-level LC: status one of 'complete' | 'pending' | 'none' */
+/* Physician-level LC: status one of 'complete' | 'pending' | 'none'
+   act = the specific Learning Community activity completed, with the date it was
+   completed and the date it was noted/credited in the portal. Examples mirror the
+   LC Activities Menu (live webinar, recorded webinar, quiz, tool feedback/review,
+   CGM user-experience program). act is null when no activity has been logged. */
 const PRACTICES = [
   {
     id:'lakeside', name:'Lakeside Family Medicine', color:PRAC_COLORS[0],
     regionalSpring:'registered', regionalFall:'not_started',
     practiceLC:'none', census:'complete', a1cMet:false,
     physicians:[
-      {n:'Dr. Helen Frost', s:'complete', m:'Live webinar (CME)', d:'2026-03-12'},
-      {n:'Dr. Omar Haddad', s:'complete', m:'Recorded event', d:'2026-02-20'},
-      {n:'Dr. Lena Vogel', s:'complete', m:'Tool feedback', d:'2026-04-02'},
-      {n:'Dr. Sam Okafor', s:'complete', m:'CGM challenge', d:'2026-01-30'},
-      {n:'NP Rachel Dunn', s:'complete', m:'Live webinar (CME)', d:'2026-04-15'},
-      {n:'Dr. Marcus Reed', s:'pending', m:'Recorded event — awaiting verification', d:'2026-05-02'},
-      {n:'Dr. Joy Tan', s:'none', m:'No activity yet', d:null},
-      {n:'Dr. Ibrahim Ali', s:'none', m:'No activity yet', d:null},
+      {n:'Dr. Helen Frost',  s:'complete', act:{name:'Attended a live Learning Community webinar', completed:'2026-03-12', noted:'2026-03-12', cme:'1.0 CME', via:'Auto-recorded from live webinar attendance'}},
+      {n:'Dr. Omar Haddad',  s:'complete', act:{name:'Watched a recorded Learning Community webinar', completed:'2026-02-20', noted:'2026-02-24', cme:null, via:'Self-attested, verified by coordinating center'}},
+      {n:'Dr. Lena Vogel',   s:'complete', act:{name:'Submitted physician tool feedback', completed:'2026-04-02', noted:'2026-04-03', cme:null, via:'Tool feedback form submission'}},
+      {n:'Dr. Sam Okafor',   s:'complete', act:{name:'Participating in the CGM user-experience program', completed:'2026-01-30', noted:'2026-02-05', cme:null, via:'CGM user-experience program enrollment'}},
+      {n:'NP Rachel Dunn',   s:'complete', act:{name:'Attended a live Learning Community webinar', completed:'2026-04-15', noted:'2026-04-15', cme:'1.0 CME', via:'Auto-recorded from live webinar attendance'}},
+      {n:'Dr. Marcus Reed',  s:'pending',  act:{name:'Completed an MCT2D Learning Community quiz', completed:'2026-05-02', noted:null, cme:null, via:'Quiz submitted — awaiting credit verification'}},
+      {n:'Dr. Joy Tan',      s:'none', act:null},
+      {n:'Dr. Ibrahim Ali',  s:'none', act:null},
     ],
   },
   {
@@ -990,12 +1070,12 @@ const PRACTICES = [
     regionalSpring:'not_started', regionalFall:'not_started',
     practiceLC:'complete', census:'complete', a1cMet:true,
     physicians:[
-      {n:'Dr. Grace Lim', s:'complete', m:'Live webinar (CME)', d:'2026-03-08'},
-      {n:'Dr. Paul Ndiaye', s:'complete', m:'CGM challenge', d:'2026-02-11'},
-      {n:'Dr. Erin Walsh', s:'complete', m:'Recorded event', d:'2026-03-22'},
-      {n:'PA Devon Cole', s:'complete', m:'Tool feedback', d:'2026-04-09'},
-      {n:'Dr. Nadia Petrov', s:'complete', m:'Live webinar (CME)', d:'2026-04-18'},
-      {n:'Dr. Hugo Marsh', s:'none', m:'No activity yet', d:null},
+      {n:'Dr. Grace Lim',    s:'complete', act:{name:'Attended a live Learning Community webinar', completed:'2026-03-08', noted:'2026-03-08', cme:'1.0 CME', via:'Auto-recorded from live webinar attendance'}},
+      {n:'Dr. Paul Ndiaye',  s:'complete', act:{name:'Participating in the CGM user-experience program', completed:'2026-02-11', noted:'2026-02-16', cme:null, via:'CGM user-experience program enrollment'}},
+      {n:'Dr. Erin Walsh',   s:'complete', act:{name:'Watched a recorded Learning Community webinar', completed:'2026-03-22', noted:'2026-03-25', cme:null, via:'Self-attested, verified by coordinating center'}},
+      {n:'PA Devon Cole',    s:'complete', act:{name:'Completed the physician tool review survey', completed:'2026-04-09', noted:'2026-04-10', cme:null, via:'Tool review survey submission'}},
+      {n:'Dr. Nadia Petrov', s:'complete', act:{name:'Attended a live Learning Community webinar', completed:'2026-04-18', noted:'2026-04-18', cme:'1.0 CME', via:'Auto-recorded from live webinar attendance'}},
+      {n:'Dr. Hugo Marsh',   s:'none', act:null},
     ],
   },
 ];
@@ -1193,7 +1273,7 @@ function renderCmdSummary(){
     </div>
     <div class="cmd-card">
       <div class="cmd-card-lbl">Awaiting credit</div>
-      <div class="cmd-card-val cmd-val-navy">${t.pending+2}</div>
+      <div class="cmd-card-val cmd-val-navy">${pendingCount()}</div>
       <div class="cmd-card-sub">items pending verification</div>
     </div>`;
 }
@@ -1345,46 +1425,6 @@ function renderLcSnapshot(){
   document.getElementById('lc-snapshot').innerHTML=PRACTICES.map(p=>lcRowHtml(p)).join('');
 }
 
-/* ══════════ HOME: REPORTS TO DISSEMINATE ══════════ */
-function renderReports(){
-  const reports=[
-    {t:'Lakeside Family Medicine — 2025 practice performance report',m:'PDF · refreshed Apr 2026 · NEW',url:'https://portal.mct2d.org/po-reports/practice-reports'},
-    {t:'Harbor Primary Care — 2025 practice performance report',m:'PDF · refreshed Apr 2026 · NEW',url:'https://portal.mct2d.org/po-reports/practice-reports'},
-    {t:'Practice-level A1c report (both practices)',m:'Interactive · controlled A1c by practice',url:'https://portal.mct2d.org/po-reports/a1c-data'},
-  ];
-  document.getElementById('reports-list').innerHTML=reports.map(r=>`
-    <div class="report-item">
-      <div class="report-icon"><i class="ti ti-file-analytics"></i></div>
-      <div class="report-body"><div class="report-title">${r.t}</div><div class="report-meta">${r.m}</div></div>
-      <div class="report-actions">
-        <button class="phys-btn" onclick="window.open('${r.url}','_blank')"><i class="ti ti-eye"></i>Open</button>
-        <button class="phys-btn" onclick="copyLink(this,'${r.url}')"><i class="ti ti-send"></i>Share</button>
-      </div>
-    </div>`).join('');
-}
-
-/* ══════════ HOME: PO CONTRIBUTION PANEL ══════════ */
-function renderPoPanel(){
-  const t=totals();
-  const lcRate=Math.round(t.physDone/t.physTotal*100);
-  document.getElementById('po-panel').innerHTML=`
-    <div class="po-panel-row">
-      <div class="po-panel-icon"><i class="ti ti-calendar-check"></i></div>
-      <div class="po-panel-body"><div class="po-panel-title">Regional meeting attendance</div><div class="po-panel-sub">Your practices attending supports the PO's participation requirements</div></div>
-      <div class="po-panel-val">${t.regReg}/${PRACTICES.length}</div>
-    </div>
-    <div class="po-panel-row">
-      <div class="po-panel-icon"><i class="ti ti-stethoscope"></i></div>
-      <div class="po-panel-body"><div class="po-panel-title">Physician LC completion</div><div class="po-panel-sub">PO needs ≥90% across practices for full A1c-measure credit</div></div>
-      <div class="po-panel-val" style="color:${pCol(lcRate)}">${lcRate}%</div>
-    </div>
-    <div class="po-panel-row">
-      <div class="po-panel-icon"><i class="ti ti-messages"></i></div>
-      <div class="po-panel-body"><div class="po-panel-title">Coordinate with your PO lead</div><div class="po-panel-sub">${CHAMPION.poLead} · ${CHAMPION.po}</div></div>
-      <button class="phys-btn" onclick="markBtn(this,'Drafted')"><i class="ti ti-mail"></i>Message</button>
-    </div>`;
-}
-
 /* ══════════ HOME: FEED ══════════ */
 function renderFeed(){
   const FEED=[
@@ -1400,6 +1440,40 @@ function renderFeed(){
       <span class="feed-status ${f.cls}"><i class="ti ti-circle-check" style="font-size:10px"></i>${f.label}</span>
       <div class="feed-when">${f.w}</div></div>
     </div>`).join('');
+}
+
+/* ══════════ HOME: AWAITING CREDIT CONFIRMATION ══════════
+   Practice-scoped: activities the champion's practices have completed/submitted
+   that haven't yet been credited by the MCT2D coordinating center. */
+function buildPending(){
+  const items=[];
+  // Physician LC activities submitted but awaiting verification (from the roster)
+  PRACTICES.forEach(p=>p.physicians.filter(x=>x.s==='pending').forEach(x=>{
+    items.push({icon:'ti-user-check',
+      title:`Physician LC — ${x.n}`,
+      meta:`${p.name} · ${x.act.name.toLowerCase()}, completed ${fD(x.act.completed)}`,
+      timing:'Awaiting MCT2D verification · credit applied at month-end'});
+  }));
+  // Champion year-1 training (CME credit processing)
+  items.push({icon:'ti-certificate',
+    title:'Clinical champion training — CGM module',
+    meta:'Completed Apr 22, 2026 · CME credit being processed',
+    timing:'Credit typically posts within 5–7 business days'});
+  return items;
+}
+function pendingCount(){return buildPending().length;}
+function renderPendingList(){
+  const items=buildPending();
+  document.getElementById('pending-count').textContent=items.length+' item'+(items.length!==1?'s':'');
+  document.getElementById('pending-list').innerHTML=items.length?items.map(p=>`
+    <div class="pending-item">
+      <div class="pending-icon"><i class="ti ${p.icon}" aria-hidden="true"></i></div>
+      <div class="pending-body">
+        <div class="pending-title">${p.title}</div>
+        <div class="pending-meta">${p.meta}</div>
+        <div class="pending-timing"><i class="ti ti-info-circle" style="font-size:10px;margin-right:2px" aria-hidden="true"></i>${p.timing}</div>
+      </div>
+    </div>`).join(''):`<div class="no-results" style="padding:22px 18px"><i class="ti ti-circle-check" style="color:var(--teal)"></i>Nothing awaiting credit — you're all caught up.</div>`;
 }
 
 /* ══════════ SCORECARDS VIEW ══════════ */
@@ -1465,7 +1539,96 @@ function renderRosterStats(){
 }
 function renderRoster(){
   renderRosterStats();
-  document.getElementById('roster-list').innerHTML=PRACTICES.map(p=>lcRowHtml(p)).join('');
+  document.getElementById('roster-list').innerHTML=PRACTICES.map(p=>practiceCardHtml(p)).join('');
+}
+
+/* ── Drill-down: practice card → physician list → activity detail ── */
+const STATUS_ORDER={complete:0,pending:1,none:2};
+function actIcon(name){
+  if(/live/i.test(name))return'ti-broadcast';
+  if(/recorded/i.test(name))return'ti-player-play';
+  if(/quiz/i.test(name))return'ti-help-circle';
+  if(/feedback/i.test(name))return'ti-message-circle';
+  if(/survey|review/i.test(name))return'ti-clipboard-list';
+  if(/cgm/i.test(name))return'ti-device-watch-heart';
+  return'ti-certificate';
+}
+function physInitials(n){return n.replace(/^(Dr\.|NP|PA|RN|PharmD|DO|RDN)\s/,'').split(' ').map(w=>w[0]).join('').slice(0,2);}
+function statusBadge(s){
+  if(s==='complete')return`<span class="status-badge sb-credited"><i class="ti ti-circle-check" style="font-size:10px"></i>Complete</span>`;
+  if(s==='pending')return`<span class="status-badge sb-awaitingcredit"><i class="ti ti-clock" style="font-size:10px"></i>Awaiting credit</span>`;
+  return`<span class="status-badge sb-notstarted"><i class="ti ti-alert-circle" style="font-size:10px"></i>Not started</span>`;
+}
+function physDetailHtml(id,x){
+  const a=x.act;
+  const notedVal=a.noted
+    ? `<div class="pd-val">${fDY(a.noted)}</div>`
+    : `<div class="pd-val muted">Awaiting credit verification</div>`;
+  return `<div class="phys-detail" id="physdet-${id}">
+    <div class="pd-grid">
+      <div class="pd-cell-full" style="display:flex;align-items:center;gap:10px">
+        <div class="pd-act-icon"><i class="ti ${actIcon(a.name)}"></i></div>
+        <div><div class="pd-lbl"><i class="ti ti-school" style="font-size:11px"></i>Learning Community activity</div><div class="pd-val">${a.name}</div></div>
+      </div>
+      <div><div class="pd-lbl"><i class="ti ti-calendar-check" style="font-size:11px"></i>Completed on</div><div class="pd-val">${fDY(a.completed)}</div></div>
+      <div><div class="pd-lbl"><i class="ti ti-pencil-check" style="font-size:11px"></i>Noted in portal</div>${notedVal}</div>
+      <div><div class="pd-lbl"><i class="ti ti-award" style="font-size:11px"></i>CME credit</div><div class="pd-val ${a.cme?'':'muted'}">${a.cme||'No CME for this activity'}</div></div>
+      <div><div class="pd-lbl"><i class="ti ti-info-circle" style="font-size:11px"></i>Recorded via</div><div class="pd-val">${a.via}</div></div>
+    </div>
+  </div>`;
+}
+function physRowHtml(p,x,idx){
+  const id=p.id+'-'+idx;
+  const has=!!x.act;
+  const sub = x.s==='complete'
+    ? `<span class="pd-act">${x.act.name}</span><span class="pd-noted">· noted ${fD(x.act.noted)}</span>`
+    : x.s==='pending'
+      ? `<span class="pd-act">${x.act.name}</span><span class="pd-noted">· awaiting credit</span>`
+      : `<span class="pd-act" style="color:var(--gray-400)">No activity logged yet</span>`;
+  const chev = has?`<i class="ti ti-chevron-down phys-d-chev" id="pchev-${id}"></i>`:'';
+  const row = `<div class="phys-d-row ${has?'clickable':''}" ${has?`onclick="togglePhysDetail('${id}')"`:''}>
+    <div class="phys-avatar">${physInitials(x.n)}</div>
+    <div class="phys-d-main"><div class="phys-name">${x.n}</div><div class="phys-d-sub">${sub}</div></div>
+    <div class="phys-d-right">${statusBadge(x.s)}${chev}</div>
+  </div>`;
+  return row + (has?physDetailHtml(id,x):'');
+}
+function practiceCardHtml(p){
+  const total=p.physicians.length;
+  const done=p.physicians.filter(x=>x.s==='complete').length;
+  const pend=awaiting(p).length, none=notDone(p).length;
+  const right=none>0
+    ? `<button class="lcp-gen-btn" onclick="event.stopPropagation();openReminder('${p.id}')"><i class="ti ti-mail" aria-hidden="true"></i>Generate Reminder</button>`
+    : `<span class="lcp-alldone"><i class="ti ti-circle-check"></i>All complete</span>`;
+  const phys=[...p.physicians].sort((a,b)=>STATUS_ORDER[a.s]-STATUS_ORDER[b.s]||a.n.localeCompare(b.n));
+  const list=phys.map((x,i)=>physRowHtml(p,x,p.physicians.indexOf(x))).join('');
+  return `<div class="lcp-card">
+    <div class="lcp-row lcp-row-expandable" onclick="togglePracExpand('${p.id}')">
+      <i class="ti ti-chevron-down lcp-chev" id="chev-${p.id}" style="transform:rotate(180deg)"></i>
+      <span class="lcp-dot" style="background:${p.color}"></span>
+      <div class="lcp-body">
+        <div class="lcp-name">${p.name}</div>
+        <div class="lcp-count"><span class="big" style="color:var(--teal)">${done}</span> of ${total} completed${none?` · <span class="big" style="color:var(--amber)">${none}</span> not yet completed`:''}${pend?`<span class="lcp-pending">· ${pend} awaiting credit</span>`:''}</div>
+      </div>
+      ${right}
+    </div>
+    <div class="lcp-physlist open" id="physlist-${p.id}">
+      <div class="lcp-physlist-cap">Physicians · tap a completed physician to see the activity &amp; date noted</div>
+      ${list}
+    </div>
+  </div>`;
+}
+function togglePracExpand(id){
+  const list=document.getElementById('physlist-'+id), chev=document.getElementById('chev-'+id);
+  if(!list)return;
+  const open=list.classList.toggle('open');
+  if(chev)chev.style.transform=open?'rotate(180deg)':'';
+}
+function togglePhysDetail(id){
+  const det=document.getElementById('physdet-'+id), chev=document.getElementById('pchev-'+id);
+  if(!det)return;
+  const open=det.classList.toggle('open');
+  if(chev)chev.style.transform=open?'rotate(180deg)':'';
 }
 
 /* ── Reminder email modal ── */
@@ -1590,6 +1753,71 @@ function renderQuickLinks(){
   else picker.style.display='none';
 }
 
+/* ══════════ SECTION VISIBILITY / CUSTOMIZE HOME ══════════
+   Lets the user hide home-page sections and re-enable them from one place.
+   Choices persist across sessions via window.storage. */
+const SECTIONS=[
+  {key:'nudge',      el:'nudge',        label:'Encouragement banner',        icon:'ti-confetti'},
+  {key:'summary',    el:'cmd-summary',  label:'At-a-glance summary',         icon:'ti-layout-dashboard'},
+  {key:'quicklinks', el:'ql-wrap',      label:'Quick links',                 icon:'ti-bookmark'},
+  {key:'actions',    el:'sec-actions',  label:'Actions needed',              icon:'ti-list-check'},
+  {key:'lc',         el:'sec-lc',       label:'Physician LC follow-up',      icon:'ti-stethoscope'},
+  {key:'pending',    el:'sec-pending',  label:'Awaiting credit confirmation',icon:'ti-clock'},
+  {key:'feed',       el:'sec-feed',     label:'Recently completed',          icon:'ti-circle-check'},
+];
+const SM_KEY='hidden-sections-champion';
+let hiddenSections=new Set();
+let customizeMode=false;
+
+function isSecVisible(id){const e=document.getElementById(id);return !!e && e.style.display!=='none';}
+function updateTwoColLayout(){
+  const tc=document.querySelector('.two-col'),left=document.getElementById('col-left'),right=document.getElementById('col-right');
+  if(!tc||!left||!right)return;
+  const leftVis=isSecVisible('sec-actions');
+  const rightVis=['sec-lc','sec-pending','sec-feed'].some(isSecVisible);
+  left.style.display=leftVis?'':'none';
+  right.style.display=rightVis?'':'none';
+  tc.classList.toggle('one-col',(leftVis?1:0)+(rightVis?1:0)===1);
+}
+function applySectionVisibility(){
+  SECTIONS.forEach(s=>{const el=document.getElementById(s.el);if(el)el.style.display=hiddenSections.has(s.key)?'none':'';});
+  updateTwoColLayout();
+}
+async function smLoad(){
+  try{const r=await window.storage.get(SM_KEY);if(r&&r.value){const a=JSON.parse(r.value);if(Array.isArray(a))hiddenSections=new Set(a);}}catch(e){}
+  applySectionVisibility();
+}
+async function smSave(){try{await window.storage.set(SM_KEY,JSON.stringify([...hiddenSections]));}catch(e){}}
+function hideSection(key){hiddenSections.add(key);smSave();applySectionVisibility();renderSectionManager();}
+function showSection(key){hiddenSections.delete(key);smSave();applySectionVisibility();renderSectionManager();}
+function toggleSection(key){hiddenSections.has(key)?hiddenSections.delete(key):hiddenSections.add(key);smSave();applySectionVisibility();renderSectionManager();}
+function resetSections(){hiddenSections.clear();smSave();applySectionVisibility();renderSectionManager();}
+function toggleCustomize(){
+  customizeMode=!customizeMode;
+  document.body.classList.toggle('customizing',customizeMode);
+  document.getElementById('section-manager').classList.toggle('open',customizeMode);
+  document.getElementById('customize-btn').classList.toggle('on',customizeMode);
+  if(customizeMode){renderSectionManager();document.getElementById('section-manager').scrollIntoView({behavior:'smooth',block:'nearest'});}
+}
+function renderSectionManager(){
+  const sm=document.getElementById('section-manager');if(!sm)return;
+  const h=hiddenSections.size;
+  sm.innerHTML=`
+    <div class="sm-head">
+      <span class="sm-title"><i class="ti ti-adjustments-horizontal"></i>Customize home</span>
+      <button class="sm-reset" onclick="resetSections()"><i class="ti ti-rotate" style="font-size:12px"></i>Show all</button>
+    </div>
+    <div class="sm-sub">Toggle a section off to hide it from your home page${h?` — <strong>${h} hidden right now</strong>`:''}. Hidden sections stay listed here so you can switch them back on anytime. Your choices are saved for next time.</div>
+    <div class="sm-grid">
+      ${SECTIONS.map(s=>{const shown=!hiddenSections.has(s.key);
+        return `<button class="sm-chip ${shown?'shown':'hidden-state'}" onclick="toggleSection('${s.key}')" aria-pressed="${shown}">
+          <div class="sm-chip-icon"><i class="ti ${s.icon}"></i></div>
+          <div class="sm-chip-body"><div class="sm-chip-label">${s.label}</div><div class="sm-chip-state">${shown?'Shown':'Hidden'}</div></div>
+          <div class="sm-toggle"></div>
+        </button>`;}).join('')}
+    </div>`;
+}
+
 /* ══════════ INIT ══════════ */
 buildSearchIndex();
 renderScorebar();
@@ -1598,9 +1826,10 @@ renderNudge();
 renderCmdSummary();
 renderActions();
 renderLcSnapshot();
-renderReports();
-renderPoPanel();
+renderPendingList();
 renderFeed();
+renderSectionManager();
+smLoad();
 qlLoad();
 </script>
 </body>
