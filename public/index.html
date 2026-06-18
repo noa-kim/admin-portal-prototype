@@ -1534,11 +1534,10 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
           </div>
         </div>
         <div class="sh-tile clickable" onclick="nav('practice-scorecard', document.getElementById('nav-pcp-sc'))">
-          <div class="sh-tile-icon sh-tile-orange"><i class="ti ti-alert-triangle"></i></div>
+          <div class="sh-tile-icon sh-tile-orange"><i class="ti ti-building-hospital"></i></div>
           <div class="sh-tile-body">
-            <div class="sh-tile-val sh-tile-val-orange">2</div>
-            <div class="sh-tile-label">Practices need attention</div>
-            <div class="sh-tile-sub">score &lt;55 · VBR at risk</div>
+            <div class="sh-tile-val sh-tile-val-orange">60</div>
+            <div class="sh-tile-label">Practice scorecards</div>
           </div>
         </div>
         <div class="sh-tile clickable" onclick="switchDfTab('deadlines')">
@@ -1601,11 +1600,11 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);min
                   <span class="an-tab-label">PCP</span>
                 </button>
                 <button class="an-tab" id="antab-endo" onclick="switchActionTab('endo')" role="tab" aria-selected="false" aria-controls="anpane-endo">
-                  <span class="an-tab-icon"><i class="ti ti-stethoscope" style="color:#6D28D9"></i><span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span></span>
+                  <span class="an-tab-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle"><path d="M2,9 C2,7 3.5,5.5 6,5.5 C7,4.5 9,4.5 10.5,5.5 C12,4.5 14,6 14,8 C14,10 12.5,11.5 10.5,11 C9,12 7,11.5 6,11 C3.5,11.5 2,10.5 2,9Z" fill="#6D28D9" opacity=".25" stroke="#6D28D9" stroke-width="1"/><path d="M2.5,8.5 C5,8 8,8 13,8.5" stroke="#6D28D9" stroke-width=".8" fill="none" stroke-dasharray="1.5 1" opacity=".7" stroke-linecap="round"/></svg><span class="an-tab-badge an-badge-endo" id="antbadge-endo"></span></span>
                   <span class="an-tab-label">Endo</span>
                 </button>
                 <button class="an-tab" id="antab-nephro" onclick="switchActionTab('nephro')" role="tab" aria-selected="false" aria-controls="anpane-nephro">
-                  <span class="an-tab-icon"><i class="ti ti-droplet" style="color:#0369a1"></i><span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span></span>
+                  <span class="an-tab-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle"><path d="M7,2 C10,2 12,4.5 12,8 C12,11.5 10,14 7,14 C5,14 3,13 2.5,11.5 C1.5,10.5 1.5,9.5 2.5,8.5 C1.5,7.5 1.5,6 2.5,5 C3,3.5 5,2 7,2Z" fill="#0369a1" opacity=".22" stroke="#0369a1" stroke-width="1"/><path d="M6.5,4.5 C5,5 4.5,6.5 4.5,8 C4.5,9.5 5,11 6.5,11.5" stroke="#0369a1" stroke-width=".8" fill="none" opacity=".55" stroke-linecap="round"/></svg><span class="an-tab-badge an-badge-nephro" id="antbadge-nephro"></span></span>
                   <span class="an-tab-label">Nephro</span>
                 </button>
                 <button class="an-tab" id="antab-access" onclick="switchActionTab('access')" role="tab" aria-selected="false" aria-controls="anpane-access">
@@ -1884,18 +1883,15 @@ const SC_ICONS={
   </svg>`,
   [SC_ENDO]:`<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="38" height="38" rx="9" fill="#f4f0fa"/>
-    <rect x="8" y="12" width="19" height="14" rx="3" fill="#6D28D9" opacity=".12" stroke="#6D28D9" stroke-width="1.2"/>
-    <polyline points="11,22 14.5,18 17.5,20.5 21,14.5 24.5,17" stroke="#6D28D9" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="25" y="20" width="5.5" height="7.5" rx="2.75" fill="#6D28D9" opacity=".55"/>
-    <circle cx="27.75" cy="17.5" r="3" fill="none" stroke="#6D28D9" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+    <path d="M8,21 C8,17 11,13 16,13 C18,11 22,11 25,13 C28,11 33,14 33,19 C33,23 29,27 25,26 C22,28 18,27 16,26 C11,27 8,24 8,21Z" fill="#6D28D9" opacity=".18" stroke="#6D28D9" stroke-width="1.2"/>
+    <path d="M9,19 C15,18 22,18 31,19" stroke="#6D28D9" stroke-width="1" fill="none" stroke-dasharray="2 1.5" opacity=".6" stroke-linecap="round"/>
     <circle cx="9.5" cy="9.5" r="5.5" fill="#6D28D9"/>
     <text x="9.5" y="12.5" text-anchor="middle" fill="white" font-size="7.5" font-weight="700" font-family="sans-serif">E</text>
   </svg>`,
   [SC_NEPHRO]:`<svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="38" height="38" rx="9" fill="#e0f2fe"/>
-    <path d="M13 10.5C9 10.5 8 14.5 8 18C8 23 10 27.5 13 27.5C16.5 27.5 17.5 25 16.5 21C15.5 18 15.5 14 16.5 12C15.5 11 14 10.5 13 10.5Z" fill="#0369a1" opacity=".18" stroke="#0369a1" stroke-width="1.2"/>
-    <path d="M25 10.5C29 10.5 30 14.5 30 18C30 23 28 27.5 25 27.5C21.5 27.5 20.5 25 21.5 21C22.5 18 22.5 14 21.5 12C22.5 11 24 10.5 25 10.5Z" fill="#0369a1" opacity=".18" stroke="#0369a1" stroke-width="1.2"/>
-    <path d="M19 8C19 8,16 13.5 16 17.5C16 19.5 17.3 21 19 21C20.7 21 22 19.5 22 17.5C22 13.5 19 8 19 8Z" fill="#0369a1" opacity=".65"/>
+    <path d="M17,7 C24,7 27,12 27,19 C27,26 24,31 17,31 C13,31 9,29 8,26 C6,24 6,22 8,20 C6,18 6,14 8,12 C9,9 13,7 17,7Z" fill="#0369a1" opacity=".18" stroke="#0369a1" stroke-width="1.2"/>
+    <path d="M16,12 C13,13 12,16 12,19 C12,22 13,25 16,26" stroke="#0369a1" stroke-width="1" fill="none" opacity=".55" stroke-linecap="round"/>
     <circle cx="28.5" cy="10" r="5.5" fill="#0369a1"/>
     <text x="28.5" y="13" text-anchor="middle" fill="white" font-size="7.5" font-weight="700" font-family="sans-serif">N</text>
   </svg>`,
